@@ -34,7 +34,7 @@ public class Club implements DomainEntity{
 	
 	@ManyToOne(cascade= {CascadeType.REFRESH}, fetch=FetchType.LAZY)
     @JoinColumn(name="ADMIN", referencedColumnName = "ID")
-	private Runner admin;
+	private User admin;
 	
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "SMALLOGO", referencedColumnName = "ID")
@@ -92,14 +92,14 @@ public class Club implements DomainEntity{
 	/**
 	 * @return the admin
 	 */
-	public Runner getAdmin() {
+	public User getAdmin() {
 		return admin;
 	}
 
 	/**
 	 * @param admin the admin to set
 	 */
-	public void setAdmin(Runner admin) {
+	public void setAdmin(User admin) {
 		this.admin = admin;
 	}
 

@@ -7,11 +7,15 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.powermock.api.easymock.PowerMock;
+import org.powermock.api.easymock.annotation.Mock;
 
 
 public class ClubTest {
 	
 	private Club club;
+	
+	@Mock
+	private User admin;
 	
 	@Before
 	public void init(){
@@ -62,6 +66,13 @@ public class ClubTest {
 		assertNull(club.getBaseCity());
 		club.setBaseCity("city");
 		assertEquals("city",club.getBaseCity());
+	}
+	
+	@Test
+	public void adminTest(){
+		assertNull(club.getAdmin());
+		club.setAdmin(admin);
+		assertEquals(admin,club.getAdmin());
 	}
 	
 	@Test
