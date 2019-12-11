@@ -43,7 +43,7 @@ public class Result implements DomainEntity{
     @JoinColumn(name="CLUB", referencedColumnName = "ID")
 	private Club club;
 	
-	@Column(name = "GENDER")
+	@Column(name = "GENDER", nullable = false)
 	@Convert(converter = GenderConverter.class)
 	private Gender gender;
 	

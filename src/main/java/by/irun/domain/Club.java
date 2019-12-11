@@ -33,11 +33,11 @@ public class Club implements DomainEntity{
 	private List<Runner>currentRunners;
 	
 	@ManyToOne(cascade= {CascadeType.REFRESH}, fetch=FetchType.LAZY)
-    @JoinColumn(name="ADMIN", referencedColumnName = "ID")
+    @JoinColumn(name="ADMIN", nullable = false, referencedColumnName = "ID")
 	private User admin;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "SMALLOGO", referencedColumnName = "ID")
+    @JoinColumn(name = "SMALLLOGO", referencedColumnName = "ID")
 	private Picture smallLogo;
 	
 	@OneToOne(cascade = CascadeType.ALL)

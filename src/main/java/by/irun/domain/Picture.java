@@ -18,7 +18,7 @@ public class Picture implements DomainEntity{
 	@Column(name="ID")
 	private Long id;
 	
-	@Column(name="LOCATION")
+	@Column(name="LOCATION", nullable = false)
 	private String location;
 
 	/**

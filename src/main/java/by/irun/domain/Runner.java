@@ -29,7 +29,7 @@ public class Runner implements DomainEntity{
 	private Long id;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "USER", nullable = false, referencedColumnName = "id")
+    @JoinColumn(name = "ASSOTIATEDUSER", nullable = false, unique = true, referencedColumnName = "id")
 	private User user;
 	
 	@Column(name = "FIRSTNAME", nullable = false)
