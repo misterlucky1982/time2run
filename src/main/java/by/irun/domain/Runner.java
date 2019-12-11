@@ -18,7 +18,7 @@ import javax.persistence.Table;
 import by.irun.persistance.util.GenderConverter;
 
 @Entity
-@Table (name = "RUNNER")
+@Table (name = "RUNNERS")
 public class Runner implements DomainEntity{
 
 	private static final long serialVersionUID = 1L;

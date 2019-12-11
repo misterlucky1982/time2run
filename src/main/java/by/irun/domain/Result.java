@@ -18,7 +18,7 @@ import by.irun.persistance.util.DurationConverter;
 import by.irun.persistance.util.GenderConverter;
 
 @Entity
-@Table(name="RESULT")
+@Table(name="RESULTS")
 public class Result implements DomainEntity{
 
 	private static final long serialVersionUID = 1L;

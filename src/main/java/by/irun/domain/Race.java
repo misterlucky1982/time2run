@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="RACE")
+@Table(name="RACES")
 public class Race implements DomainEntity{
 
 	private static final long serialVersionUID = 1L;

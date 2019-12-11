@@ -16,7 +16,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="CLUB")
+@Table(name="CLUBS")
 public class Club implements DomainEntity{
 
 	private static final long serialVersionUID = 1L;
