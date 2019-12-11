@@ -42,4 +42,10 @@
 <productionRequired>true</productionRequired>
 <script>CREATE TABLE RESULTS (ID SERIAL, RACE BIGINT NOT NULL REFERENCES RACES (ID), POSITION SMALLINT NOT NULL, RUNNER BIGINT REFERENCES RUNNERS (ID), GENDER CHARACTER VARYING (1) NOT NULL, CLUB BIGINT REFERENCES CLUBS (ID), TIME INTEGER NOT NULL, PRIMARY KEY (ID));</script>
 </changeSet>
+
+<changeSet>
+<id>8</id>
+<productionRequired>true</productionRequired>
+<script>CREATE SEQUENCE HIBERNATE_SEQUENCE;</script>
+</changeSet>
 </changeList>
