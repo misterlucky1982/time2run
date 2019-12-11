@@ -29,10 +29,10 @@ public class Result implements DomainEntity{
 	private Long id;
 	
 	@ManyToOne(cascade= {CascadeType.REFRESH}, fetch=FetchType.LAZY)
-    @JoinColumn(name="RACE", referencedColumnName = "ID")
+    @JoinColumn(name="RACE", nullable = false, referencedColumnName = "ID")
 	private Race race;
 	
-	@Column(name="POSITION")
+	@Column(name="POSITION", nullable = false)
 	private int absolutePosition;
 	
 	@ManyToOne(cascade= {CascadeType.REFRESH}, fetch=FetchType.LAZY)
@@ -47,7 +47,7 @@ public class Result implements DomainEntity{
 	@Convert(converter = GenderConverter.class)
 	private Gender gender;
 	
-	@Column(name = "TIME")
+	@Column(name = "TIME", nullable = false)
 	@Convert(converter = DurationConverter.class)
 	private Duration time;
 	/**

@@ -33,7 +33,7 @@ public class Race implements DomainEntity{
 	private List<Result>resultList;
 	
 	@ManyToOne(cascade= {CascadeType.REFRESH}, fetch=FetchType.LAZY)
-    @JoinColumn(name="PARK")
+    @JoinColumn(name="PARK", nullable = false)
 	private Park park;
 	/**
 	 * @return the id
