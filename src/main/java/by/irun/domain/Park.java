@@ -21,7 +21,7 @@ public class Park implements DomainEntity{
     @Column (name = "ID")
 	private Long id;
 	
-	@Column(name="NAME")
+	@Column(name="NAME", nullable = false, unique = true)
 	private String name;
 	
 	@OneToMany(mappedBy="park", targetEntity=by.irun.domain.Race.class)
