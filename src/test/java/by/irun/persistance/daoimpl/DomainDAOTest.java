@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import java.io.Serializable;
 import java.sql.SQLException;
 import org.easymock.EasyMock;
-import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.junit.Before;
 import org.junit.Test;
@@ -78,7 +77,7 @@ public class DomainDAOTest {
 	@Test
 	public void addEntityTestWithException() {
 		EasyMock.expect(session.beginTransaction()).andReturn(transaction);
-		EasyMock.expect(session.save(entity)).andThrow(new HibernateException("exception"));
+		EasyMock.expect(session.save(entity)).andThrow(new javax.persistence.PersistenceException("exception"));
 		transaction.rollback();
 		EasyMock.expectLastCall();
 		EasyMock.expect(session.isOpen()).andReturn(true);
@@ -125,7 +124,7 @@ public class DomainDAOTest {
 	public void updateEntityTestWithException() {
 		EasyMock.expect(session.beginTransaction()).andReturn(transaction);
 		session.update(entity);
-		EasyMock.expectLastCall().andThrow(new HibernateException("exception"));
+		EasyMock.expectLastCall().andThrow(new javax.persistence.PersistenceException("exception"));
 		transaction.rollback();
 		EasyMock.expectLastCall();
 		EasyMock.expect(session.isOpen()).andReturn(true);
@@ -170,7 +169,7 @@ public class DomainDAOTest {
 	public void deleteEntityTestWithException() {
 		EasyMock.expect(session.beginTransaction()).andReturn(transaction);
 		session.delete(entity);
-		EasyMock.expectLastCall().andThrow(new HibernateException("exception"));
+		EasyMock.expectLastCall().andThrow(new javax.persistence.PersistenceException("exception"));
 		transaction.rollback();
 		EasyMock.expectLastCall();
 		EasyMock.expect(session.isOpen()).andReturn(true);
@@ -211,7 +210,7 @@ public class DomainDAOTest {
 	@Test
 	public void getEntityByIdTestWithException() {
 		DomainEntity en = null;
-		EasyMock.expect(session.get(DomainEntity.class, ID)).andThrow(new HibernateException("exception"));
+		EasyMock.expect(session.get(DomainEntity.class, ID)).andThrow(new javax.persistence.PersistenceException("exception"));
 		EasyMock.expect(session.isOpen()).andReturn(true);
 		session.close();
 		EasyMock.expectLastCall();

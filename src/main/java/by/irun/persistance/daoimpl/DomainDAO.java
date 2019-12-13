@@ -2,13 +2,10 @@ package by.irun.persistance.daoimpl;
 
 import java.io.Serializable;
 import java.sql.SQLException;
-
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
 import by.irun.dao.CRUDHandler;
 import by.irun.domain.DomainEntity;
 import by.irun.persistance.util.DBUtils;
@@ -30,7 +27,7 @@ public class DomainDAO implements CRUDHandler{
 			tr = session.beginTransaction();
 			id = session.save(entity);
 			tr.commit();
-		}catch(HibernateException e){
+		}catch(javax.persistence.PersistenceException e){
 			if(tr!=null)tr.rollback();
 			throw new SQLException();
 		}finally{
@@ -52,7 +49,7 @@ public class DomainDAO implements CRUDHandler{
 			session.update(entity);
 			tr.commit();
 			return true;
-		}catch(HibernateException e){
+		}catch(javax.persistence.PersistenceException e){
 			if(tr!=null)tr.rollback();
 			throw new SQLException();
 		}finally{
@@ -73,7 +70,7 @@ public class DomainDAO implements CRUDHandler{
 			session.delete(entity);
 			tr.commit();
 			return true;
-		}catch(HibernateException e){
+		}catch(javax.persistence.PersistenceException e){
 			if(tr!=null)tr.rollback();
 			throw new SQLException();
 		}finally{
@@ -92,7 +89,7 @@ public class DomainDAO implements CRUDHandler{
 	    try {
 	      session = DBUtils.getSessionFactory().openSession();
 	      entity = (DomainEntity) session.get(entityClass, id);
-	    } catch (HibernateException e) {
+	    } catch (javax.persistence.PersistenceException e) {
 	      throw new SQLException();
 	    } finally {
 	      if (session != null && session.isOpen()) {
