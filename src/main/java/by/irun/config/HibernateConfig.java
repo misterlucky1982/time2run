@@ -2,8 +2,21 @@ package by.irun.config;
 
 import org.hibernate.cfg.Configuration;
 
+/**
+ * This class provides configuration for hibernate
+ * 
+ * @author A.Dubovik
+ *
+ */
+
 public class HibernateConfig {
 	
+	private HibernateConfig(){}
+	
+	/**
+	 * obtain hibernate configuration
+	 * @return Configuration
+	 */
 	public static Configuration getConfiguration(){
 		Configuration configuration = new Configuration()
                 .setProperty( "hibernate.connection.driver_class", 

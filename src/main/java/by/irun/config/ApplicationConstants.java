@@ -1,5 +1,10 @@
 package by.irun.config;
 
+/**
+ * This class provides constant values which are common for application`s scope
+ * @author A.Dubovik
+ *
+ */
 public class ApplicationConstants {
 	
 	private ApplicationConstants(){}
