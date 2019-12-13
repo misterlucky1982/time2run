@@ -7,7 +7,7 @@ import by.irun.domain.DomainEntity;
 
 /**
  * Implementation of this interface
- * has to provide standard CREATE, READ, UPDATE and DELETE operations with 
+ * provides standard CREATE, READ, UPDATE and DELETE operations with 
  * {@link by.irun.domain.DomainEntity}
  *
  */
