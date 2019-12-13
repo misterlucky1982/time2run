@@ -26,7 +26,7 @@ import by.irun.domain.User;
 
 /**
  * test class for {@link by.irun.service.impl.DomainEntityService}
- * @author 111-75-75
+ * @author A.Dubovik
  *
  */
 @RunWith(PowerMockRunner.class)
