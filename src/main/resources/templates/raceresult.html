@@ -11,7 +11,15 @@
     <div th:replace="fragments/raceheader :: raceheader"></div>
     </div>
     <div class="container">
-        Race results will be here
+        <table>
+        <tr th:each="result : ${results}">
+	      <td th:text="${result.positionInGroup}"></td>
+		  <td th:text="${result.name}"></td>
+		  <td th:text="${result.gender}"></td>
+		  <td th:text="${result.club}"></td>
+		  <td th:text="${result.time}"></td>		  		  
+	    </tr>	
+	</table>
     </div>
   </body>
 </html>
