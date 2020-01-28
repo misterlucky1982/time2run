@@ -6,7 +6,9 @@
       <link rel="stylesheet" th:href="@{/css/styles.css}"/>
   </head>
   <body>
-    <div th:replace="fragments/header :: header">
+    <div th:replace="fragments/header :: header"></div>
+    <div id = 'raceheader'>
+    <div th:replace="fragments/raceheader :: raceheader"></div>
     </div>
     <div class="container">
         Race results will be here
