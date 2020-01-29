@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import by.irun.viz.to.ResultTOUtil;
+
 public class ResultTOUtilTest {
 	private static final String RACE_RESULT_TO_REQUEST = "SELECT RS.POSITION AS POSITION"
 			+ ", CONCAT(RN.FIRSTNAME,' ',RN.LASTNAME) AS NAME"

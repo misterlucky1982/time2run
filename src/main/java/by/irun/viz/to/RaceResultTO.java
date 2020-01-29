@@ -1,4 +1,4 @@
-package by.irun.inf.ob;
+package by.irun.viz.to;
 
 /**
  * Provides information about result for front-end representation

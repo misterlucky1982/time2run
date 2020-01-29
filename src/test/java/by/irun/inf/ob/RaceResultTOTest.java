@@ -4,8 +4,10 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import by.irun.viz.to.RaceResultTO;
 /**
- * test class for {@link by.irun.inf.ob.RaceResultTO}
+ * test class for {@link by.irun.viz.to.RaceResultTO}
  * @author A.Dubovik
  */
 public class RaceResultTOTest {

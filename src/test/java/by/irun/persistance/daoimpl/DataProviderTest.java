@@ -15,8 +15,8 @@ import org.powermock.reflect.Whitebox;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
-import by.irun.inf.ob.RaceResultTO;
-import by.irun.inf.ob.ResultTOUtil;
+import by.irun.viz.to.RaceResultTO;
+import by.irun.viz.to.ResultTOUtil;
 
 /**
  * Test Class for testing {@link by.irun.persistance.daoimpl.DataProvider}

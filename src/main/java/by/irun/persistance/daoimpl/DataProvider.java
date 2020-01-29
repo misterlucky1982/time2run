@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 
 import by.irun.config.ApplicationConstants;
 import by.irun.dao.IDataProvider;
-import by.irun.inf.ob.RaceResultTO;
-import by.irun.inf.ob.ResultTOUtil;
+import by.irun.viz.to.RaceResultTO;
+import by.irun.viz.to.ResultTOUtil;
 
 /**
  * implementation of {@link by.irun.dao.IDataProvider}

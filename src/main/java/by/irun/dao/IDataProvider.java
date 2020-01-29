@@ -2,7 +2,7 @@ package by.irun.dao;
 
 import java.util.List;
 
-import by.irun.inf.ob.RaceResultTO;
+import by.irun.viz.to.RaceResultTO;
 
 /**
  * Provides information from DB without creation entity-objects
