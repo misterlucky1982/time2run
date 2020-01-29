@@ -10,6 +10,7 @@ import by.irun.config.ApplicationConstants;
 import by.irun.dao.IDataProvider;
 import by.irun.viz.to.RaceResultTO;
 import by.irun.viz.to.ResultTOUtil;
+import by.irun.viz.to.VizUtils;
 
 /**
  * implementation of {@link by.irun.dao.IDataProvider}
@@ -46,7 +47,7 @@ public class DataProvider implements IDataProvider{
 			to.setClub(rowSet.getString(ResultTOUtil.CLUB));
 			to.setName(rowSet.getString(ResultTOUtil.NAME));
 			to.setGender(rowSet.getString(ResultTOUtil.GENDER));
-			to.setTime(Integer.toString(rowSet.getInt(ResultTOUtil.TIME)));
+			to.setTime(VizUtils.convertNumberOfSecondsToTimeRepresentation(rowSet.getInt(ResultTOUtil.TIME)));
 			list.add(to);
 		}
 		return list;

@@ -17,6 +17,7 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 import by.irun.viz.to.RaceResultTO;
 import by.irun.viz.to.ResultTOUtil;
+import by.irun.viz.to.VizUtils;
 
 /**
  * Test Class for testing {@link by.irun.persistance.daoimpl.DataProvider}
@@ -72,7 +73,7 @@ public class DataProviderTest {
 			to.setName(NAME+numberOfResults);
 			EasyMock.expect(rowSet.getString(ResultTOUtil.GENDER)).andReturn(GENDER);
 			to.setGender(GENDER);
-			to.setTime(Integer.toString(numberOfResults));
+			to.setTime(VizUtils.convertNumberOfSecondsToTimeRepresentation(numberOfResults));
 			EasyMock.expect(rowSet.getInt(ResultTOUtil.TIME)).andReturn(numberOfResults--);
 			list.add(to);
 		}
