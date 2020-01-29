@@ -12,6 +12,13 @@
     </div>
     <div class="container">
         <table>
+        <tr>
+           <th th:text="#{raceresult.position}"/></th>
+           <th th:text="#{raceresult.name}"></th>
+           <th th:text="#{raceresult.gender}"></th>
+           <th th:text="#{raceresult.club}"></th>
+           <th th:text="#{raceresult.time}"></th>
+        </tr>
         <tr th:each="result : ${results}">
 	      <td th:text="${result.positionInGroup}"></td>
 		  <td th:text="${result.name}"></td>

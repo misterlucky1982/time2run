@@ -22,7 +22,7 @@ public class ApplicationController {
 	@GetMapping("/test")
 	public ModelAndView getResultListForRace(){
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("results", data.getRaceResult(0));
+		mav.addObject("results", data.getRaceResult(123));
 	    mav.setViewName("raceresult");
 	    return mav;
 	}
