@@ -1,4 +1,4 @@
-package by.irun.inf.ob;
+package by.irun.viz.to;
 
 import static org.junit.Assert.assertEquals;
 
