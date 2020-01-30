@@ -5,6 +5,8 @@ package by.irun.viz.to;
 
 import static org.junit.Assert.assertEquals;
 
+import java.sql.Date;
+
 import org.junit.Test;
 
 /**
@@ -23,5 +25,14 @@ public class VizUtilsTest {
 		assertEquals("5:01",VizUtils.convertNumberOfSecondsToTimeRepresentation(301));
 		assertEquals("0:30",VizUtils.convertNumberOfSecondsToTimeRepresentation(30));
 		assertEquals("0:01",VizUtils.convertNumberOfSecondsToTimeRepresentation(1));
+	}
+	
+	/**
+	 * test for {@link by.irun.viz.to.VizUtils#convertSqlDateToFrontEndRepresentation(java.sql.Date)}
+	 */
+	@Test
+	public void convertSqlDateToFrontEndRepresentationTest(){
+		assertEquals(VizUtils.UNKNOWN_DATE,VizUtils.convertSqlDateToFrontEndRepresentation(null));
+		assertEquals("02.02.2000",VizUtils.convertSqlDateToFrontEndRepresentation(Date.valueOf("2000-02-02")));
 	}
 }

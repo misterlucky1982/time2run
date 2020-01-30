@@ -2,6 +2,7 @@ package by.irun.dao;
 
 import java.util.List;
 
+import by.irun.viz.to.RaceInfoTO;
 import by.irun.viz.to.RaceResultTO;
 
 /**
@@ -18,4 +19,10 @@ public interface IDataProvider {
 	 * @return List<RaceResultTO>
 	 */
 	List<RaceResultTO>getRaceResult(long raceId);
+	
+	/**
+	 * Provides entire list of races from DB
+	 * @return
+	 */
+	List<RaceInfoTO>getFullRaceList();
 }

@@ -2,7 +2,10 @@ package by.irun.persistance.daoimpl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.easymock.EasyMock;
 import org.junit.Test;
@@ -15,6 +18,7 @@ import org.powermock.reflect.Whitebox;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
+import by.irun.viz.to.RaceInfoTO;
 import by.irun.viz.to.RaceResultTO;
 import by.irun.viz.to.ResultTOUtil;
 import by.irun.viz.to.VizUtils;
@@ -35,6 +39,7 @@ public class DataProviderTest {
 	private static final String CLUB = "CLUB";
 	private static final String NAME = "NAME";
 	private static final String GENDER = "G";
+	private static final String PARK = "PARK";
 	
 	/**
 	 * test for DataProviter#getRaceResult()
@@ -51,6 +56,24 @@ public class DataProviderTest {
 			assertTrue(result.size()==1);
 			assertEquals(expected.get(0),result.get(0));
 			PowerMock.verifyAll();
+	}
+	
+	/**
+	 * test for {@link by.irun.persistance.daoimpl.DataProvider#getFullRaceList()}
+	 */
+	@Test
+	public void getRaceInfoTOListFromSqlRowSetTest(){
+		SqlRowSet rowSet = PowerMock.createMock(org.springframework.jdbc.support.rowset.SqlRowSet.class);
+		EasyMock.expect(jdbcTemplate.queryForRowSet(ResultTOUtil.fullRaceListRequest())).andReturn(rowSet);
+		DataProvider provider = new DataProvider();
+		Whitebox.setInternalState(provider, "jdbcTemplate", jdbcTemplate);
+		List<RaceInfoTO>expected = prepareForGetRaceInfoTOListFromSqlRowSetForGivenDates(rowSet,Arrays.asList(Date.valueOf("2000-01-01"),Date.valueOf("2000-02-02")),1L);
+		PowerMock.replayAll();
+		List<RaceInfoTO> result = provider.getFullRaceList();
+		assertTrue(result.size()==2);
+		assertEquals(expected.get(0),result.get(0));
+		assertEquals(expected.get(1),result.get(1));
+		PowerMock.verifyAll();
 	}
 	
 	/**
@@ -81,4 +104,27 @@ public class DataProviderTest {
 		return list;
 	}
 
+	/**
+	 * prepares List RaceInfoTO for given list of dates
+	 * @param rowSet
+	 * @param dates - list of dates
+	 * @param startId - start id for RaceInfoTO
+	 * @return List<RaceInfoTO>
+	 */
+	private List<RaceInfoTO> prepareForGetRaceInfoTOListFromSqlRowSetForGivenDates(SqlRowSet rowSet,List<Date>dates,long startId){
+		List<RaceInfoTO>list = new ArrayList<>();
+		for(Date d:dates){
+			RaceInfoTO to = new RaceInfoTO();
+			EasyMock.expect(rowSet.next()).andReturn(true);
+			EasyMock.expect(rowSet.getLong(ResultTOUtil.RACE_ID)).andReturn(startId);
+			to.setRaceId(startId++);
+			EasyMock.expect(rowSet.getDate(ResultTOUtil.RACE_DATE)).andReturn(d);
+			EasyMock.expect(rowSet.getString(ResultTOUtil.PARK_NAME)).andReturn(PARK);
+			to.setRaceName(VizUtils.convertSqlDateToFrontEndRepresentation(d)+" "+PARK);
+			list.add(to);
+		}
+		EasyMock.expect(rowSet.next()).andReturn(false);
+		return list;
+	}
+	
 }
