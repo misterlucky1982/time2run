@@ -1,32 +1,39 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-  <head>
-      <title th:text="#{app.title}"> Title </title>
-      <link rel="icon" href="/images/icon.png" type="image/png">
-      <link rel="stylesheet" th:href="@{/css/styles.css}"/>
-  </head>
-  <body>
-    <div th:replace="fragments/header :: header"></div>
-    <div id = 'raceheader'>
-    <div th:replace="fragments/raceheader :: raceheader"></div>
-    </div>
-    <div class="container">
-        <table>
-        <tr>
-           <th th:text="#{raceresult.position}"/></th>
-           <th th:text="#{raceresult.name}"></th>
-           <th th:text="#{raceresult.gender}"></th>
-           <th th:text="#{raceresult.club}"></th>
-           <th th:text="#{raceresult.time}"></th>
-        </tr>
-        <tr th:each="result : ${results}">
-	      <td th:text="${result.positionInGroup}"></td>
-		  <td th:text="${result.name}"></td>
-		  <td th:text="${result.gender}"></td>
-		  <td th:text="${result.club}"></td>
-		  <td th:text="${result.time}"></td>		  		  
-	    </tr>	
-	</table>
-    </div>
-  </body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:text="#{app.title}">Title</title>
+<link rel="icon" href="/images/icon.png" type="image/png">
+<link rel="stylesheet" th:href="@{/css/styles.css}" />
+<link rel="stylesheet" th:href="@{/css/raceSelect_styles.css}"/>
+<link rel="stylesheet" th:href="@{/css/header_styles.css}"/>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+</head>
+<body>
+	<div th:replace="fragments/header :: header"></div>
+	<div id='raceheader'>
+		<div
+			th:replace="fragments/raceSelect :: raceSelect"></div>
+		<div th:replace="fragments/raceheader :: raceheader"></div>
+	</div>
+	<div class="container">
+		<table>
+			<tr>
+				<th th:text="#{raceresult.position}" /></th>
+				<th th:text="#{raceresult.name}"></th>
+				<th th:text="#{raceresult.gender}"></th>
+				<th th:text="#{raceresult.club}"></th>
+				<th th:text="#{raceresult.time}"></th>
+			</tr>
+			<tr th:each="result : ${results}">
+				<td th:text="${result.positionInGroup}"></td>
+				<td th:text="${result.name}"></td>
+				<td th:text="${result.gender}"></td>
+				<td th:text="${result.club}"></td>
+				<td th:text="${result.time}"></td>
+			</tr>
+		</table>
+	</div>
+</body>
 </html>
