@@ -2,8 +2,12 @@
 	height: 90px;
 }
 
-#race_list_wrapper{
-	
+#show_last_events{
+	margin-top: 10px;
+}
+
+#hide_race_list_panel{
+	margin-top: -20px;
 }
 
 .race_select_panel_item{
@@ -154,14 +158,14 @@
 }
 
 .jspVerticalBar {
-   width: 8px;
+   width: 30px;
 }
 .jspTrack {
-   width: 8px;
+   width: 30px;
    background-color: rgb(78, 78, 78);
 }
 .jspDrag {
-   width: 8px;
+   width: 30px;
    background-color: #ccc;
 }
 
