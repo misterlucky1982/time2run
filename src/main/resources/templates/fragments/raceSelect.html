@@ -4,22 +4,29 @@
   </head>
   <body>
     <div th:fragment="raceSelect">
-      <button>Показать последние события</button>
+      <button class="race_search_button" id="show_last_events">Показать последние события</button>
+      <div id = "race_list_wrapper">
+      <button class="race_search_button" id="hide_race_list_panel">спрятать</button>
+      <div class = "race_select_panel_item" id="race_list">
       <div>
-      <button>спрятать</button>
-      <div id="race_list">
-      <p>гонка 1</p>
-      <p>гонка 2</p>
-      <p>гонка 3</p>
-      <p>гонка 4</p>
-      <p>гонка 5</p>
-      <p>гонка 6</p>
-      <p>гонка 7</p>
-      <p>гонка 8</p>
-      <p>гонка 9</p>
-      <p>гонка 10</p>
+		<p>line 1</p>
+      <p>line 2</p>
+      <p>line 3</p>
+      <p>line 4</p>
+      <p>line 5</p>
+      <p>line 6</p>
+      <p>line 7</p>
+      <p>line 8</p>
+      <p>line 9</p>
+      <p>line 10</p>      
       </div>
-      <button>искать другие</button>
+      </div>
+      <button class="race_search_button" id="seek_other_races_button">искать другие</button>
+      </div>
+      <div class = "race_select_panel_item" id="race_search_panel">
+      <div>Some search options...
+      </div>
+      <button class = "race_search_button" id="hide_search_race_panel_button">спрятать панель поиска</button>
       </div>
     </div>
   </body>
