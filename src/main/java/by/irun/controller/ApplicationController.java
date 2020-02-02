@@ -27,6 +27,7 @@ public class ApplicationController {
 		List<RaceInfoTO>list = data.getFullRaceList();
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("results", data.getRaceResult(list.get(0).getRaceId()));
+		mav.addObject("races",list);
 	    mav.setViewName("raceresult");
 	    return mav;
 	}

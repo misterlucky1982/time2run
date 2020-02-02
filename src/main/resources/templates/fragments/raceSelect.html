@@ -9,16 +9,11 @@
       <button class="race_search_button" id="hide_race_list_panel" th:text="#{raceresult.hide_button}"></button>
       <div class = "race_select_panel_item" id="race_list">
       <div>
-		<p>line 1</p>
-      <p>line 2</p>
-      <p>line 3</p>
-      <p>line 4</p>
-      <p>line 5</p>
-      <p>line 6</p>
-      <p>line 7</p>
-      <p>line 8</p>
-      <p>line 9</p>
-      <p>line 10</p>      
+      <table>
+		<tr th:each="race : ${races}">
+				<td th:text="${race.raceName}"></td>
+			</tr>
+		</table>
       </div>
       </div>
       <button class="race_search_button" id="seek_other_races_button" th:text="#{raceresult.search_others_button}"></button>

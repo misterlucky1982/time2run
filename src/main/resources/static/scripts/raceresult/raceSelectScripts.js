@@ -3,6 +3,8 @@
  */
 'use strict'
 
+var isSelectOptionsPanelHidden = true;
+
 $(document).ready(function() {
    console.log("hello!");
 	$('#race_list').jScrollPane();
@@ -21,45 +23,62 @@ $(document).ready(function() {
 
 function showRaceList(){
 	$('#show_last_events').animate({
-		height : 0,
 		opacity:0
 	})
+	$('#show_last_events').animate({
+		height : 0
+	})
 	$('#race_list_wrapper').animate({
-		height : 200,
+		height : 200
+	})
+	$('#race_list_wrapper').animate({
 		opacity:1
 	})
 }
 
 function hideRaceList(){
-	hideRaceSelectPanel();
-	$('#show_last_events').animate({
-		height : 30,
-		opacity:1
-	})
+	console.log(isSelectOptionsPanelHidden);
+	if(!isSelectOptionsPanelHidden){
+		hideRaceSelectPanel();
+	};
 	$('#race_list_wrapper').animate({
 		height : 0,
 		opacity:0
+	})
+	$('#show_last_events').animate({
+		height : 30,
+		opacity:1
 	})
 }
 
 function showRaceSelectPanel(){
 	$('#race_search_panel').animate({
-		height : 325,
+		height : 325
+	})
+	$('#race_search_panel').animate({
 		opacity:1
 	})
 	$('#seek_other_races_button').animate({
-		height : 0,
 		opacity:0
 	})
+	$('#seek_other_races_button').animate({
+		height : 0
+	})
+	isSelectOptionsPanelHidden = false;
 }
 
 function hideRaceSelectPanel(){
 	$('#race_search_panel').animate({
-		height : 0,
 		opacity:0
 	})
+	$('#race_search_panel').animate({
+		height : 0
+	})
 	$('#seek_other_races_button').animate({
-		height : 30,
+		height : 30
+	})
+	$('#seek_other_races_button').animate({
 		opacity:1
 	})
+	isSelectOptionsPanelHidden = true;
 }
