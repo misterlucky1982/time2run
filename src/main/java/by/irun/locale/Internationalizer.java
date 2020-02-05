@@ -13,9 +13,9 @@ import java.util.Map;
  */
 public class Internationalizer {
 	
-	private static final Map<Locale,Map<String,String>> MOTH_TODATE_MAP;
+	private static final Map<Locale,Map<String,String>> MONTH_TODATE_MAP;
 	static{
-		MOTH_TODATE_MAP = new HashMap<>();
+		MONTH_TODATE_MAP = new HashMap<>();
 		Map<String,String> by = new HashMap<>();
 		Map<String,String> ru = new HashMap<>();
 		Map<String,String> en = new HashMap<>();
@@ -55,9 +55,9 @@ public class Internationalizer {
 		by.put("12", "снежня");
 		ru.put("12", "декабря");
 		en.put("12", "December");
-		MOTH_TODATE_MAP.put(AppLocales.BY, by);
-		MOTH_TODATE_MAP.put(AppLocales.EN, en);
-		MOTH_TODATE_MAP.put(AppLocales.RU, ru);
+		MONTH_TODATE_MAP.put(AppLocales.BY, by);
+		MONTH_TODATE_MAP.put(AppLocales.EN, en);
+		MONTH_TODATE_MAP.put(AppLocales.RU, ru);
 	}
 	
 	private Internationalizer(){}
@@ -73,7 +73,7 @@ public class Internationalizer {
 		StringBuilder sb = new StringBuilder();
 		sb.append(date(lines[2]));
 		sb.append(" ");
-		sb.append(MOTH_TODATE_MAP.get(locale).get(lines[1]));
+		sb.append(MONTH_TODATE_MAP.get(locale).get(lines[1]));
 		sb.append(" ");
 		sb.append(lines[0]);
 		if(locale!=AppLocales.EN)sb.append("г.");
