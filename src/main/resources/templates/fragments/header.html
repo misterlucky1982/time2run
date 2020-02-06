@@ -1,13 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<meta charset="UTF-8">
-		<link rel="stylesheet" href="../../static/css/header_styles.css">
-	</head>
 	<body>
-	<!--<div class="1" th:fragment="header">
-	    Some buttons and links will be here...
-	</div> -->
 		<header>
 			<div class="wrapper">
 				<div class="logo">
@@ -23,15 +16,15 @@
 				      				&mdash;
 				      			</a>
 				      		</li>
-				      		<li><a href="#">лига</a></li>
-				      		<li><a href="#">клубы</a></li>
-				      		<li><a href="#">волонтеры</a></li>
-				      		<li><a href="#">контакты</a></li>
-				      		<li><a href="#">магазин</a></li>
-				      		<li><a href="#">блог</a></li>
-				      		<li><a href="#">фото</a></li>
-				      		<li><a href="#">faq</a></li>
-				      		<li><a href="#">вход</a></li>
+				      		<li><a href="#" th:text="#{header.league}"></a></li>
+				      		<li><a href="#" th:text="#{header.clubs}"></a></li>
+				      		<li><a href="#" th:text="#{header.volunteers}"></a></li>
+				      		<li><a href="#" th:text="#{header.contacts}"></a></li>
+				      		<li><a href="#" th:text="#{header.shop}"></a></li>
+				      		<li><a href="#" th:text="#{header.blog}"></a></li>
+				      		<li><a href="#" th:text="#{header.photo}"></a></li>
+				      		<li><a href="#" th:text="#{header.faq}"></a></li>
+				      		<li><a href="#" th:text="#{header.enter}"></a></li>
 	      				</ul>
 	      			</nav>
 				</div>
