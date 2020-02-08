@@ -1,12 +1,8 @@
 package by.irun.viz.to;
 
 import static org.junit.Assert.*;
-
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
-import org.powermock.api.easymock.PowerMock;
 
 /**
  * test class for {@link by.irun.viz.to.RunnerInfoTO}
@@ -52,15 +48,6 @@ public class RunnerInfoTOTest {
 		assertEquals("clublink",to.getClubLink());
 	}
 	
-	/**
-	 * get/set test for clubLogo
-	 */
-	@Test
-	public void clubLogoTest(){
-		assertNull(to.getClubLogo());
-		to.setClubLogo("logo");
-		assertEquals("logo",to.getClubLogo());
-	}
 	
 	/**
 	 * get/set test for clubName
@@ -93,14 +80,22 @@ public class RunnerInfoTOTest {
 	}
 	
 	/**
-	 * get/set test for races
+	 * get/set test for number of races
 	 */
 	@Test
-	public void racesTest(){
-		assertNull(to.getRaces());
-		@SuppressWarnings("unchecked")
-		List<RunnerResultInfoTO>list = PowerMock.createMock(List.class);
-		to.setRaces(list);
-		assertEquals(list,to.getRaces());
+	public void numberOfRacesTest(){
+		assertTrue(to.getNumberOfRaces()==0);
+		to.setNumberOfRaces(1);
+		assertTrue(to.getNumberOfRaces()==1);
+	}
+	
+	/**
+	 * get/set test for raceRequest
+	 */
+	@Test
+	public void raceRequestTest(){
+		assertNull(to.getRacesRequest());
+		to.setRacesRequest("request");
+		assertEquals("request",to.getRacesRequest());
 	}
 }

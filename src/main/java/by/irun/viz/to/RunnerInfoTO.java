@@ -1,6 +1,5 @@
 package by.irun.viz.to;
 
-import java.util.List;
 /**
  * This class provides information about runner for front-end representation
  * @author A.Dubovik
@@ -13,9 +12,9 @@ public class RunnerInfoTO {
 	private String city;
 	private String dateOfBirth;
 	private String clubName;
-	private String clubLogo;
 	private String clubLink;
-	private List<RunnerResultInfoTO>races;
+	private int numberOfRaces;
+	private String racesRequest;
 	/**
 	 * @return the avatar
 	 */
@@ -64,18 +63,7 @@ public class RunnerInfoTO {
 	public void setClubName(String clubName) {
 		this.clubName = clubName;
 	}
-	/**
-	 * @return the clubLogo
-	 */
-	public String getClubLogo() {
-		return clubLogo;
-	}
-	/**
-	 * @param clubLogo the clubLogo to set
-	 */
-	public void setClubLogo(String clubLogo) {
-		this.clubLogo = clubLogo;
-	}
+	
 	/**
 	 * @return the clubLink
 	 */
@@ -88,18 +76,7 @@ public class RunnerInfoTO {
 	public void setClubLink(String clubLink) {
 		this.clubLink = clubLink;
 	}
-	/**
-	 * @return the races
-	 */
-	public List<RunnerResultInfoTO> getRaces() {
-		return races;
-	}
-	/**
-	 * @param races the races to set
-	 */
-	public void setRaces(List<RunnerResultInfoTO> races) {
-		this.races = races;
-	}
+	
 	/**
 	 * @return the city
 	 */
@@ -111,6 +88,30 @@ public class RunnerInfoTO {
 	 */
 	public void setCity(String city) {
 		this.city = city;
+	}
+	/**
+	 * @return the numberOfRaces
+	 */
+	public int getNumberOfRaces() {
+		return numberOfRaces;
+	}
+	/**
+	 * @param numberOfRaces the numberOfRaces to set
+	 */
+	public void setNumberOfRaces(int numberOfRaces) {
+		this.numberOfRaces = numberOfRaces;
+	}
+	/**
+	 * @return the racesRequest
+	 */
+	public String getRacesRequest() {
+		return racesRequest;
+	}
+	/**
+	 * @param racesRequest the racesRequest to set
+	 */
+	public void setRacesRequest(String racesRequest) {
+		this.racesRequest = racesRequest;
 	}
 
 }
