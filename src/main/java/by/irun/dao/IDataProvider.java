@@ -1,5 +1,6 @@
 package by.irun.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import by.irun.viz.to.RaceInfoTO;
@@ -18,11 +19,11 @@ public interface IDataProvider {
 	 * @param raceId
 	 * @return List<RaceResultTO>
 	 */
-	List<RaceResultTO>getRaceResult(long raceId);
+	List<RaceResultTO>getRaceResult(long raceId) throws SQLException;
 	
 	/**
 	 * Provides entire list of races from DB
 	 * @return
 	 */
-	List<RaceInfoTO>getFullRaceList();
+	List<RaceInfoTO>getFullRaceList() throws SQLException;
 }

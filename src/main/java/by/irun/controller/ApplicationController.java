@@ -23,7 +23,7 @@ public class ApplicationController {
 	private DataProvider data;
 	
 	@GetMapping("/test")
-	public ModelAndView getResultListForRace(){
+	public ModelAndView getResultListForRace() throws Exception{
 		List<RaceInfoTO>list = data.getFullRaceList();
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("results", data.getRaceResult(list.get(0).getRaceId()));

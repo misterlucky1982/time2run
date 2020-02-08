@@ -1,5 +1,6 @@
 package by.irun.persistance.daoimpl;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -29,16 +30,24 @@ public class DataProvider implements IDataProvider{
 	 * @see by.irun.dao.IDataProvider#getRaceResult(long raceId)
 	 */
 	@Override
-	public List<RaceResultTO> getRaceResult(long raceId) {
-		return getRaceResultTOListFromSqlRowSet(jdbcTemplate.queryForRowSet(TORequests.raceResultRequest(raceId)));		
+	public List<RaceResultTO> getRaceResult(long raceId) throws SQLException{
+		try{
+			return getRaceResultTOListFromSqlRowSet(jdbcTemplate.queryForRowSet(TORequests.raceResultRequest(raceId)));		
+		}catch(org.springframework.dao.DataAccessException e){
+			throw new SQLException(e);
+		}
 	}
 	
 	/* (non-Javadoc)
 	 * @see by.irun.dao.IDataProvider#getFullRaceList()
 	 */
 	@Override
-	public List<RaceInfoTO> getFullRaceList() {
-		return getRaceInfoTOListFromSqlRowSet(jdbcTemplate.queryForRowSet(TORequests.fullRaceListRequest()));
+	public List<RaceInfoTO> getFullRaceList() throws SQLException{
+		try{
+			return getRaceInfoTOListFromSqlRowSet(jdbcTemplate.queryForRowSet(TORequests.fullRaceListRequest()));
+		}catch(org.springframework.dao.DataAccessException e){
+			throw new SQLException(e);
+		}
 	}
 
 	
