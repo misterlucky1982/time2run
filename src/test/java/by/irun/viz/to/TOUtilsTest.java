@@ -4,9 +4,9 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import by.irun.viz.to.ResultTOUtil;
+import by.irun.viz.to.TOUtils;
 
-public class ResultTOUtilTest {
+public class TOUtilsTest {
 	private static final String RACE_RESULT_TO_REQUEST = "SELECT RS.POSITION AS POSITION"
 			+ ", CONCAT(RN.FIRSTNAME,' ',RN.LASTNAME) AS NAME"
 			+", RS.GENDER AS GENDER"
@@ -19,7 +19,7 @@ public class ResultTOUtilTest {
 	 */
 	@Test
 	public void resultRequestTOTest(){
-		String request = ResultTOUtil.raceResultRequest(1L);
+		String request = TOUtils.raceResultRequest(1L);
 		assertEquals(RACE_RESULT_TO_REQUEST+1,request);
 	}
 }

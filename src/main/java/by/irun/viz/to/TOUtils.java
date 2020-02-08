@@ -3,12 +3,14 @@ package by.irun.viz.to;
 
 /**
  * Utility class for operations with request`s result sets
+ * <p>
  * Provides sql requests for info-objects (front-end representation of data stored in db)
+ * <p>
  * and transfer operations for result-sets
  * @author A.Dubovik
  *
  */
-public class ResultTOUtil {
+public class TOUtils {
 
 	public static final String POSITION = "POSITION";
 	public static final String NAME = "NAME";

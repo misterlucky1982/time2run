@@ -20,7 +20,7 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 import by.irun.viz.to.RaceInfoTO;
 import by.irun.viz.to.RaceResultTO;
-import by.irun.viz.to.ResultTOUtil;
+import by.irun.viz.to.TOUtils;
 import by.irun.viz.to.VizUtils;
 
 /**
@@ -47,7 +47,7 @@ public class DataProviderTest {
 	@Test
 	public void getRaceResultTest(){
 			SqlRowSet rowSet = PowerMock.createMock(org.springframework.jdbc.support.rowset.SqlRowSet.class);
-			EasyMock.expect(jdbcTemplate.queryForRowSet(ResultTOUtil.raceResultRequest(1L))).andReturn(rowSet);
+			EasyMock.expect(jdbcTemplate.queryForRowSet(TOUtils.raceResultRequest(1L))).andReturn(rowSet);
 			DataProvider provider = new DataProvider();
 			Whitebox.setInternalState(provider, "jdbcTemplate", jdbcTemplate);
 			List<RaceResultTO>expected = prepareForGetRaceResultTOListFromSqlRowSet(rowSet,1);
@@ -64,7 +64,7 @@ public class DataProviderTest {
 	@Test
 	public void getRaceInfoTOListFromSqlRowSetTest(){
 		SqlRowSet rowSet = PowerMock.createMock(org.springframework.jdbc.support.rowset.SqlRowSet.class);
-		EasyMock.expect(jdbcTemplate.queryForRowSet(ResultTOUtil.fullRaceListRequest())).andReturn(rowSet);
+		EasyMock.expect(jdbcTemplate.queryForRowSet(TOUtils.fullRaceListRequest())).andReturn(rowSet);
 		DataProvider provider = new DataProvider();
 		Whitebox.setInternalState(provider, "jdbcTemplate", jdbcTemplate);
 		List<RaceInfoTO>expected = prepareForGetRaceInfoTOListFromSqlRowSetForGivenDates(rowSet,Arrays.asList(Date.valueOf("2000-01-01"),Date.valueOf("2000-02-02")),1L);
@@ -87,17 +87,17 @@ public class DataProviderTest {
 		while(numberOfResults>0){
 			RaceResultTO to = new RaceResultTO();
 			EasyMock.expect(rowSet.next()).andReturn(true);
-			EasyMock.expect(rowSet.getInt(ResultTOUtil.POSITION)).andReturn(numberOfResults);
+			EasyMock.expect(rowSet.getInt(TOUtils.POSITION)).andReturn(numberOfResults);
 			to.setAbsPosition(numberOfResults);
 			to.setPositionInGroup(numberOfResults);
-			EasyMock.expect(rowSet.getString(ResultTOUtil.CLUB)).andReturn(CLUB+numberOfResults);
+			EasyMock.expect(rowSet.getString(TOUtils.CLUB)).andReturn(CLUB+numberOfResults);
 			to.setClub(CLUB+numberOfResults);
-			EasyMock.expect(rowSet.getString(ResultTOUtil.NAME)).andReturn(NAME+numberOfResults);
+			EasyMock.expect(rowSet.getString(TOUtils.NAME)).andReturn(NAME+numberOfResults);
 			to.setName(NAME+numberOfResults);
-			EasyMock.expect(rowSet.getString(ResultTOUtil.GENDER)).andReturn(GENDER);
+			EasyMock.expect(rowSet.getString(TOUtils.GENDER)).andReturn(GENDER);
 			to.setGender(GENDER);
 			to.setTime(VizUtils.convertNumberOfSecondsToTimeRepresentation(numberOfResults));
-			EasyMock.expect(rowSet.getInt(ResultTOUtil.TIME)).andReturn(numberOfResults--);
+			EasyMock.expect(rowSet.getInt(TOUtils.TIME)).andReturn(numberOfResults--);
 			list.add(to);
 		}
 		EasyMock.expect(rowSet.next()).andReturn(false);
@@ -116,10 +116,10 @@ public class DataProviderTest {
 		for(Date d:dates){
 			RaceInfoTO to = new RaceInfoTO();
 			EasyMock.expect(rowSet.next()).andReturn(true);
-			EasyMock.expect(rowSet.getLong(ResultTOUtil.RACE_ID)).andReturn(startId);
+			EasyMock.expect(rowSet.getLong(TOUtils.RACE_ID)).andReturn(startId);
 			to.setRaceId(startId++);
-			EasyMock.expect(rowSet.getDate(ResultTOUtil.RACE_DATE)).andReturn(d);
-			EasyMock.expect(rowSet.getString(ResultTOUtil.PARK_NAME)).andReturn(PARK);
+			EasyMock.expect(rowSet.getDate(TOUtils.RACE_DATE)).andReturn(d);
+			EasyMock.expect(rowSet.getString(TOUtils.PARK_NAME)).andReturn(PARK);
 			to.setRaceName(VizUtils.convertSqlDateToFrontEndRepresentation(d)+" "+PARK);
 			list.add(to);
 		}

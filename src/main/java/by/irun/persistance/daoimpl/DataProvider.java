@@ -10,7 +10,7 @@ import by.irun.config.ApplicationConstants;
 import by.irun.dao.IDataProvider;
 import by.irun.viz.to.RaceInfoTO;
 import by.irun.viz.to.RaceResultTO;
-import by.irun.viz.to.ResultTOUtil;
+import by.irun.viz.to.TOUtils;
 import by.irun.viz.to.VizUtils;
 
 /**
@@ -30,7 +30,7 @@ public class DataProvider implements IDataProvider{
 	 */
 	@Override
 	public List<RaceResultTO> getRaceResult(long raceId) {
-		return getRaceResultTOListFromSqlRowSet(jdbcTemplate.queryForRowSet(ResultTOUtil.raceResultRequest(raceId)));		
+		return getRaceResultTOListFromSqlRowSet(jdbcTemplate.queryForRowSet(TOUtils.raceResultRequest(raceId)));		
 	}
 	
 	/* (non-Javadoc)
@@ -38,7 +38,7 @@ public class DataProvider implements IDataProvider{
 	 */
 	@Override
 	public List<RaceInfoTO> getFullRaceList() {
-		return getRaceInfoTOListFromSqlRowSet(jdbcTemplate.queryForRowSet(ResultTOUtil.fullRaceListRequest()));
+		return getRaceInfoTOListFromSqlRowSet(jdbcTemplate.queryForRowSet(TOUtils.fullRaceListRequest()));
 	}
 
 	
@@ -52,12 +52,12 @@ public class DataProvider implements IDataProvider{
 		int posInGroup = 1;
 		while(rowSet.next()){
 			RaceResultTO to = new RaceResultTO();
-			to.setAbsPosition(rowSet.getInt(ResultTOUtil.POSITION));
+			to.setAbsPosition(rowSet.getInt(TOUtils.POSITION));
 			to.setPositionInGroup(posInGroup++);
-			to.setClub(rowSet.getString(ResultTOUtil.CLUB));
-			to.setName(rowSet.getString(ResultTOUtil.NAME));
-			to.setGender(rowSet.getString(ResultTOUtil.GENDER));
-			to.setTime(VizUtils.convertNumberOfSecondsToTimeRepresentation(rowSet.getInt(ResultTOUtil.TIME)));
+			to.setClub(rowSet.getString(TOUtils.CLUB));
+			to.setName(rowSet.getString(TOUtils.NAME));
+			to.setGender(rowSet.getString(TOUtils.GENDER));
+			to.setTime(VizUtils.convertNumberOfSecondsToTimeRepresentation(rowSet.getInt(TOUtils.TIME)));
 			list.add(to);
 		}
 		return list;
@@ -72,8 +72,8 @@ public class DataProvider implements IDataProvider{
 		List<RaceInfoTO>list = new ArrayList<>();
 		while(rowSet.next()){
 			RaceInfoTO to = new RaceInfoTO();
-			to.setRaceId(rowSet.getLong(ResultTOUtil.RACE_ID));
-			to.setRaceName(VizUtils.convertSqlDateToFrontEndRepresentation(rowSet.getDate(ResultTOUtil.RACE_DATE))+" "+rowSet.getString(ResultTOUtil.PARK_NAME));
+			to.setRaceId(rowSet.getLong(TOUtils.RACE_ID));
+			to.setRaceName(VizUtils.convertSqlDateToFrontEndRepresentation(rowSet.getDate(TOUtils.RACE_DATE))+" "+rowSet.getString(TOUtils.PARK_NAME));
 			list.add(to);
 		}
 		return list;
