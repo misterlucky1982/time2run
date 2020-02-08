@@ -26,6 +26,7 @@ public class AppLocales {
 
 	/**
 	 * returns Locale for given key
+	 * <p>
 	 * If there is no such Locale or key is null returns default locale for application scope
 	 * @param key
 	 * @return Locale
