@@ -10,7 +10,7 @@ package by.irun.viz.to;
  * @author A.Dubovik
  *
  */
-public class TOUtils {
+public class TORequests {
 
 	public static final String POSITION = "POSITION";
 	public static final String NAME = "NAME";
