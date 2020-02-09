@@ -15,7 +15,7 @@ import by.irun.domain.to.RunnerResultTO;
 import by.irun.viz.to.RaceInfoTO;
 import by.irun.viz.to.RaceResultTO;
 import by.irun.viz.to.TORequests;
-import by.irun.viz.to.VizUtils;
+import by.irun.viz.utils.VizUtils;
 
 /**
  * implementation of {@link by.irun.dao.IDataProvider}

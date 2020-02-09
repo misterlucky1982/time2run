@@ -1,7 +1,7 @@
 /**
  * 
  */
-package by.irun.viz.to;
+package by.irun.viz.utils;
 
 import static org.junit.Assert.assertEquals;
 
@@ -9,8 +9,10 @@ import java.sql.Date;
 
 import org.junit.Test;
 
+import by.irun.viz.utils.VizUtils;
+
 /**
- * test class for {@link by.irun.viz.to.VizUtils}
+ * test class for {@link by.irun.viz.utils.VizUtils}
  * @author A.Dubovik
  */
 public class VizUtilsTest {
@@ -28,7 +30,7 @@ public class VizUtilsTest {
 	}
 	
 	/**
-	 * test for {@link by.irun.viz.to.VizUtils#convertSqlDateToFrontEndRepresentation(java.sql.Date)}
+	 * test for {@link by.irun.viz.utils.VizUtils#convertSqlDateToFrontEndRepresentation(java.sql.Date)}
 	 */
 	@Test
 	public void convertSqlDateToFrontEndRepresentationTest(){

@@ -1,4 +1,4 @@
-package by.irun.viz.to;
+package by.irun.viz.utils;
 
 import java.sql.Date;
 
