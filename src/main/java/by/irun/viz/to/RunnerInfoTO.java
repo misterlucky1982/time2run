@@ -17,7 +17,7 @@ public class RunnerInfoTO {
 	private String clubLink;
 	private int numberOfRaces;
 	private String racesRequest;
-	private List<RaceResultTO> racesList;
+	private List<RunnerResultInfoTO> racesList;
 	/**
 	 * @return the avatar
 	 */
@@ -119,13 +119,13 @@ public class RunnerInfoTO {
 	/**
 	 * @return the racesList
 	 */
-	public List<RaceResultTO> getRacesList() {
+	public List<RunnerResultInfoTO> getRacesList() {
 		return racesList;
 	}
 	/**
 	 * @param racesList the racesList to set
 	 */
-	public void setRacesList(List<RaceResultTO> racesList) {
+	public void setRacesList(List<RunnerResultInfoTO> racesList) {
 		this.racesList = racesList;
 	}
 

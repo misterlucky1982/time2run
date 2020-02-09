@@ -109,7 +109,7 @@ public class RunnerInfoTOTest {
 	public void raceResultListTest(){
 		assertNull(to.getRacesList());
 		@SuppressWarnings("unchecked")
-		List<RaceResultTO>list = PowerMock.createMock(List.class);
+		List<RunnerResultInfoTO>list = PowerMock.createMock(List.class);
 		to.setRacesList(list);
 		assertEquals(list,to.getRacesList());
 	}
