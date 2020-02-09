@@ -3,12 +3,15 @@ package by.irun.persistance.daoimpl;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
 import by.irun.config.ApplicationConstants;
 import by.irun.dao.IDataProvider;
+import by.irun.domain.to.RunnerResultTO;
 import by.irun.viz.to.RaceInfoTO;
 import by.irun.viz.to.RaceResultTO;
 import by.irun.viz.to.TORequests;
@@ -87,4 +90,34 @@ public class DataProvider implements IDataProvider{
 		}
 		return list;
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see by.irun.dao.IDataProvider#getRunnerResults(long runnerId)
+	 */
+	@Override
+	public List<RunnerResultTO> getRunnerResults(long runnerId) throws SQLException {
+		try {
+			SqlRowSet rowSet = jdbcTemplate.queryForRowSet(TORequests.runnerResultInfoListRequest(runnerId));
+			List<RunnerResultTO> list = new ArrayList<>();
+			while (rowSet.next()) {
+				RunnerResultTO to = new RunnerResultTO();
+				to.setAbsPosition(rowSet.getInt(TORequests.ABSPOSITION));
+				to.setClubId(rowSet.getLong(TORequests.CLUBID));
+				to.setClubLogo(rowSet.getString(TORequests.CLUBLOGO));
+				to.setClubName(rowSet.getString(TORequests.CLUBNAME));
+				to.setParkName(rowSet.getString(TORequests.PARK_NAME));
+				to.setPositionInGenderGroup(rowSet.getInt(TORequests.POSITIONINGENDERGROUP));
+				to.setRaceDate(rowSet.getDate(TORequests.RACE_DATE));
+				to.setRaceId(rowSet.getLong(TORequests.RACE_ID));
+				to.setTime(rowSet.getInt(TORequests.TIME));
+				list.add(to);
+			}
+			return list;
+		} catch (DataAccessException e) {
+			throw new SQLException(e);
+		}
+	}
+
 }

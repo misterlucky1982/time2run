@@ -3,6 +3,7 @@ package by.irun.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import by.irun.domain.to.RunnerResultTO;
 import by.irun.viz.to.RaceInfoTO;
 import by.irun.viz.to.RaceResultTO;
 
@@ -26,4 +27,12 @@ public interface IDataProvider {
 	 * @return
 	 */
 	List<RaceInfoTO>getFullRaceList() throws SQLException;
+	
+	/**
+	 * Provides List of runner result for given runner id
+	 * @param runnerId
+	 * @return List<RunnerResultInfoTO>
+	 * @throws SQLException
+	 */
+	List<RunnerResultTO> getRunnerResults(long runnerId) throws SQLException;
 }
