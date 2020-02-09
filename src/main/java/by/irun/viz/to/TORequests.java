@@ -66,7 +66,4 @@ public class TORequests {
 		return RUNNER_RESULT_INFO_REQUEST + runnerId;
 	};
 
-	public static void main(String... strings) {
-		System.out.println(runnerResultInfoListRequest(80));
-	}
 }
