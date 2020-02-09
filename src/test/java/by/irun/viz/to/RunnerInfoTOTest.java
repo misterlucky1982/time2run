@@ -1,8 +1,12 @@
 package by.irun.viz.to;
 
 import static org.junit.Assert.*;
+
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
+import org.powermock.api.easymock.PowerMock;
 
 /**
  * test class for {@link by.irun.viz.to.RunnerInfoTO}
@@ -97,5 +101,16 @@ public class RunnerInfoTOTest {
 		assertNull(to.getRacesRequest());
 		to.setRacesRequest("request");
 		assertEquals("request",to.getRacesRequest());
+	}
+	/**
+	 * get/set test for raceList
+	 */
+	@Test
+	public void raceResultListTest(){
+		assertNull(to.getRacesList());
+		@SuppressWarnings("unchecked")
+		List<RaceResultTO>list = PowerMock.createMock(List.class);
+		to.setRacesList(list);
+		assertEquals(list,to.getRacesList());
 	}
 }

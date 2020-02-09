@@ -1,5 +1,7 @@
 package by.irun.viz.to;
 
+import java.util.List;
+
 /**
  * This class provides information about runner for front-end representation
  * @author A.Dubovik
@@ -15,6 +17,7 @@ public class RunnerInfoTO {
 	private String clubLink;
 	private int numberOfRaces;
 	private String racesRequest;
+	private List<RaceResultTO> racesList;
 	/**
 	 * @return the avatar
 	 */
@@ -113,5 +116,18 @@ public class RunnerInfoTO {
 	public void setRacesRequest(String racesRequest) {
 		this.racesRequest = racesRequest;
 	}
+	/**
+	 * @return the racesList
+	 */
+	public List<RaceResultTO> getRacesList() {
+		return racesList;
+	}
+	/**
+	 * @param racesList the racesList to set
+	 */
+	public void setRacesList(List<RaceResultTO> racesList) {
+		this.racesList = racesList;
+	}
 
+	
 }
