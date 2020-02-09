@@ -9,6 +9,11 @@ import java.sql.Date;
 
 import org.junit.Test;
 
+import by.irun.domain.Gender;
+import by.irun.domain.Picture;
+import by.irun.domain.Runner;
+import by.irun.locale.AppLocales;
+import by.irun.viz.to.RunnerInfoTO;
 import by.irun.viz.utils.VizUtils;
 
 /**
@@ -36,5 +41,34 @@ public class VizUtilsTest {
 	public void convertSqlDateToFrontEndRepresentationTest(){
 		assertEquals(VizUtils.UNKNOWN_DATE,VizUtils.convertSqlDateToFrontEndRepresentation(null));
 		assertEquals("02.02.2000",VizUtils.convertSqlDateToFrontEndRepresentation(Date.valueOf("2000-02-02")));
+	}
+	
+	/**
+	 * test for {@link by.irun.viz.utils.VizUtils#resolveAvatarPathForRunner(RunnerInfoTO, Runner, java.util.Locale)}
+	 */
+	@Test
+	public void resolveAvatarPathForRunnerTest() {
+		Runner runner = new Runner();
+		runner.setGender(Gender.FEMALE);
+		RunnerInfoTO to = new RunnerInfoTO();
+		VizUtils.resolveAvatarPathForRunner(to, runner, AppLocales.BY);
+		assertEquals(VizConstants.NO_FOTO_AVATAR_WOMAN_BY, to.getAvatar());
+		VizUtils.resolveAvatarPathForRunner(to, runner, AppLocales.RU);
+		assertEquals(VizConstants.NO_FOTO_AVATAR_WOMAN_RU, to.getAvatar());
+		VizUtils.resolveAvatarPathForRunner(to, runner, AppLocales.EN);
+		assertEquals(VizConstants.NO_FOTO_AVATAR_WOMAN_EN, to.getAvatar());
+		runner.setGender(Gender.MALE);
+		VizUtils.resolveAvatarPathForRunner(to, runner, AppLocales.BY);
+		assertEquals(VizConstants.NO_FOTO_AVATAR_MAN_BY, to.getAvatar());
+		VizUtils.resolveAvatarPathForRunner(to, runner, AppLocales.RU);
+		assertEquals(VizConstants.NO_FOTO_AVATAR_MAN_RU, to.getAvatar());
+		VizUtils.resolveAvatarPathForRunner(to, runner, AppLocales.EN);
+		assertEquals(VizConstants.NO_FOTO_AVATAR_MAN_EN, to.getAvatar());
+		Picture pic = new Picture();
+		pic.setLocation("path");
+		runner.setAvatar(pic);
+		to = new RunnerInfoTO();
+		VizUtils.resolveAvatarPathForRunner(to, runner, AppLocales.DEFAULT);
+		assertEquals("path", to.getAvatar());
 	}
 }
