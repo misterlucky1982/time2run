@@ -11,7 +11,7 @@ import by.irun.domain.DomainEntity;
  * {@link by.irun.domain.DomainEntity}
  *
  */
-public interface CRUDHandler {
+public interface CRUDHandler extends IDomainEntityProvider{
 
 	/**
 	 * Persists entity into database
@@ -37,12 +37,4 @@ public interface CRUDHandler {
 	 */
 	boolean delete(DomainEntity entity) throws SQLException;
 	
-	/**
-	 * Read DomainEntity from database
-	 * @param entityClass - class of entity
-	 * @param id - id of the required entity
-	 * @return DomainEntity
-	 * @throws SQLException
-	 */
-	DomainEntity getEntityById(@SuppressWarnings("rawtypes") Class entityClass, Serializable id) throws SQLException;
 }
