@@ -11,6 +11,9 @@ public class RunnerResultInfoTO {
 	private String posInOwnGenderInfo;
 	private String time;
 	private String linkToRace;
+	private String clubLogo;
+	private String clubName;
+	private String linkToClub;
 	/**
 	 * @return the raceInfo
 	 */
@@ -71,7 +74,42 @@ public class RunnerResultInfoTO {
 	public void setLinkToRace(String linkToRace) {
 		this.linkToRace = linkToRace;
 	}
-	
+	/**
+	 * @return the clubLogo
+	 */
+	public String getClubLogo() {
+		return clubLogo;
+	}
+	/**
+	 * @param clubLogo the clubLogo to set
+	 */
+	public void setClubLogo(String clubLogo) {
+		this.clubLogo = clubLogo;
+	}
+	/**
+	 * @return the clubName
+	 */
+	public String getClubName() {
+		return clubName;
+	}
+	/**
+	 * @param clubName the clubName to set
+	 */
+	public void setClubName(String clubName) {
+		this.clubName = clubName;
+	}
+	/**
+	 * @return the linkToClub
+	 */
+	public String getLinkToClub() {
+		return linkToClub;
+	}
+	/**
+	 * @param linkToClub the linkToClub to set
+	 */
+	public void setLinkToClub(String linkToClub) {
+		this.linkToClub = linkToClub;
+	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
@@ -80,6 +118,9 @@ public class RunnerResultInfoTO {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((absPositionInfo == null) ? 0 : absPositionInfo.hashCode());
+		result = prime * result + ((clubLogo == null) ? 0 : clubLogo.hashCode());
+		result = prime * result + ((clubName == null) ? 0 : clubName.hashCode());
+		result = prime * result + ((linkToClub == null) ? 0 : linkToClub.hashCode());
 		result = prime * result + ((linkToRace == null) ? 0 : linkToRace.hashCode());
 		result = prime * result + ((posInOwnGenderInfo == null) ? 0 : posInOwnGenderInfo.hashCode());
 		result = prime * result + ((raceInfo == null) ? 0 : raceInfo.hashCode());
@@ -102,6 +143,21 @@ public class RunnerResultInfoTO {
 			if (other.absPositionInfo != null)
 				return false;
 		} else if (!absPositionInfo.equals(other.absPositionInfo))
+			return false;
+		if (clubLogo == null) {
+			if (other.clubLogo != null)
+				return false;
+		} else if (!clubLogo.equals(other.clubLogo))
+			return false;
+		if (clubName == null) {
+			if (other.clubName != null)
+				return false;
+		} else if (!clubName.equals(other.clubName))
+			return false;
+		if (linkToClub == null) {
+			if (other.linkToClub != null)
+				return false;
+		} else if (!linkToClub.equals(other.linkToClub))
 			return false;
 		if (linkToRace == null) {
 			if (other.linkToRace != null)

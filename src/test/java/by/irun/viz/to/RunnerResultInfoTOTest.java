@@ -70,6 +70,36 @@ public class RunnerResultInfoTOTest {
 	}
 	
 	/**
+	 * get/set test for clubLogo
+	 */
+	@Test
+	public void clubLogoTest(){
+		assertNull(to.getClubLogo());
+		to.setClubLogo("logo");
+		assertEquals("logo",to.getClubLogo());
+	}
+	
+	/**
+	 * get/set test for linkToClub
+	 */
+	@Test
+	public void clubLinkTest(){
+		assertNull(to.getLinkToClub());
+		to.setLinkToClub("clubLink");
+		assertEquals("clubLink",to.getLinkToClub());
+	}
+	
+	/**
+	 * get/set test for clubName
+	 */
+	@Test
+	public void clubNameTest(){
+		assertNull(to.getClubName());
+		to.setClubName("clubName");
+		assertEquals("clubName",to.getClubName());
+	}
+	
+	/**
 	 * test for equals
 	 */
 	@Test
@@ -79,6 +109,9 @@ public class RunnerResultInfoTOTest {
 		to.setPosInOwnGenderInfo("gender");
 		to.setRaceInfo("race");
 		to.setTime("time");
+		to.setClubName("clubName");
+		to.setClubLogo("clubLogo");
+		to.setLinkToClub("linkToClub");
 		RunnerResultInfoTO infoTO = new RunnerResultInfoTO();
 		assertNotEquals(to,infoTO);
 		infoTO.setAbsPositionInfo("absPos");
@@ -90,6 +123,12 @@ public class RunnerResultInfoTOTest {
 		infoTO.setRaceInfo("race");
 		assertNotEquals(to,infoTO);
 		infoTO.setTime("time");
+		assertNotEquals(to,infoTO);
+		infoTO.setClubLogo("clubLogo");
+		assertNotEquals(to,infoTO);
+		infoTO.setClubName("clubName");
+		assertNotEquals(to,infoTO);
+		infoTO.setLinkToClub("linkToClub");
 		assertEquals(to,infoTO);
 	}
 }
