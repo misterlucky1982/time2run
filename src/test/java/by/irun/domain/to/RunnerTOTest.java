@@ -7,6 +7,8 @@ import java.sql.Date;
 import org.junit.Before;
 import org.junit.Test;
 
+import by.irun.domain.Gender;
+
 public class RunnerTOTest {
 	
 	private RunnerTO to;
@@ -64,5 +66,12 @@ public class RunnerTOTest {
 		assertNull(to.getLastName());
 		to.setLastName("name");
 		assertEquals("name",to.getLastName());
+	}
+	
+	@Test
+	public void genderTest(){
+		assertNull(to.getGender());
+		to.setGender(Gender.MALE);
+		assertEquals(Gender.MALE,to.getGender());
 	}
 }

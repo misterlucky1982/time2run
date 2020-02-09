@@ -2,6 +2,8 @@ package by.irun.domain.to;
 
 import java.sql.Date;
 
+import by.irun.domain.Gender;
+
 /**
  * provides object for transfer data from entity-layer to viz-layer
  * @author A.Dubovik
@@ -16,6 +18,7 @@ public class RunnerTO {
 	private Date dateOfBirth;
 	private String firstName;
 	private String lastName;
+	private Gender gender;
 	/**
 	 * @return the avatar
 	 */
@@ -99,6 +102,18 @@ public class RunnerTO {
 	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+	/**
+	 * @return the gender
+	 */
+	public Gender getGender() {
+		return gender;
+	}
+	/**
+	 * @param gender the gender to set
+	 */
+	public void setGender(Gender gender) {
+		this.gender = gender;
 	}
 	
 	
