@@ -7,8 +7,12 @@ import java.util.Map;
 
 import by.irun.domain.Gender;
 import by.irun.domain.Runner;
+import by.irun.domain.to.RunnerResultTO;
+import by.irun.domain.to.RunnerTO;
 import by.irun.locale.AppLocales;
+import by.irun.locale.Internationalizer;
 import by.irun.viz.to.RunnerInfoTO;
+import by.irun.viz.to.RunnerResultInfoTO;
 
 /**
  * this class provides utility methods for front-end representation
@@ -74,10 +78,23 @@ public class VizUtils {
 	 * @param runner
 	 * @param locale
 	 */
-	public static void resolveAvatarPathForRunner(RunnerInfoTO to, Runner runner, Locale locale) {
+	public static void resolveAvatarPathForRunner(RunnerInfoTO to, RunnerTO runner, Locale locale) {
 		if (runner.getAvatar() != null) {
-			to.setAvatar(runner.getAvatar().getLocation());
+			to.setAvatar(runner.getAvatar());
 		} else
 			to.setAvatar(AVATAR_MAP.get(runner.getGender()).get(locale));
+	}
+	
+	public static RunnerResultInfoTO convert(RunnerResultTO to, Locale locale){
+		RunnerResultInfoTO infoTO = new RunnerResultInfoTO();
+		infoTO.setAbsPositionInfo(Integer.toString(to.getAbsPosition()));
+		infoTO.setClubLogo(to.getClubLogo());
+		infoTO.setClubName(to.getClubName());
+		infoTO.setLinkToClub(null);//TODO
+		infoTO.setLinkToRace(null);//TODO
+		infoTO.setPosInOwnGenderInfo(Integer.toString(to.getPositionInGenderGroup()));
+		infoTO.setRaceInfo(Internationalizer.translate(to.getRaceDate(), locale)+" "+to.getParkName());
+		infoTO.setTime(VizUtils.convertNumberOfSecondsToTimeRepresentation(to.getTime()));
+		return infoTO;
 	}
 }

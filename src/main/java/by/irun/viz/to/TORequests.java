@@ -26,6 +26,11 @@ public class TORequests {
 	public static final String CLUBID = "CLUBID";
 	public static final String CLUBNAME = "CLUBNAME";
 	public static final String CLUBLOGO = "CLUBLOGO";
+	public static final String FIRSTNAME = "FIRSTNAME";
+	public static final String LASTNAME = "LASTNAME";
+	public static final String AVATAR = "AVATAR";
+	public static final String DATEOFBIRTH = "DATEOFBIRTH";
+	public static final String CITY = "CITY";
 
 	private static final String RACE_RESULT_TO_REQUEST = "SELECT RS.POSITION AS " + POSITION
 			+ ", CONCAT(RN.FIRSTNAME,' ',RN.LASTNAME) AS " + NAME + ", RS.GENDER AS " + GENDER + ", CL.NAME AS " + CLUB
@@ -43,6 +48,11 @@ public class TORequests {
 	private static final String RACELIST_REQUEST = "select rc.id as " + RACE_ID + ", pk.name as " + PARK_NAME
 			+ ", rc.date as " + RACE_DATE + " from races rc inner"
 			+ " join parks pk on rc.park = pk.id order by rc.date desc;";
+	
+	private static final String RUNNER_TO_REQUEST = "SELECT RN.FIRSTNAME AS " + FIRSTNAME + ", RN.LASTNAME AS "
+			+ LASTNAME + ", RN.CITY AS " + CITY + ",  PC.LOCATION AS " + AVATAR + ", CL.ID AS " + CLUBID
+			+ ", CL.NAME AS " + CLUBNAME + ", RN.DATEOFBIRTH AS " + DATEOFBIRTH + ", RN.GENDER AS " + GENDER
+			+ " FROM RUNNERS RN LEFT JOIN PICTURES PC ON RN.AVATAR=PC.ID LEFT JOIN CLUBS CL ON RN.CLUB=CL.ID WHERE RN.ID=";
 
 	public static String raceResultRequest(long raceId) {
 		return RACE_RESULT_TO_REQUEST + raceId;
@@ -65,5 +75,15 @@ public class TORequests {
 	public static String runnerResultInfoListRequest(long runnerId) {
 		return RUNNER_RESULT_INFO_REQUEST + runnerId;
 	};
+	
+	/**
+	 * returns RunnerTO request for given runnerId
+	 * 
+	 * @param runnerId
+	 * @return String sql-request
+	 */
+	public static String runnerTORequest(long runnerId) {
+		return RUNNER_TO_REQUEST + runnerId;
+	}
 
 }

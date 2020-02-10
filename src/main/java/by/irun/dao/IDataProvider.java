@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import by.irun.domain.to.RunnerResultTO;
+import by.irun.domain.to.RunnerTO;
 import by.irun.viz.to.RaceInfoTO;
 import by.irun.viz.to.RaceResultTO;
 
@@ -35,4 +36,12 @@ public interface IDataProvider {
 	 * @throws SQLException
 	 */
 	List<RunnerResultTO> getRunnerResults(long runnerId) throws SQLException;
+	
+	/**
+	 * Provides RunnerTO for given runner id
+	 * @param runnerId
+	 * @return RunnerTO
+	 * @throws SQLException
+	 */
+	RunnerTO getRunnerTO(long runnerId) throws SQLException;
 }

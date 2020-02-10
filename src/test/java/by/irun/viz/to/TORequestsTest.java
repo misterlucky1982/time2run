@@ -20,6 +20,11 @@ public class TORequestsTest {
 			+ "AS CLUBLOGO, RS.RACE AS RACE_ID, RC.DATE AS RACE_DATE, PK.NAME AS PARK_NAME, "
 			+ "RS.TIME AS TIME FROM RESULTS RS INNER JOIN RACES RC ON RS.RACE=RC.ID INNER JOIN PARKS PK"
 			+ " ON RC.PARK=PK.ID INNER JOIN CLUBS CL ON RS.CLUB = CL.ID WHERE RS.RUNNER =";
+	
+	private static final String RUNNER_TO_REQUEST = "SELECT RN.FIRSTNAME AS FIRSTNAME, "
+			+ "RN.LASTNAME AS LASTNAME, RN.CITY AS CITY,  PC.LOCATION AS AVATAR, CL.ID AS CLUBID, "
+			+ "CL.NAME AS CLUBNAME, RN.DATEOFBIRTH AS DATEOFBIRTH," + " RN.GENDER AS GENDER FROM RUNNERS "
+			+ "RN LEFT JOIN PICTURES PC ON RN.AVATAR=PC.ID LEFT " + "JOIN CLUBS CL ON RN.CLUB=CL.ID WHERE RN.ID=";
 
 	/**
 	 * request test for RaceResultTO
@@ -36,5 +41,14 @@ public class TORequestsTest {
 	public void runnerResultInfoListTest(){
 		String request = TORequests.runnerResultInfoListRequest(1);
 		assertEquals(RUNNER_RESULT_INFO_LIST_REQUEST+1,request);
+	}
+	
+	/**
+	 * request test for RunnerTO
+	 */
+	@Test
+	public void runnerTORequestTest() {
+		String request = TORequests.runnerTORequest(22);
+		assertEquals(RUNNER_TO_REQUEST + 22, request);
 	}
 }

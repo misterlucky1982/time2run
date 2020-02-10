@@ -12,6 +12,8 @@ import org.springframework.stereotype.Component;
 import by.irun.config.ApplicationConstants;
 import by.irun.dao.IDataProvider;
 import by.irun.domain.to.RunnerResultTO;
+import by.irun.domain.to.RunnerTO;
+import by.irun.persistance.util.GenderConverter;
 import by.irun.viz.to.RaceInfoTO;
 import by.irun.viz.to.RaceResultTO;
 import by.irun.viz.to.TORequests;
@@ -23,6 +25,8 @@ import by.irun.viz.utils.VizUtils;
  */
 @Component
 public class DataProvider implements IDataProvider{
+	
+	private GenderConverter genderConverter = new GenderConverter();
 	
 	private JdbcTemplate jdbcTemplate;
 	{
@@ -115,6 +119,33 @@ public class DataProvider implements IDataProvider{
 				list.add(to);
 			}
 			return list;
+		} catch (DataAccessException e) {
+			throw new SQLException(e);
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see by.irun.dao.IDataProvider#getRunnerTO(long runnerId)
+	 */
+	@Override
+	public RunnerTO getRunnerTO(long runnerId) throws SQLException {
+		try {
+			SqlRowSet rowSet = jdbcTemplate.queryForRowSet(TORequests.runnerTORequest(runnerId));
+			if (rowSet.next()) {
+				RunnerTO to = new RunnerTO();
+				to.setAvatar(rowSet.getString(TORequests.AVATAR));
+				to.setCity(rowSet.getString(TORequests.CITY));
+				to.setClubId(rowSet.getLong(TORequests.CLUBID));
+				to.setClubName(rowSet.getString(TORequests.CLUBNAME));
+				to.setDateOfBirth(rowSet.getDate(TORequests.DATEOFBIRTH));
+				to.setFirstName(rowSet.getString(TORequests.FIRSTNAME));
+				to.setGender(genderConverter.convertToEntityAttribute(rowSet.getString(TORequests.GENDER)));
+				to.setLastName(rowSet.getString(TORequests.LASTNAME));
+				return to;
+			} else
+				throw new SQLException("Empty resultset for id:" + runnerId);
 		} catch (DataAccessException e) {
 			throw new SQLException(e);
 		}

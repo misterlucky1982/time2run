@@ -10,8 +10,8 @@ import java.sql.Date;
 import org.junit.Test;
 
 import by.irun.domain.Gender;
-import by.irun.domain.Picture;
 import by.irun.domain.Runner;
+import by.irun.domain.to.RunnerTO;
 import by.irun.locale.AppLocales;
 import by.irun.viz.to.RunnerInfoTO;
 import by.irun.viz.utils.VizUtils;
@@ -48,7 +48,7 @@ public class VizUtilsTest {
 	 */
 	@Test
 	public void resolveAvatarPathForRunnerTest() {
-		Runner runner = new Runner();
+		RunnerTO runner = new RunnerTO();
 		runner.setGender(Gender.FEMALE);
 		RunnerInfoTO to = new RunnerInfoTO();
 		VizUtils.resolveAvatarPathForRunner(to, runner, AppLocales.BY);
@@ -64,9 +64,7 @@ public class VizUtilsTest {
 		assertEquals(VizConstants.NO_FOTO_AVATAR_MAN_RU, to.getAvatar());
 		VizUtils.resolveAvatarPathForRunner(to, runner, AppLocales.EN);
 		assertEquals(VizConstants.NO_FOTO_AVATAR_MAN_EN, to.getAvatar());
-		Picture pic = new Picture();
-		pic.setLocation("path");
-		runner.setAvatar(pic);
+		runner.setAvatar("path");
 		to = new RunnerInfoTO();
 		VizUtils.resolveAvatarPathForRunner(to, runner, AppLocales.DEFAULT);
 		assertEquals("path", to.getAvatar());

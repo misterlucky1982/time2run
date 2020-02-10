@@ -1,6 +1,7 @@
 package by.irun.service;
 
 import java.util.List;
+import java.util.Locale;
 
 import by.irun.viz.to.RaceInfoTO;
 import by.irun.viz.to.RaceResultTO;
@@ -30,5 +31,13 @@ public interface IDataService {
 	 * @return
 	 */
 	RunnerInfoTO getRunnerInfoTO(long runnerId);
+	
+	/**
+	 * Provides RunnerTO for given id of {@link by.irun.domain.Runner}
+	 * @param runnerId
+	 * @param locale
+	 * @return
+	 */
+	RunnerInfoTO getRunnerInfoTO(long runnerId, Locale locale);
 
 }
