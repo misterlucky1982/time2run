@@ -13,7 +13,7 @@ public class RunnerTO {
 
 	private String avatar;
 	private String city;
-	private long clubId;
+	private Long clubId;
 	private String clubName;
 	private Date dateOfBirth;
 	private String firstName;
@@ -46,13 +46,13 @@ public class RunnerTO {
 	/**
 	 * @return the clubId
 	 */
-	public long getClubId() {
+	public Long getClubId() {
 		return clubId;
 	}
 	/**
 	 * @param clubId the clubId to set
 	 */
-	public void setClubId(long clubId) {
+	public void setClubId(Long clubId) {
 		this.clubId = clubId;
 	}
 	/**

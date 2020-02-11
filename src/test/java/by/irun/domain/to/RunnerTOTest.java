@@ -34,7 +34,7 @@ public class RunnerTOTest {
 	
 	@Test
 	public void clubIdTest(){
-		assertTrue(to.getClubId()==0);
+		assertNull(to.getClubId());
 		to.setClubId(1L);
 		assertTrue(to.getClubId()==1);
 	}
