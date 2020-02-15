@@ -30,7 +30,6 @@ public class ApplicationController {
 	
 	@GetMapping("/test")
 	public ModelAndView getResultListForRace() throws Exception{
-		RunnerInfoTO to = dataService.getRunnerInfoTO(89, AppLocales.BY);
 		List<RaceInfoTO>list = data.getFullRaceList();
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("results", data.getRaceResult(list.get(0).getRaceId()));
