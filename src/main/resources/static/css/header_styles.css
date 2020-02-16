@@ -9,12 +9,12 @@ body a {
 }
 
 header .wrapper {
-
+	position: relative;
 	margin: 0 auto;
 	width: 90%;
 }
 
-header ul {
+header .menu ul {
 	display: flex;
 	justify-content: space-between;
 	align-content: center;
@@ -42,16 +42,47 @@ header li a {
 header li a:hover  {
 	transform: scale(0.8);
 	color: #040000;
-
 }
 
 
 header li:last-child a {
 	border-radius: 30px;
 	box-sizing: border-box;
-	
 }
 
-header li:first-child a {
+header .menu li:first-child a {
 	text-shadow: 0px 9px 1px black, 0px -9px 1px black /* Параметры тени */
+}
+
+header .choice_language {
+	width: 100px;
+	position: absolute;
+	top: 10%;
+	right: 10%;
+}
+
+header .choice_language ul {
+	padding: 0;
+	margin: 0;
+	display: flex;
+	justify-content: space-between;
+
+}
+
+header .choice_language ul li {
+	display: block;
+}
+
+header .choice_language ul li a {
+	display: block;
+	width: 100%;
+	font-size: 14px;
+	vertical-align: middle;
+	border: 1px solid black;
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	box-sizing: border-box;
+	padding-top: 5px;
+	padding-left: 3px;
 }
