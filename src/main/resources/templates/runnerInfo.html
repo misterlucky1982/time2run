@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:text="#{app.title}">Title</title>
+<link rel="icon" href="/images/icon.png" type="image/png">
+<link rel="stylesheet" th:href="@{/css/styles.css}" />
+<link rel="stylesheet" th:href="@{/css/header_styles.css}"/>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	<script
+	src="http://jscrollpane.kelvinluck.com/script/jquery.jscrollpane.min.js"></script>
+</head>
+<body>
+	<div th:replace="fragments/header :: header"></div>
+	<div id="runnerinfo_runnercontainer">
+	<img alt="foto" th:src="${runner.avatar}">
+	<p th:text="${runner.name}"></p>
+	</div>
+</body>
+</html>

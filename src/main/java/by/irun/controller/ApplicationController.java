@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
+import org.springframework.web.bind.annotation.RequestParam;
 import by.irun.locale.AppLocales;
 import by.irun.persistance.daoimpl.DataProvider;
 import by.irun.service.impl.DataService;
@@ -35,6 +35,15 @@ public class ApplicationController {
 		mav.addObject("results", data.getRaceResult(list.get(0).getRaceId()));
 		mav.addObject("races",list);
 	    mav.setViewName("raceresult");
+	    return mav;
+	}
+	
+	@GetMapping("/runner")
+	public ModelAndView getRunnerPage(@RequestParam (value = "id", required = true) long id){
+		ModelAndView mav = new ModelAndView();
+		RunnerInfoTO to = dataService.getRunnerInfoTO(id);
+		mav.addObject("runner",to);
+	    mav.setViewName("runnerInfo");
 	    return mav;
 	}
 
