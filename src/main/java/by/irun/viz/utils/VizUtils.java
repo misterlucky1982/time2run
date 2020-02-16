@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import by.irun.controller.ControllerConstants;
 import by.irun.domain.Gender;
-import by.irun.domain.Runner;
 import by.irun.domain.to.RunnerResultTO;
 import by.irun.domain.to.RunnerTO;
 import by.irun.locale.AppLocales;
@@ -21,6 +21,7 @@ import by.irun.viz.to.RunnerResultInfoTO;
  */
 public class VizUtils {
 	
+	public static final String EMPTY_LINK = "#";
 	private static final Map<Gender, Map<Locale, String>> AVATAR_MAP;
 	static {
 		AVATAR_MAP = new HashMap<>();
@@ -89,12 +90,40 @@ public class VizUtils {
 		RunnerResultInfoTO infoTO = new RunnerResultInfoTO();
 		infoTO.setAbsPositionInfo(Integer.toString(to.getAbsPosition()));
 		infoTO.setClubLogo(to.getClubLogo());
-		infoTO.setClubName(to.getClubName());
-		infoTO.setLinkToClub(null);//TODO
-		infoTO.setLinkToRace(null);//TODO
+		infoTO.setClubName(resolveClubName(to.getClubName(),locale));
+		infoTO.setLinkToClub(resolveClubLink(to.getClubId()));
+		infoTO.setLinkToRace(resolveRaceLink(to.getRaceId()));
 		infoTO.setPosInOwnGenderInfo(Integer.toString(to.getPositionInGenderGroup()));
 		infoTO.setRaceInfo(Internationalizer.translate(to.getRaceDate(), locale)+" "+to.getParkName());
-		infoTO.setTime(VizUtils.convertNumberOfSecondsToTimeRepresentation(to.getTime()));
+		infoTO.setTime(convertNumberOfSecondsToTimeRepresentation(to.getTime()));
 		return infoTO;
+	}
+	
+	/**
+	 * provides link to club`s page for given club id
+	 * @param id
+	 * @return link
+	 */
+	public static String resolveClubLink(Long id){
+		return id==null?EMPTY_LINK:ControllerConstants.CLUB_LINK+id;
+	}
+	
+	/**
+	 * resolves clubName using given locale
+	 * @param clubName
+	 * @param locale
+	 * @return
+	 */
+	public static String resolveClubName(String clubName, Locale locale){
+		return clubName!=null?clubName:Internationalizer.translate(Internationalizer.KEY_WITHOUTCLUB, locale);
+	}
+	
+	/**
+	 * resolves link to race for given raceId
+	 * @param id
+	 * @return link to race
+	 */
+	public static String resolveRaceLink(Long id){
+		return id==null?EMPTY_LINK:ControllerConstants.RACE_LINK+id;
 	}
 }

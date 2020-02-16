@@ -13,6 +13,27 @@ import java.util.Map;
  */
 public class Internationalizer {
 	
+	public static final String KEY_WITHOUTCLUB = "key_WithoutClub";
+	
+	private static final Map<Locale,Map<String,String>> TRANSLATIONS;
+	static{
+		TRANSLATIONS = new HashMap<>();
+		Map<String,String> by = new HashMap<>();
+		Map<String,String> ru = new HashMap<>();
+		Map<String,String> en = new HashMap<>();
+		/*
+		 * temporary solution
+		 * until resoursebundle not implemented
+		 */
+		by.put(KEY_WITHOUTCLUB, "без клубу");
+		ru.put(KEY_WITHOUTCLUB, "без клуба");
+		en.put(KEY_WITHOUTCLUB, "no club");
+		
+		TRANSLATIONS.put(AppLocales.BY, by);
+		TRANSLATIONS.put(AppLocales.RU, ru);
+		TRANSLATIONS.put(AppLocales.EN, en);
+	}
+	
 	private static final Map<Locale,Map<String,String>> MONTH_TODATE_MAP;
 	static{
 		MONTH_TODATE_MAP = new HashMap<>();
@@ -60,6 +81,8 @@ public class Internationalizer {
 		MONTH_TODATE_MAP.put(AppLocales.RU, ru);
 	}
 	
+	
+	
 	private Internationalizer(){}
 
 	/**
@@ -105,4 +128,21 @@ public class Internationalizer {
 		return dateOfMonth;
 	}
 	
+	/**
+	 * Translates given key using given locale
+	 * @param key
+	 * @param locale
+	 * @return
+	 */
+	public static String translate(String key, Locale locale){
+		return TRANSLATIONS.get(locale).get(key);
+	}
+	/**
+	 * Translates given key using default locale
+	 * @param key
+	 * @return
+	 */
+	public static String translate(String key){
+		return translate(key, AppLocales.DEFAULT);
+	}
 }

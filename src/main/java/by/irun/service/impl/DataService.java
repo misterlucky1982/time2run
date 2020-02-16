@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import by.irun.dao.IDataProvider;
 import by.irun.dao.IDomainEntityProvider;
-import by.irun.domain.Runner;
 import by.irun.domain.to.RunnerResultTO;
 import by.irun.domain.to.RunnerTO;
 import by.irun.locale.AppLocales;
@@ -29,6 +28,7 @@ import by.irun.viz.utils.VizUtils;
 @Service
 public class DataService implements IDataService{
 
+	@SuppressWarnings("unused")
 	@Autowired
 	private IDomainEntityProvider entityProvider;
 	
@@ -86,8 +86,8 @@ public class DataService implements IDataService{
 		RunnerInfoTO to = new RunnerInfoTO();
 		VizUtils.resolveAvatarPathForRunner(to, runnerTO, locale);
 		to.setCity(runnerTO.getCity());
-		to.setClubLink(null);//TODO
-		to.setClubName(runnerTO.getClubName());
+		to.setClubLink(VizUtils.resolveClubLink(runnerTO.getClubId()));
+		to.setClubName(VizUtils.resolveClubName(runnerTO.getClubName(), locale));
 		to.setDateOfBirth(Internationalizer.translate(runnerTO.getDateOfBirth(), locale));
 		to.setName(runnerTO.getFirstName()+" "+runnerTO.getLastName());
 		List<RunnerResultTO> resultList = null;

@@ -9,6 +9,7 @@ import java.sql.Date;
 
 import org.junit.Test;
 
+import by.irun.controller.ControllerConstants;
 import by.irun.domain.Gender;
 import by.irun.domain.Runner;
 import by.irun.domain.to.RunnerTO;
@@ -69,4 +70,27 @@ public class VizUtilsTest {
 		VizUtils.resolveAvatarPathForRunner(to, runner, AppLocales.DEFAULT);
 		assertEquals("path", to.getAvatar());
 	}
+	
+	/**
+	 * test for ({@link VizUtils#resolveClubLink(Long)}
+	 */
+	@Test
+	public void resolveClubLinkTest(){
+		assertEquals(VizUtils.EMPTY_LINK,VizUtils.resolveClubLink(null));
+		assertEquals(ControllerConstants.CLUB_LINK+1,VizUtils.resolveClubLink(1L));
+	}
+	
+	/**
+	 * test for {@link VizUtils#resolveClubName(String, java.util.Locale)}
+	 */
+	@Test
+	public void resolveClubNameTest(){
+		assertEquals("Name",VizUtils.resolveClubName("Name", AppLocales.BY));
+		assertEquals("Name",VizUtils.resolveClubName("Name", AppLocales.RU));
+		assertEquals("Name",VizUtils.resolveClubName("Name", AppLocales.EN));
+		assertEquals("без клубу",VizUtils.resolveClubName(null, AppLocales.BY));
+		assertEquals("без клуба",VizUtils.resolveClubName(null, AppLocales.RU));
+		assertEquals("no club",VizUtils.resolveClubName(null, AppLocales.EN));
+	}
+	
 }
