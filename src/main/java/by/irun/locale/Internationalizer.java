@@ -11,9 +11,7 @@ import java.util.Map;
  * @author A.Dubovik
  *
  */
-public class Internationalizer {
-	
-	public static final String KEY_WITHOUTCLUB = "key_WithoutClub";
+public class Internationalizer implements Translator{
 	
 	private static final Map<Locale,Map<String,String>> TRANSLATIONS;
 	static{
@@ -28,6 +26,9 @@ public class Internationalizer {
 		by.put(KEY_WITHOUTCLUB, "без клубу");
 		ru.put(KEY_WITHOUTCLUB, "без клуба");
 		en.put(KEY_WITHOUTCLUB, "no club");
+		by.put(KEY_UNKNOWN, "невядома");
+		ru.put(KEY_UNKNOWN, "неизвестно");
+		en.put(KEY_UNKNOWN, "unknown");
 		
 		TRANSLATIONS.put(AppLocales.BY, by);
 		TRANSLATIONS.put(AppLocales.RU, ru);

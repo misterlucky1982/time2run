@@ -85,7 +85,7 @@ public class DataService implements IDataService{
 		if(runnerTO==null)return null;
 		RunnerInfoTO to = new RunnerInfoTO();
 		VizUtils.resolveAvatarPathForRunner(to, runnerTO, locale);
-		to.setCity(runnerTO.getCity());
+		to.setCity(VizUtils.resolveCity(runnerTO.getCity(), locale));
 		to.setClubLink(VizUtils.resolveClubLink(runnerTO.getClubId()));
 		to.setClubName(VizUtils.resolveClubName(runnerTO.getClubName(), locale));
 		to.setDateOfBirth(Internationalizer.translate(runnerTO.getDateOfBirth(), locale));

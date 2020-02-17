@@ -11,6 +11,7 @@ import by.irun.domain.to.RunnerResultTO;
 import by.irun.domain.to.RunnerTO;
 import by.irun.locale.AppLocales;
 import by.irun.locale.Internationalizer;
+import by.irun.locale.Translator;
 import by.irun.viz.to.RunnerInfoTO;
 import by.irun.viz.to.RunnerResultInfoTO;
 
@@ -125,5 +126,15 @@ public class VizUtils {
 	 */
 	public static String resolveRaceLink(Long id){
 		return id==null?EMPTY_LINK:ControllerConstants.RACE_LINK+id;
+	}
+	
+	/**
+	 * resolves city for frond-end representation
+	 * @param city
+	 * @param locale
+	 * @return city
+	 */
+	public static String resolveCity(String city, Locale locale){
+		return city!=null?city:Internationalizer.translate(Translator.KEY_UNKNOWN, locale);
 	}
 }
