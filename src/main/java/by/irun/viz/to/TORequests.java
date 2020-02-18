@@ -31,6 +31,8 @@ public class TORequests {
 	public static final String AVATAR = "AVATAR";
 	public static final String DATEOFBIRTH = "DATEOFBIRTH";
 	public static final String CITY = "CITY";
+	public static final String EMAIL = "EMAIL";
+	public static final String PHONE = "PHONE";
 
 	private static final String RACE_RESULT_TO_REQUEST = "SELECT RS.POSITION AS " + POSITION
 			+ ", CONCAT(RN.FIRSTNAME,' ',RN.LASTNAME) AS " + NAME + ", RS.GENDER AS " + GENDER + ", CL.NAME AS " + CLUB
@@ -53,6 +55,10 @@ public class TORequests {
 			+ LASTNAME + ", RN.CITY AS " + CITY + ",  PC.LOCATION AS " + AVATAR + ", CL.ID AS " + CLUBID
 			+ ", CL.NAME AS " + CLUBNAME + ", RN.DATEOFBIRTH AS " + DATEOFBIRTH + ", RN.GENDER AS " + GENDER
 			+ " FROM RUNNERS RN LEFT JOIN PICTURES PC ON RN.AVATAR=PC.ID LEFT JOIN CLUBS CL ON RN.CLUB=CL.ID WHERE RN.ID=";
+
+	private static final String CLUB_TO_REQUEST = "SELECT CL.NAME AS " + NAME + ", CL.BASECITY AS " + CITY
+			+ ", CL.BIGLOGO AS " + CLUBLOGO + ", A.EMAIL AS " + EMAIL + ", A.PHONE AS " + PHONE
+			+ " FROM CLUBS CL INNER JOIN USERS A ON CL.ADMIN=A.ID WHERE CL.ID=";
 
 	public static String raceResultRequest(long raceId) {
 		return RACE_RESULT_TO_REQUEST + raceId;
@@ -86,4 +92,13 @@ public class TORequests {
 		return RUNNER_TO_REQUEST + runnerId;
 	}
 
+	/**
+	 * returns ClubTO request for given club id
+	 * 
+	 * @param clubId
+	 * @return String sql-request
+	 */
+	public static String clubTORequest(long clubId) {
+		return CLUB_TO_REQUEST + clubId;
+	}
 }
