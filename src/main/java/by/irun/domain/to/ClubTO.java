@@ -15,10 +15,6 @@ public class ClubTO {
 	 */
 	String city;
 	/**
-	 * First race id
-	 */
-	Long firstRace;
-	/**
 	 * Admin`s email
 	 */
 	String email;
@@ -53,18 +49,6 @@ public class ClubTO {
 	 */
 	protected void setCity(String city) {
 		this.city = city;
-	}
-	/**
-	 * @return the firstRace
-	 */
-	protected Long getFirstRace() {
-		return firstRace;
-	}
-	/**
-	 * @param firstRace the firstRace to set
-	 */
-	protected void setFirstRace(Long firstRace) {
-		this.firstRace = firstRace;
 	}
 	/**
 	 * @return the email

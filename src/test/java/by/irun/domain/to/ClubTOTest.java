@@ -33,13 +33,6 @@ public class ClubTOTest {
 	}
 	
 	@Test
-	public void firstRaceTest(){
-		assertNull(to.getFirstRace());
-		to.setFirstRace(1L);
-		assertTrue(to.getFirstRace()==1);
-	}
-	
-	@Test
 	public void clubLogoTest(){
 		assertNull(to.getClubLogo());
 		to.setClubLogo("logo");
