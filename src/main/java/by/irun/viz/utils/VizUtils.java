@@ -38,6 +38,22 @@ public class VizUtils {
 		AVATAR_MAP.put(Gender.FEMALE, w);
 	}
 	
+	private static final String CLUB_NO_LOGO = "clubNoLogo";
+	
+	private static final Map<Locale, Map<String, String>> PATH_MAP;
+	static {
+		PATH_MAP = new HashMap<>();
+		Map<String, String> en = new HashMap<>();
+		Map<String, String> ru = new HashMap<>();
+		Map<String, String> by = new HashMap<>();
+		en.put(CLUB_NO_LOGO, VizConstants.CLUBLOGO_IS_NOT_UPLOADED_EN);
+		ru.put(CLUB_NO_LOGO, VizConstants.CLUBLOGO_IS_NOT_UPLOADED_RU);
+		by.put(CLUB_NO_LOGO, VizConstants.CLUBLOGO_IS_NOT_UPLOADED_BY);
+		PATH_MAP.put(AppLocales.BY, by);
+		PATH_MAP.put(AppLocales.RU, ru);
+		PATH_MAP.put(AppLocales.EN, en);
+	}
+	
 	public static final String UNKNOWN_DATE = "???";
 	
 	/**
@@ -136,5 +152,20 @@ public class VizUtils {
 	 */
 	public static String resolveCity(String city, Locale locale){
 		return city!=null?city:Internationalizer.translate(Translator.KEY_UNKNOWN, locale);
+	}
+	
+	/**
+	 * Resolves club`s logo image path
+	 * <p>
+	 * If logo is not null returns the same logo
+	 * <p>
+	 * if logo is null returns image "no logo" using given locale
+	 * 
+	 * @param logo
+	 * @param locale
+	 * @return
+	 */
+	public static String resolveClubLogo(String logo, Locale locale) {
+		return logo != null ? logo : PATH_MAP.get(locale).get(CLUB_NO_LOGO);
 	}
 }

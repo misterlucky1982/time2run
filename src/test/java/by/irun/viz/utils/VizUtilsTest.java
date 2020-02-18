@@ -93,4 +93,16 @@ public class VizUtilsTest {
 		assertEquals("no club",VizUtils.resolveClubName(null, AppLocales.EN));
 	}
 	
+	/**
+	 * test for {@link VizUtils#resolveClubLogo(String, java.util.Locale)}
+	 */
+	@Test
+	public void resolveClubLogoTest() {
+		assertEquals("logo", VizUtils.resolveClubLogo("logo", AppLocales.EN));
+		assertEquals("logo", VizUtils.resolveClubLogo("logo", AppLocales.RU));
+		assertEquals("logo", VizUtils.resolveClubLogo("logo", AppLocales.BY));
+		assertEquals(VizConstants.CLUBLOGO_IS_NOT_UPLOADED_EN, VizUtils.resolveClubLogo(null, AppLocales.EN));
+		assertEquals(VizConstants.CLUBLOGO_IS_NOT_UPLOADED_RU, VizUtils.resolveClubLogo(null, AppLocales.RU));
+		assertEquals(VizConstants.CLUBLOGO_IS_NOT_UPLOADED_BY, VizUtils.resolveClubLogo(null, AppLocales.BY));
+	}
 }
