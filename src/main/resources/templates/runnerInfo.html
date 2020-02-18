@@ -6,38 +6,92 @@
 <link rel="icon" href="/images/icon.png" type="image/png">
 <link rel="stylesheet" th:href="@{/css/styles.css}" />
 <link rel="stylesheet" th:href="@{/css/header_styles.css}"/>
+<link rel="stylesheet" href="../static/css/runnerinfo.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 	<script
 	src="http://jscrollpane.kelvinluck.com/script/jquery.jscrollpane.min.js"></script>
 </head>
 <body>
-	<div th:replace="fragments/header :: header"></div>
-	<div id="runnerinfo_runnercontainer">
-	<img alt="foto" th:src="${runner.avatar}">
-	<p th:text="${runner.name}"></p>
-	<p><span th:text = "#{runnerInfo.dateOfBirth}"></span>: <span th:text = "${runner.dateOfBirth}"></span></p>
-	<p><span th:text = "#{runnerInfo.city}"></span>: <span th:text = "${runner.city}"></span></p>
-	<p><span th:text = "#{runnerInfo.currentClub}"></span>: <span th:text = "${runner.clubName}"></span></p>
-	<p><span th:text = "#{runnerInfo.amountOfRaces}"></span>: <span th:text = "${runner.numberOfRaces}"></span></p>
-	<div id="runnerInfo.showRaceList"><p th:text = "#{runnerInfo.showAllRaces}"></p></div>
-	<div id="runnerInfo.raceList">
-			<table>
-				<tr>
-					<th th:text="#{runnerInfo.race}"></th>
-					<th th:text="#{runnerInfo.position}" /></th>
-					<th th:text="#{runnerInfo.absPosition}"></th>
-					<th th:text="#{runnerInfo.club}"></th>
-					<th th:text="#{runnerInfo.time}"></th>
-				</tr>
-				<tr th:each="result : ${runner.racesList}">
-					<td th:text="${result.raceInfo}"></td>
-					<td th:text="${result.posInOwnGenderInfo}"></td>
-					<td th:text="${result.absPositionInfo}"></td>
-					<td th:text="${result.clubName}"></td>
-					<td th:text="${result.time}"></td>
-				</tr>
-			</table>
+	<div class="dark_bg">
+		<div th:replace="fragments/header :: header"></div>
+		<div id="runnerinfo_runnercontainer" class="runnerinfo">
+			<img alt="foto" th:src="${runner.avatar}" src="../static/images/nofoto_man_ru.png">
+			<div class="wrapper_texts">
+				<p th:text="${runner.name}">Константин Константинов</p>
+				<p><span th:text = "#{runnerInfo.dateOfBirth}" class="dateOfBirth">Дата рождения</span>: <span th:text = "${runner.dateOfBirth}">9 сентября 1990 г.</span></p>
+				<p><span th:text = "#{runnerInfo.city}">город</span>: <span th:text = "${runner.city}">Минск</span></p>
+				<p><span th:text = "#{runnerInfo.currentClub}">текущий клуб</span>: <span th:text = "${runner.clubName}">Minskrun club</span></p>
+				<p><span th:text = "#{runnerInfo.amountOfRaces}">количество забегов</span>: <span th:text = "${runner.numberOfRaces}">8</span></p>
+				<div id="runnerInfo.showRaceList" class="showAllRaces"><p th:text = "#{runnerInfo.showAllRaces}"><a href="#">показать все забеги</a></p></div>
+			</div>
+			<div id="runnerInfo.raceList" class="table_results">
+				<table>
+					<tr>
+						<th th:text="#{runnerInfo.race}">забег</th>
+						<th th:text="#{runnerInfo.position}" />место</th>
+						<th th:text="#{runnerInfo.absPosition}">место в абсолюте</th>
+						<th th:text="#{runnerInfo.club}">клуб</th>
+						<th th:text="#{runnerInfo.time}">время</th>
+					</tr>
+					<tr th:each="result : ${runner.racesList}">
+						<td th:text="${result.raceInfo}">1 февраля 2020 г. Парк Калиновского</td>
+						<td th:text="${result.posInOwnGenderInfo}">12</td>
+						<td th:text="${result.absPositionInfo}">19</td>
+						<td th:text="${result.clubName}">Minskrun Club</td>
+						<td th:text="${result.time}">26:02</td>
+					</tr>
+					<tr th:each="result : ${runner.racesList}">
+						<td th:text="${result.raceInfo}">1 февраля 2020 г. Парк Калиновского</td>
+						<td th:text="${result.posInOwnGenderInfo}">12</td>
+						<td th:text="${result.absPositionInfo}">19</td>
+						<td th:text="${result.clubName}">Minskrun Club</td>
+						<td th:text="${result.time}">26:02</td>
+					</tr>
+					<tr th:each="result : ${runner.racesList}">
+						<td th:text="${result.raceInfo}">1 февраля 2020 г. Парк Калиновского</td>
+						<td th:text="${result.posInOwnGenderInfo}">12</td>
+						<td th:text="${result.absPositionInfo}">19</td>
+						<td th:text="${result.clubName}">Minskrun Club</td>
+						<td th:text="${result.time}">26:02</td>
+					</tr>
+					<tr th:each="result : ${runner.racesList}">
+						<td th:text="${result.raceInfo}">1 февраля 2020 г. Парк Калиновского</td>
+						<td th:text="${result.posInOwnGenderInfo}">12</td>
+						<td th:text="${result.absPositionInfo}">19</td>
+						<td th:text="${result.clubName}">Minskrun Club</td>
+						<td th:text="${result.time}">26:02</td>
+					</tr>
+					<tr th:each="result : ${runner.racesList}">
+						<td th:text="${result.raceInfo}">1 февраля 2020 г. Парк Калиновского</td>
+						<td th:text="${result.posInOwnGenderInfo}">12</td>
+						<td th:text="${result.absPositionInfo}">19</td>
+						<td th:text="${result.clubName}">Minskrun Club</td>
+						<td th:text="${result.time}">26:02</td>
+					</tr>
+					<tr th:each="result : ${runner.racesList}">
+						<td th:text="${result.raceInfo}">1 февраля 2020 г. Парк Калиновского</td>
+						<td th:text="${result.posInOwnGenderInfo}">12</td>
+						<td th:text="${result.absPositionInfo}">19</td>
+						<td th:text="${result.clubName}">Minskrun Club</td>
+						<td th:text="${result.time}">26:02</td>
+					</tr>
+					<tr th:each="result : ${runner.racesList}">
+						<td th:text="${result.raceInfo}">1 февраля 2020 г. Парк Калиновского</td>
+						<td th:text="${result.posInOwnGenderInfo}">12</td>
+						<td th:text="${result.absPositionInfo}">19</td>
+						<td th:text="${result.clubName}">Minskrun Club</td>
+						<td th:text="${result.time}">26:02</td>
+					</tr>
+					<tr th:each="result : ${runner.racesList}">
+						<td th:text="${result.raceInfo}">1 февраля 2020 г. Парк Калиновского</td>
+						<td th:text="${result.posInOwnGenderInfo}">12</td>
+						<td th:text="${result.absPositionInfo}">19</td>
+						<td th:text="${result.clubName}">Minskrun Club</td>
+						<td th:text="${result.time}">26:02</td>
+					</tr>
+				</table>
+			</div>
 		</div>
 	</div>
 </body>

@@ -1,1 +1,73 @@
 @CHARSET "UTF-8";
+
+html {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	background: url(../images/runinfo_bg.jpg) no-repeat;
+	background-size: cover;
+	color: #cccccc;
+	height: 100vh;
+}
+
+body>.dark_bg {
+	height: 100vh;
+	margin: 0;
+	padding: 0;
+	background-color: rgba(0, 0, 0, 0.7);
+}
+
+.runnerinfo {
+	display: flex;
+	min-height: 90vh;
+	min-width: 600px;
+	width: 100%;
+	margin: 0 2vw;
+	box-sizing: border-box;
+	padding-top: 5vh;
+}
+
+.wrapper_texts {
+	max-width: 50vw;
+	margin: 0 2vw;
+}
+
+.wrapper_texts div.showAllRaces a {
+	text-transform: uppercase;
+	text-decoration: none;
+	color: #cccccc;
+}
+
+.wrapper_texts div.showAllRaces a:hover {
+	color: white;
+}
+
+.wrapper_texts>p  {
+	text-transform: capitalize;
+}
+
+.wrapper_texts>p:first-child {
+	margin-top: 0px;
+}
+
+.table_results {
+	text-align: center;
+}
+
+.table_results table {
+	border-collapse: collapse;
+}
+
+.table_results table th {
+	border-collapse: collapse;
+	text-transform: uppercase;
+}
+
+.table_results td, .table_results th {
+	border: 1px solid #777777;
+	padding: 5px;
+}
