@@ -3,6 +3,7 @@ package by.irun.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import by.irun.domain.to.ClubTO;
 import by.irun.domain.to.RunnerResultTO;
 import by.irun.domain.to.RunnerTO;
 import by.irun.viz.to.RaceInfoTO;
@@ -44,4 +45,12 @@ public interface IDataProvider {
 	 * @throws SQLException
 	 */
 	RunnerTO getRunnerTO(long runnerId) throws SQLException;
+	
+	/**
+	 * Provides ClubTO for given club id
+	 * @param clubId
+	 * @return ClubTO
+	 * @throws SQLException
+	 */
+	ClubTO getClubTO(long clubId) throws SQLException;
 }

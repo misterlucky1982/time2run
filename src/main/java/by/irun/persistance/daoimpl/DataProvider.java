@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import by.irun.config.ApplicationConstants;
 import by.irun.dao.IDataProvider;
+import by.irun.domain.to.ClubTO;
 import by.irun.domain.to.RunnerResultTO;
 import by.irun.domain.to.RunnerTO;
 import by.irun.persistance.util.GenderConverter;
@@ -146,6 +147,30 @@ public class DataProvider implements IDataProvider{
 				return to;
 			} else
 				throw new SQLException("Empty resultset for id:" + runnerId);
+		} catch (DataAccessException e) {
+			throw new SQLException(e);
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see by.irun.dao.IDataProvider#getClubTO(long clubId)
+	 */
+	@Override
+	public ClubTO getClubTO(long clubId) throws SQLException {
+		try {
+			SqlRowSet rowSet = jdbcTemplate.queryForRowSet(TORequests.clubTORequest(clubId));
+			if (rowSet.next()) {
+				ClubTO to = new ClubTO();
+				to.setName(rowSet.getString(TORequests.NAME));
+				to.setCity(rowSet.getString(TORequests.CITY));
+				to.setClubLogo(rowSet.getString(TORequests.CLUBLOGO));
+				to.setEmail(rowSet.getString(TORequests.EMAIL));
+				to.setPhone(rowSet.getString(TORequests.PHONE));
+				return to;
+			} else
+				throw new SQLException("Empty resultset for id:" + clubId);
 		} catch (DataAccessException e) {
 			throw new SQLException(e);
 		}
