@@ -29,61 +29,61 @@ public class ClubTO {
 	/**
 	 * @return the name
 	 */
-	protected String getName() {
+	public String getName() {
 		return name;
 	}
 	/**
 	 * @param name the name to set
 	 */
-	protected void setName(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 	/**
 	 * @return the city
 	 */
-	protected String getCity() {
+	public String getCity() {
 		return city;
 	}
 	/**
 	 * @param city the city to set
 	 */
-	protected void setCity(String city) {
+	public void setCity(String city) {
 		this.city = city;
 	}
 	/**
 	 * @return the email
 	 */
-	protected String getEmail() {
+	public String getEmail() {
 		return email;
 	}
 	/**
 	 * @param email the email to set
 	 */
-	protected void setEmail(String email) {
+	public void setEmail(String email) {
 		this.email = email;
 	}
 	/**
 	 * @return the phone
 	 */
-	protected String getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 	/**
 	 * @param phone the phone to set
 	 */
-	protected void setPhone(String phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 	/**
 	 * @return the clubLogo
 	 */
-	protected String getClubLogo() {
+	public String getClubLogo() {
 		return clubLogo;
 	}
 	/**
 	 * @param clubLogo the clubLogo to set
 	 */
-	protected void setClubLogo(String clubLogo) {
+	public void setClubLogo(String clubLogo) {
 		this.clubLogo = clubLogo;
 	}
 	
