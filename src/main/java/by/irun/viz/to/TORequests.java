@@ -33,6 +33,7 @@ public class TORequests {
 	public static final String CITY = "CITY";
 	public static final String EMAIL = "EMAIL";
 	public static final String PHONE = "PHONE";
+	public static final String RUNNERID = "RUNNERID";
 
 	private static final String RACE_RESULT_TO_REQUEST = "SELECT RS.POSITION AS " + POSITION
 			+ ", CONCAT(RN.FIRSTNAME,' ',RN.LASTNAME) AS " + NAME + ", RS.GENDER AS " + GENDER + ", CL.NAME AS " + CLUB
@@ -59,6 +60,14 @@ public class TORequests {
 	private static final String CLUB_TO_REQUEST = "SELECT CL.NAME AS " + NAME + ", CL.BASECITY AS " + CITY
 			+ ", CL.BIGLOGO AS " + CLUBLOGO + ", A.EMAIL AS " + EMAIL + ", A.PHONE AS " + PHONE
 			+ " FROM CLUBS CL INNER JOIN USERS A ON CL.ADMIN=A.ID WHERE CL.ID=";
+	
+	private static final String RACE_CLUB_RESULT_TO_REQUEST = "SELECT RS.POSITION AS " + ABSPOSITION
+			+ ",(SELECT COUNT(*)+1 FROM RESULTS WHERE RACE=RS.RACE AND POSITION<RS.POSITION"
+			+ " AND GENDER = RS.GENDER) AS " + POSITIONINGENDERGROUP + ",RC.DATE AS " + RACE_DATE + ", PK.NAME AS "
+			+ PARK_NAME + ", RC.ID AS " + RACE_ID + ",RN.FIRSTNAME AS " + FIRSTNAME + ", RN.LASTNAME AS " + LASTNAME
+			+ ", RN.ID AS " + RUNNERID + ", RS.TIME AS " + TIME
+			+ " FROM RESULTS RS INNER JOIN RACES RC ON RS.RACE = RC.ID INNER "
+			+ "JOIN PARKS PK ON RC.PARK=PK.ID INNER JOIN RUNNERS RN ON RS.RUNNER=RN.ID WHERE RS.CLUB=";
 
 	public static String raceResultRequest(long raceId) {
 		return RACE_RESULT_TO_REQUEST + raceId;
@@ -100,5 +109,15 @@ public class TORequests {
 	 */
 	public static String clubTORequest(long clubId) {
 		return CLUB_TO_REQUEST + clubId;
+	}
+	
+	/**
+	 * returns RaceClubResultTO request for given club id
+	 * 
+	 * @param clubId
+	 * @return String sql-request
+	 */
+	public static String raceClubResultTORequest(long clubId) {
+		return RACE_CLUB_RESULT_TO_REQUEST + clubId;
 	}
 }
