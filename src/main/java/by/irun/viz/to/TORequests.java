@@ -68,6 +68,10 @@ public class TORequests {
 			+ ", RN.ID AS " + RUNNERID + ", RS.TIME AS " + TIME
 			+ " FROM RESULTS RS INNER JOIN RACES RC ON RS.RACE = RC.ID INNER "
 			+ "JOIN PARKS PK ON RC.PARK=PK.ID INNER JOIN RUNNERS RN ON RS.RUNNER=RN.ID WHERE RS.CLUB=";
+	
+	private static final String CLUB_RUNNER_TO_LIST_REQUEST = "SELECT RN.FIRSTNAME AS " + FIRSTNAME + ", "
+			+ "RN.LASTNAME AS " + LASTNAME + ", RN.AVATAR AS " + AVATAR + ", RN.ID AS " + RUNNERID
+			+ " FROM RUNNERS RN WHERE RN.CLUB = ";
 
 	public static String raceResultRequest(long raceId) {
 		return RACE_RESULT_TO_REQUEST + raceId;
@@ -119,5 +123,14 @@ public class TORequests {
 	 */
 	public static String raceClubResultTORequest(long clubId) {
 		return RACE_CLUB_RESULT_TO_REQUEST + clubId;
+	}
+	
+	/**
+	 * returns request for List of ClubRunnerTO for club with given id
+	 * @param clubId
+	 * @return String sql-request
+	 */
+	public static String clubRunnerTOListReqyest(long clubId){
+		return CLUB_RUNNER_TO_LIST_REQUEST+clubId;
 	}
 }
