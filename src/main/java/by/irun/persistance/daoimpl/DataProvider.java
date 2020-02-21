@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import by.irun.config.ApplicationConstants;
 import by.irun.dao.IDataProvider;
+import by.irun.domain.to.ClubRunnerTO;
 import by.irun.domain.to.ClubTO;
 import by.irun.domain.to.RaceClubResultTO;
 import by.irun.domain.to.RunnerResultTO;
@@ -204,6 +205,26 @@ public class DataProvider implements IDataProvider{
 		} catch (DataAccessException e) {
 			throw new SQLException(e);
 		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see by.irun.dao.IDataProvider#getCurrentClubRunnerTOListForClub(long clubId)
+	 */
+	@Override
+	public List<ClubRunnerTO> getCurrentClubRunnerTOListForClub(long clubId) throws SQLException {
+		List<ClubRunnerTO> result = new ArrayList<>();
+		SqlRowSet rowSet = jdbcTemplate.queryForRowSet(TORequests.clubRunnerTOListReqyest(clubId));
+		while (rowSet.next()) {
+			ClubRunnerTO to = new ClubRunnerTO();
+			to.setRunnerId(rowSet.getLong(TORequests.RUNNERID));
+			to.setFirstName(rowSet.getString(TORequests.FIRSTNAME));
+			to.setLastName(rowSet.getString(TORequests.LASTNAME));
+			to.setAvatarPath(rowSet.getString(TORequests.AVATAR));
+			result.add(to);
+		}
+		return result;
 	}
 
 }
