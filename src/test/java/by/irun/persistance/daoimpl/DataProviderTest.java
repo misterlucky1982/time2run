@@ -466,6 +466,7 @@ public class DataProviderTest {
 		EasyMock.expect(rowSet.getString(TORequests.FIRSTNAME)).andReturn(firstName);
 		EasyMock.expect(rowSet.getString(TORequests.LASTNAME)).andReturn(lastName);
 		EasyMock.expect(rowSet.getLong(TORequests.RUNNERID)).andReturn(runnerId);
+		EasyMock.expect(rowSet.getString(TORequests.GENDER)).andReturn("F");
 		EasyMock.expect(rowSet.getInt(TORequests.TIME)).andReturn(time);
 		EasyMock.expect(rowSet.next()).andReturn(false);
 		PowerMock.replayAll();
@@ -488,6 +489,7 @@ public class DataProviderTest {
 		assertEquals(lastName, to.getRunnerLastName());
 		assertTrue(to.getRaceId() == raceId);
 		assertTrue(to.getRunnerId() == runnerId);
+		assertEquals(Gender.FEMALE,to.getGender());
 		assertTrue(to.getTimeInSeconds() == time);
 	}
 

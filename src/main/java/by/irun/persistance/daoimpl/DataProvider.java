@@ -198,6 +198,7 @@ public class DataProvider implements IDataProvider{
 				to.setRunnerFirstName(rowSet.getString(TORequests.FIRSTNAME));
 				to.setRunnerLastName(rowSet.getString(TORequests.LASTNAME));
 				to.setRunnerId(rowSet.getLong(TORequests.RUNNERID));
+				to.setGender(genderConverter.convertToEntityAttribute(rowSet.getString(TORequests.GENDER)));
 				to.setTimeInSeconds(rowSet.getInt(TORequests.TIME));
 				list.add(to);
 			}

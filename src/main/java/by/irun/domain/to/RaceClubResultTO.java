@@ -1,6 +1,8 @@
 package by.irun.domain.to;
 
 import java.sql.Date;
+
+import by.irun.domain.Gender;
 /**
  * Provides information about runner`s result for transfer data from entity-layer to viz-layer
  * @author A.Dubovik
@@ -17,6 +19,7 @@ public class RaceClubResultTO {
 	private int timeInSeconds;
 	private int absPosition;
 	private int positionInGenderGroup;
+	private Gender gender;
 	/**
 	 * @return the raceId
 	 */
@@ -124,6 +127,18 @@ public class RaceClubResultTO {
 	 */
 	public void setPositionInGenderGroup(int positionInGenderGroup) {
 		this.positionInGenderGroup = positionInGenderGroup;
+	}
+	/**
+	 * @return the gender
+	 */
+	public Gender getGender() {
+		return gender;
+	}
+	/**
+	 * @param gender the gender to set
+	 */
+	public void setGender(Gender gender) {
+		this.gender = gender;
 	}
 
 }

@@ -7,6 +7,8 @@ import java.sql.Date;
 import org.junit.Before;
 import org.junit.Test;
 
+import by.irun.domain.Gender;
+
 /**
  * Test class for {@link by.irun.domain.to.RaceClubResultTO}
  * @author A.Dubovik
@@ -82,5 +84,12 @@ public class RaceClubResultTOTest {
 		assertTrue(to.getTimeInSeconds()==0);
 		to.setTimeInSeconds(10);
 		assertTrue(to.getTimeInSeconds()==10);
+	}
+	
+	@Test
+	public void genderTest(){
+		assertNull(to.getGender());
+		to.setGender(Gender.FEMALE);
+		assertEquals(Gender.FEMALE,to.getGender());
 	}
 }
