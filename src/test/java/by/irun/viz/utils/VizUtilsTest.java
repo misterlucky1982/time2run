@@ -7,12 +7,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.sql.Date;
 
-import org.easymock.EasyMock;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.powermock.api.easymock.PowerMock;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 
 import by.irun.controller.ControllerConstants;
 import by.irun.domain.Gender;
@@ -27,8 +22,6 @@ import by.irun.viz.utils.VizUtils;
  * test class for {@link by.irun.viz.utils.VizUtils}
  * @author A.Dubovik
  */
-@RunWith(PowerMockRunner.class)
-@PrepareForTest({ Internationalizer.class })
 public class VizUtilsTest {
 
 	@Test

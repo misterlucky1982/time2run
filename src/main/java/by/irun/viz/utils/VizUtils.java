@@ -190,4 +190,15 @@ public class VizUtils {
 	public static String concatName(String firstName, String lastName){
 		return firstName+" "+lastName;
 	}
+	
+	/**
+	 * Resolves raceName using given date and locale
+	 * @param parkName
+	 * @param raceDate
+	 * @param locale
+	 * @return
+	 */
+	public static String buildRaceName(String parkName, Date raceDate, Locale locale){
+		return parkName+" "+Internationalizer.translate(raceDate, locale);
+	}
 }
