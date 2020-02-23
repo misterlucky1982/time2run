@@ -7,13 +7,19 @@ import static org.junit.Assert.assertEquals;
 
 import java.sql.Date;
 
+import org.easymock.EasyMock;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.powermock.api.easymock.PowerMock;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 import by.irun.controller.ControllerConstants;
 import by.irun.domain.Gender;
 import by.irun.domain.Runner;
 import by.irun.domain.to.RunnerTO;
 import by.irun.locale.AppLocales;
+import by.irun.locale.Internationalizer;
 import by.irun.viz.to.RunnerInfoTO;
 import by.irun.viz.utils.VizUtils;
 
@@ -21,6 +27,8 @@ import by.irun.viz.utils.VizUtils;
  * test class for {@link by.irun.viz.utils.VizUtils}
  * @author A.Dubovik
  */
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({ Internationalizer.class })
 public class VizUtilsTest {
 
 	@Test
@@ -132,5 +140,18 @@ public class VizUtilsTest {
 	@Test
 	public void concatNameTest(){
 		assertEquals("First Last",VizUtils.concatName("First", "Last"));
+	}
+	/**
+	 *  test for {@link VizUtils#buildRaceName(String, Date, java.util.Locale)}
+	 */
+	@Test
+	public void buildRaceNameTest(){
+		Date d = Date.valueOf("2000-01-01");
+		String translationBY = Internationalizer.translate(d, AppLocales.BY);
+		String translationRU = Internationalizer.translate(d, AppLocales.RU);
+		String translationEN = Internationalizer.translate(d, AppLocales.EN);
+		assertEquals("name "+translationBY,VizUtils.buildRaceName("name", d, AppLocales.BY));
+		assertEquals("name "+translationRU,VizUtils.buildRaceName("name", d, AppLocales.RU));
+		assertEquals("name "+translationEN,VizUtils.buildRaceName("name", d, AppLocales.EN));
 	}
 }
