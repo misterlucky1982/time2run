@@ -168,4 +168,14 @@ public class VizUtils {
 	public static String resolveClubLogo(String logo, Locale locale) {
 		return logo != null ? logo : PATH_MAP.get(locale).get(CLUB_NO_LOGO);
 	}
+	
+	/**
+	 * Concats full name for firstName and lastName
+	 * @param firstName
+	 * @param lastName
+	 * @return String
+	 */
+	public static String concatName(String firstName, String lastName){
+		return firstName+" "+lastName;
+	}
 }
