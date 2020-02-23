@@ -96,6 +96,7 @@ public class VizUtils {
 	 * @param runner
 	 * @param locale
 	 */
+	@Deprecated
 	public static void resolveAvatarPathForRunner(RunnerInfoTO to, RunnerTO runner, Locale locale) {
 		if (runner.getAvatar() != null) {
 			to.setAvatar(runner.getAvatar());
@@ -103,7 +104,16 @@ public class VizUtils {
 			to.setAvatar(AVATAR_MAP.get(runner.getGender()).get(locale));
 	}
 	
-	
+	/**
+	 * resolves avatar path for given gender and locale
+	 * @param avatar
+	 * @param gender
+	 * @param locale
+	 * @return
+	 */
+	public static String getAvatarForAvatarPathAndGender(String avatar, Gender gender, Locale locale){
+		return avatar!=null?avatar:AVATAR_MAP.get(gender).get(locale);
+	}
 	
 	public static RunnerResultInfoTO convert(RunnerResultTO to, Locale locale){
 		RunnerResultInfoTO infoTO = new RunnerResultInfoTO();

@@ -47,6 +47,7 @@ public class VizUtilsTest {
 	/**
 	 * test for {@link by.irun.viz.utils.VizUtils#resolveAvatarPathForRunner(RunnerInfoTO, Runner, java.util.Locale)}
 	 */
+	@SuppressWarnings("deprecation")
 	@Test
 	public void resolveAvatarPathForRunnerTest() {
 		RunnerTO runner = new RunnerTO();
@@ -69,6 +70,25 @@ public class VizUtilsTest {
 		to = new RunnerInfoTO();
 		VizUtils.resolveAvatarPathForRunner(to, runner, AppLocales.DEFAULT);
 		assertEquals("path", to.getAvatar());
+	}
+	
+	/**
+	 * test for {@link by.irun.viz.utils.VizUtils#getAvatarForAvatarPathAndGender(String, Gender, Locale)}
+	 */
+	@Test
+	public void resolveAvatarPathForTest() {
+		assertEquals("path",VizUtils.getAvatarForAvatarPathAndGender("path", Gender.FEMALE, AppLocales.BY));
+		assertEquals("path",VizUtils.getAvatarForAvatarPathAndGender("path", Gender.FEMALE, AppLocales.EN));
+		assertEquals("path",VizUtils.getAvatarForAvatarPathAndGender("path", Gender.FEMALE, AppLocales.RU));
+		assertEquals("path",VizUtils.getAvatarForAvatarPathAndGender("path", Gender.MALE, AppLocales.BY));
+		assertEquals("path",VizUtils.getAvatarForAvatarPathAndGender("path", Gender.MALE, AppLocales.EN));
+		assertEquals("path",VizUtils.getAvatarForAvatarPathAndGender("path", Gender.MALE, AppLocales.RU));
+		assertEquals(VizConstants.NO_FOTO_AVATAR_MAN_BY,VizUtils.getAvatarForAvatarPathAndGender(null, Gender.MALE, AppLocales.BY));
+		assertEquals(VizConstants.NO_FOTO_AVATAR_MAN_RU,VizUtils.getAvatarForAvatarPathAndGender(null, Gender.MALE, AppLocales.RU));
+		assertEquals(VizConstants.NO_FOTO_AVATAR_MAN_EN,VizUtils.getAvatarForAvatarPathAndGender(null, Gender.MALE, AppLocales.EN));
+		assertEquals(VizConstants.NO_FOTO_AVATAR_WOMAN_BY,VizUtils.getAvatarForAvatarPathAndGender(null, Gender.FEMALE, AppLocales.BY));
+		assertEquals(VizConstants.NO_FOTO_AVATAR_WOMAN_RU,VizUtils.getAvatarForAvatarPathAndGender(null, Gender.FEMALE, AppLocales.RU));
+		assertEquals(VizConstants.NO_FOTO_AVATAR_WOMAN_EN,VizUtils.getAvatarForAvatarPathAndGender(null, Gender.FEMALE, AppLocales.EN));
 	}
 	
 	/**
