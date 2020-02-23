@@ -1,5 +1,7 @@
 package by.irun.domain.to;
 
+import by.irun.domain.Gender;
+
 /**
  * This class provides object for transfer club`s runners data between entity-layer and viz-layer
  * @author A.Dubovik
@@ -10,6 +12,7 @@ public class ClubRunnerTO {
 	private String firstName;
 	private String lastName;
 	private String avatarPath;
+	private Gender gender;
 	/**
 	 * @return the runnerId
 	 */
@@ -58,5 +61,18 @@ public class ClubRunnerTO {
 	public void setAvatarPath(String avatarPath) {
 		this.avatarPath = avatarPath;
 	}
+	/**
+	 * @return the gender
+	 */
+	public Gender getGender() {
+		return gender;
+	}
+	/**
+	 * @param gender the gender to set
+	 */
+	public void setGender(Gender gender) {
+		this.gender = gender;
+	}
+	
 	
 }

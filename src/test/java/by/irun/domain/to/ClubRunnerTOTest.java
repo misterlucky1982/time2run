@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import by.irun.domain.Gender;
+
 /**
  * Test class for {@link by.irun.domain.to.ClubRunnerTO}
  * 
@@ -45,5 +47,12 @@ public class ClubRunnerTOTest {
 		assertNull(to.getLastName());
 		to.setLastName("lastName");
 		assertEquals("lastName", to.getLastName());
+	}
+	
+	@Test
+	public void genderTest(){
+		assertNull(to.getGender());
+		to.setGender(Gender.FEMALE);
+		assertEquals(Gender.FEMALE,to.getGender());
 	}
 }
