@@ -105,4 +105,12 @@ public class VizUtilsTest {
 		assertEquals(VizConstants.CLUBLOGO_IS_NOT_UPLOADED_RU, VizUtils.resolveClubLogo(null, AppLocales.RU));
 		assertEquals(VizConstants.CLUBLOGO_IS_NOT_UPLOADED_BY, VizUtils.resolveClubLogo(null, AppLocales.BY));
 	}
+	
+	/**
+	 * test for {@link VizUtils#concatName(String, String)}
+	 */
+	@Test
+	public void concatNameTest(){
+		assertEquals("First Last",VizUtils.concatName("First", "Last"));
+	}
 }
