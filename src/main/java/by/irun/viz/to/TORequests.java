@@ -70,7 +70,7 @@ public class TORequests {
 			+ "JOIN PARKS PK ON RC.PARK=PK.ID INNER JOIN RUNNERS RN ON RS.RUNNER=RN.ID WHERE RS.CLUB=";
 	
 	private static final String CLUB_RUNNER_TO_LIST_REQUEST = "SELECT RN.FIRSTNAME AS " + FIRSTNAME + ", "
-			+ "RN.LASTNAME AS " + LASTNAME + ", RN.AVATAR AS " + AVATAR + ", RN.ID AS " + RUNNERID
+			+ "RN.LASTNAME AS " + LASTNAME + ", RN.AVATAR AS " + AVATAR +  ", RN.GENDER AS "+GENDER+", RN.ID AS " + RUNNERID
 			+ " FROM RUNNERS RN WHERE RN.CLUB = ";
 
 	public static String raceResultRequest(long raceId) {
