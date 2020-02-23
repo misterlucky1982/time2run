@@ -223,6 +223,7 @@ public class DataProvider implements IDataProvider{
 			to.setFirstName(rowSet.getString(TORequests.FIRSTNAME));
 			to.setLastName(rowSet.getString(TORequests.LASTNAME));
 			to.setAvatarPath(rowSet.getString(TORequests.AVATAR));
+			to.setGender(genderConverter.convertToEntityAttribute(rowSet.getString(TORequests.GENDER)));
 			result.add(to);
 		}
 		return result;

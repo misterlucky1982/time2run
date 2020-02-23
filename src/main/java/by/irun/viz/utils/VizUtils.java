@@ -103,6 +103,8 @@ public class VizUtils {
 			to.setAvatar(AVATAR_MAP.get(runner.getGender()).get(locale));
 	}
 	
+	
+	
 	public static RunnerResultInfoTO convert(RunnerResultTO to, Locale locale){
 		RunnerResultInfoTO infoTO = new RunnerResultInfoTO();
 		infoTO.setAbsPositionInfo(Integer.toString(to.getAbsPosition()));
