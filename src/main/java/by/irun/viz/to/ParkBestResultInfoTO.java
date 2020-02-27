@@ -7,7 +7,7 @@ import java.util.List;
  * @author Home
  *
  */
-public class ParkBestResultInfoTO {
+public class ParkBestResultInfoTO implements InfoTO {
 	
 	private String parkName;
 	private List<String>bestResults;

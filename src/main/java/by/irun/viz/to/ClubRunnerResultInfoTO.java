@@ -8,7 +8,7 @@ package by.irun.viz.to;
  * @author A.Dunovik
  *
  */
-public class ClubRunnerResultInfoTO {
+public class ClubRunnerResultInfoTO implements InfoTO {
 
 	private String name;
 	private String position;

@@ -2,7 +2,7 @@ package by.irun.viz.to;
 
 import java.util.List;
 
-public class ClubRaceResultInfoTO {
+public class ClubRaceResultInfoTO implements InfoTO{
 
 	private String RaceName;
 	private String linkToRace;

@@ -8,7 +8,7 @@ package by.irun.viz.to;
  *  for front-end representation
  * @author A.Dubovik
  */
-public class ClubResultInfoTO {
+public class ClubResultInfoTO implements InfoTO {
 
 	private String position;
 	private String raceName;

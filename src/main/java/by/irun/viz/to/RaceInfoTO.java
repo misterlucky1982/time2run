@@ -3,7 +3,7 @@ package by.irun.viz.to;
  * Provides information about race for front-end representation
  * @author A.Dubovik
  */
-public class RaceInfoTO {
+public class RaceInfoTO implements InfoTO {
 
 	private long raceId;
 	private String raceName;

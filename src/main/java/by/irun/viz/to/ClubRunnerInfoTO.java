@@ -4,7 +4,7 @@ package by.irun.viz.to;
  * Provides information about runner in the list of  club`s runners for front-end representation
  * @author A.Dubovik
  */
-public class ClubRunnerInfoTO {
+public class ClubRunnerInfoTO implements InfoTO {
 
 	private String name;
 	private String avatarPath;

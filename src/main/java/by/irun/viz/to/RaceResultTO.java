@@ -4,7 +4,7 @@ package by.irun.viz.to;
  * Provides information about result for front-end representation
  * @author A.Dubovik
  */
-public class RaceResultTO {
+public class RaceResultTO implements InfoTO {
 	
 	private int absPosition;
 	private int positionInGroup;

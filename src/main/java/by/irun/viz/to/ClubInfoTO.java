@@ -2,7 +2,7 @@ package by.irun.viz.to;
 
 import java.util.List;
 
-public class ClubInfoTO {
+public class ClubInfoTO implements InfoTO{
 	
 	private String clubName;
 	private String email;

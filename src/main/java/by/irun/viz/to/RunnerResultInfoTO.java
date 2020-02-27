@@ -4,7 +4,7 @@ package by.irun.viz.to;
  * This class provides information of the runner`s result in particular race
  * @author A.Dubovik
  */
-public class RunnerResultInfoTO {
+public class RunnerResultInfoTO implements InfoTO {
 	
 	private String raceInfo;
 	private String absPositionInfo;
