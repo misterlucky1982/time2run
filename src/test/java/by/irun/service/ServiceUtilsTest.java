@@ -2,7 +2,9 @@ package by.irun.service;
 
 import static org.junit.Assert.*;
 
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -78,6 +80,50 @@ public class ServiceUtilsTest {
 			list.add(to0);
 		}
 		return list;
+	}
+	
+	/**
+	 * test for {@link by.irun.service.ServiceUtils#getRaceClubResultTOSet(List)}
+	 */
+	@Test
+	public void getRaceClubResultTOSetTest(){
+		Date date1 = Date.valueOf("2020-02-02");
+		Date date2 = Date.valueOf("2020-01-01");
+		String park1 = "park1";
+		String park2 = "park2";
+		Gender m = Gender.MALE;
+		Gender f = Gender.FEMALE;
+		RaceClubResultTO to1 = getRaceClubResultTO(date2,park2,f,1);
+		RaceClubResultTO to2 = getRaceClubResultTO(date2,park1,f,20);
+		RaceClubResultTO to3 = getRaceClubResultTO(date1,park1,m,2);
+		RaceClubResultTO to4 = getRaceClubResultTO(date1,park2,f,8);
+		RaceClubResultTO to5 = getRaceClubResultTO(date2,park1,m,18);
+		RaceClubResultTO to6 = getRaceClubResultTO(date1,park2,f,28);
+		List<RaceClubResultTO>list = Arrays.asList(to1,to2,to3,to4,to5,to6);
+		List<RaceClubResultTO>sorted = new ArrayList<>(ServiceUtils.getRaceClubResultTOSet(list));
+		assertTrue(sorted.get(0)==to3);
+		assertTrue(sorted.get(1)==to4);
+		assertTrue(sorted.get(2)==to6);
+		assertTrue(sorted.get(3)==to5);
+		assertTrue(sorted.get(4)==to2);
+		assertTrue(sorted.get(5)==to1);
+	}
+	
+	/**
+	 * Creates RaceClubResultTO for testing
+	 * @param d
+	 * @param park
+	 * @param g
+	 * @param absPosition
+	 * @return
+	 */
+	private RaceClubResultTO getRaceClubResultTO(Date d, String park, Gender g, int absPosition){
+		RaceClubResultTO to = new RaceClubResultTO();
+		to.setAbsPosition(absPosition);
+		to.setDate(d);
+		to.setGender(g);
+		to.setParkName(park);
+		return to;
 	}
 
 }
