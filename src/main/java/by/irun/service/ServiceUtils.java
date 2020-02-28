@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
-
 import by.irun.domain.Gender;
 import by.irun.domain.to.RaceClubResultTO;
 
@@ -53,8 +52,6 @@ public class ServiceUtils {
 	 * <p>
 	 * secondly check the name of park (sorts by park name)
 	 * <p>
-	 * the next check - gender (male will be first, female - second)
-	 * <p>
 	 * the last check - time (sorts by time increasing, i.e. most faster will be
 	 * first)
 	 * 
@@ -66,11 +63,8 @@ public class ServiceUtils {
 			@Override
 			public int compare(RaceClubResultTO o1, RaceClubResultTO o2) {
 				if (o1.getDate().equals(o2.getDate())) {
-					if (o1.getParkName().equals(o2.getParkName())) {
-						if (o1.getGender().equals(o2.getGender())) {
-							return o1.getAbsPosition() > o2.getAbsPosition() ? 1 : -1;
-						}
-						return o1.getGender() == Gender.MALE ? -1 : 1;
+					if (o2.getParkName().equals(o1.getParkName())) {
+						return o1.getAbsPosition() > o2.getAbsPosition() ? 1 : -1;
 					} else
 						return o1.getParkName().compareTo(o2.getParkName());
 				} else
@@ -80,4 +74,5 @@ public class ServiceUtils {
 		raceClubResultTOSet.addAll(list);
 		return raceClubResultTOSet;
 	}
+
 }
