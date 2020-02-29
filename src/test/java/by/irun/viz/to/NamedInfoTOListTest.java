@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import org.easymock.Mock;
 import org.junit.Before;
 import org.junit.Test;
-import org.powermock.api.easymock.PowerMock;
 
 /**
  * test-class for {@link by.irun.viz.to.NamedInfoTOList}

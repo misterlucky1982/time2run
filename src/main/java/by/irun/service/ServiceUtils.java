@@ -2,7 +2,6 @@ package by.irun.service;
 
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -14,8 +13,8 @@ import by.irun.domain.Gender;
 import by.irun.domain.to.RaceClubResultTO;
 import by.irun.locale.Internationalizer;
 import by.irun.locale.Translator;
-import by.irun.viz.to.ClubRaceResultInfoTO;
 import by.irun.viz.to.ClubRunnerResultInfoTO;
+import by.irun.viz.to.ExtendedInfoTOList;
 import by.irun.viz.to.NamedInfoTOList;
 import by.irun.viz.utils.VizUtils;
 
@@ -89,6 +88,12 @@ public class ServiceUtils {
 		return raceClubResultTOSet;
 	}
 
+	/**
+	 * 
+	 * @param list
+	 * @param locale
+	 * @return
+	 */
 	public static List<NamedInfoTOList<NamedInfoTOList<ClubRunnerResultInfoTO>>> generateSortedClubRunnerResultList(
 			List<RaceClubResultTO> list, Locale locale) {
 		List<NamedInfoTOList<NamedInfoTOList<ClubRunnerResultInfoTO>>> result = new ArrayList<>();
@@ -97,7 +102,7 @@ public class ServiceUtils {
 		String park = null;
 		boolean isMenResults = true;
 		NamedInfoTOList<NamedInfoTOList<ClubRunnerResultInfoTO>> raceResultList = null;
-		NamedInfoTOList<ClubRunnerResultInfoTO> currentResults = null;
+		ExtendedInfoTOList<ClubRunnerResultInfoTO> currentResults = null;
 		while (it.hasNext()) {
 			RaceClubResultTO to = it.next();
 			if (to.getDate().equals(date)) {
@@ -106,7 +111,7 @@ public class ServiceUtils {
 					result.add(raceResultList);
 					raceResultList = new NamedInfoTOList<>();
 					raceResultList.setName(VizUtils.buildRaceName(to.getParkName(), to.getDate(), locale));
-					currentResults = new NamedInfoTOList<>();
+					currentResults = new ExtendedInfoTOList<>();
 					raceResultList.add(currentResults);
 					if (to.getGender() == Gender.FEMALE) {
 						isMenResults = false;
@@ -122,7 +127,7 @@ public class ServiceUtils {
 					} else {
 						if (isMenResults) {
 							isMenResults = false;
-							currentResults = new NamedInfoTOList<>();
+							currentResults = new ExtendedInfoTOList<>();
 							raceResultList.add(currentResults);
 							currentResults.setName(Internationalizer.translate(Translator.KEY_WOMENS_RESULTS, locale));
 						}
@@ -135,7 +140,7 @@ public class ServiceUtils {
 				raceResultList = new NamedInfoTOList<>();
 				result.add(raceResultList);
 				raceResultList.setName(VizUtils.buildRaceName(to.getParkName(), to.getDate(), locale));
-				currentResults = new NamedInfoTOList<>();
+				currentResults = new ExtendedInfoTOList<>();
 				raceResultList.add(currentResults);
 				if (to.getGender() == Gender.FEMALE) {
 					isMenResults = false;
@@ -150,6 +155,11 @@ public class ServiceUtils {
 		return result;
 	}
 
+	/**
+	 * Constructs ClubRunnerResultInfoTO based on given RaceClubResultTO
+	 * @param to
+	 * @return ClubRunnerResultInfoTO
+	 */
 	private static ClubRunnerResultInfoTO buildClubRunnerResultInfoTO(RaceClubResultTO to) {
 		ClubRunnerResultInfoTO resultInfoTO = new ClubRunnerResultInfoTO();
 		resultInfoTO.setName(VizUtils.concatName(to.getRunnerFirstName(), to.getRunnerLastName()));

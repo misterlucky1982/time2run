@@ -13,6 +13,10 @@ import org.junit.Test;
 
 import by.irun.domain.Gender;
 import by.irun.domain.to.RaceClubResultTO;
+import by.irun.locale.AppLocales;
+import by.irun.viz.to.ClubRunnerResultInfoTO;
+import by.irun.viz.to.NamedInfoTOList;
+import by.irun.viz.utils.VizUtils;
 
 /**
  * Test class for {@link by.irun.service.ServiceUtils}
@@ -129,5 +133,38 @@ public class ServiceUtilsTest {
 		to.setGender(g);
 		to.setParkName(park);
 		return to;
+	}
+	
+	@Test
+	public void generateSortedClubRunnerResultListTest(){
+		Date d1 = Date.valueOf("2020-01-01");
+		Date d2 = Date.valueOf("2020-02-02");
+		String park1 = "park1";
+		String park2 = "park2";
+		RaceClubResultTO to1 = getRaceClubResultTO(d1,park1,Gender.MALE,1);
+		to1.setRunnerFirstName("F1");
+		to1.setRunnerLastName("L1");
+		RaceClubResultTO to2 = getRaceClubResultTO(d1,park1,Gender.FEMALE,3);
+		to2.setRunnerFirstName("F2");
+		to2.setRunnerLastName("L2");
+		RaceClubResultTO to3 = getRaceClubResultTO(d1,park1,Gender.FEMALE,2);
+		to3.setRunnerFirstName("F3");
+		to3.setRunnerLastName("L3");
+		RaceClubResultTO to4 = getRaceClubResultTO(d2,park1,Gender.MALE,11);
+		to4.setRunnerFirstName("F4");
+		to4.setRunnerLastName("L4");
+		RaceClubResultTO to5 = getRaceClubResultTO(d1,park2,Gender.MALE,31);
+		to5.setRunnerFirstName("F5");
+		to5.setRunnerLastName("L5");
+		RaceClubResultTO to6 = getRaceClubResultTO(d1,park2,Gender.MALE,33);
+		to6.setRunnerFirstName("F6");
+		to6.setRunnerLastName("L6");
+		List<RaceClubResultTO>list = Arrays.asList(to1,to2,to3,to4,to5,to6);
+		List<NamedInfoTOList<NamedInfoTOList<ClubRunnerResultInfoTO>>> result = ServiceUtils.generateSortedClubRunnerResultList(list, AppLocales.DEFAULT);
+		assertNotNull(result);
+		assertTrue(result.size()==3);
+		assertEquals(VizUtils.buildRaceName(park2, d2, AppLocales.DEFAULT),result.get(0).getName());
+		assertEquals(VizUtils.buildRaceName(park1, d1, AppLocales.DEFAULT),result.get(1).getName());
+		assertEquals(VizUtils.buildRaceName(park2, d1, AppLocales.DEFAULT),result.get(2).getName());
 	}
 }

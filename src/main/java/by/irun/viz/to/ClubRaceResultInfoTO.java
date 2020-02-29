@@ -2,6 +2,7 @@ package by.irun.viz.to;
 
 import java.util.List;
 
+@Deprecated
 public class ClubRaceResultInfoTO implements InfoTO{
 
 	private String RaceName;

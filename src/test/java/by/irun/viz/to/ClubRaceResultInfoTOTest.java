@@ -11,13 +11,16 @@ import org.powermock.api.easymock.PowerMock;
 
 public class ClubRaceResultInfoTOTest {
 
+	@SuppressWarnings("deprecation")
 	private ClubRaceResultInfoTO to;
 	
+	@SuppressWarnings("deprecation")
 	@Before
 	public void init(){
 		to = new ClubRaceResultInfoTO();
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Test
 	public void raceNameTest(){
 		assertNull(to.getRaceName());
@@ -25,6 +28,7 @@ public class ClubRaceResultInfoTOTest {
 		assertEquals("race",to.getRaceName());
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Test
 	public void linkToRaceTest(){
 		assertNull(to.getLinkToRace());
@@ -32,6 +36,7 @@ public class ClubRaceResultInfoTOTest {
 		assertEquals("link",to.getLinkToRace());
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Test
 	public void womenResultTest(){
 		assertNull(to.getWomenResults());
@@ -41,6 +46,7 @@ public class ClubRaceResultInfoTOTest {
 		assertEquals(list,to.getWomenResults());
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Test
 	public void menResultTest(){
 		assertNull(to.getMenResults());
