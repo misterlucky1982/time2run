@@ -105,12 +105,12 @@ public class ServiceUtilsTest {
 		RaceClubResultTO to6 = getRaceClubResultTO(date1, park2, f, 9);
 		List<RaceClubResultTO> list = Arrays.asList(to1, to2, to3, to4, to5, to6);
 		List<RaceClubResultTO> sorted = new ArrayList<>(ServiceUtils.getRaceClubResultTOSet(list));
-		assertTrue(sorted.get(0) == to3);
-		assertTrue(sorted.get(1) == to4);
-		assertTrue(sorted.get(2) == to6);
-		assertTrue(sorted.get(3) == to5);
-		assertTrue(sorted.get(4) == to2);
-		assertTrue(sorted.get(5) == to1);
+		assertTrue(sorted.get(0)==to3);
+		assertTrue(sorted.get(1)==to4);
+		assertTrue(sorted.get(2)==to6);
+		assertTrue(sorted.get(3)==to5);
+		assertTrue(sorted.get(4)==to2);
+		assertTrue(sorted.get(5)==to1);
 	}
 
 	/**

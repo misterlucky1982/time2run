@@ -3,6 +3,7 @@ package by.irun.service;
 import java.util.List;
 import java.util.Locale;
 
+import by.irun.viz.to.ClubInfoTO;
 import by.irun.viz.to.RaceInfoTO;
 import by.irun.viz.to.RaceResultTO;
 import by.irun.viz.to.RunnerInfoTO;
@@ -39,5 +40,13 @@ public interface IDataService {
 	 * @return
 	 */
 	RunnerInfoTO getRunnerInfoTO(long runnerId, Locale locale);
+	
+	/**
+	 * Provides ClubInfoTO for given id of {@link by.irun.domain.Club}
+	 * @param runnerId
+	 * @param locale
+	 * @return
+	 */
+	ClubInfoTO getClubInfoTO(long clubId, Locale locale);
 
 }

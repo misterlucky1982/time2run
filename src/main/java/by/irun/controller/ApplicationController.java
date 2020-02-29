@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import by.irun.locale.AppLocales;
 import by.irun.persistance.daoimpl.DataProvider;
 import by.irun.service.impl.DataService;
+import by.irun.viz.to.ClubInfoTO;
 import by.irun.viz.to.RaceInfoTO;
 import by.irun.viz.to.RunnerInfoTO;
 
@@ -42,6 +43,15 @@ public class ApplicationController {
 	public ModelAndView getRunnerPage(@RequestParam (value = "id", required = true) long id){
 		ModelAndView mav = new ModelAndView();
 		RunnerInfoTO to = dataService.getRunnerInfoTO(id);
+		mav.addObject("runner",to);
+	    mav.setViewName("runnerInfo");
+	    return mav;
+	}
+	
+	@GetMapping("/clubs")
+	public ModelAndView getClubPage(@RequestParam (value = "id", required = true) long id){
+		ModelAndView mav = new ModelAndView();
+		ClubInfoTO to = dataService.getClubInfoTO(26, AppLocales.RU);
 		mav.addObject("runner",to);
 	    mav.setViewName("runnerInfo");
 	    return mav;

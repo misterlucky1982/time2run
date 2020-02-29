@@ -29,6 +29,12 @@ public class Internationalizer implements Translator{
 		by.put(KEY_UNKNOWN, "невядома");
 		ru.put(KEY_UNKNOWN, "неизвестно");
 		en.put(KEY_UNKNOWN, "unknown");
+		by.put(KEY_MENS_RESULTS, "вынікі мужчын");
+		ru.put(KEY_MENS_RESULTS, "результаты мужчин");
+		en.put(KEY_MENS_RESULTS, "men`s results");
+		by.put(KEY_WOMENS_RESULTS, "вынікі жанчын");
+		ru.put(KEY_WOMENS_RESULTS, "результаты женщин");
+		en.put(KEY_WOMENS_RESULTS, "womens results");
 		
 		TRANSLATIONS.put(AppLocales.BY, by);
 		TRANSLATIONS.put(AppLocales.RU, ru);

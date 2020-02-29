@@ -545,6 +545,7 @@ public class DataProviderTest {
 		String avatarPath = "avatar";
 		String firstName = "firstName";
 		String lastName = "lastName";
+		Gender gender = Gender.MALE;
 		long runnerId = 333;
 
 		SqlRowSet rowSet = PowerMock.createMock(org.springframework.jdbc.support.rowset.SqlRowSet.class);
@@ -556,6 +557,7 @@ public class DataProviderTest {
 		EasyMock.expect(rowSet.getString(TORequests.FIRSTNAME)).andReturn(firstName);
 		EasyMock.expect(rowSet.getString(TORequests.LASTNAME)).andReturn(lastName);
 		EasyMock.expect(rowSet.getString(TORequests.AVATAR)).andReturn(avatarPath);
+		EasyMock.expect(rowSet.getString(TORequests.GENDER)).andReturn("M");
 		EasyMock.expect(rowSet.next()).andReturn(false);
 		PowerMock.replayAll();
 		List<ClubRunnerTO> list = null;
@@ -572,6 +574,7 @@ public class DataProviderTest {
 		assertEquals(avatarPath, to.getAvatarPath());
 		assertEquals(firstName, to.getFirstName());
 		assertEquals(lastName, to.getLastName());
+		assertEquals(gender,to.getGender());
 	}
 	
 	/**

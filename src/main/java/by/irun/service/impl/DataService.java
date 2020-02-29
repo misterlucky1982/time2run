@@ -1,21 +1,34 @@
 package by.irun.service.impl;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import by.irun.dao.IDataProvider;
 import by.irun.dao.IDomainEntityProvider;
+import by.irun.domain.Gender;
+import by.irun.domain.to.ClubRunnerTO;
+import by.irun.domain.to.ClubTO;
+import by.irun.domain.to.RaceClubResultTO;
 import by.irun.domain.to.RunnerResultTO;
 import by.irun.domain.to.RunnerTO;
 import by.irun.locale.AppLocales;
 import by.irun.locale.Internationalizer;
+import by.irun.locale.Translator;
 import by.irun.service.IDataService;
+import by.irun.service.ServiceUtils;
+import by.irun.viz.to.ClubInfoTO;
+import by.irun.viz.to.ClubRaceResultInfoTO;
+import by.irun.viz.to.ClubRunnerInfoTO;
 import by.irun.viz.to.RaceInfoTO;
 import by.irun.viz.to.RaceResultTO;
 import by.irun.viz.to.RunnerInfoTO;
@@ -102,6 +115,47 @@ public class DataService implements IDataService{
 		for(RunnerResultTO resTO:resultList)listTO.add(VizUtils.convert(resTO, locale));
 		to.setRacesList(listTO);
 		return to;
+	}
+
+	@Override
+	public ClubInfoTO getClubInfoTO(long clubId, Locale locale) {
+		ClubTO clubTO = null;
+		List<ClubRunnerTO> clubRunnerTOList = null;
+		List<RaceClubResultTO> raceClubResultTOList = null;
+		try {
+			clubTO = dataProvider.getClubTO(clubId);
+			clubRunnerTOList = dataProvider.getCurrentClubRunnerTOListForClub(clubId);
+			raceClubResultTOList = dataProvider.getRaceClubResultTOList(clubId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		ClubInfoTO clubInfoTO = new ClubInfoTO();
+		clubInfoTO.setAmountOfRunners(clubRunnerTOList.size());
+		clubInfoTO.setClubName(clubTO.getName());
+		clubInfoTO.setEmail(clubTO.getEmail());
+		clubInfoTO.setPhone(clubTO.getPhone());
+		List<ClubRunnerInfoTO> clubRunnerInfoTOList = new ArrayList<>(clubRunnerTOList.size());
+		for (ClubRunnerTO crto : clubRunnerTOList) {
+			ClubRunnerInfoTO clubRunnerInfoTO = new ClubRunnerInfoTO();
+			clubRunnerInfoTO.setName(VizUtils.concatName(crto.getFirstName(), crto.getLastName()));
+			clubRunnerInfoTO.setAvatarPath(
+					VizUtils.getAvatarForAvatarPathAndGender(crto.getAvatarPath(), crto.getGender(), locale));
+			// TODO link
+			clubRunnerInfoTOList.add(clubRunnerInfoTO);
+		}
+		clubInfoTO.setCurrentRunners(clubRunnerInfoTOList);
+		RaceClubResultTO firstRaceResult = raceClubResultTOList.stream()
+				.min((r1, r2) -> r1.getDate().compareTo(r2.getDate())).get();
+		clubInfoTO.setFirstRace(firstRaceResult != null
+				? VizUtils.buildRaceName(firstRaceResult.getParkName(), firstRaceResult.getDate(), locale)
+				: Internationalizer.translate(Translator.KEY_UNKNOWN));
+		Map<String,Map<Gender,RaceClubResultTO>> parkBestResultMap = new HashMap<>();
+		for(RaceClubResultTO rto:raceClubResultTOList){
+			ServiceUtils.checkBestResultsInPark(parkBestResultMap, rto);
+		}
+		clubInfoTO.setRaceResults(ServiceUtils.generateSortedClubRunnerResultList(raceClubResultTOList, locale));
+		return clubInfoTO;
 	}
 
 }

@@ -14,7 +14,7 @@ public class ClubInfoTO implements InfoTO{
 	private int numberOfRaces;
 	private int numberOfRunnersInHistory;
 	private List<ClubRunnerInfoTO> currentRunners;
-	private List<ClubRaceResultInfoTO> raceResults;
+	private List<NamedInfoTOList<NamedInfoTOList<ClubRunnerResultInfoTO>>> raceResults;
 	/**
 	 * @return the clubName
 	 */
@@ -138,16 +138,16 @@ public class ClubInfoTO implements InfoTO{
 	/**
 	 * @return the raceResults
 	 */
-	public List<ClubRaceResultInfoTO> getRaceResults() {
+	/**
+	 * @return the raceResults
+	 */
+	public List<NamedInfoTOList<NamedInfoTOList<ClubRunnerResultInfoTO>>> getRaceResults() {
 		return raceResults;
 	}
 	/**
 	 * @param raceResults the raceResults to set
 	 */
-	public void setRaceResults(List<ClubRaceResultInfoTO> raceResults) {
+	public void setRaceResults(List<NamedInfoTOList<NamedInfoTOList<ClubRunnerResultInfoTO>>> raceResults) {
 		this.raceResults = raceResults;
 	}
-	
-	
-
 }
