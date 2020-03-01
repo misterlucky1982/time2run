@@ -89,68 +89,53 @@ public class ServiceUtils {
 	}
 
 	/**
-	 * 
+	 * Produces structured list of results 
+	 * <p>
+	 * {@link by.irun.viz.to.ClubRunnerResultInfoTO}
+	 * <p>
+	 * based of given list of RaceClubResultTO
+	 * <p>
+	 * sorts by: races, gender, position
 	 * @param list
 	 * @param locale
-	 * @return
+	 * @return List
 	 */
-	public static List<NamedInfoTOList<NamedInfoTOList<ClubRunnerResultInfoTO>>> generateSortedClubRunnerResultList(
+	public static List<ExtendedInfoTOList<NamedInfoTOList<ClubRunnerResultInfoTO>>> generateSortedClubRunnerResultList(
 			List<RaceClubResultTO> list, Locale locale) {
-		List<NamedInfoTOList<NamedInfoTOList<ClubRunnerResultInfoTO>>> result = new ArrayList<>();
+		List<ExtendedInfoTOList<NamedInfoTOList<ClubRunnerResultInfoTO>>> result = new ArrayList<>();
 		Iterator<RaceClubResultTO> it = getRaceClubResultTOSet(list).iterator();
+		NamedInfoTOList<ClubRunnerResultInfoTO>currentList = null;
 		Date date = null;
 		String park = null;
-		boolean isMenResults = true;
-		NamedInfoTOList<NamedInfoTOList<ClubRunnerResultInfoTO>> raceResultList = null;
-		ExtendedInfoTOList<ClubRunnerResultInfoTO> currentResults = null;
-		while (it.hasNext()) {
-			RaceClubResultTO to = it.next();
-			if (to.getDate().equals(date)) {
-				if (!to.getParkName().equals(park)) {
-					park = to.getParkName();
-					result.add(raceResultList);
-					raceResultList = new NamedInfoTOList<>();
-					raceResultList.setName(VizUtils.buildRaceName(to.getParkName(), to.getDate(), locale));
-					currentResults = new ExtendedInfoTOList<>();
-					raceResultList.add(currentResults);
-					if (to.getGender() == Gender.FEMALE) {
-						isMenResults = false;
-						currentResults.setName(Internationalizer.translate(Translator.KEY_WOMENS_RESULTS, locale));
-					} else {
-						isMenResults = true;
-						currentResults.setName(Internationalizer.translate(Translator.KEY_MENS_RESULTS, locale));
-					}
-					currentResults.add(buildClubRunnerResultInfoTO(to));
-				} else {
-					if (to.getGender() == Gender.MALE) {
-						currentResults.add(buildClubRunnerResultInfoTO(to));
-					} else {
-						if (isMenResults) {
-							isMenResults = false;
-							currentResults = new ExtendedInfoTOList<>();
-							raceResultList.add(currentResults);
-							currentResults.setName(Internationalizer.translate(Translator.KEY_WOMENS_RESULTS, locale));
-						}
-						currentResults.add(buildClubRunnerResultInfoTO(to));
-					}
-				}
-			} else {
-				date = to.getDate();
+		RaceClubResultTO to = null;
+		boolean mensRes = true;
+		ExtendedInfoTOList <NamedInfoTOList<ClubRunnerResultInfoTO>>currentResultList = null;
+		while(it.hasNext()){
+			to = it.next();
+			if((!to.getDate().equals(date))||(!to.getParkName().equals(park))){
+				currentResultList = new ExtendedInfoTOList<>();
+				result.add(currentResultList);
 				park = to.getParkName();
-				raceResultList = new NamedInfoTOList<>();
-				result.add(raceResultList);
-				raceResultList.setName(VizUtils.buildRaceName(to.getParkName(), to.getDate(), locale));
-				currentResults = new ExtendedInfoTOList<>();
-				raceResultList.add(currentResults);
-				if (to.getGender() == Gender.FEMALE) {
-					isMenResults = false;
-					currentResults.setName(Internationalizer.translate(Translator.KEY_WOMENS_RESULTS, locale));
-				} else {
-					isMenResults = true;
-					currentResults.setName(Internationalizer.translate(Translator.KEY_MENS_RESULTS, locale));
+				date = to.getDate();
+				currentResultList.setName(VizUtils.buildRaceName(park, date, locale));
+				currentList = new NamedInfoTOList<>();
+				if(to.getGender()==Gender.MALE){
+					mensRes = true;
+					currentList.setName(Internationalizer.translate(Translator.KEY_MENS_RESULTS,locale));
+				}else{
+					mensRes = false;
+					currentList.setName(Internationalizer.translate(Translator.KEY_WOMENS_RESULTS,locale));
 				}
-				currentResults.add(buildClubRunnerResultInfoTO(to));
+				currentResultList.add(currentList);
+			}else{
+				if(mensRes&&to.getGender()==Gender.FEMALE){
+					mensRes = false;
+					currentList = new NamedInfoTOList<>();
+					currentList.setName(Internationalizer.translate(Translator.KEY_WOMENS_RESULTS,locale));
+					currentResultList.add(currentList);
+				}
 			}
+			currentList.add(buildClubRunnerResultInfoTO(to));
 		}
 		return result;
 	}

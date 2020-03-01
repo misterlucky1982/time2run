@@ -95,7 +95,7 @@ public class ClubInfoTOTest {
 	public void raceResultTest() {
 		assertNull(to.getRaceResults());
 		@SuppressWarnings("unchecked")
-		List<NamedInfoTOList<NamedInfoTOList<ClubRunnerResultInfoTO>>> list = PowerMock.createMock(List.class);
+		List<ExtendedInfoTOList<NamedInfoTOList<ClubRunnerResultInfoTO>>> list = PowerMock.createMock(List.class);
 		to.setRaceResults(list);
 		assertEquals(list, to.getRaceResults());
 	}
