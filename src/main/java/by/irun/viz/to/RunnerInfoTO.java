@@ -7,7 +7,7 @@ import java.util.List;
  * @author A.Dubovik
  *
  */
-public class RunnerInfoTO {
+public class RunnerInfoTO implements InfoTO {
 	
 	private String avatar;
 	private String name;

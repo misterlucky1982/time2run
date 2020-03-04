@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet"
+	th:href="@{/css/clubInfo/clubRunnerResult_styles.css}" />
+</head>
+<body>
+	<div th:fragment="runnerResult">
+		<table>
+			<tr>
+				<th th:text="#{clubInfo.clubRunnerResult.position}" /></th>
+				<th th:text="#{clubInfo.clubRunnerResult.name}"></th>
+				<th th:text="#{clubInfo.clubRunnerResult.time}"></th>
+			</tr>
+			<tr th:each="runnerResult : ${result.infoTOs}">
+				<td th:text="${runnerResult.position}"></td>
+				<td th:text="${runnerResult.name}"></td>
+				<td th:text="${runnerResult.time}"></td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:text="#{app.title}">Title</title>
+<link rel="icon" href="/images/icon.png" type="image/png">
+<link rel="stylesheet" th:href="@{/css/styles.css}" />
+<link rel="stylesheet" th:href="@{/css/header_styles.css}" />
+<link rel="stylesheet" th:href="@{/css/clubInfo/clubInfo_styles.css}" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script
+	src="http://jscrollpane.kelvinluck.com/script/jquery.jscrollpane.min.js"></script>
+<script src="../scripts/clubInfo/clubInfoScripts.js"></script>
+</head>
+<body>
+	<div th:replace="fragments/header :: header"></div>
+	<div class="clubInfo_container">
+		<img alt="logo" th:src="${club.clubLogo}">
+		<p th:text="${club.clubName}"></p>
+		<p><span th:text="#{clubInfo.city}"></span>: <span th:text="${club.city}"></span></p>
+		<div id="clubInfo_contacts">
+			<p><span th:text="#{clubInfo.email}"></span>:<span th:text="${club.email}"></span></p>
+			<p><span th:text="#{clubInfo.phone}"></span>:<span th:text="${club.phone}"></span></p>
+		</div>
+		<p><span th:text="#{clubInfo.firstRace}"></span>:<span th:text="${club.firstRace}"></span></p>
+		<div>
+		<p><span th:text="#{clubInfo.bestResults}"></span>:</p>
+			<table>
+				<tr th:each="parkBestResult : ${club.parkBestResults}">
+				<td th:replace="fragments/bestResultList :: bestResult"></td>
+				</tr>
+			</table>
+		</div>
+		<div>
+			<p><span th:text="#{clubInfo.allResults}"></span>:</p>
+			<table>
+				<tr th:each="clubResult : ${club.raceResults}">
+					<td th:replace="fragments/clubRaceResult :: raceResult"></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

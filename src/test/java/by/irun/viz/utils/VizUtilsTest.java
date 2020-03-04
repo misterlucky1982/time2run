@@ -14,6 +14,7 @@ import by.irun.domain.Gender;
 import by.irun.domain.Runner;
 import by.irun.domain.to.RunnerTO;
 import by.irun.locale.AppLocales;
+import by.irun.locale.Internationalizer;
 import by.irun.viz.to.RunnerInfoTO;
 import by.irun.viz.utils.VizUtils;
 
@@ -47,6 +48,7 @@ public class VizUtilsTest {
 	/**
 	 * test for {@link by.irun.viz.utils.VizUtils#resolveAvatarPathForRunner(RunnerInfoTO, Runner, java.util.Locale)}
 	 */
+	@SuppressWarnings("deprecation")
 	@Test
 	public void resolveAvatarPathForRunnerTest() {
 		RunnerTO runner = new RunnerTO();
@@ -72,6 +74,25 @@ public class VizUtilsTest {
 	}
 	
 	/**
+	 * test for {@link by.irun.viz.utils.VizUtils#getAvatarForAvatarPathAndGender(String, Gender, Locale)}
+	 */
+	@Test
+	public void resolveAvatarPathForTest() {
+		assertEquals("path",VizUtils.getAvatarForAvatarPathAndGender("path", Gender.FEMALE, AppLocales.BY));
+		assertEquals("path",VizUtils.getAvatarForAvatarPathAndGender("path", Gender.FEMALE, AppLocales.EN));
+		assertEquals("path",VizUtils.getAvatarForAvatarPathAndGender("path", Gender.FEMALE, AppLocales.RU));
+		assertEquals("path",VizUtils.getAvatarForAvatarPathAndGender("path", Gender.MALE, AppLocales.BY));
+		assertEquals("path",VizUtils.getAvatarForAvatarPathAndGender("path", Gender.MALE, AppLocales.EN));
+		assertEquals("path",VizUtils.getAvatarForAvatarPathAndGender("path", Gender.MALE, AppLocales.RU));
+		assertEquals(VizConstants.NO_FOTO_AVATAR_MAN_BY,VizUtils.getAvatarForAvatarPathAndGender(null, Gender.MALE, AppLocales.BY));
+		assertEquals(VizConstants.NO_FOTO_AVATAR_MAN_RU,VizUtils.getAvatarForAvatarPathAndGender(null, Gender.MALE, AppLocales.RU));
+		assertEquals(VizConstants.NO_FOTO_AVATAR_MAN_EN,VizUtils.getAvatarForAvatarPathAndGender(null, Gender.MALE, AppLocales.EN));
+		assertEquals(VizConstants.NO_FOTO_AVATAR_WOMAN_BY,VizUtils.getAvatarForAvatarPathAndGender(null, Gender.FEMALE, AppLocales.BY));
+		assertEquals(VizConstants.NO_FOTO_AVATAR_WOMAN_RU,VizUtils.getAvatarForAvatarPathAndGender(null, Gender.FEMALE, AppLocales.RU));
+		assertEquals(VizConstants.NO_FOTO_AVATAR_WOMAN_EN,VizUtils.getAvatarForAvatarPathAndGender(null, Gender.FEMALE, AppLocales.EN));
+	}
+	
+	/**
 	 * test for ({@link VizUtils#resolveClubLink(Long)}
 	 */
 	@Test
@@ -93,4 +114,37 @@ public class VizUtilsTest {
 		assertEquals("no club",VizUtils.resolveClubName(null, AppLocales.EN));
 	}
 	
+	/**
+	 * test for {@link VizUtils#resolveClubLogo(String, java.util.Locale)}
+	 */
+	@Test
+	public void resolveClubLogoTest() {
+		assertEquals("logo", VizUtils.resolveClubLogo("logo", AppLocales.EN));
+		assertEquals("logo", VizUtils.resolveClubLogo("logo", AppLocales.RU));
+		assertEquals("logo", VizUtils.resolveClubLogo("logo", AppLocales.BY));
+		assertEquals(VizConstants.CLUBLOGO_IS_NOT_UPLOADED_EN, VizUtils.resolveClubLogo(null, AppLocales.EN));
+		assertEquals(VizConstants.CLUBLOGO_IS_NOT_UPLOADED_RU, VizUtils.resolveClubLogo(null, AppLocales.RU));
+		assertEquals(VizConstants.CLUBLOGO_IS_NOT_UPLOADED_BY, VizUtils.resolveClubLogo(null, AppLocales.BY));
+	}
+	
+	/**
+	 * test for {@link VizUtils#concatName(String, String)}
+	 */
+	@Test
+	public void concatNameTest(){
+		assertEquals("First Last",VizUtils.concatName("First", "Last"));
+	}
+	/**
+	 *  test for {@link VizUtils#buildRaceName(String, Date, java.util.Locale)}
+	 */
+	@Test
+	public void buildRaceNameTest(){
+		Date d = Date.valueOf("2000-01-01");
+		String translationBY = Internationalizer.translate(d, AppLocales.BY);
+		String translationRU = Internationalizer.translate(d, AppLocales.RU);
+		String translationEN = Internationalizer.translate(d, AppLocales.EN);
+		assertEquals("name "+translationBY,VizUtils.buildRaceName("name", d, AppLocales.BY));
+		assertEquals("name "+translationRU,VizUtils.buildRaceName("name", d, AppLocales.RU));
+		assertEquals("name "+translationEN,VizUtils.buildRaceName("name", d, AppLocales.EN));
+	}
 }

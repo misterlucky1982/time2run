@@ -3,6 +3,9 @@ package by.irun.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import by.irun.domain.to.ClubRunnerTO;
+import by.irun.domain.to.ClubTO;
+import by.irun.domain.to.RaceClubResultTO;
 import by.irun.domain.to.RunnerResultTO;
 import by.irun.domain.to.RunnerTO;
 import by.irun.viz.to.RaceInfoTO;
@@ -44,4 +47,30 @@ public interface IDataProvider {
 	 * @throws SQLException
 	 */
 	RunnerTO getRunnerTO(long runnerId) throws SQLException;
+	
+	/**
+	 * Provides ClubTO for given club id
+	 * @param clubId
+	 * @return ClubTO
+	 * @throws SQLException
+	 */
+	ClubTO getClubTO(long clubId) throws SQLException;
+	
+	/**
+	 * Provides List<RaceClubResultTO> for given club id
+	 * @param clubId
+	 * @return List
+	 * @throws SQLException
+	 */
+	List<RaceClubResultTO> getRaceClubResultTOList(long clubId) throws SQLException;
+	
+	/**
+	 * Provides List<ClubRunnerTO> for given clubId
+	 * <p>
+	 * In fact - information about current club`s line-up
+	 * @param clubId
+	 * @return List
+	 * @throws SQLException
+	 */
+	List<ClubRunnerTO> getCurrentClubRunnerTOListForClub(long clubId) throws SQLException;
 }

@@ -16,6 +16,29 @@
 	<div id="runnerinfo_runnercontainer">
 	<img alt="foto" th:src="${runner.avatar}">
 	<p th:text="${runner.name}"></p>
+	<p><span th:text = "#{runnerInfo.dateOfBirth}"></span>: <span th:text = "${runner.dateOfBirth}"></span></p>
+	<p><span th:text = "#{runnerInfo.city}"></span>: <span th:text = "${runner.city}"></span></p>
+	<p><span th:text = "#{runnerInfo.currentClub}"></span>: <span th:text = "${runner.clubName}"></span></p>
+	<p><span th:text = "#{runnerInfo.amountOfRaces}"></span>: <span th:text = "${runner.numberOfRaces}"></span></p>
+	<div id="runnerInfo.showRaceList"><p th:text = "#{runnerInfo.showAllRaces}"></p></div>
+	<div id="runnerInfo.raceList">
+			<table>
+				<tr>
+					<th th:text="#{runnerInfo.race}"></th>
+					<th th:text="#{runnerInfo.position}" /></th>
+					<th th:text="#{runnerInfo.absPosition}"></th>
+					<th th:text="#{runnerInfo.club}"></th>
+					<th th:text="#{runnerInfo.time}"></th>
+				</tr>
+				<tr th:each="result : ${runner.racesList}">
+					<td th:text="${result.raceInfo}"></td>
+					<td th:text="${result.posInOwnGenderInfo}"></td>
+					<td th:text="${result.absPositionInfo}"></td>
+					<td th:text="${result.clubName}"></td>
+					<td th:text="${result.time}"></td>
+				</tr>
+			</table>
+		</div>
 	</div>
 </body>
 </html>
