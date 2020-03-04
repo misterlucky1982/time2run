@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet"
+	th:href="@{/css/clubInfo/clubRaceResult_styles.css}" />
+</head>
+<body>
+	<div th:fragment="raceResult">
+		<table>
+			<tr>
+				<th th:text="${clubResult.name}"></th>
+			</tr>
+			<tr th:each="result : ${clubResult.infoTOs}">
+				<td th:text="${result.name}"></td>
+				<td th:replace="fragments/clubRunnerResult :: runnerResult"></td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

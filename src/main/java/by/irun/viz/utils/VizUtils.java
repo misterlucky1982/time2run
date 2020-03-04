@@ -7,6 +7,7 @@ import java.util.Map;
 
 import by.irun.controller.ControllerConstants;
 import by.irun.domain.Gender;
+import by.irun.domain.to.RaceClubResultTO;
 import by.irun.domain.to.RunnerResultTO;
 import by.irun.domain.to.RunnerTO;
 import by.irun.locale.AppLocales;
@@ -20,7 +21,7 @@ import by.irun.viz.to.RunnerResultInfoTO;
  * 
  * @author A.Dubovik
  */
-public class VizUtils {
+public class VizUtils implements Translator{
 	
 	public static final String EMPTY_LINK = "#";
 	private static final Map<Gender, Map<Locale, String>> AVATAR_MAP;
@@ -36,6 +37,22 @@ public class VizUtils {
 		w.put(AppLocales.EN, VizConstants.NO_FOTO_AVATAR_WOMAN_EN);
 		AVATAR_MAP.put(Gender.MALE, m);
 		AVATAR_MAP.put(Gender.FEMALE, w);
+	}
+	
+	private static final String CLUB_NO_LOGO = "clubNoLogo";
+	
+	private static final Map<Locale, Map<String, String>> PATH_MAP;
+	static {
+		PATH_MAP = new HashMap<>();
+		Map<String, String> en = new HashMap<>();
+		Map<String, String> ru = new HashMap<>();
+		Map<String, String> by = new HashMap<>();
+		en.put(CLUB_NO_LOGO, VizConstants.CLUBLOGO_IS_NOT_UPLOADED_EN);
+		ru.put(CLUB_NO_LOGO, VizConstants.CLUBLOGO_IS_NOT_UPLOADED_RU);
+		by.put(CLUB_NO_LOGO, VizConstants.CLUBLOGO_IS_NOT_UPLOADED_BY);
+		PATH_MAP.put(AppLocales.BY, by);
+		PATH_MAP.put(AppLocales.RU, ru);
+		PATH_MAP.put(AppLocales.EN, en);
 	}
 	
 	public static final String UNKNOWN_DATE = "???";
@@ -80,11 +97,23 @@ public class VizUtils {
 	 * @param runner
 	 * @param locale
 	 */
+	@Deprecated
 	public static void resolveAvatarPathForRunner(RunnerInfoTO to, RunnerTO runner, Locale locale) {
 		if (runner.getAvatar() != null) {
 			to.setAvatar(runner.getAvatar());
 		} else
 			to.setAvatar(AVATAR_MAP.get(runner.getGender()).get(locale));
+	}
+	
+	/**
+	 * resolves avatar path for given gender and locale
+	 * @param avatar
+	 * @param gender
+	 * @param locale
+	 * @return
+	 */
+	public static String getAvatarForAvatarPathAndGender(String avatar, Gender gender, Locale locale){
+		return avatar!=null?avatar:AVATAR_MAP.get(gender).get(locale);
 	}
 	
 	public static RunnerResultInfoTO convert(RunnerResultTO to, Locale locale){
@@ -136,5 +165,53 @@ public class VizUtils {
 	 */
 	public static String resolveCity(String city, Locale locale){
 		return city!=null?city:Internationalizer.translate(Translator.KEY_UNKNOWN, locale);
+	}
+	
+	/**
+	 * Resolves club`s logo image path
+	 * <p>
+	 * If logo is not null returns the same logo
+	 * <p>
+	 * if logo is null returns image "no logo" using given locale
+	 * 
+	 * @param logo
+	 * @param locale
+	 * @return
+	 */
+	public static String resolveClubLogo(String logo, Locale locale) {
+		return logo != null ? logo : PATH_MAP.get(locale).get(CLUB_NO_LOGO);
+	}
+	
+	/**
+	 * Concats full name for firstName and lastName
+	 * @param firstName
+	 * @param lastName
+	 * @return String
+	 */
+	public static String concatName(String firstName, String lastName){
+		return firstName+" "+lastName;
+	}
+	
+	/**
+	 * Resolves raceName using given date and locale
+	 * @param parkName
+	 * @param raceDate
+	 * @param locale
+	 * @return
+	 */
+	public static String buildRaceName(String parkName, Date raceDate, Locale locale){
+		return parkName+" "+Internationalizer.translate(raceDate, locale);
+	}
+	
+	/**
+	 * Produces string representation of best result for given TO
+	 * @param to
+	 * @param locale
+	 * @return String
+	 */
+	public static String buildRaceResultStringForBestResultReport(RaceClubResultTO to, Locale locale) {
+		return Internationalizer.translate(to.getGender() == Gender.FEMALE ? KEY_AMONG_WOMEN : KEY_AMONG_MEN, locale)
+				+ DUALPOINT + SPACE + concatName(to.getRunnerFirstName(), to.getRunnerLastName()) + SPACE + HYPHEN
+				+ convertNumberOfSecondsToTimeRepresentation(to.getTimeInSeconds());
 	}
 }

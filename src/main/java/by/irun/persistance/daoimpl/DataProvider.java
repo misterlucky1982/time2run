@@ -11,6 +11,9 @@ import org.springframework.stereotype.Component;
 
 import by.irun.config.ApplicationConstants;
 import by.irun.dao.IDataProvider;
+import by.irun.domain.to.ClubRunnerTO;
+import by.irun.domain.to.ClubTO;
+import by.irun.domain.to.RaceClubResultTO;
 import by.irun.domain.to.RunnerResultTO;
 import by.irun.domain.to.RunnerTO;
 import by.irun.persistance.util.GenderConverter;
@@ -149,6 +152,81 @@ public class DataProvider implements IDataProvider{
 		} catch (DataAccessException e) {
 			throw new SQLException(e);
 		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see by.irun.dao.IDataProvider#getClubTO(long clubId)
+	 */
+	@Override
+	public ClubTO getClubTO(long clubId) throws SQLException {
+		try {
+			SqlRowSet rowSet = jdbcTemplate.queryForRowSet(TORequests.clubTORequest(clubId));
+			if (rowSet.next()) {
+				ClubTO to = new ClubTO();
+				to.setName(rowSet.getString(TORequests.NAME));
+				to.setCity(rowSet.getString(TORequests.CITY));
+				to.setClubLogo(rowSet.getString(TORequests.CLUBLOGO));
+				to.setEmail(rowSet.getString(TORequests.EMAIL));
+				to.setPhone(rowSet.getString(TORequests.PHONE));
+				return to;
+			} else
+				throw new SQLException("Empty resultset for id:" + clubId);
+		} catch (DataAccessException e) {
+			throw new SQLException(e);
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see by.irun.dao.IDataProvider#getRaceClubResultTOList(long clubId)
+	 */
+	@Override
+	public List<RaceClubResultTO> getRaceClubResultTOList(long clubId) throws SQLException {
+		try {
+			SqlRowSet rowSet = jdbcTemplate.queryForRowSet(TORequests.raceClubResultTORequest(clubId));
+			List<RaceClubResultTO> list = new ArrayList<>();
+			while (rowSet.next()) {
+				RaceClubResultTO to = new RaceClubResultTO();
+				to.setAbsPosition(rowSet.getInt(TORequests.ABSPOSITION));
+				to.setPositionInGenderGroup(rowSet.getInt(TORequests.POSITIONINGENDERGROUP));
+				to.setDate(rowSet.getDate(TORequests.RACE_DATE));
+				to.setParkName(rowSet.getString(TORequests.PARK_NAME));
+				to.setRaceId(rowSet.getLong(TORequests.RACE_ID));
+				to.setRunnerFirstName(rowSet.getString(TORequests.FIRSTNAME));
+				to.setRunnerLastName(rowSet.getString(TORequests.LASTNAME));
+				to.setRunnerId(rowSet.getLong(TORequests.RUNNERID));
+				to.setGender(genderConverter.convertToEntityAttribute(rowSet.getString(TORequests.GENDER)));
+				to.setTimeInSeconds(rowSet.getInt(TORequests.TIME));
+				list.add(to);
+			}
+			return list;
+		} catch (DataAccessException e) {
+			throw new SQLException(e);
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see by.irun.dao.IDataProvider#getCurrentClubRunnerTOListForClub(long clubId)
+	 */
+	@Override
+	public List<ClubRunnerTO> getCurrentClubRunnerTOListForClub(long clubId) throws SQLException {
+		List<ClubRunnerTO> result = new ArrayList<>();
+		SqlRowSet rowSet = jdbcTemplate.queryForRowSet(TORequests.clubRunnerTOListReqyest(clubId));
+		while (rowSet.next()) {
+			ClubRunnerTO to = new ClubRunnerTO();
+			to.setRunnerId(rowSet.getLong(TORequests.RUNNERID));
+			to.setFirstName(rowSet.getString(TORequests.FIRSTNAME));
+			to.setLastName(rowSet.getString(TORequests.LASTNAME));
+			to.setAvatarPath(rowSet.getString(TORequests.AVATAR));
+			to.setGender(genderConverter.convertToEntityAttribute(rowSet.getString(TORequests.GENDER)));
+			result.add(to);
+		}
+		return result;
 	}
 
 }

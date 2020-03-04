@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.easymock.EasyMock;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.api.easymock.PowerMock;
@@ -19,6 +20,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 import by.irun.domain.Gender;
+import by.irun.domain.to.ClubRunnerTO;
+import by.irun.domain.to.ClubTO;
+import by.irun.domain.to.RaceClubResultTO;
 import by.irun.domain.to.RunnerResultTO;
 import by.irun.domain.to.RunnerTO;
 import by.irun.viz.to.RaceInfoTO;
@@ -351,5 +355,270 @@ public class DataProviderTest {
 		}
 		PowerMock.verifyAll();
 		assertNull(to);
+	}
+	
+	/**
+	 * test for {@link DataProvider#getClubTO(long)} with successful scenario
+	 */
+	@Test
+	public void getClubTOTest() {
+		String name = "name";
+		String city = "city";
+		String logo = "logo";
+		String email = "email";
+		String phone = "phone";
+		SqlRowSet rowSet = PowerMock.createMock(org.springframework.jdbc.support.rowset.SqlRowSet.class);
+		EasyMock.expect(jdbcTemplate.queryForRowSet(TORequests.clubTORequest(33))).andReturn(rowSet);
+		DataProvider provider = new DataProvider();
+		Whitebox.setInternalState(provider, "jdbcTemplate", jdbcTemplate);
+		EasyMock.expect(rowSet.next()).andReturn(true);
+		EasyMock.expect(rowSet.getString(TORequests.NAME)).andReturn(name);
+		EasyMock.expect(rowSet.getString(TORequests.CITY)).andReturn(city);
+		EasyMock.expect(rowSet.getString(TORequests.CLUBLOGO)).andReturn(logo);
+		EasyMock.expect(rowSet.getString(TORequests.EMAIL)).andReturn(email);
+		EasyMock.expect(rowSet.getString(TORequests.PHONE)).andReturn(phone);
+		PowerMock.replayAll();
+		ClubTO to = null;
+		try {
+			to = provider.getClubTO(33);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		PowerMock.verifyAll();
+		assertNotNull(to);
+		assertEquals(city, to.getCity());
+		assertEquals(name, to.getName());
+		assertEquals(logo, to.getClubLogo());
+		assertEquals(email, to.getEmail());
+		assertEquals(phone, to.getPhone());
+	}
+
+	/**
+	 * test for {@link DataProvider#getClubTO(long)} for empty ResultSet
+	 */
+	@Test
+	public void clubTOwithEmptyResultSetTest() {
+		SqlRowSet rowSet = PowerMock.createMock(org.springframework.jdbc.support.rowset.SqlRowSet.class);
+		EasyMock.expect(jdbcTemplate.queryForRowSet(TORequests.clubTORequest(33))).andReturn(rowSet);
+		DataProvider provider = new DataProvider();
+		Whitebox.setInternalState(provider, "jdbcTemplate", jdbcTemplate);
+		EasyMock.expect(rowSet.next()).andReturn(false);
+		PowerMock.replayAll();
+		ClubTO to = null;
+		try {
+			to = provider.getClubTO(33);
+		} catch (SQLException e) {
+			assertEquals("Empty resultset for id:33", e.getMessage());
+		}
+		PowerMock.verifyAll();
+		assertNull(to);
+	}
+
+	/**
+	 * test for {@link DataProvider#getClubTO(long)} with exception
+	 */
+	@Test
+	public void clubTOwithExceptionTest() {
+		org.springframework.dao.DataAccessException exception = PowerMock
+				.createMock(org.springframework.dao.DataAccessException.class);
+		EasyMock.expect(jdbcTemplate.queryForRowSet(TORequests.clubTORequest(33))).andThrow(exception);
+		EasyMock.expect(exception.getCause()).andReturn(new RuntimeException());
+		DataProvider provider = new DataProvider();
+		Whitebox.setInternalState(provider, "jdbcTemplate", jdbcTemplate);
+		PowerMock.replayAll();
+		ClubTO to = null;
+		try {
+			to = provider.getClubTO(33);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		PowerMock.verifyAll();
+		assertNull(to);
+	}
+
+	/**
+	 * test for {@link DataProvider#getRaceClubResultTOList(long)} with
+	 * successful scenario
+	 */
+	@Test
+	public void getRaceClubResultTOListTest() {
+
+		int absPos = 5;
+		int posInGen = 3;
+		Date date = Date.valueOf("2020-01-01");
+		String park = "park";
+		long raceId = 11;
+		String firstName = "firstName";
+		String lastName = "lastName";
+		long runnerId = 333;
+		int time = 150;
+
+		SqlRowSet rowSet = PowerMock.createMock(org.springframework.jdbc.support.rowset.SqlRowSet.class);
+		EasyMock.expect(jdbcTemplate.queryForRowSet(TORequests.raceClubResultTORequest(100))).andReturn(rowSet);
+		DataProvider provider = new DataProvider();
+		Whitebox.setInternalState(provider, "jdbcTemplate", jdbcTemplate);
+		EasyMock.expect(rowSet.next()).andReturn(true);
+		EasyMock.expect(rowSet.getInt(TORequests.ABSPOSITION)).andReturn(absPos);
+		EasyMock.expect(rowSet.getInt(TORequests.POSITIONINGENDERGROUP)).andReturn(posInGen);
+		EasyMock.expect(rowSet.getDate(TORequests.RACE_DATE)).andReturn(date);
+		EasyMock.expect(rowSet.getString(TORequests.PARK_NAME)).andReturn(park);
+		EasyMock.expect(rowSet.getLong(TORequests.RACE_ID)).andReturn(raceId);
+		EasyMock.expect(rowSet.getString(TORequests.FIRSTNAME)).andReturn(firstName);
+		EasyMock.expect(rowSet.getString(TORequests.LASTNAME)).andReturn(lastName);
+		EasyMock.expect(rowSet.getLong(TORequests.RUNNERID)).andReturn(runnerId);
+		EasyMock.expect(rowSet.getString(TORequests.GENDER)).andReturn("F");
+		EasyMock.expect(rowSet.getInt(TORequests.TIME)).andReturn(time);
+		EasyMock.expect(rowSet.next()).andReturn(false);
+		PowerMock.replayAll();
+		List<RaceClubResultTO> list = null;
+
+		try {
+			list = provider.getRaceClubResultTOList(100);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		PowerMock.verifyAll();
+		assertNotNull(list);
+		assertTrue(list.size() == 1);
+		RaceClubResultTO to = list.get(0);
+		assertTrue(to.getAbsPosition() == absPos);
+		assertTrue(to.getPositionInGenderGroup() == posInGen);
+		assertEquals(date, to.getDate());
+		assertEquals(park, to.getParkName());
+		assertEquals(firstName, to.getRunnerFirstName());
+		assertEquals(lastName, to.getRunnerLastName());
+		assertTrue(to.getRaceId() == raceId);
+		assertTrue(to.getRunnerId() == runnerId);
+		assertEquals(Gender.FEMALE,to.getGender());
+		assertTrue(to.getTimeInSeconds() == time);
+	}
+
+	/**
+	 * test for {@link DataProvider#getClubTO(long)} for empty ResultSet
+	 */
+	@Test
+	public void getRaceClubResultTOListwithEmptyResultSetTest() {
+		SqlRowSet rowSet = PowerMock.createMock(org.springframework.jdbc.support.rowset.SqlRowSet.class);
+		EasyMock.expect(jdbcTemplate.queryForRowSet(TORequests.raceClubResultTORequest(33))).andReturn(rowSet);
+		DataProvider provider = new DataProvider();
+		Whitebox.setInternalState(provider, "jdbcTemplate", jdbcTemplate);
+		EasyMock.expect(rowSet.next()).andReturn(false);
+		PowerMock.replayAll();
+		List<RaceClubResultTO> list = null;
+		try {
+			list = provider.getRaceClubResultTOList(33);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		PowerMock.verifyAll();
+		assertNotNull(list);
+		assertTrue(list.size() == 0);
+	}
+
+	/**
+	 * test for {@link DataProvider#getClubTO(long)} with exception
+	 */
+	@Test
+	public void getRaceClubResultTOListwithExceptionTest() {
+		org.springframework.dao.DataAccessException exception = PowerMock
+				.createMock(org.springframework.dao.DataAccessException.class);
+		EasyMock.expect(jdbcTemplate.queryForRowSet(TORequests.raceClubResultTORequest(133))).andThrow(exception);
+		EasyMock.expect(exception.getCause()).andReturn(new RuntimeException());
+		DataProvider provider = new DataProvider();
+		Whitebox.setInternalState(provider, "jdbcTemplate", jdbcTemplate);
+		PowerMock.replayAll();
+		List<RaceClubResultTO> list = null;
+		try {
+			list = provider.getRaceClubResultTOList(133);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		PowerMock.verifyAll();
+		assertNull(list);
+	}
+	
+	/**
+	 * test for {@link DataProvider#getCurrentClubRunnerTOListForClub(long)}
+	 */
+	@Test
+	public void getCurrentClubRunnerTOListForClubTest(){
+		String avatarPath = "avatar";
+		String firstName = "firstName";
+		String lastName = "lastName";
+		Gender gender = Gender.MALE;
+		long runnerId = 333;
+
+		SqlRowSet rowSet = PowerMock.createMock(org.springframework.jdbc.support.rowset.SqlRowSet.class);
+		EasyMock.expect(jdbcTemplate.queryForRowSet(TORequests.clubRunnerTOListReqyest(33))).andReturn(rowSet);
+		DataProvider provider = new DataProvider();
+		Whitebox.setInternalState(provider, "jdbcTemplate", jdbcTemplate);
+		EasyMock.expect(rowSet.next()).andReturn(true);
+		EasyMock.expect(rowSet.getLong(TORequests.RUNNERID)).andReturn(runnerId);
+		EasyMock.expect(rowSet.getString(TORequests.FIRSTNAME)).andReturn(firstName);
+		EasyMock.expect(rowSet.getString(TORequests.LASTNAME)).andReturn(lastName);
+		EasyMock.expect(rowSet.getString(TORequests.AVATAR)).andReturn(avatarPath);
+		EasyMock.expect(rowSet.getString(TORequests.GENDER)).andReturn("M");
+		EasyMock.expect(rowSet.next()).andReturn(false);
+		PowerMock.replayAll();
+		List<ClubRunnerTO> list = null;
+		try {
+			list = provider.getCurrentClubRunnerTOListForClub(33);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		PowerMock.verifyAll();
+		assertNotNull(list);
+		assertTrue(list.size() == 1);
+		ClubRunnerTO to = list.get(0);
+		assertTrue(to.getRunnerId()==runnerId);
+		assertEquals(avatarPath, to.getAvatarPath());
+		assertEquals(firstName, to.getFirstName());
+		assertEquals(lastName, to.getLastName());
+		assertEquals(gender,to.getGender());
+	}
+	
+	/**
+	 * test for {@link DataProvider#getCurrentClubRunnerTOListForClub(long)} for empty resultSet
+	 */
+	@Test
+	public void getCurrentClubRunnerTOListForClubForEmptyResultSetTest(){
+		SqlRowSet rowSet = PowerMock.createMock(org.springframework.jdbc.support.rowset.SqlRowSet.class);
+		EasyMock.expect(jdbcTemplate.queryForRowSet(TORequests.clubRunnerTOListReqyest(33))).andReturn(rowSet);
+		DataProvider provider = new DataProvider();
+		Whitebox.setInternalState(provider, "jdbcTemplate", jdbcTemplate);
+		EasyMock.expect(rowSet.next()).andReturn(false);
+		PowerMock.replayAll();
+		List<ClubRunnerTO> list = null;
+		try {
+			list = provider.getCurrentClubRunnerTOListForClub(33);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		PowerMock.verifyAll();
+		assertNotNull(list);
+		assertTrue(list.size() == 0);
+	}
+	
+	/**
+	 * test for {@link DataProvider#getCurrentClubRunnerTOListForClub(long)} with exception
+	 */
+	@Test
+	@Ignore
+	public void getCurrentClubRunnerTOListForClubWithExceptionTest(){
+		DataProvider provider = new DataProvider();
+		Whitebox.setInternalState(provider, "jdbcTemplate", jdbcTemplate);
+		org.springframework.dao.DataAccessException exception = PowerMock
+				.createMock(org.springframework.dao.DataAccessException.class);
+		EasyMock.expect(jdbcTemplate.queryForRowSet(TORequests.clubRunnerTOListReqyest(133))).andThrow(exception);
+		EasyMock.expect(exception.getCause()).andReturn(new RuntimeException());
+		PowerMock.replayAll();
+		List<ClubRunnerTO> list = null;
+		try {
+			list = provider.getCurrentClubRunnerTOListForClub(133);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		PowerMock.verifyAll();
+		assertNull(list);
 	}
 }
