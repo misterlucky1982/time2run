@@ -7,6 +7,7 @@ import java.util.Map;
 
 import by.irun.controller.ControllerConstants;
 import by.irun.domain.Gender;
+import by.irun.domain.to.RaceClubResultTO;
 import by.irun.domain.to.RunnerResultTO;
 import by.irun.domain.to.RunnerTO;
 import by.irun.locale.AppLocales;
@@ -20,7 +21,7 @@ import by.irun.viz.to.RunnerResultInfoTO;
  * 
  * @author A.Dubovik
  */
-public class VizUtils {
+public class VizUtils implements Translator{
 	
 	public static final String EMPTY_LINK = "#";
 	private static final Map<Gender, Map<Locale, String>> AVATAR_MAP;
@@ -200,5 +201,17 @@ public class VizUtils {
 	 */
 	public static String buildRaceName(String parkName, Date raceDate, Locale locale){
 		return parkName+" "+Internationalizer.translate(raceDate, locale);
+	}
+	
+	/**
+	 * Produces string representation of best result for given TO
+	 * @param to
+	 * @param locale
+	 * @return String
+	 */
+	public static String buildRaceResultStringForBestResultReport(RaceClubResultTO to, Locale locale) {
+		return Internationalizer.translate(to.getGender() == Gender.FEMALE ? KEY_AMONG_WOMEN : KEY_AMONG_MEN, locale)
+				+ DUALPOINT + SPACE + concatName(to.getRunnerFirstName(), to.getRunnerLastName()) + SPACE + HYPHEN
+				+ convertNumberOfSecondsToTimeRepresentation(to.getTimeInSeconds());
 	}
 }

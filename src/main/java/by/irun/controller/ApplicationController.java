@@ -51,9 +51,9 @@ public class ApplicationController {
 	@GetMapping("/clubs")
 	public ModelAndView getClubPage(@RequestParam (value = "id", required = true) long id){
 		ModelAndView mav = new ModelAndView();
-		ClubInfoTO to = dataService.getClubInfoTO(26, AppLocales.BY);
-		mav.addObject("runner",to);
-	    mav.setViewName("runnerInfo");
+		ClubInfoTO to = dataService.getClubInfoTO(id, AppLocales.RU);
+		mav.addObject("club",to);
+	    mav.setViewName("clubInfo");
 	    return mav;
 	}
 

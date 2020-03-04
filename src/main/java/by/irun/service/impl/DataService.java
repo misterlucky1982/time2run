@@ -135,6 +135,8 @@ public class DataService implements IDataService{
 		clubInfoTO.setClubName(clubTO.getName());
 		clubInfoTO.setEmail(clubTO.getEmail());
 		clubInfoTO.setPhone(clubTO.getPhone());
+		clubInfoTO.setCity(VizUtils.resolveCity(clubTO.getCity(), locale));
+		clubInfoTO.setClubLogo(VizUtils.resolveClubLogo(clubTO.getClubLogo(), locale));
 		List<ClubRunnerInfoTO> clubRunnerInfoTOList = new ArrayList<>(clubRunnerTOList.size());
 		for (ClubRunnerTO crto : clubRunnerTOList) {
 			ClubRunnerInfoTO clubRunnerInfoTO = new ClubRunnerInfoTO();
@@ -150,10 +152,7 @@ public class DataService implements IDataService{
 		clubInfoTO.setFirstRace(firstRaceResult != null
 				? VizUtils.buildRaceName(firstRaceResult.getParkName(), firstRaceResult.getDate(), locale)
 				: Internationalizer.translate(Translator.KEY_UNKNOWN));
-		Map<String,Map<Gender,RaceClubResultTO>> parkBestResultMap = new HashMap<>();
-		for(RaceClubResultTO rto:raceClubResultTOList){
-			ServiceUtils.checkBestResultsInPark(parkBestResultMap, rto);
-		}
+		clubInfoTO.setParkBestResults(ServiceUtils.getParkBestResultInfoTOList(raceClubResultTOList, locale));
 		clubInfoTO.setRaceResults(ServiceUtils.generateSortedClubRunnerResultList(raceClubResultTOList, locale));
 		return clubInfoTO;
 	}

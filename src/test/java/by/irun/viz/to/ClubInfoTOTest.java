@@ -100,4 +100,17 @@ public class ClubInfoTOTest {
 		assertEquals(list, to.getRaceResults());
 	}
 
+	@Test
+	public void clubLogoTest(){
+		assertNull(to.getClubLogo());
+		to.setClubLogo("logo");
+		assertEquals("logo",to.getClubLogo());
+	}
+	
+	@Test
+	public void cityTest(){
+		assertNull(to.getCity());
+		to.setCity("city");
+		assertEquals("city",to.getCity());
+	}
 }

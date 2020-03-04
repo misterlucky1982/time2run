@@ -4,9 +4,11 @@ import java.util.List;
 
 public class ClubInfoTO implements InfoTO{
 	
+	private String clubLogo;
 	private String clubName;
 	private String email;
 	private String phone;
+	private String city;
 	private int amountOfRunners;
 	private String firstRace;
 	private String linkToFirstRace;
@@ -141,5 +143,29 @@ public class ClubInfoTO implements InfoTO{
 	public void setRaceResults(List<ExtendedInfoTOList<NamedInfoTOList<ClubRunnerResultInfoTO>>> raceResults) {
 		this.raceResults = raceResults;
 	}
-	
+	/**
+	 * @return the clubLogo
+	 */
+	public String getClubLogo() {
+		return clubLogo;
+	}
+	/**
+	 * @param clubLogo the clubLogo to set
+	 */
+	public void setClubLogo(String clubLogo) {
+		this.clubLogo = clubLogo;
+	}
+	/**
+	 * @return the city
+	 */
+	public String getCity() {
+		return city;
+	}
+	/**
+	 * @param city the city to set
+	 */
+	public void setCity(String city) {
+		this.city = city;
+	}
+
 }

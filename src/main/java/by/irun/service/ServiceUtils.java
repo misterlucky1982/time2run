@@ -16,6 +16,7 @@ import by.irun.locale.Translator;
 import by.irun.viz.to.ClubRunnerResultInfoTO;
 import by.irun.viz.to.ExtendedInfoTOList;
 import by.irun.viz.to.NamedInfoTOList;
+import by.irun.viz.to.ParkBestResultInfoTO;
 import by.irun.viz.utils.VizUtils;
 
 /**
@@ -37,7 +38,7 @@ public class ServiceUtils {
 	 * @param map
 	 * @param to
 	 */
-	public static void checkBestResultsInPark(Map<String, Map<Gender, RaceClubResultTO>> map, RaceClubResultTO to) {
+	private static void checkBestResultsInPark(Map<String, Map<Gender, RaceClubResultTO>> map, RaceClubResultTO to) {
 		if (map.get(to.getParkName()) == null) {
 			Map<Gender, RaceClubResultTO> genderMap = new HashMap<>();
 			genderMap.put(to.getGender(), to);
@@ -151,5 +152,30 @@ public class ServiceUtils {
 		resultInfoTO.setPosition(Integer.toString(to.getPositionInGenderGroup()));
 		resultInfoTO.setTime(VizUtils.convertNumberOfSecondsToTimeRepresentation(to.getTimeInSeconds()));
 		return resultInfoTO;
+	}
+	
+	/**
+	 * Generates List of ParkBestResultInfoTO for given List<RaceClubResultTO>
+	 * @param list
+	 * @param locale
+	 * @return List
+	 */
+	public static List<ParkBestResultInfoTO> getParkBestResultInfoTOList(List<RaceClubResultTO> list, Locale locale) {
+		Map<String, Map<Gender, RaceClubResultTO>> parkBestResultMap = new HashMap<>();
+		for (RaceClubResultTO rto : list) {
+			checkBestResultsInPark(parkBestResultMap, rto);
+		}
+		List<ParkBestResultInfoTO> result = new ArrayList<>();
+		for (String park : parkBestResultMap.keySet()) {
+			ParkBestResultInfoTO bestResultTO = new ParkBestResultInfoTO();
+			bestResultTO.setParkName(park);
+			List<String> bestResultStrings = new ArrayList<>();
+			for (RaceClubResultTO resultTO : parkBestResultMap.get(park).values()) {
+				bestResultStrings.add(VizUtils.buildRaceResultStringForBestResultReport(resultTO, locale));
+			}
+			bestResultTO.setBestResults(bestResultStrings);
+			result.add(bestResultTO);
+		}
+		return result;
 	}
 }

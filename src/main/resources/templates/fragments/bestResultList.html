@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" th:href="@{/css/clubInfo/bestResults_styles.css}" />
+</head>
+<body>
+	<div th:fragment="bestResult">
+		<table>
+			<tr>
+				<th th:text="${parkBestResult.parkName}"></th>
+			</tr>
+			<tr th:each="result : ${parkBestResult.bestResults}">
+				<td th:text="${result}"></td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>
