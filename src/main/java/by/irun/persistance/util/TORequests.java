@@ -1,4 +1,4 @@
-package by.irun.viz.to;
+package by.irun.persistance.util;
 
 /**
  * Utility class for operations with request`s result sets
