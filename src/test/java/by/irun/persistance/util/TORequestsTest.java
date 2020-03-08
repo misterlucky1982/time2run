@@ -1,10 +1,10 @@
-package by.irun.viz.to;
+package by.irun.persistance.util;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import by.irun.viz.to.TORequests;
+import by.irun.persistance.util.TORequests;
 
 public class TORequestsTest {
 	private static final String RACE_RESULT_TO_REQUEST = "SELECT RS.POSITION AS POSITION"

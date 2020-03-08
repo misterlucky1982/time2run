@@ -17,9 +17,9 @@ import by.irun.domain.to.RaceClubResultTO;
 import by.irun.domain.to.RunnerResultTO;
 import by.irun.domain.to.RunnerTO;
 import by.irun.persistance.util.GenderConverter;
+import by.irun.persistance.util.TORequests;
 import by.irun.viz.to.RaceInfoTO;
 import by.irun.viz.to.RaceResultTO;
-import by.irun.viz.to.TORequests;
 import by.irun.viz.utils.VizUtils;
 
 /**
