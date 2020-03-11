@@ -10,6 +10,8 @@ public class RunnerRaceResultTO {
 	private String club;
 	private Date dateOfBirth;
 	private Integer timeInSeconds;
+	private Long runnerId;
+	private String smallAvatar;
 	/**
 	 * @return the position
 	 */
@@ -81,6 +83,30 @@ public class RunnerRaceResultTO {
 	 */
 	public void setTimeInSeconds(Integer timeInSeconds) {
 		this.timeInSeconds = timeInSeconds;
+	}
+	/**
+	 * @return the runnerId
+	 */
+	public Long getRunnerId() {
+		return runnerId;
+	}
+	/**
+	 * @param runnerId the runnerId to set
+	 */
+	public void setRunnerId(Long runnerId) {
+		this.runnerId = runnerId;
+	}
+	/**
+	 * @return the smallAvatar
+	 */
+	public String getSmallAvatar() {
+		return smallAvatar;
+	}
+	/**
+	 * @param smallAvatar the smallAvatar to set
+	 */
+	public void setSmallAvatar(String smallAvatar) {
+		this.smallAvatar = smallAvatar;
 	}
 	
 	

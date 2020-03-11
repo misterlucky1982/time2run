@@ -60,4 +60,17 @@ public class RunnerRaceResultTOTest {
 		assertEquals(Integer.valueOf(5),to.getTimeInSeconds());
 	}
 
+	@Test
+	public void smallAvatarTest(){
+		assertNull(to.getSmallAvatar());
+		to.setSmallAvatar("avatar");
+		assertEquals("avatar",to.getSmallAvatar());
+	}
+	
+	@Test
+	public void runnerIdTest(){
+		assertNull(to.getRunnerId());
+		to.setRunnerId(1L);
+		assertEquals(Long.valueOf(1),to.getRunnerId());
+	}
 }
