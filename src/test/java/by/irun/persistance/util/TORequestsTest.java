@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import by.irun.domain.Gender;
 import by.irun.persistance.util.TORequests;
 
 public class TORequestsTest {
@@ -41,6 +42,15 @@ public class TORequestsTest {
 	
 	private static final String RACE_TO_REQUEST = "SELECT RC.ID AS RACE_ID, RC.DATE AS RACE_DATE, "
 			+ "PK.NAME AS PARK_NAME FROM RACES RC INNER JOIN PARKS PK ON RC.PARK=PK.ID WHERE RC.ID=";
+
+	private final static String RUNNERRACERESULTREQUESTFORMEN = "SELECT RS.POSITION AS POSITION, RN.FIRSTNAME AS FIRSTNAME, "
+			+ "RN.LASTNAME AS LASTNAME, CL.NAME AS CLUBNAME, CL.SMALLLOGO AS CLUBLOGO, CL.ID AS CLUBID, RN.DATEOFBIRTH "
+			+ "AS DATEOFBIRTH, RS.TIME AS TIME, RN.ID AS RUNNERID, RN.LOGO AS AVATAR FROM RESULTS RS LEFT JOIN RUNNERS "
+			+ "RN ON RS.RUNNER=RN.ID LEFT JOIN CLUBS CL ON RS.CLUB=CL.ID WHERE RS.RACE = 223 AND RS.GENDER = 'M'";
+	private final static String RUNNERRACERESULTREQUESTFORWOMEN = "SELECT RS.POSITION AS POSITION, RN.FIRSTNAME AS FIRSTNAME, "
+			+ "RN.LASTNAME AS LASTNAME, CL.NAME AS CLUBNAME, CL.SMALLLOGO AS CLUBLOGO, CL.ID AS CLUBID, RN.DATEOFBIRTH "
+			+ "AS DATEOFBIRTH, RS.TIME AS TIME, RN.ID AS RUNNERID, RN.LOGO AS AVATAR FROM RESULTS RS LEFT JOIN RUNNERS "
+			+ "RN ON RS.RUNNER=RN.ID LEFT JOIN CLUBS CL ON RS.CLUB=CL.ID WHERE RS.RACE = 223 AND RS.GENDER = 'F'";
 
 	/**
 	 * request test for RaceResultTO
@@ -102,6 +112,14 @@ public class TORequestsTest {
 	public void raceTORequestTest(){
 		String request = TORequests.raceTORequest(1);
 		assertEquals(RACE_TO_REQUEST+1,request);
+	}
+	
+	@Test
+	public void runnerRaceResultTORequestTest(){
+		String requestForMale = TORequests.runnerRaceResultTORequest(223, Gender.MALE);
+		String requestForWomen = TORequests.runnerRaceResultTORequest(223, Gender.FEMALE);
+		assertEquals(RUNNERRACERESULTREQUESTFORMEN,requestForMale);
+		assertEquals(RUNNERRACERESULTREQUESTFORWOMEN,requestForWomen);
 	}
 	
 }
