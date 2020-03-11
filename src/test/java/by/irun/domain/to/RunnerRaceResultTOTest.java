@@ -73,4 +73,18 @@ public class RunnerRaceResultTOTest {
 		to.setRunnerId(1L);
 		assertEquals(Long.valueOf(1),to.getRunnerId());
 	}
+	
+	@Test
+	public void clubIdTest(){
+		assertNull(to.getClubId());
+		to.setClubId(1L);
+		assertEquals(Long.valueOf(1),to.getClubId());
+	}
+	
+	@Test
+	public void clubLogoTest(){
+		assertNull(to.getClubLogo());
+		to.setClubLogo("logo");
+		assertEquals("logo",to.getClubLogo());
+	}
 }
