@@ -11,9 +11,11 @@ import org.springframework.stereotype.Component;
 
 import by.irun.config.ApplicationConstants;
 import by.irun.dao.IDataProvider;
+import by.irun.domain.Gender;
 import by.irun.domain.to.ClubRunnerTO;
 import by.irun.domain.to.ClubTO;
 import by.irun.domain.to.RaceClubResultTO;
+import by.irun.domain.to.RunnerRaceResultTO;
 import by.irun.domain.to.RunnerResultTO;
 import by.irun.domain.to.RunnerTO;
 import by.irun.persistance.util.GenderConverter;
@@ -227,6 +229,36 @@ public class DataProvider implements IDataProvider{
 			result.add(to);
 		}
 		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see by.irun.dao.IDataProvider#getRunnerRaceResultList(long raceId, Gender gender)
+	 */
+	@Override
+	public List<RunnerRaceResultTO> getRunnerRaceResultList(long raceId, Gender gender) throws SQLException {
+		try {
+			SqlRowSet rowSet = jdbcTemplate.queryForRowSet(TORequests.runnerRaceResultTORequest(raceId, gender));
+			List<RunnerRaceResultTO> list = new ArrayList<>();
+			while (rowSet.next()) {
+				RunnerRaceResultTO to = new RunnerRaceResultTO();
+				to.setPosition(rowSet.getInt(TORequests.POSITION));
+				to.setFirstName(rowSet.getString(TORequests.FIRSTNAME));
+				to.setLastName(rowSet.getString(TORequests.LASTNAME));
+				to.setClub(rowSet.getString(TORequests.CLUB));
+				to.setClubLogo(rowSet.getString(TORequests.CLUBLOGO));
+				to.setClubId(rowSet.getLong(TORequests.CLUBID));
+				to.setDateOfBirth(rowSet.getDate(TORequests.DATEOFBIRTH));
+				to.setTimeInSeconds(rowSet.getInt(TORequests.TIME));
+				to.setRunnerId(rowSet.getLong(TORequests.RUNNERID));
+				to.setSmallAvatar(rowSet.getString(TORequests.AVATAR));
+				list.add(to);
+			}
+			return list;
+		} catch (RuntimeException e) {
+			throw new SQLException(e);
+		}
 	}
 
 }
