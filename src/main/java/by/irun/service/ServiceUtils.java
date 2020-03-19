@@ -203,7 +203,7 @@ public class ServiceUtils {
 			to.setClub(VizUtils.resolveClubName(resultTO.getClub(), resultTO.getRunnerId(), locale));
 			to.setClubLogo(VizUtils.resolveClubSmallLogo(resultTO.getClubLogo(), resultTO.getClub(), resultTO.getRunnerId(), locale));
 			if(to.getClubLogo()==null){
-				to.setAltLogo(resultTO.getClub());
+				to.setAltLogo(VizUtils.clubNameFirstLettersForClubClogo(resultTO.getClub()));
 			}
 			to.setLinkToClub(VizUtils.resolveClubLink(resultTO.getClubId()));
 			to.setDateOfBirth(VizUtils.convertSqlDateToFrontEndRepresentation(resultTO.getDateOfBirth()));
