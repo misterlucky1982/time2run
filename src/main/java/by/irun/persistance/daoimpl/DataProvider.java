@@ -15,6 +15,7 @@ import by.irun.domain.Gender;
 import by.irun.domain.to.ClubRunnerTO;
 import by.irun.domain.to.ClubTO;
 import by.irun.domain.to.RaceClubResultTO;
+import by.irun.domain.to.RaceTO;
 import by.irun.domain.to.RunnerRaceResultTO;
 import by.irun.domain.to.RunnerResultTO;
 import by.irun.domain.to.RunnerTO;
@@ -246,7 +247,7 @@ public class DataProvider implements IDataProvider{
 				to.setPosition(rowSet.getInt(TORequests.POSITION));
 				to.setFirstName(rowSet.getString(TORequests.FIRSTNAME));
 				to.setLastName(rowSet.getString(TORequests.LASTNAME));
-				to.setClub(rowSet.getString(TORequests.CLUB));
+				to.setClub(rowSet.getString(TORequests.CLUBNAME));
 				to.setClubLogo(rowSet.getString(TORequests.CLUBLOGO));
 				to.setClubId(rowSet.getLong(TORequests.CLUBID));
 				to.setDateOfBirth(rowSet.getDate(TORequests.DATEOFBIRTH));
@@ -259,6 +260,28 @@ public class DataProvider implements IDataProvider{
 		} catch (RuntimeException e) {
 			throw new SQLException(e);
 		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see by.irun.dao.IDataProvider#getRaceTOforRaceId (long raceId)
+	 */
+	@Override
+	public RaceTO getRaceTOforRaceId(long raceId) throws SQLException {
+		RaceTO to = null;
+		try {
+			SqlRowSet rowSet = jdbcTemplate.queryForRowSet(TORequests.raceTORequest(raceId));
+			if (rowSet.next()) {
+				to = new RaceTO();
+				to.setDate(rowSet.getDate(TORequests.RACE_DATE));
+				to.setParkName(rowSet.getString(TORequests.PARK_NAME));
+			} else
+				throw new SQLException("empty resultSet for race id:" + raceId);
+		} catch (RuntimeException e) {
+			throw new SQLException(e);
+		}
+		return to;
 	}
 
 }

@@ -4,6 +4,8 @@
 package by.irun.viz.utils;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.sql.Date;
 
@@ -15,6 +17,7 @@ import by.irun.domain.Runner;
 import by.irun.domain.to.RunnerTO;
 import by.irun.locale.AppLocales;
 import by.irun.locale.Internationalizer;
+import by.irun.locale.Translator;
 import by.irun.viz.to.RunnerInfoTO;
 import by.irun.viz.utils.VizUtils;
 
@@ -146,5 +149,56 @@ public class VizUtilsTest {
 		assertEquals("name "+translationBY,VizUtils.buildRaceName("name", d, AppLocales.BY));
 		assertEquals("name "+translationRU,VizUtils.buildRaceName("name", d, AppLocales.RU));
 		assertEquals("name "+translationEN,VizUtils.buildRaceName("name", d, AppLocales.EN));
+	}
+	
+	/**
+	 *  test for {@link VizUtils#isValidId(Long)}
+	 */
+	@Test
+	public void isValidIdTest(){
+		assertFalse(VizUtils.isValidId(null));
+		assertFalse(VizUtils.isValidId(0L));
+		assertFalse(VizUtils.isValidId(-1L));
+		assertTrue(VizUtils.isValidId(1L));
+	}
+	
+	@Test
+	public void resolveClubNameTestForUnknown(){
+		String nameBy = Internationalizer.translate(Translator.KEY_UNKNOWN, AppLocales.BY);
+		String nameRu = Internationalizer.translate(Translator.KEY_UNKNOWN, AppLocales.RU);
+		String nameEn = Internationalizer.translate(Translator.KEY_UNKNOWN, AppLocales.EN);
+		assertEquals(nameBy,VizUtils.resolveClubName(null, null, AppLocales.BY));
+		assertEquals(nameRu,VizUtils.resolveClubName(null, null, AppLocales.RU));
+		assertEquals(nameEn,VizUtils.resolveClubName(null, null, AppLocales.EN));
+	}
+	
+	@Test
+	public void resolveClubNameTestForWithoutClub(){
+		String nameBy = Internationalizer.translate(Translator.KEY_WITHOUTCLUB, AppLocales.BY);
+		String nameRu = Internationalizer.translate(Translator.KEY_WITHOUTCLUB, AppLocales.RU);
+		String nameEn = Internationalizer.translate(Translator.KEY_WITHOUTCLUB, AppLocales.EN);
+		assertEquals(nameBy,VizUtils.resolveClubName(null, 1L, AppLocales.BY));
+		assertEquals(nameRu,VizUtils.resolveClubName(null, 1L, AppLocales.RU));
+		assertEquals(nameEn,VizUtils.resolveClubName(null, 1L, AppLocales.EN));
+	}
+	
+	@Test
+	public void resolveClubNameTestForDefinedNameb(){
+		assertEquals("name",VizUtils.resolveClubName("name", 1L, AppLocales.BY));
+		assertEquals("name",VizUtils.resolveClubName("name", 1L, AppLocales.RU));
+		assertEquals("name",VizUtils.resolveClubName("name", 1L, AppLocales.EN));
+	}
+	
+	@Test
+	public void clubNameFirstLettersForClubClogoTest() {
+		assertEquals("Mi", VizUtils.clubNameFirstLettersForClubClogo("Minskrun"));
+		assertEquals("IB", VizUtils.clubNameFirstLettersForClubClogo("Irun Brest"));
+		assertEquals("B2", VizUtils.clubNameFirstLettersForClubClogo("B2"));
+		assertEquals("Б2", VizUtils.clubNameFirstLettersForClubClogo("Би-2"));
+		assertEquals("Q", VizUtils.clubNameFirstLettersForClubClogo("Q"));
+		assertEquals("B2", VizUtils.clubNameFirstLettersForClubClogo("B2"));
+		assertEquals("B2", VizUtils.clubNameFirstLettersForClubClogo("B 22"));
+		assertEquals("Bi", VizUtils.clubNameFirstLettersForClubClogo("Bit 22"));
+		assertEquals("B2", VizUtils.clubNameFirstLettersForClubClogo("Bi 22"));
 	}
 }

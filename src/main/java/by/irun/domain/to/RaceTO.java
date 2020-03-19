@@ -13,8 +13,6 @@ public class RaceTO {
 	
 	private Date date;
 
-	private Long raceId;
-
 	/**
 	 * @return the parkName
 	 */
@@ -41,20 +39,6 @@ public class RaceTO {
 	 */
 	public void setDate(Date date) {
 		this.date = date;
-	}
-
-	/**
-	 * @return the raceId
-	 */
-	public Long getRaceId() {
-		return raceId;
-	}
-
-	/**
-	 * @param raceId the raceId to set
-	 */
-	public void setRaceId(Long raceId) {
-		this.raceId = raceId;
 	}
 	
 	

@@ -14,4 +14,5 @@ public interface Translator {
 	public static final String DUALPOINT = ":";
 	public static final String SPACE = " ";
 	public static final String HYPHEN = "-";
+	public static final String UNKNOWN_PARTICIPANT = "unknownParticipant";
 }

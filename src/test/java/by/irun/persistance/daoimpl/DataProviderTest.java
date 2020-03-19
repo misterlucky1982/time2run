@@ -23,6 +23,7 @@ import by.irun.domain.Gender;
 import by.irun.domain.to.ClubRunnerTO;
 import by.irun.domain.to.ClubTO;
 import by.irun.domain.to.RaceClubResultTO;
+import by.irun.domain.to.RaceTO;
 import by.irun.domain.to.RunnerRaceResultTO;
 import by.irun.domain.to.RunnerResultTO;
 import by.irun.domain.to.RunnerTO;
@@ -716,5 +717,66 @@ public class DataProviderTest {
 		PowerMock.verifyAll();
 		assertNotNull(list);
 		assertTrue(list.size() == 0);
+	}
+	
+	@Test
+	public void getRaceTOTest(){
+		Date date = Date.valueOf("2000-01-01");
+		String park = "park";
+		SqlRowSet rowSet = PowerMock.createMock(org.springframework.jdbc.support.rowset.SqlRowSet.class);
+		EasyMock.expect(jdbcTemplate.queryForRowSet(TORequests.raceTORequest(333))).andReturn(rowSet);
+		DataProvider provider = new DataProvider();
+		Whitebox.setInternalState(provider, "jdbcTemplate", jdbcTemplate);
+		EasyMock.expect(rowSet.next()).andReturn(true);
+		EasyMock.expect(rowSet.getDate(TORequests.RACE_DATE)).andReturn(date);
+		EasyMock.expect(rowSet.getString(TORequests.PARK_NAME)).andReturn(park);
+		PowerMock.replayAll();
+		RaceTO to = null;
+		try {
+			to = provider.getRaceTOforRaceId(333);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		PowerMock.verifyAll();
+		assertNotNull(to);
+		assertEquals(date,to.getDate());
+		assertEquals(park,to.getParkName());
+	}
+	
+	@Test
+	public void getRaceTOTestForEmptyResultSet() {
+		SqlRowSet rowSet = PowerMock.createMock(org.springframework.jdbc.support.rowset.SqlRowSet.class);
+		EasyMock.expect(jdbcTemplate.queryForRowSet(TORequests.raceTORequest(333))).andReturn(rowSet);
+		DataProvider provider = new DataProvider();
+		Whitebox.setInternalState(provider, "jdbcTemplate", jdbcTemplate);
+		EasyMock.expect(rowSet.next()).andReturn(false);
+		PowerMock.replayAll();
+		RaceTO to = null;
+		String exceptionMessage = null;
+		try {
+			to = provider.getRaceTOforRaceId(333);
+		} catch (SQLException e) {
+			exceptionMessage = e.getMessage();
+			e.printStackTrace();
+		}
+		PowerMock.verifyAll();
+		assertEquals("empty resultSet for race id:333", exceptionMessage);
+		assertNull(to);
+	}
+	
+	@Test
+	public void getRaceTOTestWithExceptionTest() {
+		EasyMock.expect(jdbcTemplate.queryForRowSet(TORequests.raceTORequest(333))).andThrow(new RuntimeException());
+		DataProvider provider = new DataProvider();
+		Whitebox.setInternalState(provider, "jdbcTemplate", jdbcTemplate);
+		PowerMock.replayAll();
+		RaceTO to = null;
+		try {
+			to = provider.getRaceTOforRaceId(333);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		PowerMock.verifyAll();
+		assertNull(to);
 	}
 }

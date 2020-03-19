@@ -7,6 +7,7 @@ import by.irun.viz.to.ClubInfoTO;
 import by.irun.viz.to.RaceInfoTO;
 import by.irun.viz.to.RaceResultTO;
 import by.irun.viz.to.RunnerInfoTO;
+import by.irun.viz.to.racepage.RaceResultInfoTO;
 /**
  * Provides functionality for transformation data stored in DB into front-end representation
  * @author A.Dubovik
@@ -48,5 +49,12 @@ public interface IDataService {
 	 * @return
 	 */
 	ClubInfoTO getClubInfoTO(long clubId, Locale locale);
+	
+	/**
+	 * Provides RaceResultInfoTO for given id of {@link by.irun.domain.Race}
+	 * @param raceId
+	 * @return
+	 */
+	RaceResultInfoTO getRaceResultInfoTO(long raceId, Locale locale);
 
 }

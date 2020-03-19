@@ -13,6 +13,7 @@ public class RunnerResultInfoTO implements InfoTO{
 	private String linkToRunner;
 	private String club;
 	private String clubLogo;
+	private String altLogo;
 	private String linkToClub;
 	private String dateOfBirth;
 	private String time;
@@ -113,6 +114,17 @@ public class RunnerResultInfoTO implements InfoTO{
 	public void setTime(String time) {
 		this.time = time;
 	}
+	/**
+	 * @return the altLogo
+	 */
+	public String getAltLogo() {
+		return altLogo;
+	}
+	/**
+	 * @param altLogo the altLogo to set
+	 */
+	public void setAltLogo(String altLogo) {
+		this.altLogo = altLogo;
+	}
 	
-
 }

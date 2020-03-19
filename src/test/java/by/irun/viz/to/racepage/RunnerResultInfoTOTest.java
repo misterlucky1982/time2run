@@ -70,5 +70,12 @@ public class RunnerResultInfoTOTest {
 		to.setTime("time");
 		assertEquals("time",to.getTime());
 	}
+	
+	@Test
+	public void altLogoTest(){
+		assertNull(to.getAltLogo());
+		to.setAltLogo("alt");
+		assertEquals("alt",to.getAltLogo());
+	}
 
 }

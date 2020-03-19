@@ -24,13 +24,6 @@ public class RaceTOTest {
 	}
 	
 	@Test
-	public void raceIdTest(){
-		assertNull(to.getRaceId());
-		to.setRaceId(1L);
-		assertEquals(Long.valueOf(1),to.getRaceId());
-	}
-	
-	@Test
 	public void parkNameTest(){
 		assertNull(to.getParkName());
 		to.setParkName("name");

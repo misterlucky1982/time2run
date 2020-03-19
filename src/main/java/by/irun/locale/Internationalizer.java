@@ -44,6 +44,9 @@ public class Internationalizer implements Translator{
 		by.put(KEY_AMONG_WOMEN, "сярод жанчын");
 		ru.put(KEY_AMONG_WOMEN, "среди женщин");
 		en.put(KEY_AMONG_WOMEN, "among women");
+		by.put(UNKNOWN_PARTICIPANT, "Невядомы ўдзельнік");
+		ru.put(UNKNOWN_PARTICIPANT, "Неизвестный участник");
+		en.put(UNKNOWN_PARTICIPANT, "Unknown participant");
 		
 		TRANSLATIONS.put(AppLocales.BY, by);
 		TRANSLATIONS.put(AppLocales.RU, ru);

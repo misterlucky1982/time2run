@@ -4,7 +4,6 @@ import java.sql.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-
 import by.irun.controller.ControllerConstants;
 import by.irun.domain.Gender;
 import by.irun.domain.to.RaceClubResultTO;
@@ -23,6 +22,7 @@ import by.irun.viz.to.RunnerResultInfoTO;
  */
 public class VizUtils implements Translator{
 	
+	
 	public static final String EMPTY_LINK = "#";
 	private static final Map<Gender, Map<Locale, String>> AVATAR_MAP;
 	static {
@@ -40,6 +40,7 @@ public class VizUtils implements Translator{
 	}
 	
 	private static final String CLUB_NO_LOGO = "clubNoLogo";
+	private static final String WITHOUT_CLUB_LOGO = "withoutClubLogo";
 	
 	private static final Map<Locale, Map<String, String>> PATH_MAP;
 	static {
@@ -50,6 +51,9 @@ public class VizUtils implements Translator{
 		en.put(CLUB_NO_LOGO, VizConstants.CLUBLOGO_IS_NOT_UPLOADED_EN);
 		ru.put(CLUB_NO_LOGO, VizConstants.CLUBLOGO_IS_NOT_UPLOADED_RU);
 		by.put(CLUB_NO_LOGO, VizConstants.CLUBLOGO_IS_NOT_UPLOADED_BY);
+		en.put(WITHOUT_CLUB_LOGO, VizConstants.NO_CLUB_LOGO_EN);
+		ru.put(WITHOUT_CLUB_LOGO, VizConstants.NO_CLUB_LOGO_RU);
+		by.put(WITHOUT_CLUB_LOGO, VizConstants.NO_CLUB_LOGO_BY);
 		PATH_MAP.put(AppLocales.BY, by);
 		PATH_MAP.put(AppLocales.RU, ru);
 		PATH_MAP.put(AppLocales.EN, en);
@@ -135,7 +139,7 @@ public class VizUtils implements Translator{
 	 * @return link
 	 */
 	public static String resolveClubLink(Long id){
-		return id==null?EMPTY_LINK:ControllerConstants.CLUB_LINK+id;
+		return !isValidId(id)?EMPTY_LINK:ControllerConstants.CLUB_LINK+id;
 	}
 	
 	/**
@@ -154,7 +158,7 @@ public class VizUtils implements Translator{
 	 * @return link to race
 	 */
 	public static String resolveRaceLink(Long id){
-		return id==null?EMPTY_LINK:ControllerConstants.RACE_LINK+id;
+		return !isValidId(id)?EMPTY_LINK:ControllerConstants.RACE_LINK+id;
 	}
 	
 	/**
@@ -213,5 +217,86 @@ public class VizUtils implements Translator{
 		return Internationalizer.translate(to.getGender() == Gender.FEMALE ? KEY_AMONG_WOMEN : KEY_AMONG_MEN, locale)
 				+ DUALPOINT + SPACE + concatName(to.getRunnerFirstName(), to.getRunnerLastName()) + SPACE + HYPHEN
 				+ convertNumberOfSecondsToTimeRepresentation(to.getTimeInSeconds());
+	}
+	
+	/**
+	 * Returns link to runner`s page for given runner id
+	 * @param runnerId
+	 * @return
+	 */
+	public static String resolveRunnerPageLink(long runnerId){
+		//TODO
+		return null;
+	}
+	
+	/**
+	 * Resolves source path for small club`s avatar
+	 * 
+	 * @param logo
+	 * @return
+	 */
+	public static String resolveClubSmallLogo(String logo, String clubName, Long id, Locale locale) {
+		return !isValidId(id) ? VizConstants.UNKNOWN_CLUB_LOGO
+				: clubName != null ? (logo != null ? logo : null)
+						: PATH_MAP.get(locale).get(WITHOUT_CLUB_LOGO);
+	}
+
+
+	/**
+	 * 
+	 * @param clubName
+	 * @param runnerId
+	 * @param locale
+	 * @return
+	 */
+	public static String resolveClubName(String clubName, Long runnerId, Locale locale) {
+		if (clubName == null) {
+			if (!isValidId(runnerId)) {
+				return Internationalizer.translate(KEY_UNKNOWN, locale);
+			} else
+				return Internationalizer.translate(KEY_WITHOUTCLUB, locale);
+		} else
+			return clubName;
+	}
+	
+	/**
+	 * id should be valid
+	 * returns false if id<=0L or id==null and true if another
+	 * @param id
+	 * @return boolean
+	 */
+	public static boolean isValidId(Long id) {
+		return id == null ? false : id <= 0 ? false : true;
+	}
+	
+	/**
+	 * returns String for default club`s logo
+	 * <p>
+	 * Returns first letters for one-word`s name
+	 * <p>
+	 * Or first letters for complex name
+	 * Examples:
+     * <blockquote><pre>
+     * "MinskRun" - returns "Mi"
+     * "Irun Brest" - returns "IB"
+     * "Run 1990" - returns "Ru"
+     * "Bi-2" - returns "B2"
+     * </pre></blockquote>
+	 * @param clubName
+	 * @return
+	 */
+	public static String clubNameFirstLettersForClubClogo(String clubName) {
+		if (clubName.length() <= 2)
+			return clubName;
+		String regex = clubName.indexOf("-") == -1 ? " " : "-";
+		StringBuilder sb = new StringBuilder();
+		String words[] = clubName.split(regex);
+		if (words.length > 1) {
+			sb.append(Character.toUpperCase(words[0].charAt(0)));
+			sb.append(Character.isDigit(words[1].charAt(0)) && words[0].length() > 2
+					? Character.toLowerCase(words[0].charAt(1)) : Character.toUpperCase(words[1].charAt(0)));
+		} else
+			sb.append(clubName.substring(0, 2));
+		return sb.toString();
 	}
 }

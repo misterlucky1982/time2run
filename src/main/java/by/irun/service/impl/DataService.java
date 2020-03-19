@@ -1,14 +1,10 @@
 package by.irun.service.impl;
 
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +15,8 @@ import by.irun.domain.Gender;
 import by.irun.domain.to.ClubRunnerTO;
 import by.irun.domain.to.ClubTO;
 import by.irun.domain.to.RaceClubResultTO;
+import by.irun.domain.to.RaceTO;
+import by.irun.domain.to.RunnerRaceResultTO;
 import by.irun.domain.to.RunnerResultTO;
 import by.irun.domain.to.RunnerTO;
 import by.irun.locale.AppLocales;
@@ -33,6 +31,7 @@ import by.irun.viz.to.RaceInfoTO;
 import by.irun.viz.to.RaceResultTO;
 import by.irun.viz.to.RunnerInfoTO;
 import by.irun.viz.to.RunnerResultInfoTO;
+import by.irun.viz.to.racepage.RaceResultInfoTO;
 import by.irun.viz.utils.VizUtils;
 /**
  * 
@@ -157,4 +156,31 @@ public class DataService implements IDataService{
 		return clubInfoTO;
 	}
 
+	/* (non-Javadoc)
+	 * @see by.irun.service.IDataService#getRaceResultInfoTO(long raceId, Locale locale)
+	 */
+	@Override
+	public RaceResultInfoTO getRaceResultInfoTO(long raceId, Locale locale) {
+		RaceTO raceTO = null;
+		List<RunnerRaceResultTO> mensResult = null;
+		List<RunnerRaceResultTO> womenResult = null;
+		try {
+			raceTO = dataProvider.getRaceTOforRaceId(raceId);
+			mensResult = dataProvider.getRunnerRaceResultList(raceId, Gender.MALE);
+			womenResult = dataProvider.getRunnerRaceResultList(raceId, Gender.FEMALE);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		if (raceTO == null || mensResult == null || womenResult == null) {
+			return null;
+		} else {
+			RaceResultInfoTO result = new RaceResultInfoTO();
+			result.setRaceName(VizUtils.buildRaceName(raceTO.getParkName(), raceTO.getDate(), locale));
+			result.setMenResult(ServiceUtils.resolveRunnerResultList(mensResult, locale));
+			result.setWomenResult(ServiceUtils.resolveRunnerResultList(womenResult, locale));
+			return result;
+		}
+	}
+	
 }
