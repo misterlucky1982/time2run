@@ -1,4 +1,4 @@
-package by.irun.viz.to;
+package by.irun.persistance.util;
 
 /**
  * Utility class for operations with request`s result sets
@@ -72,6 +72,9 @@ public class TORequests {
 	private static final String CLUB_RUNNER_TO_LIST_REQUEST = "SELECT RN.FIRSTNAME AS " + FIRSTNAME + ", "
 			+ "RN.LASTNAME AS " + LASTNAME + ", RN.AVATAR AS " + AVATAR +  ", RN.GENDER AS "+GENDER+", RN.ID AS " + RUNNERID
 			+ " FROM RUNNERS RN WHERE RN.CLUB = ";
+	
+	private static final String RACE_TO_REQUEST = "SELECT RC.ID AS " + RACE_ID + ", RC.DATE AS " + RACE_DATE
+			+ ", PK.NAME AS " + PARK_NAME + " FROM RACES RC INNER JOIN PARKS PK ON RC.PARK=PK.ID WHERE RC.ID=";
 
 	public static String raceResultRequest(long raceId) {
 		return RACE_RESULT_TO_REQUEST + raceId;
@@ -132,5 +135,14 @@ public class TORequests {
 	 */
 	public static String clubRunnerTOListReqyest(long clubId){
 		return CLUB_RUNNER_TO_LIST_REQUEST+clubId;
+	}
+	
+	/**
+	 * returns sql-request for RaceTO
+	 * @param raceId
+	 * @return
+	 */
+	public static String raceTORequest(long raceId) {
+		return RACE_TO_REQUEST + raceId;
 	}
 }
