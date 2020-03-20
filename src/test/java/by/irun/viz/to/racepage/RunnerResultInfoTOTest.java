@@ -78,4 +78,10 @@ public class RunnerResultInfoTOTest {
 		assertEquals("alt",to.getAltLogo());
 	}
 
+	@Test
+	public void smallAvatarTest(){
+		assertNull(to.getSmallAvatar());
+		to.setSmallAvatar("avatar");
+		assertEquals("avatar",to.getSmallAvatar());
+	}
 }

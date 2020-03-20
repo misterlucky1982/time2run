@@ -11,6 +11,7 @@ public class RunnerResultInfoTO implements InfoTO{
 	private String position;
 	private String name;
 	private String linkToRunner;
+	private String smallAvatar;
 	private String club;
 	private String clubLogo;
 	private String altLogo;
@@ -125,6 +126,18 @@ public class RunnerResultInfoTO implements InfoTO{
 	 */
 	public void setAltLogo(String altLogo) {
 		this.altLogo = altLogo;
+	}
+	/**
+	 * @return the smallAvatar
+	 */
+	public String getSmallAvatar() {
+		return smallAvatar;
+	}
+	/**
+	 * @param smallAvatar the smallAvatar to set
+	 */
+	public void setSmallAvatar(String smallAvatar) {
+		this.smallAvatar = smallAvatar;
 	}
 	
 }
