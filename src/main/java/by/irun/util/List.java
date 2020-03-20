@@ -8,6 +8,12 @@ public class List<T> {
 	
 	private java.util.List<T> list;
 
+	public List(){}
+	
+	public List(java.util.List<T> list){
+		this.list = list;
+	}
+	
 	/**
 	 * @return the list
 	 */

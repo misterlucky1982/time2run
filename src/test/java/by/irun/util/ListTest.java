@@ -19,5 +19,13 @@ public class ListTest {
 		list.setList(listToSet);
 		assertEquals(listToSet,list.getList());
 	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Test
+	public void constructorTest(){
+		java.util.List listToSet = PowerMock.createMock(java.util.List.class);
+		List list = new List(listToSet);
+		assertEquals(listToSet,list.getList());
+	}
 
 }
