@@ -11,6 +11,7 @@ import by.irun.dao.CRUDHandler;
 import by.irun.domain.Club;
 import by.irun.domain.Gender;
 import by.irun.domain.Park;
+import by.irun.domain.Picture;
 import by.irun.domain.Race;
 import by.irun.domain.Result;
 import by.irun.domain.Runner;
@@ -24,6 +25,7 @@ public class Time2Run {
 	public static void main(String[] args) {
 		CRUD = SpringApplication.run(Time2Run.class).getBean(CRUDHandler.class);
 		fillingTestData1();
+		fillingTestData2();
 		System.exit(0);
 	}
 
@@ -531,4 +533,29 @@ public class Time2Run {
 		}
 	}
 
+	private static void fillingTestData2() {
+		try {
+			updateAvatars(32L, "../../images/test/test_woman_01.png", "../../images/test/test_woman_SMALL_01.png");
+			updateAvatars(46L, "../../images/test/test_woman_04.png", "../../images/test/test_woman_SMALL_02.png");
+			updateAvatars(50L, "../../images/test/test_woman_02.png", "../../images/test/test_woman_SMALL_03.png");
+			updateAvatars(33L, "../../images/test/test_man_01.png", "../../images/test/test_man_SMALL_01.png");
+			updateAvatars(37L, "../../images/test/test_man_02.png", "../../images/test/test_man_SMALL_02.png");
+			System.out.println("PICTURES HAS BEEN ADDED");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private static void updateAvatars(Long runnerId, String bigPic, String smallPic) throws SQLException{
+		Runner runner = (Runner) CRUD.getEntityById(Runner.class, runnerId);
+		Picture picBig = new Picture();
+		picBig.setLocation(bigPic);
+		CRUD.add(picBig);;
+		Picture picSmall = new Picture();
+		picSmall.setLocation(smallPic);
+		CRUD.add(picSmall);
+		runner.setAvatar(picBig);
+		runner.setLogo(picSmall);
+		CRUD.update(runner);
+	}
 }
