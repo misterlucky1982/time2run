@@ -18,6 +18,7 @@ public class RunnerResultInfoTO implements InfoTO{
 	private String linkToClub;
 	private String dateOfBirth;
 	private String time;
+	private boolean clubDefined;
 	/**
 	 * @return the position
 	 */
@@ -139,5 +140,18 @@ public class RunnerResultInfoTO implements InfoTO{
 	public void setSmallAvatar(String smallAvatar) {
 		this.smallAvatar = smallAvatar;
 	}
+	/**
+	 * @return the clubDefined
+	 */
+	public boolean isClubDefined() {
+		return clubDefined;
+	}
+	/**
+	 * @param clubDefined the clubDefined to set
+	 */
+	public void setClubDefined(boolean clubDefined) {
+		this.clubDefined = clubDefined;
+	}
+	
 	
 }

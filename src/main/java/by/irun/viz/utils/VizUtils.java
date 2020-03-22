@@ -222,11 +222,15 @@ public class VizUtils implements Translator{
 	/**
 	 * Returns link to runner`s page for given runner id
 	 * @param runnerId
-	 * @return
+	 * @param locale
+	 * @return String link
 	 */
-	public static String resolveRunnerPageLink(long runnerId){
-		//TODO
-		return null;
+	public static String resolveRunnerPageLink(Long runnerId, Locale locale) {
+		return !isValidId(runnerId) ? EMPTY_LINK : buildRunnerPagePath(runnerId, locale);
+	}
+	
+	private static String buildRunnerPagePath(Long runnerId, Locale locale) {
+		return ControllerConstants.RUNNER_LINK + runnerId;
 	}
 	
 	/**
@@ -299,4 +303,11 @@ public class VizUtils implements Translator{
 			sb.append(clubName.substring(0, 2));
 		return sb.toString();
 	}
+	
+	public static String resolveSmallAvatarForRaceResultPage(String avatar, Gender gender) {
+		return avatar != null ? avatar
+				: (gender == Gender.MALE ? VizConstants.RACE_RESULT_NO_AVATAR_MALE
+						: VizConstants.RACE_RESULT_NO_AVATAR_FEMALE);
+	}
+	
 }

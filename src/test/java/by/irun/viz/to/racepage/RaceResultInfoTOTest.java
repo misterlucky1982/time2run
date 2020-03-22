@@ -3,8 +3,6 @@ package by.irun.viz.to.racepage;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
-import java.util.List;
-
 import org.easymock.Mock;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,7 +12,7 @@ public class RaceResultInfoTOTest {
 	private RaceResultInfoTO to;
 	
 	@Mock
-	private List<RunnerResultInfoTO> resultList;
+	private by.irun.util.List<RunnerResultInfoTO> resultList;
 	
 	@Before
 	public void init(){

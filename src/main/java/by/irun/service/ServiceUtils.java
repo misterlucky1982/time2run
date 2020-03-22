@@ -189,7 +189,7 @@ public class ServiceUtils {
 	 * @param list
 	 * @return
 	 */
-	public static List<RunnerResultInfoTO> resolveRunnerResultList(List<RunnerRaceResultTO> list, Locale locale) {
+	public static List<RunnerResultInfoTO> resolveRunnerResultList(List<RunnerRaceResultTO> list, Locale locale, Gender gender) {
 		List<RunnerResultInfoTO> result = new ArrayList<>();
 		list = list.stream().sorted((r1, r2) -> r1.getPosition().compareTo(r2.getPosition()))
 				.collect(Collectors.toList());
@@ -205,10 +205,12 @@ public class ServiceUtils {
 			if(to.getClubLogo()==null){
 				to.setAltLogo(VizUtils.clubNameFirstLettersForClubClogo(resultTO.getClub()));
 			}
+			to.setSmallAvatar(VizUtils.resolveSmallAvatarForRaceResultPage(resultTO.getSmallAvatar(), gender));
 			to.setLinkToClub(VizUtils.resolveClubLink(resultTO.getClubId()));
 			to.setDateOfBirth(VizUtils.convertSqlDateToFrontEndRepresentation(resultTO.getDateOfBirth()));
-			to.setLinkToRunner(VizUtils.resolveRunnerPageLink(resultTO.getRunnerId()));
+			to.setLinkToRunner(VizUtils.resolveRunnerPageLink(resultTO.getRunnerId(), locale));
 			to.setTime(VizUtils.convertNumberOfSecondsToTimeRepresentation(resultTO.getTimeInSeconds()));
+			to.setClubDefined(VizUtils.isValidId(resultTO.getClubId()));
 			result.add(to);
 		}
 		return result;

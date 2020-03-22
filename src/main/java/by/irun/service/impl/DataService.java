@@ -37,10 +37,10 @@ import by.irun.viz.utils.VizUtils;
  * 
  * @author A.Dubovik
  */
+@SuppressWarnings({ "deprecation", "unused" })
 @Service
 public class DataService implements IDataService{
 
-	@SuppressWarnings("unused")
 	@Autowired
 	private IDomainEntityProvider entityProvider;
 	
@@ -177,8 +177,8 @@ public class DataService implements IDataService{
 		} else {
 			RaceResultInfoTO result = new RaceResultInfoTO();
 			result.setRaceName(VizUtils.buildRaceName(raceTO.getParkName(), raceTO.getDate(), locale));
-			result.setMenResult(ServiceUtils.resolveRunnerResultList(mensResult, locale));
-			result.setWomenResult(ServiceUtils.resolveRunnerResultList(womenResult, locale));
+			result.setMenResult(new by.irun.util.List<>(ServiceUtils.resolveRunnerResultList(mensResult, locale, Gender.MALE)));
+			result.setWomenResult(new by.irun.util.List<>(ServiceUtils.resolveRunnerResultList(womenResult, locale, Gender.FEMALE)));
 			return result;
 		}
 	}

@@ -1,0 +1,59 @@
+body .race_resultlist_runnername_link {
+	font-family: 'Tahoma';
+	font-size: 15px;
+	color: rgb(66, 66, 66);
+	text-decoration: none;
+}
+
+body .race_resultlist_position {
+	font-family: 'Niconne';
+	font-weight: bold;
+	font-size: 17px;
+	color: rgb(105, 7, 7);
+}
+
+body .race_resultlist_runnername {
+	text-align: center;
+	width: 300px;
+}
+
+body .race_resultList_avatar {
+	width: 40px;
+}
+
+body .race_resultlist_clublogo{
+	text-align: center;
+}
+
+body .race_resultlist_clublogoimage{
+	width:40px; 
+	height:40px; 
+}
+
+body .race_resultlist_time{
+	width: 80px;
+	text-align: center;
+}
+
+body .race_resultlist_time	.time{
+	font-family: 'Tahoma';
+	font-style: normal;
+	font-weight: 100;
+	font-size: 16px;
+}
+
+body .race_resultlist_clubdefaultlogo {
+	font-family: 'Tahoma';
+	font-style: normal;
+	font-weight: 100;
+	font-size: 20px;
+	padding-top: 6px;
+	background: rgb(217, 230, 230);
+	width:40px; 
+	height:30px; 
+	border-radius:20px;
+	border: 1px solid rgb(185, 185, 185); 
+	display:block; 
+	color: rgb(185, 185, 185);
+	text-decoration: none;
+	}

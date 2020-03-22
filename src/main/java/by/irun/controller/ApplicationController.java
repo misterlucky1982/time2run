@@ -61,8 +61,8 @@ public abstract class ApplicationController {
 		localeResolver.setLocale(request, response, getLocale());
 		RaceResultInfoTO to = dataService.getRaceResultInfoTO(raceId, getLocale());
 		mav.addObject("race", to);
-		mav.setViewName("raceInfo");
-		return null;
+		mav.setViewName("race");
+		return mav;
 	}
 	
 	/**
