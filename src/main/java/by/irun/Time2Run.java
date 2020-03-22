@@ -507,21 +507,28 @@ public class Time2Run {
 	}
 
 	private static void createRace(Park park, Date date, Runner... runners) throws SQLException {
+		createRace(null,park, date, runners);
+	}
+	
+	private static void createRace(Long raceId, Park park, Date date, Runner... runners) throws SQLException {
 		Race race = new Race();
+		if (raceId != null)
+			race.setId(raceId);
 		race.setPark(park);
 		race.setDate(date);
 		CRUD.add(race);
 		int pos = 1;
-		long seconds = (int) (Math.random() * 300)+1000;
+		long seconds = (int) (Math.random() * 300) + 1000;
 		for (Runner r : runners) {
 			Result res = new Result();
 			res.setAbsolutePosition(pos++);
-			res.setGender(r!=null?r.getGender():Math.random()>0.5?Gender.FEMALE:Gender.MALE);
+			res.setGender(r != null ? r.getGender() : Math.random() > 0.5 ? Gender.FEMALE : Gender.MALE);
 			res.setRace(race);
 			res.setTime(Duration.ofSeconds(seconds += (Math.random() * 60)));
-			res.setClub(r!=null?r.getCurrentClub():null);
+			res.setClub(r != null ? r.getCurrentClub() : null);
 			res.setRunner(r);
 			CRUD.add(res);
 		}
 	}
+
 }
