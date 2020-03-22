@@ -46,7 +46,7 @@ public class TORequests {
 			+ CLUBLOGO + ", RS.RACE AS " + RACE_ID + ", RC.DATE AS " + RACE_DATE + ", PK.NAME AS " + PARK_NAME
 			+ ", RS.TIME AS " + TIME
 			+ " FROM RESULTS RS INNER JOIN RACES RC ON RS.RACE=RC.ID INNER JOIN PARKS PK ON RC.PARK=PK.ID "
-			+ "INNER JOIN CLUBS CL ON RS.CLUB = CL.ID WHERE RS.RUNNER =";
+			+ "LEFT JOIN CLUBS CL ON RS.CLUB = CL.ID WHERE RS.RUNNER =";
 
 	private static final String RACELIST_REQUEST = "select rc.id as " + RACE_ID + ", pk.name as " + PARK_NAME
 			+ ", rc.date as " + RACE_DATE + " from races rc inner"
