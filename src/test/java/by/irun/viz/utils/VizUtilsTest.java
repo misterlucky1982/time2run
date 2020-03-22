@@ -37,6 +37,7 @@ public class VizUtilsTest {
 		assertEquals("5:01",VizUtils.convertNumberOfSecondsToTimeRepresentation(301));
 		assertEquals("0:30",VizUtils.convertNumberOfSecondsToTimeRepresentation(30));
 		assertEquals("0:01",VizUtils.convertNumberOfSecondsToTimeRepresentation(1));
+		assertEquals("31:10",VizUtils.convertNumberOfSecondsToTimeRepresentation(1870));
 	}
 	
 	/**
