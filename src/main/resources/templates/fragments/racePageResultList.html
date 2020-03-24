@@ -22,10 +22,10 @@
 					</div></td>
 				<td><div class = "race_resultlist_clublogo" th:with="clubLogo = ${runnerResult.clubLogo!=null}">
 						<div th:if="${clubLogo}">
-						<a th:if="${runnerResult.clubDefined}" th:href="${runnerResult.linkToClub}"><img class="race_resultlist_clublogoimage"  th:src="${runnerResult.clubLogo}"></a>
+						<a th:if="${runnerResult.clubDefined}" th:href="${runnerResult.linkToClub}"><img class="race_resultlist_clublogoimage"  th:src="${runnerResult.clubLogo}" th:data-tooltip="${runnerResult.club}"></a>
 						<img th:unless="${runnerResult.clubDefined}" class="race_resultlist_clublogoimage"  th:src="${runnerResult.clubLogo}"></div>
 						<div th:unless="${clubLogo}">
-							<a class="race_resultlist_clubdefaultlogo" th:href="${runnerResult.linkToClub}" th:text="${runnerResult.altLogo}"></a>
+							<a class="race_resultlist_clubdefaultlogo" th:href="${runnerResult.linkToClub}" th:text="${runnerResult.altLogo}" th:data-tooltip="${runnerResult.club}"></a>
 						</div>
 					</div></td>
 				<td class = "race_resultlist_time"><span class="time" th:text="${runnerResult.time}"></span></td>

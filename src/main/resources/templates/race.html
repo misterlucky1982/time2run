@@ -16,13 +16,13 @@
 	<div class="race_container">
 		<h1 th:text="${race.raceName}"></h1>
 		<h3 th:text="#{race.mensResults}"></h3>
-		<tr th:each="result : ${race.menResult}">
-			<td th:replace="fragments/racePageResultList :: resultList"></td>
-		</tr>
+		<div th:each="result : ${race.menResult}">
+			<div th:replace="fragments/racePageResultList :: resultList"></div>
+		</div>
 		<h3 th:text="#{race.womensResults}"></h3>
-		<tr th:each="result : ${race.womenResult}">
-			<td th:replace="fragments/racePageResultList :: resultList"></td>
-		</tr>
+		<div th:each="result : ${race.womenResult}">
+			<div th:replace="fragments/racePageResultList :: resultList"></div>
+		</div>
 	</div>
 </body>
 </html>
