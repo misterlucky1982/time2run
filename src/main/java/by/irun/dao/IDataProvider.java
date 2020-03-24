@@ -3,9 +3,12 @@ package by.irun.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import by.irun.domain.Gender;
 import by.irun.domain.to.ClubRunnerTO;
 import by.irun.domain.to.ClubTO;
 import by.irun.domain.to.RaceClubResultTO;
+import by.irun.domain.to.RaceTO;
+import by.irun.domain.to.RunnerRaceResultTO;
 import by.irun.domain.to.RunnerResultTO;
 import by.irun.domain.to.RunnerTO;
 import by.irun.viz.to.RaceInfoTO;
@@ -30,6 +33,7 @@ public interface IDataProvider {
 	 * Provides entire list of races from DB
 	 * @return
 	 */
+	@Deprecated
 	List<RaceInfoTO>getFullRaceList() throws SQLException;
 	
 	/**
@@ -73,4 +77,21 @@ public interface IDataProvider {
 	 * @throws SQLException
 	 */
 	List<ClubRunnerTO> getCurrentClubRunnerTOListForClub(long clubId) throws SQLException;
+	
+	/**
+	 * Provides List<RunnerRaceResultTO> for given race id and gender
+	 * @param raceId
+	 * @param gender
+	 * @return
+	 * @throws SQLException
+	 */
+	List<RunnerRaceResultTO> getRunnerRaceResultList(long raceId, Gender gender) throws SQLException;
+	
+	/**
+	 * Provides RaceTO for given raceId
+	 * @param raceId
+	 * @return
+	 * @throws SQLException
+	 */
+	RaceTO getRaceTOforRaceId (long raceId) throws SQLException;
 }

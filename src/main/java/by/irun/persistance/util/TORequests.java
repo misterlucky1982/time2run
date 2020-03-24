@@ -1,5 +1,7 @@
 package by.irun.persistance.util;
 
+import by.irun.domain.Gender;
+
 /**
  * Utility class for operations with request`s result sets
  * <p>
@@ -34,6 +36,9 @@ public class TORequests {
 	public static final String EMAIL = "EMAIL";
 	public static final String PHONE = "PHONE";
 	public static final String RUNNERID = "RUNNERID";
+	
+	private static final String RACEIDREGEX = "&&RACE&&";
+	private static final String GENDERREGEX = "&&GENDER&&";
 
 	private static final String RACE_RESULT_TO_REQUEST = "SELECT RS.POSITION AS " + POSITION
 			+ ", CONCAT(RN.FIRSTNAME,' ',RN.LASTNAME) AS " + NAME + ", RS.GENDER AS " + GENDER + ", CL.NAME AS " + CLUB
@@ -73,9 +78,18 @@ public class TORequests {
 			+ "RN.LASTNAME AS " + LASTNAME + ", RN.AVATAR AS " + AVATAR +  ", RN.GENDER AS "+GENDER+", RN.ID AS " + RUNNERID
 			+ " FROM RUNNERS RN WHERE RN.CLUB = ";
 	
-	private static final String RACE_TO_REQUEST = "SELECT RC.ID AS " + RACE_ID + ", RC.DATE AS " + RACE_DATE
+	private static final String RACE_TO_REQUEST = "SELECT RC.DATE AS " + RACE_DATE
 			+ ", PK.NAME AS " + PARK_NAME + " FROM RACES RC INNER JOIN PARKS PK ON RC.PARK=PK.ID WHERE RC.ID=";
+	
+	private static final String RUNNER_RACE_RESULT_REQUEST = "SELECT RS.POSITION AS "+POSITION+", RN.FIRSTNAME AS "+FIRSTNAME
+			+", RN.LASTNAME AS "+LASTNAME+", CL.NAME AS "+CLUBNAME+", PC1.LOCATION AS "+CLUBLOGO+", CL.ID AS "+CLUBID
+			+", RN.DATEOFBIRTH AS "+DATEOFBIRTH+", RS.TIME AS "+TIME+", RN.ID AS "+RUNNERID+", PC2.LOCATION AS "+AVATAR+
+			" FROM RESULTS RS LEFT JOIN RUNNERS RN ON RS.RUNNER=RN.ID LEFT JOIN CLUBS CL ON RS.CLUB=CL.ID LEFT JOIN PICTURES PC1 ON CL.SMALLLOGO=PC1.ID LEFT JOIN PICTURES PC2 ON RN.LOGO=PC2.ID "
+			+ "WHERE RS.RACE = &&RACE&& AND RS.GENDER = '&&GENDER&&'";
+	
 
+	private static GenderConverter GENDERCONVERTER = new GenderConverter();
+	
 	public static String raceResultRequest(long raceId) {
 		return RACE_RESULT_TO_REQUEST + raceId;
 	}
@@ -144,5 +158,16 @@ public class TORequests {
 	 */
 	public static String raceTORequest(long raceId) {
 		return RACE_TO_REQUEST + raceId;
+	}
+	
+	/**
+	 * returns sql-request for RunnerRaceresultTO
+	 * @param raceId
+	 * @param gender
+	 * @return
+	 */
+	public static String runnerRaceResultTORequest(long raceId, Gender gender) {
+		return RUNNER_RACE_RESULT_REQUEST.replaceAll(RACEIDREGEX, Long.toString(raceId)).replaceAll(GENDERREGEX,
+				GENDERCONVERTER.convertToDatabaseColumn(gender));
 	}
 }

@@ -1,6 +1,5 @@
 package by.irun.controller;
 
-import by.irun.config.ApplicationConstants;
 
 /**
  * This class provides constants that are used in Controller classes
@@ -13,6 +12,7 @@ public class ControllerConstants {
 	
 	private ControllerConstants(){}
 
-	public static final String CLUB_LINK = ApplicationConstants.URL+"/app/clubs?id=";
-	public static final String RACE_LINK = ApplicationConstants.URL+"/app/races?id=";
+	public static final String CLUB_LINK = "clubs?id=";
+	public static final String RACE_LINK = "race?id=";
+	public static final String RUNNER_LINK = "runner?id="; 
 }

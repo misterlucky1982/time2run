@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:text="#{app.title}">Title</title>
+<link rel="icon" href="/images/icon.png" type="image/png">
+<link rel="stylesheet" th:href="@{/css/header_styles.css}" />
+<link rel="stylesheet" th:href="@{/css/race/race_styles.css}" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script src="/scripts/race/race.js"></script>
+<script src="/scripts/header/header.js"></script>
+</head>
+<body>
+	<div th:replace="fragments/header :: header"></div>
+	<div class="race_container">
+		<h1 th:text="${race.raceName}"></h1>
+		<h3 th:text="#{race.mensResults}"></h3>
+		<div th:each="result : ${race.menResult}">
+			<div th:replace="fragments/racePageResultList :: resultList"></div>
+		</div>
+		<h3 th:text="#{race.womensResults}"></h3>
+		<div th:each="result : ${race.womenResult}">
+			<div th:replace="fragments/racePageResultList :: resultList"></div>
+		</div>
+	</div>
+</body>
+</html>

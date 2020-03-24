@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  </head>
+  <body>
+    <div th:fragment="resultList">
+		<table>
+			<tr>
+				<th th:text="#{raceresult.position}" /></th>
+				<th></th>
+				<th th:text="#{raceresult.name}"></th>
+				<th th:text="#{raceresult.club}"></th>
+				<th class = "race_resultlist_time" th:text="#{raceresult.time}"></th>
+			</tr>
+			<tr th:each="runnerResult : ${result.list}">
+				<td class="race_resultlist_position" th:text="${runnerResult.position}"></td>
+				<td><a th:href="${runnerResult.linkToRunner}"><img class="race_resultList_avatar" alt="..."
+						th:src="${runnerResult.smallAvatar}"></a></td>
+				<td><div class="race_resultlist_runnername">
+						<a class="race_resultlist_runnername_link" th:href="${runnerResult.linkToRunner}"
+							th:text="${runnerResult.name}"></a>
+					</div></td>
+				<td><div class = "race_resultlist_clublogo" th:with="clubLogo = ${runnerResult.clubLogo!=null}">
+						<div th:if="${clubLogo}">
+						<a th:if="${runnerResult.clubDefined}" th:href="${runnerResult.linkToClub}"><img class="race_resultlist_clublogoimage"  th:src="${runnerResult.clubLogo}" th:data-tooltip="${runnerResult.club}"></a>
+						<img th:unless="${runnerResult.clubDefined}" class="race_resultlist_clublogoimage"  th:src="${runnerResult.clubLogo}"></div>
+						<div th:unless="${clubLogo}">
+							<a class="race_resultlist_clubdefaultlogo" th:href="${runnerResult.linkToClub}" th:text="${runnerResult.altLogo}" th:data-tooltip="${runnerResult.club}"></a>
+						</div>
+					</div></td>
+				<td class = "race_resultlist_time"><span class="time" th:text="${runnerResult.time}"></span></td>
+			</tr>
+		</table>
+	</div>
+  </body>
+</html>
