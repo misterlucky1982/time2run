@@ -26,6 +26,7 @@ public class Time2Run {
 		CRUD = SpringApplication.run(Time2Run.class).getBean(CRUDHandler.class);
 		fillingTestData1();
 		fillingTestData2();
+		updateMinskRunAvatar();
 		System.exit(0);
 	}
 
@@ -557,5 +558,19 @@ public class Time2Run {
 		runner.setAvatar(picBig);
 		runner.setLogo(picSmall);
 		CRUD.update(runner);
+	}
+	
+	private static void updateMinskRunAvatar(){
+		try {
+			Club club = (Club) CRUD.getEntityById(Club.class, 26L);
+			if(club==null)return;
+			Picture pic = new Picture();
+			pic.setLocation("../../images/test/minskrun_logo.png");
+			CRUD.add(pic);
+			club.setSmallLogo(pic);
+			CRUD.update(club);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }
