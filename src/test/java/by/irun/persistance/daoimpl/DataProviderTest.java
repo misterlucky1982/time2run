@@ -667,7 +667,7 @@ public class DataProviderTest {
 		EasyMock.expect(rowSet.getInt(TORequests.POSITION)).andReturn(position);
 		EasyMock.expect(rowSet.getString(TORequests.FIRSTNAME)).andReturn(firstName);
 		EasyMock.expect(rowSet.getString(TORequests.LASTNAME)).andReturn(lastName);
-		EasyMock.expect(rowSet.getString(TORequests.CLUB)).andReturn(club);
+		EasyMock.expect(rowSet.getString(TORequests.CLUBNAME)).andReturn(club);
 		EasyMock.expect(rowSet.getString(TORequests.CLUBLOGO)).andReturn(clubLogo);
 		EasyMock.expect(rowSet.getLong(TORequests.CLUBID)).andReturn(clubId);
 		EasyMock.expect(rowSet.getDate(TORequests.DATEOFBIRTH)).andReturn(date);
