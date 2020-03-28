@@ -9,14 +9,18 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
+
 import by.irun.domain.Gender;
 import by.irun.domain.to.RaceClubResultTO;
+import by.irun.domain.to.RunnerRaceResultTO;
 import by.irun.locale.Internationalizer;
 import by.irun.locale.Translator;
 import by.irun.viz.to.ClubRunnerResultInfoTO;
 import by.irun.viz.to.ExtendedInfoTOList;
 import by.irun.viz.to.NamedInfoTOList;
 import by.irun.viz.to.ParkBestResultInfoTO;
+import by.irun.viz.to.racepage.RunnerResultInfoTO;
 import by.irun.viz.utils.VizUtils;
 
 /**
@@ -27,6 +31,7 @@ import by.irun.viz.utils.VizUtils;
  */
 public class ServiceUtils {
 
+	
 	private ServiceUtils() {
 	}
 
@@ -178,4 +183,37 @@ public class ServiceUtils {
 		}
 		return result;
 	}
+	
+	/**
+	 * Produces List<RunnerResultInfoTO> sorted by position from given List<RunnerRaceResultTO>
+	 * @param list
+	 * @return
+	 */
+	public static List<RunnerResultInfoTO> resolveRunnerResultList(List<RunnerRaceResultTO> list, Locale locale, Gender gender) {
+		List<RunnerResultInfoTO> result = new ArrayList<>();
+		list = list.stream().sorted((r1, r2) -> r1.getPosition().compareTo(r2.getPosition()))
+				.collect(Collectors.toList());
+		int position = 1;
+		for (RunnerRaceResultTO resultTO : list) {
+			RunnerResultInfoTO to = new RunnerResultInfoTO();
+			to.setName(VizUtils.isValidId(resultTO.getRunnerId())
+					? VizUtils.concatName(resultTO.getFirstName(), resultTO.getLastName())
+					: Internationalizer.translate(Translator.UNKNOWN_PARTICIPANT, locale));
+			to.setPosition(Integer.toString(position++));
+			to.setClub(VizUtils.resolveClubName(resultTO.getClub(), resultTO.getRunnerId(), locale));
+			to.setClubLogo(VizUtils.resolveClubSmallLogo(resultTO.getClubLogo(), resultTO.getClub(), resultTO.getRunnerId(), locale));
+			if(to.getClubLogo()==null){
+				to.setAltLogo(VizUtils.clubNameFirstLettersForClubClogo(resultTO.getClub()));
+			}
+			to.setSmallAvatar(VizUtils.resolveSmallAvatarForRaceResultPage(resultTO.getSmallAvatar(), gender));
+			to.setLinkToClub(VizUtils.resolveClubLink(resultTO.getClubId()));
+			to.setDateOfBirth(VizUtils.convertSqlDateToFrontEndRepresentation(resultTO.getDateOfBirth()));
+			to.setLinkToRunner(VizUtils.resolveRunnerPageLink(resultTO.getRunnerId(), locale));
+			to.setTime(VizUtils.convertNumberOfSecondsToTimeRepresentation(resultTO.getTimeInSeconds()));
+			to.setClubDefined(VizUtils.isValidId(resultTO.getClubId()));
+			result.add(to);
+		}
+		return result;
+	}
+	
 }
