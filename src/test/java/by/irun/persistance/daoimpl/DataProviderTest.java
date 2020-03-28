@@ -454,6 +454,7 @@ public class DataProviderTest {
 		String lastName = "lastName";
 		long runnerId = 333;
 		int time = 150;
+		String raceName = "RACE";
 
 		SqlRowSet rowSet = PowerMock.createMock(org.springframework.jdbc.support.rowset.SqlRowSet.class);
 		EasyMock.expect(jdbcTemplate.queryForRowSet(TORequests.raceClubResultTORequest(100))).andReturn(rowSet);
@@ -463,6 +464,7 @@ public class DataProviderTest {
 		EasyMock.expect(rowSet.getInt(TORequests.ABSPOSITION)).andReturn(absPos);
 		EasyMock.expect(rowSet.getInt(TORequests.POSITIONINGENDERGROUP)).andReturn(posInGen);
 		EasyMock.expect(rowSet.getDate(TORequests.RACE_DATE)).andReturn(date);
+		EasyMock.expect(rowSet.getString(TORequests.RACENAME)).andReturn(raceName);
 		EasyMock.expect(rowSet.getString(TORequests.PARK_NAME)).andReturn(park);
 		EasyMock.expect(rowSet.getLong(TORequests.RACE_ID)).andReturn(raceId);
 		EasyMock.expect(rowSet.getString(TORequests.FIRSTNAME)).andReturn(firstName);
@@ -493,6 +495,7 @@ public class DataProviderTest {
 		assertTrue(to.getRunnerId() == runnerId);
 		assertEquals(Gender.FEMALE,to.getGender());
 		assertTrue(to.getTimeInSeconds() == time);
+		assertEquals(raceName,to.getRaceName());
 	}
 
 	/**
@@ -723,12 +726,14 @@ public class DataProviderTest {
 	public void getRaceTOTest(){
 		Date date = Date.valueOf("2000-01-01");
 		String park = "park";
+		String raceName = "RACE";
 		SqlRowSet rowSet = PowerMock.createMock(org.springframework.jdbc.support.rowset.SqlRowSet.class);
 		EasyMock.expect(jdbcTemplate.queryForRowSet(TORequests.raceTORequest(333))).andReturn(rowSet);
 		DataProvider provider = new DataProvider();
 		Whitebox.setInternalState(provider, "jdbcTemplate", jdbcTemplate);
 		EasyMock.expect(rowSet.next()).andReturn(true);
 		EasyMock.expect(rowSet.getDate(TORequests.RACE_DATE)).andReturn(date);
+		EasyMock.expect(rowSet.getString(TORequests.RACENAME)).andReturn(raceName);
 		EasyMock.expect(rowSet.getString(TORequests.PARK_NAME)).andReturn(park);
 		PowerMock.replayAll();
 		RaceTO to = null;
@@ -741,6 +746,7 @@ public class DataProviderTest {
 		assertNotNull(to);
 		assertEquals(date,to.getDate());
 		assertEquals(park,to.getParkName());
+		assertEquals(raceName, to.getRaceName());
 	}
 	
 	@Test
