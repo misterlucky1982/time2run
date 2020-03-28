@@ -29,6 +29,9 @@ public class Race implements DomainEntity{
 	@Column(name="DATE", nullable = false)
 	private Date date;
 	
+	@Column(name="NAME", unique = true)
+	private String name;
+	
 	@OneToMany(mappedBy="race", targetEntity=by.irun.domain.Result.class, fetch=FetchType.LAZY)
 	private List<Result>resultList;
 	
@@ -111,6 +114,18 @@ public class Race implements DomainEntity{
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

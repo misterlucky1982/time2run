@@ -12,6 +12,8 @@ public class RaceTO {
 	private String parkName;
 	
 	private Date date;
+	
+	private String raceName;
 
 	/**
 	 * @return the parkName
@@ -39,6 +41,20 @@ public class RaceTO {
 	 */
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+	/**
+	 * @return the raceName
+	 */
+	public String getRaceName() {
+		return raceName;
+	}
+
+	/**
+	 * @param raceName the raceName to set
+	 */
+	public void setRaceName(String raceName) {
+		this.raceName = raceName;
 	}
 	
 	

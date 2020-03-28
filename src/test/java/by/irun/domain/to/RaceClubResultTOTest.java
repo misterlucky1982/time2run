@@ -92,4 +92,11 @@ public class RaceClubResultTOTest {
 		to.setGender(Gender.FEMALE);
 		assertEquals(Gender.FEMALE,to.getGender());
 	}
+	
+	@Test
+	public void raceNameTest(){
+		assertNull(to.getRaceName());
+		to.setRaceName("race");
+		assertEquals("race",to.getRaceName());
+	}
 }

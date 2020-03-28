@@ -13,6 +13,7 @@ public class RaceClubResultTO {
 	private long raceId;
 	private Date date;
 	private String parkName;
+	private String raceName;
 	private String runnerFirstName;
 	private String runnerLastName;
 	private long runnerId;
@@ -140,5 +141,18 @@ public class RaceClubResultTO {
 	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
+	/**
+	 * @return the raceName
+	 */
+	public String getRaceName() {
+		return raceName;
+	}
+	/**
+	 * @param raceName the raceName to set
+	 */
+	public void setRaceName(String raceName) {
+		this.raceName = raceName;
+	}
 
+	
 }
