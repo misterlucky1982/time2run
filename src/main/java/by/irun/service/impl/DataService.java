@@ -149,7 +149,7 @@ public class DataService implements IDataService{
 		RaceClubResultTO firstRaceResult = raceClubResultTOList.stream()
 				.min((r1, r2) -> r1.getDate().compareTo(r2.getDate())).get();
 		clubInfoTO.setFirstRace(firstRaceResult != null
-				? VizUtils.buildRaceName(firstRaceResult.getParkName(), firstRaceResult.getDate(), locale)
+				? VizUtils.buildRaceName(firstRaceResult.getRaceName(), firstRaceResult.getParkName(), firstRaceResult.getDate(), locale)
 				: Internationalizer.translate(Translator.KEY_UNKNOWN));
 		clubInfoTO.setParkBestResults(ServiceUtils.getParkBestResultInfoTOList(raceClubResultTOList, locale));
 		clubInfoTO.setRaceResults(ServiceUtils.generateSortedClubRunnerResultList(raceClubResultTOList, locale));
@@ -176,7 +176,7 @@ public class DataService implements IDataService{
 			return null;
 		} else {
 			RaceResultInfoTO result = new RaceResultInfoTO();
-			result.setRaceName(VizUtils.buildRaceName(raceTO.getParkName(), raceTO.getDate(), locale));
+			result.setRaceName(VizUtils.buildRaceName(raceTO.getRaceName(), raceTO.getParkName(), raceTO.getDate(), locale));
 			result.setMenResult(new by.irun.util.List<>(ServiceUtils.resolveRunnerResultList(mensResult, locale, Gender.MALE)));
 			result.setWomenResult(new by.irun.util.List<>(ServiceUtils.resolveRunnerResultList(womenResult, locale, Gender.FEMALE)));
 			return result;

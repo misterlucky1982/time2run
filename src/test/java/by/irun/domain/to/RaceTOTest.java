@@ -37,4 +37,11 @@ public class RaceTOTest {
 		to.setDate(date);
 		assertEquals(date,to.getDate());
 	}
+	
+	@Test
+	public void raceNameTest(){
+		assertNull(to.getRaceName());
+		to.setRaceName("raceName");
+		assertEquals("raceName",to.getRaceName());
+	}
 }

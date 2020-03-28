@@ -197,14 +197,15 @@ public class VizUtils implements Translator{
 	}
 	
 	/**
-	 * Resolves raceName using given date and locale
+	 * builds title of the race for given parameters
+	 * @param raceName
 	 * @param parkName
 	 * @param raceDate
 	 * @param locale
 	 * @return
 	 */
-	public static String buildRaceName(String parkName, Date raceDate, Locale locale){
-		return parkName+" "+Internationalizer.translate(raceDate, locale);
+	public static String buildRaceName(String raceName, String parkName, Date raceDate, Locale locale){
+		return raceName==null?parkName+" "+Internationalizer.translate(raceDate, locale):raceName;
 	}
 	
 	/**
