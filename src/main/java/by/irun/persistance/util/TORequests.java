@@ -36,6 +36,7 @@ public class TORequests {
 	public static final String EMAIL = "EMAIL";
 	public static final String PHONE = "PHONE";
 	public static final String RUNNERID = "RUNNERID";
+	public static final String RACENAME = "RACENAME";
 	
 	private static final String RACEIDREGEX = "&&RACE&&";
 	private static final String GENDERREGEX = "&&GENDER&&";
@@ -79,7 +80,7 @@ public class TORequests {
 			+ " FROM RUNNERS RN WHERE RN.CLUB = ";
 	
 	private static final String RACE_TO_REQUEST = "SELECT RC.DATE AS " + RACE_DATE
-			+ ", PK.NAME AS " + PARK_NAME + " FROM RACES RC INNER JOIN PARKS PK ON RC.PARK=PK.ID WHERE RC.ID=";
+			+ ", RC.NAME AS "+RACENAME+", PK.NAME AS " + PARK_NAME + " FROM RACES RC INNER JOIN PARKS PK ON RC.PARK=PK.ID WHERE RC.ID=";
 	
 	private static final String RUNNER_RACE_RESULT_REQUEST = "SELECT RS.POSITION AS "+POSITION+", RN.FIRSTNAME AS "+FIRSTNAME
 			+", RN.LASTNAME AS "+LASTNAME+", CL.NAME AS "+CLUBNAME+", PC1.LOCATION AS "+CLUBLOGO+", CL.ID AS "+CLUBID
