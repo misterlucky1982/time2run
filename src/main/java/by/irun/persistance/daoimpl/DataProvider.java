@@ -1,5 +1,6 @@
 package by.irun.persistance.daoimpl;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -284,4 +285,38 @@ public class DataProvider implements IDataProvider{
 		return to;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see by.irun.dao.IDataProvider#getRaceTOForLastRace()
+	 */
+	@Override
+	public RaceTO getRaceTOForLastRace() throws SQLException {
+		RaceTO to = null;
+		try {
+			SqlRowSet rowSet = jdbcTemplate.queryForRowSet(TORequests.raceTORequestForLastRace());
+			if (rowSet.next()) {
+				to = getRaceTOFromSqlRowset(rowSet);
+			} else
+				throw new SQLException("empty resultSet");
+		} catch (RuntimeException e) {
+			throw new SQLException(e);
+		}
+		return to;
+	}
+
+	private RaceTO getRaceTOFromSqlRowset(SqlRowSet rowSet){
+		RaceTO to = new RaceTO();
+		to.setRaceId(rowSet.getLong(TORequests.RACE_ID));
+		to.setDate(rowSet.getDate(TORequests.RACE_DATE));
+		to.setParkName(rowSet.getString(TORequests.PARK_NAME));
+		return to;
+	}
+	
+	@Override
+	public List<RaceTO> getRaceTOList(Date from, Date to, Long parkId) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 }

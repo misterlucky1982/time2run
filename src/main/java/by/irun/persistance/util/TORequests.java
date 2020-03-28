@@ -1,5 +1,7 @@
 package by.irun.persistance.util;
 
+import java.sql.Date;
+
 import by.irun.domain.Gender;
 
 /**
@@ -81,13 +83,30 @@ public class TORequests {
 	private static final String RACE_TO_REQUEST = "SELECT RC.DATE AS " + RACE_DATE
 			+ ", PK.NAME AS " + PARK_NAME + " FROM RACES RC INNER JOIN PARKS PK ON RC.PARK=PK.ID WHERE RC.ID=";
 	
+	private static final String FULL_RACE_TO_REQUEST = "SELECT RC.ID AS RACEID, RC.DATE AS DATE, PK.NAME AS PARK FROM RACES RC INNER JOIN PARKS PK ON RC.PARK=PK.ID";
+	
+	private static final String FULL_RACE_TO_REQUEST_ENDING_FOR_LAST_RACE = " ORDER BY RC.DATE DESC, RC.ID DESC LIMIT 1;";
+	
+	private static final String WHERE = " WHERE";
+	
+	private static final String AND = " AND";
+	
+	private static final String FULL_RACE_TO_REQUEST_ENDING_PARK_ID = " PK.ID=";
+	
+	private static final String FULL_RACE_TO_REQUEST_ENDING_DATE_AFTER = " NOT RC.DATE<";
+	
+	private static final String FULL_RACE_TO_REQUEST_ENDING_DATE_BEFORE = " NOT RC.DATE>";
+	
+	private static final String FULL_RACE_TO_REQUEST_ENDING_FOR_LIST = " ORDER BY RC.DATE DESC, RC.ID;";
+	
 	private static final String RUNNER_RACE_RESULT_REQUEST = "SELECT RS.POSITION AS "+POSITION+", RN.FIRSTNAME AS "+FIRSTNAME
 			+", RN.LASTNAME AS "+LASTNAME+", CL.NAME AS "+CLUBNAME+", PC1.LOCATION AS "+CLUBLOGO+", CL.ID AS "+CLUBID
 			+", RN.DATEOFBIRTH AS "+DATEOFBIRTH+", RS.TIME AS "+TIME+", RN.ID AS "+RUNNERID+", PC2.LOCATION AS "+AVATAR+
 			" FROM RESULTS RS LEFT JOIN RUNNERS RN ON RS.RUNNER=RN.ID LEFT JOIN CLUBS CL ON RS.CLUB=CL.ID LEFT JOIN PICTURES PC1 ON CL.SMALLLOGO=PC1.ID LEFT JOIN PICTURES PC2 ON RN.LOGO=PC2.ID "
 			+ "WHERE RS.RACE = &&RACE&& AND RS.GENDER = '&&GENDER&&'";
 	
-
+	
+	
 	private static GenderConverter GENDERCONVERTER = new GenderConverter();
 	
 	public static String raceResultRequest(long raceId) {
@@ -169,5 +188,49 @@ public class TORequests {
 	public static String runnerRaceResultTORequest(long raceId, Gender gender) {
 		return RUNNER_RACE_RESULT_REQUEST.replaceAll(RACEIDREGEX, Long.toString(raceId)).replaceAll(GENDERREGEX,
 				GENDERCONVERTER.convertToDatabaseColumn(gender));
+	}
+	
+	/**
+	 * provides sql-request for RaceTO for last Race
+	 * @return String sql-request
+	 */
+	public static String raceTORequestForLastRace(){
+		return FULL_RACE_TO_REQUEST+FULL_RACE_TO_REQUEST_ENDING_FOR_LAST_RACE;
+	}
+	
+	/**
+	 * provides sql-request for for fetching the list of RaceTO for given time-interval and parkId 
+	 * @param from - start date
+	 * @param to - end date
+	 * @param parkId - id of park
+	 * @return String sql-request
+	 */
+	public static String fullRaceTOListRequest(Date from, Date to, Long parkId) {
+		StringBuilder sb = new StringBuilder();
+		sb.append(FULL_RACE_TO_REQUEST);
+		boolean appended = false;
+		if (parkId != null) {
+			appended = true;
+			sb.append(WHERE);
+			sb.append(FULL_RACE_TO_REQUEST_ENDING_PARK_ID);
+			sb.append(Long.toString(parkId));
+		}
+		if (from != null) {
+			if (!appended) {
+				sb.append(WHERE);
+				appended = true;
+			}else sb.append(AND);
+			sb.append(FULL_RACE_TO_REQUEST_ENDING_DATE_AFTER);
+			sb.append("'" + from.toString() + "'");
+		}
+		if (to != null) {
+			if (!appended) {
+				sb.append(WHERE);
+			}else sb.append(AND);
+			sb.append(FULL_RACE_TO_REQUEST_ENDING_DATE_BEFORE);
+			sb.append("'" + to.toString() + "'");
+		}
+		sb.append(FULL_RACE_TO_REQUEST_ENDING_FOR_LIST);
+		return sb.toString();
 	}
 }

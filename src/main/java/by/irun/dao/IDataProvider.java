@@ -1,5 +1,6 @@
 package by.irun.dao;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -94,4 +95,21 @@ public interface IDataProvider {
 	 * @throws SQLException
 	 */
 	RaceTO getRaceTOforRaceId (long raceId) throws SQLException;
+	
+	/**
+	 * Provides RaceTO for last Race
+	 * @return RaceTO
+	 * @throws SQLException
+	 */
+	RaceTO getRaceTOForLastRace() throws SQLException;
+	
+	/**
+	 * Provides List<RaceTO> for given parameters
+	 * @param from - start date of period
+	 * @param to - end date of period
+	 * @param parkId - Park id
+	 * @return
+	 * @throws SQLException
+	 */
+	List<RaceTO> getRaceTOList (Date from, Date to, Long parkId) throws SQLException;
 }
