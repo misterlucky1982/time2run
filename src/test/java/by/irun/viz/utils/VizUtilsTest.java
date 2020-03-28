@@ -147,9 +147,12 @@ public class VizUtilsTest {
 		String translationBY = Internationalizer.translate(d, AppLocales.BY);
 		String translationRU = Internationalizer.translate(d, AppLocales.RU);
 		String translationEN = Internationalizer.translate(d, AppLocales.EN);
-		assertEquals("name "+translationBY,VizUtils.buildRaceName("name", d, AppLocales.BY));
-		assertEquals("name "+translationRU,VizUtils.buildRaceName("name", d, AppLocales.RU));
-		assertEquals("name "+translationEN,VizUtils.buildRaceName("name", d, AppLocales.EN));
+		assertEquals("name "+translationBY,VizUtils.buildRaceName(null, "name", d, AppLocales.BY));
+		assertEquals("name "+translationRU,VizUtils.buildRaceName(null, "name", d, AppLocales.RU));
+		assertEquals("name "+translationEN,VizUtils.buildRaceName(null, "name", d, AppLocales.EN));
+		assertEquals("TRAIL",VizUtils.buildRaceName("TRAIL", "name", d, AppLocales.BY));
+		assertEquals("TRAIL",VizUtils.buildRaceName("TRAIL", "name", d, AppLocales.RU));
+		assertEquals("TRAIL",VizUtils.buildRaceName("TRAIL", "name", d, AppLocales.EN));
 	}
 	
 	/**

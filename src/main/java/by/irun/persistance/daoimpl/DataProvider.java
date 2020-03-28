@@ -197,6 +197,7 @@ public class DataProvider implements IDataProvider{
 				to.setAbsPosition(rowSet.getInt(TORequests.ABSPOSITION));
 				to.setPositionInGenderGroup(rowSet.getInt(TORequests.POSITIONINGENDERGROUP));
 				to.setDate(rowSet.getDate(TORequests.RACE_DATE));
+				to.setRaceName(rowSet.getString(TORequests.RACENAME));
 				to.setParkName(rowSet.getString(TORequests.PARK_NAME));
 				to.setRaceId(rowSet.getLong(TORequests.RACE_ID));
 				to.setRunnerFirstName(rowSet.getString(TORequests.FIRSTNAME));
@@ -275,6 +276,7 @@ public class DataProvider implements IDataProvider{
 			SqlRowSet rowSet = jdbcTemplate.queryForRowSet(TORequests.raceTORequest(raceId));
 			if (rowSet.next()) {
 				to = new RaceTO();
+				to.setRaceName(rowSet.getString(TORequests.RACENAME));
 				to.setDate(rowSet.getDate(TORequests.RACE_DATE));
 				to.setParkName(rowSet.getString(TORequests.PARK_NAME));
 			} else

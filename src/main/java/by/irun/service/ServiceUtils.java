@@ -123,7 +123,7 @@ public class ServiceUtils {
 				result.add(currentResultList);
 				park = to.getParkName();
 				date = to.getDate();
-				currentResultList.setName(VizUtils.buildRaceName(park, date, locale));
+				currentResultList.setName(VizUtils.buildRaceName(to.getRaceName(), park, date, locale));
 				currentList = new NamedInfoTOList<>();
 				if(to.getGender()==Gender.MALE){
 					mensRes = true;
