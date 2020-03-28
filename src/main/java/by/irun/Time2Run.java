@@ -27,6 +27,7 @@ public class Time2Run {
 		fillingTestData1();
 		fillingTestData2();
 		updateMinskRunAvatar();
+		updateMinskRunAvatarAndAddNewRace();
 		System.exit(0);
 	}
 
@@ -510,27 +511,12 @@ public class Time2Run {
 	}
 
 	private static void createRace(Park park, Date date, Runner... runners) throws SQLException {
-		Race race = new Race();
-		race.setPark(park);
-		race.setDate(date);
-		CRUD.add(race);
-		int pos = 1;
-		long seconds = (int) (Math.random() * 300) + 1000;
-		for (Runner r : runners) {
-			Result res = new Result();
-			res.setAbsolutePosition(pos++);
-			res.setGender(r != null ? r.getGender() : Math.random() > 0.5 ? Gender.FEMALE : Gender.MALE);
-			res.setRace(race);
-			res.setTime(Duration.ofSeconds(seconds += (Math.random() * 60)));
-			res.setClub(r != null ? r.getCurrentClub() : null);
-			res.setRunner(r);
-			CRUD.add(res);
-		}
+		createRace(null, park, date, runners);
 	}
 	
 	private static void createRace(String name, Park park, Date date, Runner... runners) throws SQLException {
 		Race race = new Race();
-	
+		race.setName(name);
 		race.setPark(park);
 		race.setDate(date);
 		CRUD.add(race);
@@ -595,29 +581,28 @@ public class Time2Run {
 			Picture pic = new Picture();
 			pic.setLocation("../../images/test/minskrun_avatar.png");
 			CRUD.add(pic);
-			club.setSmallLogo(pic);
+			club.setBigLogo(pic);
 			CRUD.update(club);
+			Runner r1 = (Runner) CRUD.getEntityById(Runner.class, 28L);
+			Runner r2 = (Runner) CRUD.getEntityById(Runner.class, 30L);
+			Runner r3 = (Runner) CRUD.getEntityById(Runner.class, 31L);
+			Runner r4 = (Runner) CRUD.getEntityById(Runner.class, 35L);
+			Runner r5 = (Runner) CRUD.getEntityById(Runner.class, 36L);
+			Runner r6 = (Runner) CRUD.getEntityById(Runner.class, 37L);
+			Runner r7 = (Runner) CRUD.getEntityById(Runner.class, 40L);
+			Runner r8 = (Runner) CRUD.getEntityById(Runner.class, 41L);
+			Runner r9 = (Runner) CRUD.getEntityById(Runner.class, 42L);
+			Runner r10 = (Runner) CRUD.getEntityById(Runner.class, 44L);
+			Runner r11 = (Runner) CRUD.getEntityById(Runner.class, 46L);
+			Runner r12 = (Runner) CRUD.getEntityById(Runner.class, 48L);
+			Runner r13 = (Runner) CRUD.getEntityById(Runner.class, 49L);
+			Runner r14 = (Runner) CRUD.getEntityById(Runner.class, 50L);
+			Runner r15 = (Runner) CRUD.getEntityById(Runner.class, 51L);
+			Runner r16 = (Runner) CRUD.getEntityById(Runner.class, 52L);
 			
-			Runner r1 = (Runner) CRUD.getEntityById(Runner.class, 28);
-			Runner r2 = (Runner) CRUD.getEntityById(Runner.class, 30);
-			Runner r3 = (Runner) CRUD.getEntityById(Runner.class, 31);
-			Runner r4 = (Runner) CRUD.getEntityById(Runner.class, 35);
-			Runner r5 = (Runner) CRUD.getEntityById(Runner.class, 36);
-			Runner r6 = (Runner) CRUD.getEntityById(Runner.class, 37);
-			Runner r7 = (Runner) CRUD.getEntityById(Runner.class, 40);
-			Runner r8 = (Runner) CRUD.getEntityById(Runner.class, 41);
-			Runner r9 = (Runner) CRUD.getEntityById(Runner.class, 42);
-			Runner r10 = (Runner) CRUD.getEntityById(Runner.class, 44);
-			Runner r11 = (Runner) CRUD.getEntityById(Runner.class, 46);
-			Runner r12 = (Runner) CRUD.getEntityById(Runner.class, 48);
-			Runner r13 = (Runner) CRUD.getEntityById(Runner.class, 49);
-			Runner r14 = (Runner) CRUD.getEntityById(Runner.class, 50);
-			Runner r15 = (Runner) CRUD.getEntityById(Runner.class, 51);
-			Runner r16 = (Runner) CRUD.getEntityById(Runner.class, 52);
+			Park park = (Park) CRUD.getEntityById(Park.class, 54L);
 			
-			Park park = (Park) CRUD.getEntityById(Park.class, 54);
-			
-			createRace("IRun Brest Winter Trail 2020", park, Date.valueOf("2020-02-08"), r1, r10, r3,null,  r9, r2, r12, r5, r6, null, r11, null, r13, r11, r15, r14,r4, r8, r16, r7,null);
+			createRace("IRun Brest Winter Trail 2020", park, Date.valueOf("2020-02-08"), r1, r10, r3,null,  r9, r2, r12, r5, r6, null, r11, null, r13, r11, r15, null, null, r14,r4, r8, r16, r7,null);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
