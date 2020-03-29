@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 import by.irun.domain.Gender;
 import by.irun.domain.to.RaceClubResultTO;
 import by.irun.domain.to.RunnerRaceResultTO;
+import by.irun.domain.to.RunnerResultTO;
 import by.irun.locale.Internationalizer;
 import by.irun.locale.Translator;
 import by.irun.viz.to.ClubRunnerResultInfoTO;

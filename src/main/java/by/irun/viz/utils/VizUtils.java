@@ -128,7 +128,7 @@ public class VizUtils implements Translator{
 		infoTO.setLinkToClub(resolveClubLink(to.getClubId()));
 		infoTO.setLinkToRace(resolveRaceLink(to.getRaceId()));
 		infoTO.setPosInOwnGenderInfo(Integer.toString(to.getPositionInGenderGroup()));
-		infoTO.setRaceInfo(Internationalizer.translate(to.getRaceDate(), locale)+" "+to.getParkName());
+		infoTO.setRaceInfo(VizUtils.buildRaceName(to.getRaceName(), to.getParkName(), to.getRaceDate(), locale));
 		infoTO.setTime(convertNumberOfSecondsToTimeRepresentation(to.getTime()));
 		return infoTO;
 	}

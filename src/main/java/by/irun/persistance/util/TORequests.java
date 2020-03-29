@@ -42,6 +42,7 @@ public class TORequests {
 	
 	private static final String RACEIDREGEX = "&&RACE&&";
 	private static final String GENDERREGEX = "&&GENDER&&";
+	private static final String RUNNERIDREGEX = "&&RUNNERID&&";
 
 	private static final String RACE_RESULT_TO_REQUEST = "SELECT RS.POSITION AS " + POSITION
 			+ ", CONCAT(RN.FIRSTNAME,' ',RN.LASTNAME) AS " + NAME + ", RS.GENDER AS " + GENDER + ", CL.NAME AS " + CLUB
@@ -51,10 +52,10 @@ public class TORequests {
 	private static final String RUNNER_RESULT_INFO_REQUEST = "SELECT RS.POSITION AS " + ABSPOSITION
 			+ ", (SELECT COUNT(*)+1 FROM RESULTS WHERE RACE=RS.RACE AND POSITION<RS.POSITION AND GENDER = RS.GENDER) AS "
 			+ POSITIONINGENDERGROUP + ",RS.CLUB AS " + CLUBID + ",CL.NAME AS " + CLUBNAME + ", CL.SMALLLOGO AS "
-			+ CLUBLOGO + ", RS.RACE AS " + RACE_ID + ", RC.DATE AS " + RACE_DATE + ", PK.NAME AS " + PARK_NAME
+			+ CLUBLOGO + ", RS.RACE AS " + RACE_ID + ", RC.DATE AS " + RACE_DATE + ", RC.NAME AS "+RACENAME+", PK.NAME AS " + PARK_NAME
 			+ ", RS.TIME AS " + TIME
 			+ " FROM RESULTS RS INNER JOIN RACES RC ON RS.RACE=RC.ID INNER JOIN PARKS PK ON RC.PARK=PK.ID "
-			+ "LEFT JOIN CLUBS CL ON RS.CLUB = CL.ID WHERE RS.RUNNER =";
+			+ "LEFT JOIN CLUBS CL ON RS.CLUB = CL.ID WHERE RS.RUNNER =&&RUNNERID&& ORDER BY RC.DATE DESC, RC.ID DESC;";
 	
 	private static final String RUNNER_TO_REQUEST = "SELECT RN.FIRSTNAME AS " + FIRSTNAME + ", RN.LASTNAME AS "
 			+ LASTNAME + ", RN.CITY AS " + CITY + ",  PC.LOCATION AS " + AVATAR + ", CL.ID AS " + CLUBID
@@ -128,7 +129,7 @@ public class TORequests {
 	 * @return String sql-request
 	 */
 	public static String runnerResultInfoListRequest(long runnerId) {
-		return RUNNER_RESULT_INFO_REQUEST + runnerId;
+		return RUNNER_RESULT_INFO_REQUEST.replaceAll(RUNNERIDREGEX, Long.toString(runnerId));
 	};
 	
 	/**

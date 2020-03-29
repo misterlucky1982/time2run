@@ -122,6 +122,7 @@ public class DataProvider implements IDataProvider{
 				to.setPositionInGenderGroup(rowSet.getInt(TORequests.POSITIONINGENDERGROUP));
 				to.setRaceDate(rowSet.getDate(TORequests.RACE_DATE));
 				to.setRaceId(rowSet.getLong(TORequests.RACE_ID));
+				to.setRaceName(rowSet.getString(TORequests.RACENAME));
 				to.setTime(rowSet.getInt(TORequests.TIME));
 				list.add(to);
 			}
