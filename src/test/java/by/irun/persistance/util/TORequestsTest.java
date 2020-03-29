@@ -56,6 +56,9 @@ public class TORequestsTest {
 			+ "PC2.LOCATION AS AVATAR FROM RESULTS RS LEFT JOIN RUNNERS RN ON RS.RUNNER=RN.ID LEFT JOIN CLUBS "
 			+ "CL ON RS.CLUB=CL.ID LEFT JOIN PICTURES PC1 ON CL.SMALLLOGO=PC1.ID LEFT JOIN PICTURES PC2 ON"
 			+ " RN.LOGO=PC2.ID WHERE RS.RACE = 223 AND RS.GENDER = 'F'";
+	private final static String FULL_RACE_TO_LIST_REQUEST = "SELECT RC.ID AS RACE_ID, RC.NAME AS RACENAME, PK.NAME "
+			+ "AS PARK_NAME, RC.DATE AS RACE_DATE FROM RACES RC INNER JOIN PARKS PK ON RC.PARK = PK.ID "
+			+ "ORDER BY RC.DATE DESC, RC.ID DESC;";
 
 	/**
 	 * request test for RaceResultTO
@@ -125,6 +128,11 @@ public class TORequestsTest {
 		String requestForWomen = TORequests.runnerRaceResultTORequest(223, Gender.FEMALE);
 		assertEquals(RUNNERRACERESULTREQUESTFORMEN,requestForMale);
 		assertEquals(RUNNERRACERESULTREQUESTFORWOMEN,requestForWomen);
+	}
+	
+	@Test
+	public void fullRaceTOListTest(){
+		assertEquals(FULL_RACE_TO_LIST_REQUEST,TORequests.fullRaceListRequest());
 	}
 	
 }
