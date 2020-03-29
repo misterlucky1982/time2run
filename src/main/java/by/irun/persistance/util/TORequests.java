@@ -55,15 +55,6 @@ public class TORequests {
 			+ ", RS.TIME AS " + TIME
 			+ " FROM RESULTS RS INNER JOIN RACES RC ON RS.RACE=RC.ID INNER JOIN PARKS PK ON RC.PARK=PK.ID "
 			+ "LEFT JOIN CLUBS CL ON RS.CLUB = CL.ID WHERE RS.RUNNER =";
-
-	private static final String RACE_TO_REQUEST = "SELECT RC.ID AS " + RACE_ID + ", RC.NAME AS "+RACENAME
-			+", PK.NAME AS " + PARK_NAME
-			+ ", RC.DATE AS " + RACE_DATE + " FROM RACES RC INNER"
-			+ " JOIN PARKS PK ON RC.PARK = PK.ID";
-	
-	
-	
-	private static final String RACE_TO_REQUEST_FINISH = " ORDER BY RC.DATE DESC, RC.ID DESC;";
 	
 	private static final String RUNNER_TO_REQUEST = "SELECT RN.FIRSTNAME AS " + FIRSTNAME + ", RN.LASTNAME AS "
 			+ LASTNAME + ", RN.CITY AS " + CITY + ",  PC.LOCATION AS " + AVATAR + ", CL.ID AS " + CLUBID
@@ -90,7 +81,9 @@ public class TORequests {
 	private static final String RACE_TO_REQUEST_FOR_ID = "SELECT RC.DATE AS " + RACE_DATE
 			+ ", RC.NAME AS "+RACENAME+", PK.NAME AS " + PARK_NAME + " FROM RACES RC INNER JOIN PARKS PK ON RC.PARK=PK.ID WHERE RC.ID=";
 	
-	private static final String FULL_RACE_TO_REQUEST = "SELECT RC.ID AS RACEID, RC.DATE AS DATE, PK.NAME AS PARK FROM RACES RC INNER JOIN PARKS PK ON RC.PARK=PK.ID";
+	private static final String FULL_RACE_TO_REQUEST = "SELECT RC.ID AS RACEID, " + "RC.DATE AS " + RACE_DATE
+			+ ", RC.NAME AS " + RACENAME + ", PK.NAME AS " + PARK_NAME
+			+ " FROM RACES RC INNER JOIN PARKS PK ON RC.PARK=PK.ID";
 	
 	private static final String FULL_RACE_TO_REQUEST_ENDING_FOR_LAST_RACE = " ORDER BY RC.DATE DESC, RC.ID DESC LIMIT 1;";
 	
@@ -104,7 +97,7 @@ public class TORequests {
 	
 	private static final String FULL_RACE_TO_REQUEST_ENDING_DATE_BEFORE = " NOT RC.DATE>";
 	
-	private static final String FULL_RACE_TO_REQUEST_ENDING_FOR_LIST = " ORDER BY RC.DATE DESC, RC.ID;";
+	private static final String FULL_RACE_TO_REQUEST_ENDING_FOR_LIST = " ORDER BY RC.DATE DESC, RC.ID DESC;";
 	
 	private static final String RUNNER_RACE_RESULT_REQUEST = "SELECT RS.POSITION AS "+POSITION+", RN.FIRSTNAME AS "+FIRSTNAME
 			+", RN.LASTNAME AS "+LASTNAME+", CL.NAME AS "+CLUBNAME+", PC1.LOCATION AS "+CLUBLOGO+", CL.ID AS "+CLUBID
@@ -126,7 +119,7 @@ public class TORequests {
 	 * @return String sql-request
 	 */
 	public static String fullRaceListRequest() {
-		return RACE_TO_REQUEST+RACE_TO_REQUEST_FINISH;
+		return fullRaceTOListRequest(null,null,null);
 	}
 
 	/**
