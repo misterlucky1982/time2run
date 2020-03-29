@@ -785,4 +785,79 @@ public class DataProviderTest {
 		PowerMock.verifyAll();
 		assertNull(to);
 	}
+	
+	@Test
+	public void getRaceTOListTest(){
+		Date from = Date.valueOf("2000-01-01");
+		Date to = Date.valueOf("2000-01-03");
+		Date date = Date.valueOf("2000-01-02");
+		String park = "park";
+		Long raceId = 1L;
+		String raceName = "RACE";
+		SqlRowSet rowSet = PowerMock.createMock(org.springframework.jdbc.support.rowset.SqlRowSet.class);
+		EasyMock.expect(jdbcTemplate.queryForRowSet(TORequests.fullRaceTOListRequest(from, to, 1L))).andReturn(rowSet);
+		DataProvider provider = new DataProvider();
+		Whitebox.setInternalState(provider, "jdbcTemplate", jdbcTemplate);
+		EasyMock.expect(rowSet.next()).andReturn(true);
+		EasyMock.expect(rowSet.getLong(TORequests.RACE_ID)).andReturn(raceId);
+		EasyMock.expect(rowSet.getDate(TORequests.RACE_DATE)).andReturn(date);
+		EasyMock.expect(rowSet.getString(TORequests.RACENAME)).andReturn(raceName);
+		EasyMock.expect(rowSet.getString(TORequests.PARK_NAME)).andReturn(park);
+		EasyMock.expect(rowSet.next()).andReturn(false);
+		PowerMock.replayAll();
+		List<RaceTO> listTO = null;
+		try {
+			listTO = provider.getRaceTOList(from, to, 1L);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		PowerMock.verifyAll();
+		assertNotNull(listTO);
+		assertTrue(listTO.size()==1);
+		RaceTO rTO = listTO.get(0);
+		assertEquals(raceId,rTO.getRaceId());
+		assertEquals(raceName, rTO.getRaceName());
+		assertEquals(date, rTO.getDate());
+		assertEquals(park, rTO.getParkName());
+	}
+	
+	@Test
+	public void getRaceTOListTestForEmptyResultSet(){
+		Date from = Date.valueOf("2000-01-01");
+		Date to = Date.valueOf("2000-01-03");
+		SqlRowSet rowSet = PowerMock.createMock(org.springframework.jdbc.support.rowset.SqlRowSet.class);
+		EasyMock.expect(jdbcTemplate.queryForRowSet(TORequests.fullRaceTOListRequest(from, to, 1L))).andReturn(rowSet);
+		DataProvider provider = new DataProvider();
+		Whitebox.setInternalState(provider, "jdbcTemplate", jdbcTemplate);
+		EasyMock.expect(rowSet.next()).andReturn(false);
+		PowerMock.replayAll();
+		List<RaceTO> listTO = null;
+		try {
+			listTO = provider.getRaceTOList(from, to, 1L);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		PowerMock.verifyAll();
+		assertNotNull(listTO);
+		assertTrue(listTO.size()==0);
+	}
+	
+	@Test
+	public void getRaceTOListTestWithException() {
+		Date from = Date.valueOf("2000-01-01");
+		Date to = Date.valueOf("2000-01-03");
+		EasyMock.expect(jdbcTemplate.queryForRowSet(TORequests.fullRaceTOListRequest(from, to, 1L)))
+				.andThrow(new RuntimeException());
+		DataProvider provider = new DataProvider();
+		Whitebox.setInternalState(provider, "jdbcTemplate", jdbcTemplate);
+		PowerMock.replayAll();
+		List<RaceTO> listTO = null;
+		try {
+			listTO = provider.getRaceTOList(from, to, 1L);
+		} catch (Exception e) {
+			assertTrue(e instanceof SQLException);
+		}
+		PowerMock.verifyAll();
+		assertNull(listTO);
+	}
 }

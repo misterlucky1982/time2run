@@ -307,18 +307,37 @@ public class DataProvider implements IDataProvider{
 		return to;
 	}
 
+	/**
+	 * 
+	 * @param rowSet
+	 * @return RaceTO
+	 */
 	private RaceTO getRaceTOFromSqlRowset(SqlRowSet rowSet){
 		RaceTO to = new RaceTO();
 		to.setRaceId(rowSet.getLong(TORequests.RACE_ID));
 		to.setDate(rowSet.getDate(TORequests.RACE_DATE));
+		to.setRaceName(rowSet.getString(TORequests.RACENAME));
 		to.setParkName(rowSet.getString(TORequests.PARK_NAME));
 		return to;
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see by.irun.dao.IDataProvider#getRaceTOList(Date from, Date to, Long parkId)
+	 */
 	@Override
 	public List<RaceTO> getRaceTOList(Date from, Date to, Long parkId) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		List<RaceTO> list = new ArrayList<>();
+		try {
+			SqlRowSet rowSet = jdbcTemplate.queryForRowSet(TORequests.fullRaceTOListRequest(from, to, parkId));
+			while (rowSet.next()) {
+				list.add(getRaceTOFromSqlRowset(rowSet));
+			}
+		} catch (RuntimeException e) {
+			throw new SQLException(e);
+		}
+		return list;
 	}
 	
 }
