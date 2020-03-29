@@ -56,9 +56,13 @@ public class TORequestsTest {
 			+ "PC2.LOCATION AS AVATAR FROM RESULTS RS LEFT JOIN RUNNERS RN ON RS.RUNNER=RN.ID LEFT JOIN CLUBS "
 			+ "CL ON RS.CLUB=CL.ID LEFT JOIN PICTURES PC1 ON CL.SMALLLOGO=PC1.ID LEFT JOIN PICTURES PC2 ON"
 			+ " RN.LOGO=PC2.ID WHERE RS.RACE = 223 AND RS.GENDER = 'F'";
-	
+
 	private final String RACE_TO_REQUEST_FOR_LAST_RACE = "SELECT RC.ID AS RACEID, RC.DATE AS DATE, PK.NAME AS"
 			+ " PARK FROM RACES RC INNER JOIN PARKS PK ON RC.PARK=PK.ID ORDER BY RC.DATE DESC, RC.ID DESC LIMIT 1;";
+
+	private final static String FULL_RACE_TO_LIST_REQUEST = "SELECT RC.ID AS RACE_ID, RC.NAME AS RACENAME, PK.NAME "
+			+ "AS PARK_NAME, RC.DATE AS RACE_DATE FROM RACES RC INNER JOIN PARKS PK ON RC.PARK = PK.ID "
+			+ "ORDER BY RC.DATE DESC, RC.ID DESC;";
 
 	/**
 	 * request test for RaceResultTO
@@ -134,4 +138,8 @@ public class TORequestsTest {
 	public void raceTOReqestForLastRaceTest(){
 		assertEquals(RACE_TO_REQUEST_FOR_LAST_RACE,TORequests.raceTORequestForLastRace());
 	}
+	public void fullRaceTOListTest(){
+		assertEquals(FULL_RACE_TO_LIST_REQUEST,TORequests.fullRaceListRequest());
+	}
+	
 }

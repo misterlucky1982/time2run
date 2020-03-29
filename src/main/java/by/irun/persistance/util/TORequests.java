@@ -56,9 +56,14 @@ public class TORequests {
 			+ " FROM RESULTS RS INNER JOIN RACES RC ON RS.RACE=RC.ID INNER JOIN PARKS PK ON RC.PARK=PK.ID "
 			+ "LEFT JOIN CLUBS CL ON RS.CLUB = CL.ID WHERE RS.RUNNER =";
 
-	private static final String RACELIST_REQUEST = "select rc.id as " + RACE_ID + ", pk.name as " + PARK_NAME
-			+ ", rc.date as " + RACE_DATE + " from races rc inner"
-			+ " join parks pk on rc.park = pk.id order by rc.date desc;";
+	private static final String RACE_TO_REQUEST = "SELECT RC.ID AS " + RACE_ID + ", RC.NAME AS "+RACENAME
+			+", PK.NAME AS " + PARK_NAME
+			+ ", RC.DATE AS " + RACE_DATE + " FROM RACES RC INNER"
+			+ " JOIN PARKS PK ON RC.PARK = PK.ID";
+	
+	
+	
+	private static final String RACE_TO_REQUEST_FINISH = " ORDER BY RC.DATE DESC, RC.ID DESC;";
 	
 	private static final String RUNNER_TO_REQUEST = "SELECT RN.FIRSTNAME AS " + FIRSTNAME + ", RN.LASTNAME AS "
 			+ LASTNAME + ", RN.CITY AS " + CITY + ",  PC.LOCATION AS " + AVATAR + ", CL.ID AS " + CLUBID
@@ -82,7 +87,7 @@ public class TORequests {
 			+ "RN.LASTNAME AS " + LASTNAME + ", RN.AVATAR AS " + AVATAR +  ", RN.GENDER AS "+GENDER+", RN.ID AS " + RUNNERID
 			+ " FROM RUNNERS RN WHERE RN.CLUB = ";
 	
-	private static final String RACE_TO_REQUEST = "SELECT RC.DATE AS " + RACE_DATE
+	private static final String RACE_TO_REQUEST_FOR_ID = "SELECT RC.DATE AS " + RACE_DATE
 			+ ", RC.NAME AS "+RACENAME+", PK.NAME AS " + PARK_NAME + " FROM RACES RC INNER JOIN PARKS PK ON RC.PARK=PK.ID WHERE RC.ID=";
 	
 	private static final String FULL_RACE_TO_REQUEST = "SELECT RC.ID AS RACEID, RC.DATE AS DATE, PK.NAME AS PARK FROM RACES RC INNER JOIN PARKS PK ON RC.PARK=PK.ID";
@@ -121,7 +126,7 @@ public class TORequests {
 	 * @return String sql-request
 	 */
 	public static String fullRaceListRequest() {
-		return RACELIST_REQUEST;
+		return RACE_TO_REQUEST+RACE_TO_REQUEST_FINISH;
 	}
 
 	/**
@@ -178,7 +183,7 @@ public class TORequests {
 	 * @return
 	 */
 	public static String raceTORequest(long raceId) {
-		return RACE_TO_REQUEST + raceId;
+		return RACE_TO_REQUEST_FOR_ID + raceId;
 	}
 	
 	/**
