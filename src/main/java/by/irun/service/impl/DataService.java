@@ -29,9 +29,9 @@ import by.irun.viz.to.ClubRaceResultInfoTO;
 import by.irun.viz.to.ClubRunnerInfoTO;
 import by.irun.viz.to.RaceInfoTO;
 import by.irun.viz.to.RaceResultTO;
-import by.irun.viz.to.RunnerInfoTO;
-import by.irun.viz.to.RunnerResultInfoTO;
 import by.irun.viz.to.racepage.RaceResultInfoTO;
+import by.irun.viz.to.runnerpage.RunnerInfoTO;
+import by.irun.viz.to.runnerpage.RunnerResultInfoTO;
 import by.irun.viz.utils.VizUtils;
 /**
  * 
@@ -111,7 +111,7 @@ public class DataService implements IDataService{
 		}
 		to.setNumberOfRaces(resultList.size());
 		List<RunnerResultInfoTO> listTO = new ArrayList<>();
-		for(RunnerResultTO resTO:resultList)listTO.add(VizUtils.convert(resTO, locale));
+		for(RunnerResultTO resTO:resultList)listTO.add(ServiceUtils.runnerResultInfoTOForRunnerPage(resTO, locale));
 		to.setRacesList(listTO);
 		return to;
 	}

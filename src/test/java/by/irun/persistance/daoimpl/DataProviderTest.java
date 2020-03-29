@@ -227,6 +227,7 @@ public class DataProviderTest {
 		EasyMock.expect(rowSet.getInt(TORequests.POSITIONINGENDERGROUP)).andReturn(posInGr);
 		EasyMock.expect(rowSet.getDate(TORequests.RACE_DATE)).andReturn(date);
 		EasyMock.expect(rowSet.getLong(TORequests.RACE_ID)).andReturn(raceId);
+		EasyMock.expect(rowSet.getString(TORequests.RACENAME)).andReturn(null);
 		EasyMock.expect(rowSet.getInt(TORequests.TIME)).andReturn(time);
 		EasyMock.expect(rowSet.next()).andReturn(false);
 		PowerMock.replayAll();

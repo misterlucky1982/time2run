@@ -1,6 +1,8 @@
-package by.irun.viz.to;
+package by.irun.viz.to.runnerpage;
 
 import java.util.List;
+
+import by.irun.viz.to.InfoTO;
 
 /**
  * This class provides information about runner for front-end representation

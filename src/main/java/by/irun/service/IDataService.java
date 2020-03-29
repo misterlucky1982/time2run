@@ -6,8 +6,8 @@ import java.util.Locale;
 import by.irun.viz.to.ClubInfoTO;
 import by.irun.viz.to.RaceInfoTO;
 import by.irun.viz.to.RaceResultTO;
-import by.irun.viz.to.RunnerInfoTO;
 import by.irun.viz.to.racepage.RaceResultInfoTO;
+import by.irun.viz.to.runnerpage.RunnerInfoTO;
 /**
  * Provides functionality for transformation data stored in DB into front-end representation
  * @author A.Dubovik

@@ -217,4 +217,16 @@ public class ServiceUtils {
 		return result;
 	}
 	
+	public static by.irun.viz.to.runnerpage.RunnerResultInfoTO runnerResultInfoTOForRunnerPage(RunnerResultTO to, Locale locale){
+		by.irun.viz.to.runnerpage.RunnerResultInfoTO infoTO = new  by.irun.viz.to.runnerpage.RunnerResultInfoTO();
+		infoTO.setAbsPositionInfo(Integer.toString(to.getAbsPosition()));
+		infoTO.setClubLogo(to.getClubLogo());
+		infoTO.setClubName(VizUtils.resolveClubName(to.getClubName(),locale));
+		infoTO.setLinkToClub(VizUtils.resolveClubLink(to.getClubId()));
+		infoTO.setLinkToRace(VizUtils.resolveRaceLink(to.getRaceId()));
+		infoTO.setPosInOwnGenderInfo(Integer.toString(to.getPositionInGenderGroup()));
+		infoTO.setRaceInfo(VizUtils.buildRaceName(to.getRaceName(), to.getParkName(), to.getRaceDate(), locale));
+		infoTO.setTime(VizUtils.convertNumberOfSecondsToTimeRepresentation(to.getTime()));
+		return infoTO;
+	}
 }

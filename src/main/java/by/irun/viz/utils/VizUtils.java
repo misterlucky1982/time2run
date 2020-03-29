@@ -12,8 +12,8 @@ import by.irun.domain.to.RunnerTO;
 import by.irun.locale.AppLocales;
 import by.irun.locale.Internationalizer;
 import by.irun.locale.Translator;
-import by.irun.viz.to.RunnerInfoTO;
-import by.irun.viz.to.RunnerResultInfoTO;
+import by.irun.viz.to.runnerpage.RunnerInfoTO;
+import by.irun.viz.to.runnerpage.RunnerResultInfoTO;
 
 /**
  * this class provides utility methods for front-end representation
@@ -118,19 +118,6 @@ public class VizUtils implements Translator{
 	 */
 	public static String getAvatarForAvatarPathAndGender(String avatar, Gender gender, Locale locale){
 		return avatar!=null?avatar:AVATAR_MAP.get(gender).get(locale);
-	}
-	
-	public static RunnerResultInfoTO convert(RunnerResultTO to, Locale locale){
-		RunnerResultInfoTO infoTO = new RunnerResultInfoTO();
-		infoTO.setAbsPositionInfo(Integer.toString(to.getAbsPosition()));
-		infoTO.setClubLogo(to.getClubLogo());
-		infoTO.setClubName(resolveClubName(to.getClubName(),locale));
-		infoTO.setLinkToClub(resolveClubLink(to.getClubId()));
-		infoTO.setLinkToRace(resolveRaceLink(to.getRaceId()));
-		infoTO.setPosInOwnGenderInfo(Integer.toString(to.getPositionInGenderGroup()));
-		infoTO.setRaceInfo(VizUtils.buildRaceName(to.getRaceName(), to.getParkName(), to.getRaceDate(), locale));
-		infoTO.setTime(convertNumberOfSecondsToTimeRepresentation(to.getTime()));
-		return infoTO;
 	}
 	
 	/**

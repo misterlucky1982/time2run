@@ -1,12 +1,14 @@
-package by.irun.viz.to;
+package by.irun.viz.to.runnerpage;
 
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import by.irun.viz.to.runnerpage.RunnerResultInfoTO;
+
 /**
- * Test class for {@link by.irun.viz.to.RunnerResultInfoTO}
+ * Test class for {@link by.irun.viz.to.runnerpage.RunnerResultInfoTO}
  * @author A.Dubovik
  *
  */

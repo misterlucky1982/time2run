@@ -1,4 +1,4 @@
-package by.irun.viz.to;
+package by.irun.viz.to.runnerpage;
 
 import static org.junit.Assert.*;
 
@@ -8,8 +8,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.powermock.api.easymock.PowerMock;
 
+import by.irun.viz.to.runnerpage.RunnerInfoTO;
+import by.irun.viz.to.runnerpage.RunnerResultInfoTO;
+
 /**
- * test class for {@link by.irun.viz.to.RunnerInfoTO}
+ * test class for {@link by.irun.viz.to.runnerpage.RunnerInfoTO}
  * @author A.Dubovik
  *
  */

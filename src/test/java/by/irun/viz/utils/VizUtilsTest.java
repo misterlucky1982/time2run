@@ -18,7 +18,7 @@ import by.irun.domain.to.RunnerTO;
 import by.irun.locale.AppLocales;
 import by.irun.locale.Internationalizer;
 import by.irun.locale.Translator;
-import by.irun.viz.to.RunnerInfoTO;
+import by.irun.viz.to.runnerpage.RunnerInfoTO;
 import by.irun.viz.utils.VizUtils;
 
 /**

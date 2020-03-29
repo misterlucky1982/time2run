@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import by.irun.persistance.daoimpl.DataProvider;
 import by.irun.service.impl.DataService;
 import by.irun.viz.to.ClubInfoTO;
-import by.irun.viz.to.RunnerInfoTO;
 import by.irun.viz.to.racepage.RaceResultInfoTO;
+import by.irun.viz.to.runnerpage.RunnerInfoTO;
 
 @Controller
 public abstract class ApplicationController {
