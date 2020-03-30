@@ -7,6 +7,7 @@ import by.irun.viz.to.ClubInfoTO;
 import by.irun.viz.to.RaceInfoTO;
 import by.irun.viz.to.RaceResultTO;
 import by.irun.viz.to.racepage.RaceResultInfoTO;
+import by.irun.viz.to.raceselectpage.RaceSelectPageViewTO;
 import by.irun.viz.to.runnerpage.RunnerInfoTO;
 /**
  * Provides functionality for transformation data stored in DB into front-end representation
@@ -56,5 +57,11 @@ public interface IDataService {
 	 * @return
 	 */
 	RaceResultInfoTO getRaceResultInfoTO(long raceId, Locale locale);
+	
+	/**
+	 * Provides RaceSelectPageViewTO for last race
+	 * @return RaceSelectPageViewTO
+	 */
+	RaceSelectPageViewTO getRaceSelectPageViewTOForLastRace();
 
 }

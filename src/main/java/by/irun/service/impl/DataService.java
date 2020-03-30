@@ -30,6 +30,7 @@ import by.irun.viz.to.ClubRunnerInfoTO;
 import by.irun.viz.to.RaceInfoTO;
 import by.irun.viz.to.RaceResultTO;
 import by.irun.viz.to.racepage.RaceResultInfoTO;
+import by.irun.viz.to.raceselectpage.RaceSelectPageViewTO;
 import by.irun.viz.to.runnerpage.RunnerInfoTO;
 import by.irun.viz.to.runnerpage.RunnerResultInfoTO;
 import by.irun.viz.utils.VizUtils;
@@ -181,6 +182,19 @@ public class DataService implements IDataService{
 			result.setWomenResult(new by.irun.util.List<>(ServiceUtils.resolveRunnerResultList(womenResult, locale, Gender.FEMALE)));
 			return result;
 		}
+	}
+
+	@Override
+	public RaceSelectPageViewTO getRaceSelectPageViewTOForLastRace() {
+		RaceTO lastRace = null;
+		try {
+			lastRace = dataProvider.getRaceTOForLastRace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		RaceSelectPageViewTO viewTO = new RaceSelectPageViewTO();
+		return null;
 	}
 	
 }
