@@ -2,6 +2,8 @@ package by.irun.persistance.daoimpl;
 
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
@@ -78,6 +80,8 @@ public class DomainDAO implements CRUDHandler{
 		}
 	}
 
+
+
 	/* (non-Javadoc)
 	 * @see by.irun.dao.CRUDHandler#getEntityById(Class entityClass, Serializable id)
 	 */
@@ -97,6 +101,30 @@ public class DomainDAO implements CRUDHandler{
 	      }
 	    }
 	    return entity;
+	}
+
+	/* (non-Javadoc)
+	 * @see by.irun.dao.CRUDHandler#getEntityList(Class<?>entityClass)
+	 */
+	@Override
+	public List<?> getEntityList(Class<?>entityClass) throws SQLException {
+		Session session = null;
+	    List<?>result = null;
+	    Transaction tr = null;
+	    try {
+	      session = DBUtils.getSessionFactory().openSession();
+	      tr = session.beginTransaction();
+	      result = session.createQuery("from "+entityClass.getSimpleName()).getResultList();
+	      tr.commit();
+	    } catch (javax.persistence.PersistenceException e) {
+	    	if(tr!=null)tr.rollback();
+	    	throw new SQLException();
+	    } finally {
+	      if (session != null && session.isOpen()) {
+	        session.close();
+	      }
+	    }
+	    return result;
 	}
 
 }
