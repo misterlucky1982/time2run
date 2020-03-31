@@ -2,6 +2,7 @@ package by.irun.dao;
 
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.util.List;
 
 import by.irun.domain.DomainEntity;
 
@@ -20,4 +21,12 @@ public interface IDomainEntityProvider {
 	 * @throws SQLException
 	 */
 	DomainEntity getEntityById(@SuppressWarnings("rawtypes") Class entityClass, Serializable id) throws SQLException;
+	
+	/**
+	 * Provides entire list of entities for appropriate class
+	 * @param entityClass
+	 * @return List
+	 * @throws SQLException
+	 */
+	List<?> getEntityList(Class<?>entityClass) throws SQLException;
 }
