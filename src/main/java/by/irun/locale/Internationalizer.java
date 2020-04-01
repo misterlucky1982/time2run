@@ -47,6 +47,12 @@ public class Internationalizer implements Translator{
 		by.put(UNKNOWN_PARTICIPANT, "Невядомы ўдзельнік");
 		ru.put(UNKNOWN_PARTICIPANT, "Неизвестный участник");
 		en.put(UNKNOWN_PARTICIPANT, "Unknown participant");
+		by.put(LAST_EVENT, "Апошняя падзея");
+		ru.put(LAST_EVENT, "Последнее событие");
+		en.put(LAST_EVENT, "Last event");
+		by.put(RACE, "забег");
+		ru.put(RACE, "забег");
+		en.put(RACE, "race");
 		
 		TRANSLATIONS.put(AppLocales.BY, by);
 		TRANSLATIONS.put(AppLocales.RU, ru);

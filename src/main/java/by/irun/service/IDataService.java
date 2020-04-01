@@ -60,8 +60,9 @@ public interface IDataService {
 	
 	/**
 	 * Provides RaceSelectPageViewTO for last race
-	 * @return RaceSelectPageViewTO
+	 * @param locale
+	 * @return
 	 */
-	RaceSelectPageViewTO getRaceSelectPageViewTOForLastRace();
+	RaceSelectPageViewTO getRaceSelectPageViewTOForLastRace(Locale locale);
 
 }

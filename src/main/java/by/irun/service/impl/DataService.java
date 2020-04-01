@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import by.irun.dao.IDataProvider;
 import by.irun.dao.IDomainEntityProvider;
 import by.irun.domain.Gender;
+import by.irun.domain.Park;
 import by.irun.domain.to.ClubRunnerTO;
 import by.irun.domain.to.ClubTO;
 import by.irun.domain.to.RaceClubResultTO;
@@ -38,7 +39,7 @@ import by.irun.viz.utils.VizUtils;
  * 
  * @author A.Dubovik
  */
-@SuppressWarnings({ "deprecation", "unused" })
+@SuppressWarnings({ "deprecation" })
 @Service
 public class DataService implements IDataService{
 
@@ -184,17 +185,28 @@ public class DataService implements IDataService{
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public RaceSelectPageViewTO getRaceSelectPageViewTOForLastRace() {
+	public RaceSelectPageViewTO getRaceSelectPageViewTOForLastRace(Locale locale) {
 		RaceTO lastRace = null;
+		List<Park> parkList = null;
 		try {
 			lastRace = dataProvider.getRaceTOForLastRace();
+			parkList = (List<Park>) entityProvider.getEntityList(Park.class);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}
+		if(lastRace==null||parkList==null){
 			return null;
 		}
 		RaceSelectPageViewTO viewTO = new RaceSelectPageViewTO();
-		return null;
+		viewTO.setEventTitle(Internationalizer.translate(Translator.LAST_EVENT,locale));
+		viewTO.setLastRaceDate(Internationalizer.translate(lastRace.getDate(),locale));
+		viewTO.setLastRacePark(lastRace.getParkName());
+		viewTO.setLastRaceName(VizUtils.buildRaceName(lastRace.getRaceName(), lastRace.getParkName(), lastRace.getDate(), locale));
+		viewTO.setLinkToLastRace(null);//TODO
+		viewTO.setParksMap(ServiceUtils.resolveParkKeysMap(parkList));
+		return viewTO;
 	}
 	
 }

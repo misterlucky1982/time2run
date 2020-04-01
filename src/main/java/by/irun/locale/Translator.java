@@ -15,4 +15,6 @@ public interface Translator {
 	public static final String SPACE = " ";
 	public static final String HYPHEN = "-";
 	public static final String UNKNOWN_PARTICIPANT = "unknownParticipant";
+	public static final String LAST_EVENT = "lastEvent";
+	public static final String RACE = "race";
 }

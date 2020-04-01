@@ -12,6 +12,7 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import by.irun.domain.Gender;
+import by.irun.domain.Park;
 import by.irun.domain.to.RaceClubResultTO;
 import by.irun.domain.to.RunnerRaceResultTO;
 import by.irun.domain.to.RunnerResultTO;
@@ -228,5 +229,20 @@ public class ServiceUtils {
 		infoTO.setRaceInfo(VizUtils.buildRaceName(to.getRaceName(), to.getParkName(), to.getRaceDate(), locale));
 		infoTO.setTime(VizUtils.convertNumberOfSecondsToTimeRepresentation(to.getTime()));
 		return infoTO;
+	}
+	
+	/**
+	 * Keys of produced map - names of parks in given list
+	 * <p>
+	 * values - String representations of park id
+	 * @param list
+	 * @return
+	 */
+	public static Map<String, String> resolveParkKeysMap(List<Park> list) {
+		Map<String, String> map = new HashMap<>();
+		for (Park p : list) {
+			map.put(p.getName(), Long.toString(p.getId()));
+		}
+		return map;
 	}
 }

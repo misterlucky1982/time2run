@@ -16,6 +16,7 @@ import by.irun.persistance.daoimpl.DataProvider;
 import by.irun.service.impl.DataService;
 import by.irun.viz.to.ClubInfoTO;
 import by.irun.viz.to.racepage.RaceResultInfoTO;
+import by.irun.viz.to.raceselectpage.RaceSelectPageViewTO;
 import by.irun.viz.to.runnerpage.RunnerInfoTO;
 
 @Controller
@@ -63,6 +64,15 @@ public abstract class ApplicationController {
 		mav.addObject("race", to);
 		mav.setViewName("race");
 		return mav;
+	}
+	
+	@GetMapping("/events")
+	public ModelAndView getLastEventPage(HttpServletRequest request,
+			HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		localeResolver.setLocale(request, response, getLocale());
+		RaceSelectPageViewTO viewTO = dataService.getRaceSelectPageViewTOForLastRace(getLocale());
+		return null;
 	}
 	
 	/**
