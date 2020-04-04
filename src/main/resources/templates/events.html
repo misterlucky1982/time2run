@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:text="#{app.title}">Title</title>
+<link rel="icon" href="/images/icon.png" type="image/png">
+<link rel="stylesheet" th:href="@{/css/header_styles.css}" type="text/css" media="screen"/>
+<link rel="stylesheet" th:href="@{/css/events/events_styles.css}" type="text/css" media="screen"/>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script src="/scripts/header/header.js"></script>
+<script src="/scripts/events/events.js"></script>
+</head>
+<body>
+	<div th:replace="fragments/header :: header"></div>
+	<div id="events_container">
+		<h3>
+			<span th:text="${event.eventTitle}"></span>:
+		</h3>
+		<h1 th:text="${event.lastRaceName}"></h1>
+		<h4>
+			<span th:text="#{events.date}"></span>: <span
+				th:text="${event.lastRaceDate}"></span>
+		</h4>
+		<h4>
+			<span th:text="#{events.place}"></span>: <span
+				th:text="${event.lastRacePark}"></span>
+		</h4>
+		<div id=events_select_options_container>
+			<ul id="events_select_options">
+				<li><a href="#"><span id="events_parkselect" th:text="#{events.allParks}"></span></a>
+					<div class="parks">
+						<div>
+							<ul>
+								<li><a href="#" th:attr="onclick=|selectPark('#{events.allParks}',null)|"><span th:text="#{events.allParks}"></span></a></li>
+								<li th:each="e : ${event.parksMap.entrySet()}"><a href="#" th:attr="onclick=|selectPark('${e.key}','${e.value}')|" ><span th:text="${e.key}"></span></a></li>
+							</ul>
+						</div>
+					</div>
+					<input type="date" name="calendar">
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

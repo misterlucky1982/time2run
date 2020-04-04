@@ -72,7 +72,9 @@ public abstract class ApplicationController {
 		ModelAndView mav = new ModelAndView();
 		localeResolver.setLocale(request, response, getLocale());
 		RaceSelectPageViewTO viewTO = dataService.getRaceSelectPageViewTOForLastRace(getLocale());
-		return null;
+		mav.addObject("event", viewTO);
+		mav.setViewName("events");
+		return mav;
 	}
 	
 	/**
