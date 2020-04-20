@@ -80,6 +80,8 @@ public class DomainDAO implements CRUDHandler{
 		}
 	}
 
+
+
 	/* (non-Javadoc)
 	 * @see by.irun.dao.CRUDHandler#getEntityById(Class entityClass, Serializable id)
 	 */

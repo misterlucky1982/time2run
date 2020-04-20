@@ -1,0 +1,44 @@
+.raceinfo_container{
+	font-family: Code Pro Bold;
+	color:#181818;
+    text-align: center;
+    
+}
+
+.raceinfo_container #eventtype, .raceinfo_container #racedescription{
+	font-size: 18px;
+	color: rgb(121,121,121);
+	font-weight: lighter;
+}
+
+.raceinfo_container #racedescription{
+	margin-top: 20px;
+}
+
+.raceinfo_container #racedescription p{
+	margin-top: -20px;
+}
+
+.raceinfo_container #racetitle{
+	margin-top: -20px;
+	font-weight: bold;
+	font-size: 44px;
+	color: rgb(130,71,71);
+	text-shadow: 1px 1px 1px rgb(20,20,20);
+}
+
+#gotorace_wrapper{
+	display: flex;
+	justify-content: center;
+	width: 100%;
+}
+
+#gotorace{
+	margin: auto;
+	height: 35px;
+	width: 300px;
+}
+
+#gotorace a{
+	margin-top: 5px;
+}

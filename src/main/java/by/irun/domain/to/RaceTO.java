@@ -8,6 +8,8 @@ import java.sql.Date;
  *
  */
 public class RaceTO {
+	
+	private Long raceId;
 
 	private String parkName;
 	
@@ -44,6 +46,20 @@ public class RaceTO {
 	}
 
 	/**
+	 * @return the raceId
+	 */
+	public Long getRaceId() {
+		return raceId;
+	}
+
+	/**
+	 * @param raceId the raceId to set
+	 */
+	public void setRaceId(Long raceId) {
+		this.raceId = raceId;
+		}
+	
+	/**
 	 * @return the raceName
 	 */
 	public String getRaceName() {
@@ -56,6 +72,5 @@ public class RaceTO {
 	public void setRaceName(String raceName) {
 		this.raceName = raceName;
 	}
-	
 	
 }

@@ -15,6 +15,7 @@ public class RunnerResultTO {
 	private String clubLogo;
 	private long raceId;
 	private Date raceDate;
+	private String raceName;
 	private String parkName;
 	private int time;
 	/**
@@ -124,6 +125,18 @@ public class RunnerResultTO {
 	 */
 	public void setTime(int time) {
 		this.time = time;
+	}
+	/**
+	 * @return the raceName
+	 */
+	public String getRaceName() {
+		return raceName;
+	}
+	/**
+	 * @param raceName the raceName to set
+	 */
+	public void setRaceName(String raceName) {
+		this.raceName = raceName;
 	}
 	
 	

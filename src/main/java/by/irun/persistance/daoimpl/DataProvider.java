@@ -1,5 +1,6 @@
 package by.irun.persistance.daoimpl;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ import by.irun.domain.Gender;
 import by.irun.domain.to.ClubRunnerTO;
 import by.irun.domain.to.ClubTO;
 import by.irun.domain.to.RaceClubResultTO;
+import by.irun.domain.to.RaceExtendedTO;
 import by.irun.domain.to.RaceTO;
 import by.irun.domain.to.RunnerRaceResultTO;
 import by.irun.domain.to.RunnerResultTO;
@@ -121,6 +123,7 @@ public class DataProvider implements IDataProvider{
 				to.setPositionInGenderGroup(rowSet.getInt(TORequests.POSITIONINGENDERGROUP));
 				to.setRaceDate(rowSet.getDate(TORequests.RACE_DATE));
 				to.setRaceId(rowSet.getLong(TORequests.RACE_ID));
+				to.setRaceName(rowSet.getString(TORequests.RACENAME));
 				to.setTime(rowSet.getInt(TORequests.TIME));
 				list.add(to);
 			}
@@ -269,21 +272,94 @@ public class DataProvider implements IDataProvider{
 	 * @see by.irun.dao.IDataProvider#getRaceTOforRaceId (long raceId)
 	 */
 	@Override
-	public RaceTO getRaceTOforRaceId(long raceId) throws SQLException {
-		RaceTO to = null;
+	public RaceExtendedTO getRaceExtendedTOforRaceId(long raceId) throws SQLException {
+		RaceExtendedTO to = null;
 		try {
-			SqlRowSet rowSet = jdbcTemplate.queryForRowSet(TORequests.raceTORequest(raceId));
-			if (rowSet.next()) {
-				to = new RaceTO();
-				to.setRaceName(rowSet.getString(TORequests.RACENAME));
-				to.setDate(rowSet.getDate(TORequests.RACE_DATE));
-				to.setParkName(rowSet.getString(TORequests.PARK_NAME));
-			} else
-				throw new SQLException("empty resultSet for race id:" + raceId);
+			SqlRowSet rowSet = jdbcTemplate.queryForRowSet(TORequests.extendedRaceTORequestForRaceId(raceId));
+			to = raceExtendedTOfromSqlRowSet(rowSet);
 		} catch (RuntimeException e) {
 			throw new SQLException(e);
 		}
 		return to;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see by.irun.dao.IDataProvider#getRaceTOForLastRace()
+	 */
+	@Override
+	public RaceExtendedTO getRaceExtendedTOForLastRace() throws SQLException {
+		RaceExtendedTO to = null;
+		try {
+			SqlRowSet rowSet = jdbcTemplate.queryForRowSet(TORequests.extendedRaceTORequestForLastRace());
+			to = raceExtendedTOfromSqlRowSet(rowSet);
+		} catch (RuntimeException e) {
+			throw new SQLException(e);
+		}
+		return to;
+	}
+	
+	private RaceExtendedTO raceExtendedTOfromSqlRowSet(SqlRowSet rowSet) throws SQLException{
+		if (rowSet.next()) {
+			RaceExtendedTO to = null;
+			to = new RaceExtendedTO();
+			to.setRaceName(rowSet.getString(TORequests.RACENAME));
+			to.setDate(rowSet.getDate(TORequests.RACE_DATE));
+			to.setParkName(rowSet.getString(TORequests.PARK_NAME));
+			to.setRaceId(rowSet.getLong(TORequests.RACE_ID));
+			to.setMenParticupants(rowSet.getInt(TORequests.M_PARTICIPANTS));
+			to.setWomenParticipants(rowSet.getInt(TORequests.W_PARTICIPANTS));
+			return to;
+		} else
+			throw new SQLException("empty resultSet");
+	}
+
+	/**
+	 * 
+	 * @param rowSet
+	 * @return RaceTO
+	 */
+	private RaceTO getRaceTOFromSqlRowset(SqlRowSet rowSet){
+		RaceTO to = new RaceTO();
+		to.setDate(rowSet.getDate(TORequests.RACE_DATE));
+		to.setRaceName(rowSet.getString(TORequests.RACENAME));
+		to.setParkName(rowSet.getString(TORequests.PARK_NAME));
+		to.setRaceId(rowSet.getLong(TORequests.RACE_ID));
+		return to;
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see by.irun.dao.IDataProvider#getRaceTOList(Date from, Date to, Long parkId)
+	 */
+	@Override
+	public List<RaceTO> getRaceTOList(Date from, Date to, Long parkId) throws SQLException {
+		List<RaceTO> list = new ArrayList<>();
+		try {
+			SqlRowSet rowSet = jdbcTemplate.queryForRowSet(TORequests.fullRaceTOListRequest(from, to, parkId));
+			while (rowSet.next()) {
+				list.add(getRaceTOFromSqlRowset(rowSet));
+			}
+		} catch (RuntimeException e) {
+			throw new SQLException(e);
+		}
+		return list;
+	}
+
+	@Override
+	public RaceTO getRaceTOforRaceId(long raceId) throws SQLException {
+		RaceTO to = null;
+		try {
+			SqlRowSet rowSet = jdbcTemplate.queryForRowSet(TORequests.raceTORequest(raceId));
+			if(rowSet.next()){
+				to = getRaceTOFromSqlRowset(rowSet);
+			}else throw new SQLException("empty ResultSet for raceId:"+raceId);
+		} catch (RuntimeException e) {
+			throw new SQLException(e);
+		}
+		return to;
+	}
+	
 }

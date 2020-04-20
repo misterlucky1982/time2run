@@ -1,5 +1,6 @@
 package by.irun.service.impl;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,9 +13,11 @@ import org.springframework.stereotype.Service;
 import by.irun.dao.IDataProvider;
 import by.irun.dao.IDomainEntityProvider;
 import by.irun.domain.Gender;
+import by.irun.domain.Park;
 import by.irun.domain.to.ClubRunnerTO;
 import by.irun.domain.to.ClubTO;
 import by.irun.domain.to.RaceClubResultTO;
+import by.irun.domain.to.RaceExtendedTO;
 import by.irun.domain.to.RaceTO;
 import by.irun.domain.to.RunnerRaceResultTO;
 import by.irun.domain.to.RunnerResultTO;
@@ -24,20 +27,23 @@ import by.irun.locale.Internationalizer;
 import by.irun.locale.Translator;
 import by.irun.service.IDataService;
 import by.irun.service.ServiceUtils;
+import by.irun.util.Link;
 import by.irun.viz.to.ClubInfoTO;
-import by.irun.viz.to.ClubRaceResultInfoTO;
 import by.irun.viz.to.ClubRunnerInfoTO;
 import by.irun.viz.to.RaceInfoTO;
 import by.irun.viz.to.RaceResultTO;
-import by.irun.viz.to.RunnerInfoTO;
-import by.irun.viz.to.RunnerResultInfoTO;
 import by.irun.viz.to.racepage.RaceResultInfoTO;
+import by.irun.viz.to.raceselectpage.RaceInfoVizTO;
+import by.irun.viz.to.raceselectpage.RaceSelectPageViewTO;
+import by.irun.viz.to.runnerpage.RunnerInfoTO;
+import by.irun.viz.to.runnerpage.RunnerResultInfoTO;
+import by.irun.viz.utils.JSUtils;
 import by.irun.viz.utils.VizUtils;
 /**
  * 
  * @author A.Dubovik
  */
-@SuppressWarnings({ "deprecation", "unused" })
+@SuppressWarnings({ "deprecation" })
 @Service
 public class DataService implements IDataService{
 
@@ -111,7 +117,7 @@ public class DataService implements IDataService{
 		}
 		to.setNumberOfRaces(resultList.size());
 		List<RunnerResultInfoTO> listTO = new ArrayList<>();
-		for(RunnerResultTO resTO:resultList)listTO.add(VizUtils.convert(resTO, locale));
+		for(RunnerResultTO resTO:resultList)listTO.add(ServiceUtils.runnerResultInfoTOForRunnerPage(resTO, locale));
 		to.setRacesList(listTO);
 		return to;
 	}
@@ -181,6 +187,69 @@ public class DataService implements IDataService{
 			result.setWomenResult(new by.irun.util.List<>(ServiceUtils.resolveRunnerResultList(womenResult, locale, Gender.FEMALE)));
 			return result;
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public RaceSelectPageViewTO getRaceSelectPageViewTOForLastRace(Locale locale) {
+		RaceExtendedTO lastRace = null;
+		List<Park> parkList = null;
+		try {
+			lastRace = dataProvider.getRaceExtendedTOForLastRace();
+			parkList = (List<Park>) entityProvider.getEntityList(Park.class);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		if(lastRace==null||parkList==null){
+			return null;
+		}
+		RaceSelectPageViewTO viewTO = new RaceSelectPageViewTO();
+		RaceInfoVizTO raceVizTO = getRaceInfoVizTOFromRaceTO(lastRace, locale, true);
+		viewTO.setRaceInfoVizTO(raceVizTO);
+		viewTO.setParksMap(ServiceUtils.resolveParkKeysMap(parkList));
+		return viewTO;
+	}
+
+	@Override
+	public List<Link> getRaceLinkList(Date from, Date to, Long parkId, Locale locale) {
+		List<RaceTO> raceTOs = null;
+		try{
+			raceTOs = dataProvider.getRaceTOList(from, to, parkId);
+		}catch(SQLException e){
+			return Collections.emptyList();
+		};
+		List<Link>result = new ArrayList<>();
+		for(RaceTO rto:raceTOs){
+			Link link = new Link();
+			link.setLinkName(VizUtils.buildRaceName(rto.getRaceName(), rto.getParkName(), rto.getDate(), locale));
+			link.setLinkValue(JSUtils.clickToRaceInRaceList(rto.getRaceId()));
+			result.add(link);
+		}
+		return result;
+	}
+
+	@Override
+	public RaceInfoVizTO getRaceInfoVizTO(Long raceId, Locale locale) {
+		RaceExtendedTO race = null;
+		try{
+			race = dataProvider.getRaceExtendedTOforRaceId(raceId);
+		}catch(SQLException e){
+			return null;
+		}
+		return getRaceInfoVizTOFromRaceTO(race, locale, false);
+	}
+	
+	private RaceInfoVizTO getRaceInfoVizTOFromRaceTO(RaceExtendedTO race, Locale locale, boolean lastEvent){
+		RaceInfoVizTO raceVizTO = new RaceInfoVizTO();
+		raceVizTO.setEventTitle(Internationalizer.translate((lastEvent?Translator.KEY_LAST_EVENT:Translator.KEY_SELECTED_RACE),locale)+Translator.DUALPOINT);
+		raceVizTO.setRaceDate(Internationalizer.translate(race.getDate(),locale));
+		raceVizTO.setParkName(race.getParkName());
+		raceVizTO.setMenParticipant(Integer.toString(race.getMenParticupants()));
+		raceVizTO.setWomenParticipant(Integer.toString(race.getWomenParticipants()));
+		raceVizTO.setTotalAmountOfParticipant(Integer.toString(race.getMenParticupants()+race.getWomenParticipants()));
+		raceVizTO.setLinkToRace(VizUtils.resolveRaceLink(race.getRaceId()));
+		raceVizTO.setRaceName(VizUtils.buildRaceName(race.getRaceName(), race.getParkName(), race.getDate(), locale));;
+		return raceVizTO;
 	}
 	
 }

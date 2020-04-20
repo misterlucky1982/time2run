@@ -2,6 +2,8 @@ package by.irun.viz.to;
 
 import java.util.List;
 
+import by.irun.viz.to.runnerpage.RunnerResultInfoTO;
+
 @Deprecated
 public class ClubRaceResultInfoTO implements InfoTO{
 

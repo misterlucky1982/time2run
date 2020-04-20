@@ -83,5 +83,12 @@ public class RunnerResultTOTest {
 		to.setTime(100);
 		assertTrue(to.getTime()==100);
 	}
+	
+	@Test
+	public void raceNameTest(){
+		assertNull(to.getRaceName());
+		to.setRaceName("KEY_RACE");
+		assertEquals("KEY_RACE",to.getRaceName());
+	}
 
 }

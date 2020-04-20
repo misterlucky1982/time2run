@@ -39,9 +39,16 @@ public class RaceTOTest {
 	}
 	
 	@Test
-	public void raceNameTest(){
+	public void raceIdTest() {
+		assertNull(to.getRaceId());
+		to.setRaceId(1L);
+		assertEquals(Long.valueOf(1), to.getRaceId());
+	}
+
+	@Test
+	public void raceNameTest() {
 		assertNull(to.getRaceName());
 		to.setRaceName("raceName");
-		assertEquals("raceName",to.getRaceName());
+		assertEquals("raceName", to.getRaceName());
 	}
 }

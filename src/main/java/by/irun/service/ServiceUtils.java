@@ -12,8 +12,10 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import by.irun.domain.Gender;
+import by.irun.domain.Park;
 import by.irun.domain.to.RaceClubResultTO;
 import by.irun.domain.to.RunnerRaceResultTO;
+import by.irun.domain.to.RunnerResultTO;
 import by.irun.locale.Internationalizer;
 import by.irun.locale.Translator;
 import by.irun.viz.to.ClubRunnerResultInfoTO;
@@ -198,7 +200,7 @@ public class ServiceUtils {
 			RunnerResultInfoTO to = new RunnerResultInfoTO();
 			to.setName(VizUtils.isValidId(resultTO.getRunnerId())
 					? VizUtils.concatName(resultTO.getFirstName(), resultTO.getLastName())
-					: Internationalizer.translate(Translator.UNKNOWN_PARTICIPANT, locale));
+					: Internationalizer.translate(Translator.KEY_UNKNOWN_PARTICIPANT, locale));
 			to.setPosition(Integer.toString(position++));
 			to.setClub(VizUtils.resolveClubName(resultTO.getClub(), resultTO.getRunnerId(), locale));
 			to.setClubLogo(VizUtils.resolveClubSmallLogo(resultTO.getClubLogo(), resultTO.getClub(), resultTO.getRunnerId(), locale));
@@ -216,4 +218,31 @@ public class ServiceUtils {
 		return result;
 	}
 	
+	public static by.irun.viz.to.runnerpage.RunnerResultInfoTO runnerResultInfoTOForRunnerPage(RunnerResultTO to, Locale locale){
+		by.irun.viz.to.runnerpage.RunnerResultInfoTO infoTO = new  by.irun.viz.to.runnerpage.RunnerResultInfoTO();
+		infoTO.setAbsPositionInfo(Integer.toString(to.getAbsPosition()));
+		infoTO.setClubLogo(to.getClubLogo());
+		infoTO.setClubName(VizUtils.resolveClubName(to.getClubName(),locale));
+		infoTO.setLinkToClub(VizUtils.resolveClubLink(to.getClubId()));
+		infoTO.setLinkToRace(VizUtils.resolveRaceLink(to.getRaceId()));
+		infoTO.setPosInOwnGenderInfo(Integer.toString(to.getPositionInGenderGroup()));
+		infoTO.setRaceInfo(VizUtils.buildRaceName(to.getRaceName(), to.getParkName(), to.getRaceDate(), locale));
+		infoTO.setTime(VizUtils.convertNumberOfSecondsToTimeRepresentation(to.getTime()));
+		return infoTO;
+	}
+	
+	/**
+	 * Keys of produced map - names of parks in given list
+	 * <p>
+	 * values - String representations of park id
+	 * @param list
+	 * @return
+	 */
+	public static Map<String, String> resolveParkKeysMap(List<Park> list) {
+		Map<String, String> map = new HashMap<>();
+		for (Park p : list) {
+			map.put(p.getName(), Long.toString(p.getId()));
+		}
+		return map;
+	}
 }
