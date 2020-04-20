@@ -25,9 +25,6 @@ public class Time2Run {
 	public static void main(String[] args) {
 		CRUD = SpringApplication.run(Time2Run.class).getBean(CRUDHandler.class);
 		fillingTestData1();
-		fillingTestData2();
-		updateMinskRunAvatar();
-		updateMinskRunAvatarAndAddNewRace();
 		System.exit(0);
 	}
 
@@ -182,6 +179,66 @@ public class Time2Run {
 		user25.setLogin("login25");
 		user25.setPassword("password25");
 		user25.setPhone("1234561225");
+		
+		User user26 = new User();
+		user26.setEmail("email216");
+		user26.setLogin("login216");
+		user26.setPassword("password216");
+		user26.setPhone("12345612216");
+		
+		User user27 = new User();
+		user27.setEmail("email227");
+		user27.setLogin("login227");
+		user27.setPassword("password227");
+		user27.setPhone("12345612227");
+		
+		User user28 = new User();
+		user28.setEmail("email238");
+		user28.setLogin("login238");
+		user28.setPassword("password238");
+		user28.setPhone("812345612238");
+		
+		User user29 = new User();
+		user29.setEmail("9email24");
+		user29.setLogin("9login24");
+		user29.setPassword("9password24");
+		user29.setPhone("91234561224");
+		
+		User user30 = new User();
+		user30.setEmail("email2530");
+		user30.setLogin("login2530");
+		user30.setPassword("password2530");
+		user30.setPhone("123456122530");
+		
+		User user31 = new User();
+		user31.setEmail("3email21");
+		user31.setLogin("3login21");
+		user31.setPassword("3password21");
+		user31.setPhone("31234561221");
+		
+		User user32 = new User();
+		user32.setEmail("email2225");
+		user32.setLogin("login2225");
+		user32.setPassword("password2225");
+		user32.setPhone("123456122225");
+		
+		User user33 = new User();
+		user33.setEmail("email2333");
+		user33.setLogin("login2333");
+		user33.setPassword("password2333");
+		user33.setPhone("123456122333");
+		
+		User user34 = new User();
+		user34.setEmail("email233334");
+		user34.setLogin("login2333334");
+		user34.setPassword("password2333334");
+		user34.setPhone("123456122333334");
+		
+		User user35 = new User();
+		user35.setEmail("email25555");
+		user35.setLogin("login25555");
+		user35.setPassword("password255555");
+		user35.setPhone("12345612255555");
 
 		try {
 			CRUD.add(user1);
@@ -209,6 +266,16 @@ public class Time2Run {
 			CRUD.add(user23);
 			CRUD.add(user24);
 			CRUD.add(user25);
+			CRUD.add(user26);
+			CRUD.add(user27);
+			CRUD.add(user28);
+			CRUD.add(user29);
+			CRUD.add(user30);
+			CRUD.add(user31);
+			CRUD.add(user32);
+			CRUD.add(user33);
+			CRUD.add(user34);
+			CRUD.add(user35);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return;
@@ -216,16 +283,53 @@ public class Time2Run {
 
 		Club club1 = new Club();
 		Club club2 = new Club();
+		Club club3 = new Club();
+		Club club4 = new Club();
+		
 		club1.setAdmin(user1);
 		club2.setAdmin(user2);
+		club3.setAdmin(user3);
+		club4.setAdmin(user4);
+
 		club1.setBaseCity("Minsk");
 		club2.setBaseCity("Brest");
+		club3.setBaseCity("Minsk");
+		club4.setBaseCity("Minsk");
+		
 		club1.setName("MINSKRUN CLUB");
 		club2.setName("IRun Brest");
+		club3.setName("Всем Бег");
+		club4.setName("Funny Runners");
+		
+		Picture picc1 = new Picture();
+		picc1.setLocation("../../images/test/minskrun_avatar.png");
+		Picture picc1m = new Picture();
+		picc1m.setLocation("../../images/test/minskrun_logo.png");
+		try {
+			CRUD.add(picc1);
+			CRUD.add(picc1m);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+			return;
+		}
+		club1.setSmallLogo(picc1m);
+		club1.setBigLogo(picc1);
+		
+		Picture pic3 = new Picture();
+		pic3.setLocation("../../images/clubs/logo50.png");
+		try {
+			CRUD.add(pic3);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+			return;
+		}
+		club3.setSmallLogo(pic3);
 
 		try {
 			CRUD.add(club1);
 			CRUD.add(club2);
+			CRUD.add(club3);
+			CRUD.add(club4);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return;
@@ -251,7 +355,7 @@ public class Time2Run {
 
 		Runner r3 = new Runner();
 		r3.setUser(user3);
-		r3.setCurrentClub(club1);
+		r3.setCurrentClub(club3);
 		r3.setDateOfBirth(Date.valueOf("1999-09-09"));
 		r3.setCity("Minsk");
 		r3.setGender(Gender.MALE);
@@ -260,7 +364,7 @@ public class Time2Run {
 
 		Runner r4 = new Runner();
 		r4.setUser(user4);
-		r4.setCurrentClub(club1);
+		r4.setCurrentClub(club4);
 		r4.setDateOfBirth(Date.valueOf("1960-01-21"));
 		r4.setCity("Minsk");
 		r4.setGender(Gender.MALE);
@@ -310,6 +414,20 @@ public class Time2Run {
 		r9.setGender(Gender.MALE);
 		r9.setFirstName("Бонифаций");
 		r9.setLastName("Торнсунен");
+		Picture pic9 = new Picture();
+		pic9.setLocation("../../images/test/test_man_01.png");
+		Picture pic9m = new Picture();
+		pic9m.setLocation("../../images/test/test_man_SMALL_01.png");
+		try {
+			CRUD.add(pic9);
+			CRUD.add(pic9m);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+			return;
+		}
+		r9.setAvatar(pic9);
+		r9.setLogo(pic9m);
+		
 
 		Runner r10 = new Runner();
 		r10.setUser(user10);
@@ -319,6 +437,19 @@ public class Time2Run {
 		r10.setGender(Gender.MALE);
 		r10.setFirstName("Александр");
 		r10.setLastName("Отто");
+		Picture pic10 = new Picture();
+		pic10.setLocation("../../images/test/test_man_02.png");
+		Picture pic10m = new Picture();
+		pic10m.setLocation("../../images/test/test_man_SMALL_02.png");
+		try {
+			CRUD.add(pic10);
+			CRUD.add(pic10m);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+			return;
+		}
+		r10.setAvatar(pic10);
+		r10.setLogo(pic10m);
 		
 		Runner r11 = new Runner();
 		r11.setUser(user11);
@@ -337,6 +468,19 @@ public class Time2Run {
 		r12.setGender(Gender.MALE);
 		r12.setFirstName("Отто");
 		r12.setLastName("Веллер");
+		Picture pic12 = new Picture();
+		pic12.setLocation("../../images/test/test001.png");
+		Picture pic12m = new Picture();
+		pic12m.setLocation("../../images/test/test001-1.png");
+		try {
+			CRUD.add(pic12);
+			CRUD.add(pic12m);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+			return;
+		}
+		r12.setAvatar(pic12);
+		r12.setLogo(pic12m);
 		
 		Runner r13 = new Runner();
 		r13.setUser(user13);
@@ -345,6 +489,19 @@ public class Time2Run {
 		r13.setGender(Gender.FEMALE);
 		r13.setFirstName("Александра");
 		r13.setLastName("Павлова");
+		Picture pic13 = new Picture();
+		pic13.setLocation("../../images/test/test_woman_01.png");
+		Picture pic13m = new Picture();
+		pic13m.setLocation("../../images/test/test_woman_SMALL_01.png");
+		try {
+			CRUD.add(pic13);
+			CRUD.add(pic13m);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+			return;
+		}
+		r13.setAvatar(pic13);
+		r13.setLogo(pic13m);
 		
 		Runner r14 = new Runner();
 		r14.setUser(user14);
@@ -365,11 +522,24 @@ public class Time2Run {
 		
 		Runner r16 = new Runner();
 		r16.setUser(user16);
-		r16.setDateOfBirth(Date.valueOf("1966-06-06"));
+		r16.setDateOfBirth(Date.valueOf("1986-06-06"));
 		r16.setCity("Minsk");
 		r16.setGender(Gender.FEMALE);
 		r16.setFirstName("Маша");
 		r16.setLastName("Растеряша");
+		Picture pic16 = new Picture();
+		pic16.setLocation("../../images/test/test_woman_04.png");
+		Picture pic16m = new Picture();
+		pic16m.setLocation("../../images/test/test_woman_SMALL_02.png");
+		try {
+			CRUD.add(pic16);
+			CRUD.add(pic16m);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+			return;
+		}
+		r13.setAvatar(pic16);
+		r13.setLogo(pic16m);
 		
 		Runner r17 = new Runner();
 		r17.setUser(user17);
@@ -378,6 +548,19 @@ public class Time2Run {
 		r17.setGender(Gender.FEMALE);
 		r17.setFirstName("Ольга");
 		r17.setLastName("Гур");
+		Picture pic17 = new Picture();
+		pic17.setLocation("../../images/test/test_woman_02.png");
+		Picture pic17m = new Picture();
+		pic17m.setLocation("../../images/test/test_woman_SMALL_03.png");
+		try {
+			CRUD.add(pic17);
+			CRUD.add(pic17m);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+			return;
+		}
+		r17.setAvatar(pic17);
+		r17.setLogo(pic17m);
 		
 		Runner r18 = new Runner();
 		r18.setUser(user18);
@@ -412,6 +595,19 @@ public class Time2Run {
 		r21.setGender(Gender.MALE);
 		r21.setFirstName("Вова");
 		r21.setLastName("Корова");
+		Picture pic21 = new Picture();
+		pic21.setLocation("../../images/test/test002.png");
+		Picture pic21m = new Picture();
+		pic21m.setLocation("../../images/test/test002-1.png");
+		try {
+			CRUD.add(pic21);
+			CRUD.add(pic21m);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+			return;
+		}
+		r21.setAvatar(pic21);
+		r21.setLogo(pic21m);
 		
 		Runner r22 = new Runner();
 		r22.setUser(user22);
@@ -421,6 +617,19 @@ public class Time2Run {
 		r22.setGender(Gender.MALE);
 		r22.setFirstName("Лёва");
 		r22.setLastName("Уг");
+		Picture pic22 = new Picture();
+		pic22.setLocation("../../images/test/test003.png");
+		Picture pic22m = new Picture();
+		pic22m.setLocation("../../images/test/test003-1.png");
+		try {
+			CRUD.add(pic22);
+			CRUD.add(pic22m);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+			return;
+		}
+		r22.setAvatar(pic22);
+		r22.setLogo(pic22m);
 		
 		Runner r23 = new Runner();
 		r23.setUser(user23);
@@ -439,6 +648,19 @@ public class Time2Run {
 		r24.setGender(Gender.FEMALE);
 		r24.setFirstName("Нина");
 		r24.setLastName("Нинина");
+		Picture pic24 = new Picture();
+		pic24.setLocation("../../images/test/test004.png");
+		Picture pic24m = new Picture();
+		pic24m.setLocation("../../images/test/test004-1.png");
+		try {
+			CRUD.add(pic24);
+			CRUD.add(pic24m);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+			return;
+		}
+		r24.setAvatar(pic24);
+		r24.setLogo(pic24m);
 		
 		Runner r25 = new Runner();
 		r25.setUser(user25);
@@ -447,6 +669,107 @@ public class Time2Run {
 		r25.setGender(Gender.FEMALE);
 		r25.setFirstName("Vasilisa");
 		r25.setLastName("Thorn");
+		Picture pic25 = new Picture();
+		pic25.setLocation("../../images/test/test005.png");
+		Picture pic25m = new Picture();
+		pic25m.setLocation("../../images/test/test005-1.png");
+		try {
+			CRUD.add(pic25);
+			CRUD.add(pic25m);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+			return;
+		}
+		r25.setAvatar(pic25);
+		r25.setLogo(pic25m);
+		
+		Runner r26 = new Runner();
+		r26.setUser(user26);
+		r26.setDateOfBirth(Date.valueOf("1996-06-06"));
+		r26.setCity("Minsk");
+		r26.setGender(Gender.FEMALE);
+		r26.setFirstName("Мария");
+		r26.setLastName("Ингеборг");
+		
+		Runner r27 = new Runner();
+		r27.setUser(user27);
+		r27.setDateOfBirth(Date.valueOf("1987-08-27"));
+		r27.setCity("Minsk");
+		r27.setGender(Gender.FEMALE);
+		r27.setFirstName("Ольга");
+		r27.setLastName("Ольгина");
+		
+		Runner r28 = new Runner();
+		r28.setUser(user28);
+		r28.setCurrentClub(club3);
+		r28.setDateOfBirth(Date.valueOf("1988-10-11"));
+		r28.setCity("Minsk");
+		r28.setGender(Gender.MALE);
+		r28.setFirstName("Фома");
+		r28.setLastName("Фомин");
+		
+		Runner r29 = new Runner();
+		r29.setUser(user29);
+		r29.setCurrentClub(club4);
+		r29.setDateOfBirth(Date.valueOf("1997-07-07"));
+		r29.setCity("Minsk");
+		r29.setGender(Gender.FEMALE);
+		r29.setFirstName("Тракторина");
+		r29.setLastName("Белазова");
+		
+		Runner r30 = new Runner();
+		r30.setUser(user30);
+		r30.setDateOfBirth(Date.valueOf("1985-06-18"));
+		r30.setCity("Minsk");
+		r30.setCurrentClub(club3);
+		r30.setGender(Gender.MALE);
+		r30.setFirstName("Изя");
+		r30.setLastName("Трактор");
+		
+		Runner r31 = new Runner();
+		r31.setUser(user31);
+		r31.setDateOfBirth(Date.valueOf("1993-03-23"));
+		r31.setCity("Minsk");
+		r30.setCurrentClub(club4);
+		r31.setGender(Gender.MALE);
+		r31.setFirstName("Аляксандр");
+		r31.setLastName("Мазураў");
+		
+		Runner r32 = new Runner();
+		r32.setUser(user32);
+		r32.setCurrentClub(club3);
+		r32.setDateOfBirth(Date.valueOf("1982-09-29"));
+		r32.setCity("Minsk");
+		r32.setGender(Gender.MALE);
+		r32.setFirstName("Александр");
+		r32.setLastName("Солодуха");
+		
+		Runner r33 = new Runner();
+		r33.setUser(user33);
+		r23.setCurrentClub(club3);
+		r33.setDateOfBirth(Date.valueOf("1981-03-13"));
+		r33.setCity("Minsk");
+		r33.setGender(Gender.FEMALE);
+		r33.setFirstName("Renata");
+		r33.setLastName("Voland");
+		
+		Runner r34 = new Runner();
+		r34.setUser(user34);
+		r34.setCurrentClub(club3);
+		r34.setDateOfBirth(Date.valueOf("1990-11-12"));
+		r34.setCity("Minsk");
+		r34.setGender(Gender.FEMALE);
+		r34.setFirstName("Zinaida");
+		r34.setLastName("Sola");
+		
+		Runner r35 = new Runner();
+		r35.setUser(user35);
+		r35.setDateOfBirth(Date.valueOf("1993-03-03"));
+		r35.setCity("Warsaw");
+		r35.setGender(Gender.FEMALE);
+		r35.setFirstName("Angelina");
+		r35.setLastName("Kowalska");
+
 
 		try {
 			CRUD.add(r1);
@@ -474,6 +797,16 @@ public class Time2Run {
 			CRUD.add(r23);
 			CRUD.add(r24);
 			CRUD.add(r25);
+			CRUD.add(r26);
+			CRUD.add(r27);
+			CRUD.add(r28);
+			CRUD.add(r29);
+			CRUD.add(r30);
+			CRUD.add(r31);
+			CRUD.add(r32);
+			CRUD.add(r33);
+			CRUD.add(r34);
+			CRUD.add(r35);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return;
@@ -483,26 +816,37 @@ public class Time2Run {
 		park1.setName("Парк Калиновского");
 		Park park2 = new Park();
 		park2.setName("Брестский парк");
+		Park park3 = new Park();
+		park3.setName("Парк Победы");
 
 		try {
 			CRUD.add(park1);
 			CRUD.add(park2);
+			CRUD.add(park3);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return;
 		}
 
 		try {
-			createRace(park1, Date.valueOf("2019-12-7"), r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15,r16,r17,r18,r19,r20,r21,r22,r23,r24,r25);
-			createRace(park1, Date.valueOf("2019-12-14"),r8,r9,r4,r5,r6,r7,r13,r14,r15,r16,r17,r18,r19,r10,r11,r12, r1,r2,r21,r25);
-			createRace(park1, Date.valueOf("2019-12-21"), r2,r3,r4,r5,r6,r7,r9,r16,r17,r19,r20,r22,r23,r24,r25,r10,r11,r12,r13,r15);
-			createRace(park1, Date.valueOf("2019-12-28"), r1,null,r3,r12,r13,r10,r11,r15,r16,r17,r18,r19,r14,null,r5,r6,r7,r8,r9,r20,null,r22,null,r24,r25);
-			createRace(park2, Date.valueOf("2020-01-4"), r11, r12, r13, r14, r15, r15, r17, r18, r19, r10);
-			createRace(park1, Date.valueOf("2020-01-4"), r9, r8, r1, r2, r7, r22);
-			createRace(park1, Date.valueOf("2020-01-11"), r6,r7,r8,r9,r10,r11,null,null,r14,r13,r2,r1,r3,r4,r5,null,r15,r16,r17,r20,null,r23,r24,r25,r18,r19);
-			createRace(park1, Date.valueOf("2020-01-18"), r1,null,null,r14,r15,r16,r3,r4,r5,null,r11,r12,r13,null,r20,r21,r22,r23,r6,r7,r8,r9,r19,r24,r25,r10,r17,r18);
-			createRace(park1, Date.valueOf("2020-01-25"), r1,r4,r5,null,r17,r18,r19,r8,r9,r10,r11,null,r13,null,r6,r2,r3,r7,r14,r16,null,r21,null,r23,r24,r25,r15,r12);
-			createRace(park1, Date.valueOf("2020-02-1"), r4,r5,r1,r18,null,r8,r9,r10,r11,null,r13,null,null,r7,r14,r16,null,null,r6,r2,r3,r21,null,r23,r25,r12);
+			createRace(park1, Date.valueOf("2019-12-7"), r1,r2,r3,r4,r5,r6,r7,r8,r9,null,null,r10,r11,null,r12,r13,r14,null,r15,r16,null,r17,r18,r19,null,r20,r21,null,r22,null,r23,r24,r25,r26,null,r27,null,r28,r29,r30,r31,null,r32,r33,null,r34,r35);
+			createRace(park1, Date.valueOf("2019-12-14"), r2,null,r35,r4,r5,r26,r30,null,r9,r10,null,r12,r13,r14,r27,r16,r28,null,r19,r20,r29,r31,r23,r24,r35);
+			createRace(park1, Date.valueOf("2019-12-21"), r1,r32,r3,r4,r5,r6,r7,r8,r33,r16,r17,r18,null,r19,null,r20,r35,r22,r23,r34,r25,r9,null,r10,r11,null,r12,r13,null,r14);
+			createRace(park1, Date.valueOf("2019-12-28"), r1,r2,r33,r34,r35,null,r7,null,r15,r16,r17,r8,null,r10,r11,r19,null,r18,r14,r12,r20,r21,null,r25,null,r23);
+			createRace(park1, Date.valueOf("2020-01-3"), r6,r7,r26,r9,r10,r11,null,null,r14,r13,r2,r1,r3,r4,r5,null,r15,r16,r17,r20,null,r23,r24,r25,r18,r19, r27, r29, r35);
+			createRace(park1, Date.valueOf("2020-01-10"), r1,null,r26,null,r14,r15,r27,r16,r3,r4,r5,null,r28,r11,r12,r13,null,r29,r20,r21,r22,r23,r30,r6,r31,r7,r32,r8,r33,r9,r34,r19,r35,r24,r25,r10,r17,r18);
+			createRace(park1, Date.valueOf("2020-01-17"), r1,null,r30,r12,r33,r10,r31,r15,r16,null,r17,r26,r18,r27,r19,r29,null,r14,null,r5,r6,r7,r8,r9,r20,null,r22,null,r24,r25);
+			createRace(park1, Date.valueOf("2020-01-25"), r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15,r16,r17,r18,r19,r20,r21,r22,r23,r24,r25);
+			createRace(park1, Date.valueOf("2020-02-1"), r1,null,null,r14,r15,r16,r3,r4,r5,null,r11,r12,r26,r13,null,r27,r20,r21,r22,r28,r23,r6,r7,r29,r8,r9,r19,r30,r24,r25,r31,r10,r32,r17,r33,null,r18,r34,null,r35);		
+			createRace(park1, Date.valueOf("2020-02-8"), r1,r2,r3,null,r4,r26,null,r10,r11,null,r12,r13,r5,r6,r7,null,r8,r32,r14,r27,r16,null,r17,r28,r19,r20,r29,r30,r23,null,r24,r25);
+			createRace(park1, Date.valueOf("2020-02-15"), r1,r26,r3,r4,r5,null,r27,r33,r8,r9,r10,r28,r12,null,r32,r14,r34,r29,r17,null,r18,r35,r31,null,r21,r22,r30,null,r24,null,null,r25);
+			createRace(park1, Date.valueOf("2020-02-22"), r2,r1,r4,r3,r26,r6,r7,r28,r9,r10,r27,null,r12,r13,null,r14,r15,r16,r17,r18,null,r29,r20,r21,null,r22,r30,r31,r35);
+			createRace(park1, Date.valueOf("2020-02-29"), r4,r26,r1,r5,r6,r7,r8,r9,r10,r11,r12,r13,r3,r15,null,r19,r18,r20,r21,r32,r23,r24,null);
+			createRace(park1, Date.valueOf("2020-03-07"), r5,r2,r3,r4,null,r6,r7,r8,r9,r10,r26,r27,null,r28,r11,r12,r13,r14,r15,null,r29,r16,r17,r18,r30,null,r19,null,r20,r31,r32,r21,r33,null,r22,r34,r24,r25);
+			createRace("Winter Trail",park2, Date.valueOf("2019-12-15"), r10,r11,r12,null,r14,null,null,null,r15,r16,r17,r26,r18,r27,r19,r32,r28,r20,r21,null,r22,r23,r24,r25);
+			createRace("Ice Run",park2, Date.valueOf("2020-02-9"), r5,r6,r7,null,r9,r10,r33,r32,null,r16,r15,r14,r17,r34,r19,r20,r35,null,r24,r23,null,r25);
+			createRace("Hello 1/8 Marathon",park3, Date.valueOf("2020-03-15"), r1,r2,null,r4,r5,r6,r14,r8,r9,r12,null,r10,r29,null,r23,r7,r28,r15,r16,r20,r26,r19,r33,null,r27,r18,r34,null,r35,r17,null,r21,r22,null,r13,null,null,r24,null,null,r25);
+	
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -521,92 +865,17 @@ public class Time2Run {
 		race.setDate(date);
 		CRUD.add(race);
 		int pos = 1;
+		int gap = (int)((((double)runners.length)/25)*60);
 		long seconds = (int) (Math.random() * 300) + 1000;
 		for (Runner r : runners) {
 			Result res = new Result();
 			res.setAbsolutePosition(pos++);
 			res.setGender(r != null ? r.getGender() : Math.random() > 0.5 ? Gender.FEMALE : Gender.MALE);
 			res.setRace(race);
-			res.setTime(Duration.ofSeconds(seconds += (Math.random() * 60)));
+			res.setTime(Duration.ofSeconds(seconds += (Math.random() * gap)));
 			res.setClub(r != null ? r.getCurrentClub() : null);
 			res.setRunner(r);
 			CRUD.add(res);
-		}
-	}
-
-	private static void fillingTestData2() {
-		try {
-			updateAvatars(32L, "../../images/test/test_woman_01.png", "../../images/test/test_woman_SMALL_01.png");
-			updateAvatars(46L, "../../images/test/test_woman_04.png", "../../images/test/test_woman_SMALL_02.png");
-			updateAvatars(50L, "../../images/test/test_woman_02.png", "../../images/test/test_woman_SMALL_03.png");
-			updateAvatars(33L, "../../images/test/test_man_01.png", "../../images/test/test_man_SMALL_01.png");
-			updateAvatars(37L, "../../images/test/test_man_02.png", "../../images/test/test_man_SMALL_02.png");
-			System.out.println("PICTURES HAS BEEN ADDED");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	private static void updateAvatars(Long runnerId, String bigPic, String smallPic) throws SQLException{
-		Runner runner = (Runner) CRUD.getEntityById(Runner.class, runnerId);
-		Picture picBig = new Picture();
-		picBig.setLocation(bigPic);
-		CRUD.add(picBig);;
-		Picture picSmall = new Picture();
-		picSmall.setLocation(smallPic);
-		CRUD.add(picSmall);
-		runner.setAvatar(picBig);
-		runner.setLogo(picSmall);
-		CRUD.update(runner);
-	}
-	
-	private static void updateMinskRunAvatar(){
-		try {
-			Club club = (Club) CRUD.getEntityById(Club.class, 26L);
-			if(club==null)return;
-			Picture pic = new Picture();
-			pic.setLocation("../../images/test/minskrun_logo.png");
-			CRUD.add(pic);
-			club.setSmallLogo(pic);
-			CRUD.update(club);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	private static void updateMinskRunAvatarAndAddNewRace(){
-		try {
-			Club club = (Club) CRUD.getEntityById(Club.class, 26L);
-			if(club==null)return;
-			Picture pic = new Picture();
-			pic.setLocation("../../images/test/minskrun_avatar.png");
-			CRUD.add(pic);
-			club.setBigLogo(pic);
-			CRUD.update(club);
-			Runner r1 = (Runner) CRUD.getEntityById(Runner.class, 28L);
-			Runner r2 = (Runner) CRUD.getEntityById(Runner.class, 30L);
-			Runner r3 = (Runner) CRUD.getEntityById(Runner.class, 31L);
-			Runner r4 = (Runner) CRUD.getEntityById(Runner.class, 35L);
-			Runner r5 = (Runner) CRUD.getEntityById(Runner.class, 36L);
-			Runner r6 = (Runner) CRUD.getEntityById(Runner.class, 37L);
-			Runner r7 = (Runner) CRUD.getEntityById(Runner.class, 40L);
-			Runner r8 = (Runner) CRUD.getEntityById(Runner.class, 41L);
-			Runner r9 = (Runner) CRUD.getEntityById(Runner.class, 42L);
-			Runner r10 = (Runner) CRUD.getEntityById(Runner.class, 44L);
-			Runner r11 = (Runner) CRUD.getEntityById(Runner.class, 46L);
-			Runner r12 = (Runner) CRUD.getEntityById(Runner.class, 48L);
-			Runner r13 = (Runner) CRUD.getEntityById(Runner.class, 49L);
-			Runner r14 = (Runner) CRUD.getEntityById(Runner.class, 50L);
-			Runner r15 = (Runner) CRUD.getEntityById(Runner.class, 51L);
-			Runner r16 = (Runner) CRUD.getEntityById(Runner.class, 52L);
-			
-			Park park = (Park) CRUD.getEntityById(Park.class, 54L);
-			
-			createRace("IRun Brest Winter Trail 2020", park, Date.valueOf("2020-02-08"), r1, r10, r3,null,  r9, r2, r12, r5, r6, null, r11, null, r13, r11, r15, null, null, r14,r4, r8, r16, r7,null);
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return;
 		}
 	}
 	
