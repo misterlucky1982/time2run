@@ -79,14 +79,22 @@ public class TORequests {
 			+ "RN.LASTNAME AS " + LASTNAME + ", RN.AVATAR AS " + AVATAR +  ", RN.GENDER AS "+GENDER+", RN.ID AS " + RUNNERID
 			+ " FROM RUNNERS RN WHERE RN.CLUB = ";
 	
-	private static final String RACE_TO_REQUEST_FOR_ID = "SELECT RC.DATE AS " + RACE_DATE
+	private static final String RACE_TO_REQUEST_FOR_ID = "SELECT RC.ID AS "+RACE_ID+", RC.DATE AS " + RACE_DATE
 			+ ", RC.NAME AS "+RACENAME+", PK.NAME AS " + PARK_NAME + " FROM RACES RC INNER JOIN PARKS PK ON RC.PARK=PK.ID WHERE RC.ID=";
 	
 	private static final String FULL_RACE_TO_REQUEST = "SELECT RC.ID AS "+RACE_ID+", RC.DATE AS " + RACE_DATE
 			+ ", RC.NAME AS " + RACENAME + ", PK.NAME AS " + PARK_NAME
 			+ " FROM RACES RC INNER JOIN PARKS PK ON RC.PARK=PK.ID";
 	
-	private static final String FULL_RACE_TO_REQUEST_ENDING_FOR_LAST_RACE = " ORDER BY RC.DATE DESC, RC.ID DESC LIMIT 1;";
+	private static final String EXTENDED_RACE_TO_REQUEST = "SELECT RC.ID AS RACE_ID, RC.DATE AS RACE_DATE, RC.NAME AS RACENAME, PK.NAME AS PARK_NAME, (SELECT COUNT(RT.ID) FROM RESULTS RT WHERE RT.RACE=RC.ID AND RT.GENDER='M') AS M_PARTICIPANTS, (SELECT COUNT(RT.ID) FROM RESULTS RT WHERE RT.RACE=RC.ID AND RT.GENDER='F') AS W_PARTICIPANTS FROM RACES RC INNER JOIN PARKS PK ON RC.PARK=PK.ID";
+	
+	public static final String M_PARTICIPANTS = "M_PARTICIPANTS";
+	
+	public static final String W_PARTICIPANTS = "W_PARTICIPANTS";
+	
+	private static final String EXTENDED_RACE_TO_REQUEST_ENDING_FOR_LAST_RACE = " ORDER BY RC.DATE DESC, RC.ID DESC LIMIT 1;";
+	
+	private static final String EXTENDED_RACE_TO_REQUEST_ENDING_FOR_RACE_ID = " WHERE RC.ID=";
 	
 	private static final String WHERE = " WHERE";
 	
@@ -195,8 +203,16 @@ public class TORequests {
 	 * provides sql-request for RaceTO for last Race
 	 * @return String sql-request
 	 */
-	public static String raceTORequestForLastRace(){
-		return FULL_RACE_TO_REQUEST+FULL_RACE_TO_REQUEST_ENDING_FOR_LAST_RACE;
+	public static String extendedRaceTORequestForLastRace(){
+		return EXTENDED_RACE_TO_REQUEST+EXTENDED_RACE_TO_REQUEST_ENDING_FOR_LAST_RACE;
+	}
+	
+	/**
+	 * provides sql-request for RaceTO for last Race
+	 * @return String sql-request
+	 */
+	public static String extendedRaceTORequestForRaceId(long raceId){
+		return EXTENDED_RACE_TO_REQUEST+EXTENDED_RACE_TO_REQUEST_ENDING_FOR_RACE_ID+raceId;
 	}
 	
 	/**

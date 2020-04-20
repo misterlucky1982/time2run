@@ -200,7 +200,7 @@ public class ServiceUtils {
 			RunnerResultInfoTO to = new RunnerResultInfoTO();
 			to.setName(VizUtils.isValidId(resultTO.getRunnerId())
 					? VizUtils.concatName(resultTO.getFirstName(), resultTO.getLastName())
-					: Internationalizer.translate(Translator.UNKNOWN_PARTICIPANT, locale));
+					: Internationalizer.translate(Translator.KEY_UNKNOWN_PARTICIPANT, locale));
 			to.setPosition(Integer.toString(position++));
 			to.setClub(VizUtils.resolveClubName(resultTO.getClub(), resultTO.getRunnerId(), locale));
 			to.setClubLogo(VizUtils.resolveClubSmallLogo(resultTO.getClubLogo(), resultTO.getClub(), resultTO.getRunnerId(), locale));

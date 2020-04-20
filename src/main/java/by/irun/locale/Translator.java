@@ -14,7 +14,12 @@ public interface Translator {
 	public static final String DUALPOINT = ":";
 	public static final String SPACE = " ";
 	public static final String HYPHEN = "-";
-	public static final String UNKNOWN_PARTICIPANT = "unknownParticipant";
-	public static final String LAST_EVENT = "lastEvent";
-	public static final String RACE = "race";
+	public static final String KEY_UNKNOWN_PARTICIPANT = "unknownParticipant";
+	public static final String KEY_LAST_EVENT = "lastEvent";
+	public static final String KEY_RACE = "race";
+	public static final String KEY_SELECTED_RACE = "race";
+	public static final String KEY_UNCOMPLETED_START_DATE_WARNING = "events.uncompletedDateFromWarning";
+	public static final String KEY_UNCOMPLETED_FINISH_DATE_WARNING = "events.uncompletedDateForWarning";
+	public static final String KEY_INCORRECT_DATE_PARAMS_WARNING = "events.incorectDateParamsWarning";
+	public static final String KEY_EVENTS_EMPTY_RESULT_MESSAGE = "events.emptyResultMessage";
 }

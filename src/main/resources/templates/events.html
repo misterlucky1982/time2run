@@ -5,40 +5,192 @@
 <title th:text="#{app.title}">Title</title>
 <link rel="icon" href="/images/icon.png" type="image/png">
 <link rel="stylesheet" th:href="@{/css/header_styles.css}" type="text/css" media="screen"/>
+<link rel="stylesheet" th:href="@{/css/message_styles.css}" type="text/css" media="screen"/>
+<link rel="stylesheet" th:href="@{/css/events/racelist_styles.css}" type="text/css" media="screen"/>
 <link rel="stylesheet" th:href="@{/css/events/events_styles.css}" type="text/css" media="screen"/>
+<link rel="stylesheet" th:href="@{/css/events/raceinfo_styles.css}" type="text/css" media="screen"/>
+<link rel="stylesheet" th:href="@{/css/scroll_styles.css}" type="text/css" media="screen"/>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script
+	src="http://jscrollpane.kelvinluck.com/script/jquery.jscrollpane.min.js"></script>
 <script src="/scripts/header/header.js"></script>
 <script src="/scripts/events/events.js"></script>
+<script src="/scripts/events/racelist.js"></script>
+<script th:inline="javascript">
+var seekOtherEvents = [[#{events.seekOtherEvents}]];
+var hideSearchOptions = [[#{events.hideSearchOptions}]];
+</script>
 </head>
 <body>
 	<div th:replace="fragments/header :: header"></div>
 	<div id="events_container">
-		<h3>
-			<span th:text="${event.eventTitle}"></span>:
-		</h3>
-		<h1 th:text="${event.lastRaceName}"></h1>
-		<h4>
-			<span th:text="#{events.date}"></span>: <span
-				th:text="${event.lastRaceDate}"></span>
-		</h4>
-		<h4>
-			<span th:text="#{events.place}"></span>: <span
-				th:text="${event.lastRacePark}"></span>
-		</h4>
+		<div id="events_race_info_block">
+		<div th:object="${event.raceInfoVizTO}">
+			<div th:replace="fragments/raceselectpage/raceinfo :: raceinfo"></div>
+		</div>
+		</div>
+		<p></p>
+		<div class = "seek_other_events_container">
+		<div class = "events_select_options" id="seek_other_events"><a href="#" onclick="searchOptions()"><span id="seek_hide_button" th:text="#{events.seekOtherEvents}"></span><span></span></a></div>
+		</div>
+		<div id="search_race_panel_wrapper">
 		<div id=events_select_options_container>
-			<ul id="events_select_options">
+			<ul class = "events_select_options" id="parks_select_options">
 				<li><a href="#"><span id="events_parkselect" th:text="#{events.allParks}"></span></a>
-					<div class="parks">
+					<div class="events_select_items" id="parks">
 						<div>
 							<ul>
 								<li><a href="#" th:attr="onclick=|selectPark('#{events.allParks}',null)|"><span th:text="#{events.allParks}"></span></a></li>
 								<li th:each="e : ${event.parksMap.entrySet()}"><a href="#" th:attr="onclick=|selectPark('${e.key}','${e.value}')|" ><span th:text="${e.key}"></span></a></li>
 							</ul>
 						</div>
+					</div></ul>
+			<ul class="events_select_options" id="fromdate_select_options">
+				<li><a href="#"><span id="events_fromdate" th:text="#{events.fromFirstRace}"></span></a>
+					<div class="events_select_items">
+						<div>
+							<ul>
+								<li><a href="#" th:attr="onclick=|eventsFromDate('#{events.fromFirstRace}',false,'')|"><span th:text="#{events.fromFirstRace}"></span></a></li>
+								<li><a href="#" th:attr="onclick=|eventsFromDate('#{events.fromFromDate}',true,':')|"><span th:text="#{events.fromFromDate}"></span></a></li>
+							</ul>
+						</div>
+					</div></ul>
+					<div class="events_select_options" id="fromdate_calendar">
+			<ul class="calendar_options" id="fromdate_calendar_days">
+				<li><a href="#" class = "calendar_datelabel"><span id="calendar_fromdate_days" th:text="#{events.day}"></span></a>
+					<div class="events_select_items" id="calendar_fromdays_items">
+						<div class="calendar_nav_dates">
+							<ul th:each="i : ${#numbers.sequence( 1, 8/1)}">
+								<li><a class="calendar_date" href="#" th:attr="onclick=|selectFromDate('${ i }')|"><span th:text="${ i }"></span></a></li>
+							</ul>
+						</div>
+						<div class="calendar_nav_dates">
+							<ul th:each="i : ${#numbers.sequence( 9, 16/1)}">
+								<li><a class="calendar_date" href="#" th:attr="onclick=|selectFromDate('${ i }')|"><span th:text="${ i }"></span></a></li>
+							</ul>
+						</div>
+						<div class="calendar_nav_dates">
+							<ul th:each="i : ${#numbers.sequence( 17, 24/1)}">
+								<li><a class="calendar_date" href="#" th:attr="onclick=|selectFromDate('${ i }')|"><span th:text="${ i }"></span></a></li>
+							</ul>
+						</div>
+						<div class="calendar_nav_dates">
+							<ul th:each="i : ${#numbers.sequence( 25, 31/1)}">
+								<li><a class="calendar_date" href="#" th:attr="onclick=|selectFromDate('${ i }')|,id=|fromDate${ i }|"><span th:text="${ i }"></span></a></li>
+							</ul>
+						</div>
+					</div></ul>
+			<ul class="calendar_options" id="fromdate_calendar_month">
+				<li class = "calendar_monthlabel"><a href="#"><span id="calendar_fromdate_months" th:text="#{events.month}"></span></a>
+					<div class="events_select_items" id="calendar_frommonths_items">
+						<div class="calendar_nav_months">
+							<ul>
+								<li><a href="#" th:attr="onclick=|selectFromMonth('#{events.january}','01')|"><span th:text="#{events.january}"></span></a></li>
+								<li><a href="#" th:attr="onclick=|selectFromMonth('#{events.february}','02')|"><span th:text="#{events.february}"></span></a></li>
+								<li><a href="#" th:attr="onclick=|selectFromMonth('#{events.march}','03')|"><span th:text="#{events.march}"></span></a></li>
+								<li><a href="#" th:attr="onclick=|selectFromMonth('#{events.april}','04')|"><span th:text="#{events.april}"></span></a></li>
+								<li><a href="#" th:attr="onclick=|selectFromMonth('#{events.may}','05')|"><span th:text="#{events.may}"></span></a></li>
+								<li><a href="#" th:attr="onclick=|selectFromMonth('#{events.june}','06')|"><span th:text="#{events.june}"></span></a></li>
+							</ul>
+						</div>
+						<div class="calendar_nav_months">
+							<ul>
+								<li><a href="#" th:attr="onclick=|selectFromMonth('#{events.july}','07')|"><span th:text="#{events.july}"></span></a></li>
+								<li><a href="#" th:attr="onclick=|selectFromMonth('#{events.august}','08')|"><span th:text="#{events.august}"></span></a></li>
+								<li><a href="#" th:attr="onclick=|selectFromMonth('#{events.september}','09')|"><span th:text="#{events.september}"></span></a></li>
+								<li><a href="#" th:attr="onclick=|selectFromMonth('#{events.october}','10')|"><span th:text="#{events.october}"></span></a></li>
+								<li><a href="#" th:attr="onclick=|selectFromMonth('#{events.november}','11')|"><span th:text="#{events.november}"></span></a></li>
+								<li><a href="#" th:attr="onclick=|selectFromMonth('#{events.december}','12')|"><span th:text="#{events.december}"></span></a></li>
+							</ul>
+						</div>
+					</div></ul>
+			<ul class="calendar_options" id="fromdate_calendar_years">
+				<li class = "calendar_yearlabel"><a href="#"><span id="calendar_fromdate_years" th:text="#{events.year}"></span></a>
+					<div class="events_select_items" id="calendar_years_items">
+						<div>
+							<ul>
+								<li><a href="#" onclick="selectFromYear('2019')"><span>2019</span></a></li>
+								<li><a href="#" onclick="selectFromYear('2020')"><span>2020</span></a></li>
+							</ul>
+						</div>
+					</div></ul>
 					</div>
-					<input type="date" id="start" name="trip-start" value="2018-07-22"
-					min="2018-01-01" max="2018-12-31"></ul>
+			<ul class="events_select_options" id="todate_select_options">
+				<li><a href="#"><span id="events_todate" th:text="#{events.toLastRace}"></span></a>
+					<div class="events_select_items">
+						<div>
+							<ul>
+								<li><a href="#" th:attr="onclick=|eventsToDate('#{events.toLastRace}',false,'')|"><span th:text="#{events.toLastRace}"></span></a></li>
+								<li><a href="#" th:attr="onclick=|eventsToDate('#{events.toDate}',true,':')|"><span th:text="#{events.toDate}"></span></a></li>
+							</ul>
+						</div>
+					</div></ul>
+			<div class="events_select_options" id="todate_calendar">
+			<ul class="calendar_options" id="todate_calendar_days">
+				<li><a href="#" class = "calendar_datelabel"><span id="calendar_todate_days" th:text="#{events.day}"></span></a>
+					<div class="events_select_items" id="calendar_days_items">
+						<div class="calendar_nav_dates">
+							<ul th:each="i : ${#numbers.sequence( 1, 8/1)}">
+								<li><a class="calendar_date" href="#" th:attr="onclick=|selectToDate('${ i }')|"><span th:text="${ i }"></span></a></li>
+							</ul>
+						</div>
+						<div class="calendar_nav_dates">
+							<ul th:each="i : ${#numbers.sequence( 9, 16/1)}">
+								<li><a class="calendar_date" href="#" th:attr="onclick=|selectToDate('${ i }')|"><span th:text="${ i }"></span></a></li>
+							</ul>
+						</div>
+						<div class="calendar_nav_dates">
+							<ul th:each="i : ${#numbers.sequence( 17, 24/1)}">
+								<li><a class="calendar_date" href="#" th:attr="onclick=|selectToDate('${ i }')|"><span th:text="${ i }"></span></a></li>
+							</ul>
+						</div>
+						<div class="calendar_nav_dates">
+							<ul th:each="i : ${#numbers.sequence( 25, 31/1)}">
+								<li><a class="calendar_date" href="#" th:attr="onclick=|selectToDate('${ i }')|,id=|toDate${ i }|"><span th:text="${ i }"></span></a></li>
+							</ul>
+						</div>
+					</div></ul>
+			<ul class="calendar_options" id="todate_calendar_month">
+				<li class = "calendar_monthlabel"><a href="#"><span id="calendar_todate_months" th:text="#{events.month}"></span></a>
+					<div class="events_select_items" id="calendar_months_items">
+						<div class="calendar_nav_months">
+							<ul>
+								<li><a href="#" th:attr="onclick=|selectToMonth('#{events.january}','01')|"><span th:text="#{events.january}"></span></a></li>
+								<li><a href="#" th:attr="onclick=|selectToMonth('#{events.february}','02')|"><span th:text="#{events.february}"></span></a></li>
+								<li><a href="#" th:attr="onclick=|selectToMonth('#{events.march}','03')|"><span th:text="#{events.march}"></span></a></li>
+								<li><a href="#" th:attr="onclick=|selectToMonth('#{events.april}','04')|"><span th:text="#{events.april}"></span></a></li>
+								<li><a href="#" th:attr="onclick=|selectToMonth('#{events.may}','05')|"><span th:text="#{events.may}"></span></a></li>
+								<li><a href="#" th:attr="onclick=|selectToMonth('#{events.june}','06')|"><span th:text="#{events.june}"></span></a></li>
+							</ul>
+						</div>
+						<div class="calendar_nav_months">
+							<ul>
+								<li><a href="#" th:attr="onclick=|selectToMonth('#{events.july}','07')|"><span th:text="#{events.july}"></span></a></li>
+								<li><a href="#" th:attr="onclick=|selectToMonth('#{events.august}','08')|"><span th:text="#{events.august}"></span></a></li>
+								<li><a href="#" th:attr="onclick=|selectToMonth('#{events.september}','09')|"><span th:text="#{events.september}"></span></a></li>
+								<li><a href="#" th:attr="onclick=|selectToMonth('#{events.october}','10')|"><span th:text="#{events.october}"></span></a></li>
+								<li><a href="#" th:attr="onclick=|selectToMonth('#{events.november}','11')|"><span th:text="#{events.november}"></span></a></li>
+								<li><a href="#" th:attr="onclick=|selectToMonth('#{events.december}','12')|"><span th:text="#{events.december}"></span></a></li>
+							</ul>
+						</div>
+					</div></ul>
+			<ul class="calendar_options" id="todate_calendar_years">
+				<li class = "calendar_yearlabel"><a href="#"><span id="calendar_todate_years" th:text="#{events.year}"></span></a>
+					<div class="events_select_items" id="calendar_years_items">
+						<div>
+							<ul>
+								<li><a href="#" onclick="selectToYear('2019')"><span>2019</span></a></li>
+								<li><a href="#" onclick="selectToYear('2020')"><span>2020</span></a></li>
+							</ul>
+						</div>
+					</div></ul>
+					</div>
+			<div class = "events_select_options" id = "apply_search_options_button">
+			<a href="#" th:text="#{events.seek}" onclick="refreshRaceList()"></a>
+			</div>
+		</div>
+		<div id="events_race_list"></div>
 		</div>
 	</div>
 </body>

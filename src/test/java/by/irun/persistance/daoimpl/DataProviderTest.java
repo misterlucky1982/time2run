@@ -455,7 +455,7 @@ public class DataProviderTest {
 		String lastName = "lastName";
 		long runnerId = 333;
 		int time = 150;
-		String raceName = "RACE";
+		String raceName = "KEY_RACE";
 
 		SqlRowSet rowSet = PowerMock.createMock(org.springframework.jdbc.support.rowset.SqlRowSet.class);
 		EasyMock.expect(jdbcTemplate.queryForRowSet(TORequests.raceClubResultTORequest(100))).andReturn(rowSet);
@@ -727,7 +727,7 @@ public class DataProviderTest {
 	public void getRaceTOTest(){
 		Date date = Date.valueOf("2000-01-01");
 		String park = "park";
-		String raceName = "RACE";
+		String raceName = "KEY_RACE";
 		SqlRowSet rowSet = PowerMock.createMock(org.springframework.jdbc.support.rowset.SqlRowSet.class);
 		EasyMock.expect(jdbcTemplate.queryForRowSet(TORequests.raceTORequest(333))).andReturn(rowSet);
 		DataProvider provider = new DataProvider();
@@ -736,6 +736,7 @@ public class DataProviderTest {
 		EasyMock.expect(rowSet.getDate(TORequests.RACE_DATE)).andReturn(date);
 		EasyMock.expect(rowSet.getString(TORequests.RACENAME)).andReturn(raceName);
 		EasyMock.expect(rowSet.getString(TORequests.PARK_NAME)).andReturn(park);
+		EasyMock.expect(rowSet.getLong(TORequests.RACE_ID)).andReturn(1L);
 		PowerMock.replayAll();
 		RaceTO to = null;
 		try {
@@ -748,6 +749,7 @@ public class DataProviderTest {
 		assertEquals(date,to.getDate());
 		assertEquals(park,to.getParkName());
 		assertEquals(raceName, to.getRaceName());
+		assertTrue(to.getRaceId()==1L);
 	}
 	
 	@Test
@@ -767,7 +769,7 @@ public class DataProviderTest {
 			e.printStackTrace();
 		}
 		PowerMock.verifyAll();
-		assertEquals("empty resultSet for race id:333", exceptionMessage);
+		assertEquals("empty ResultSet for raceId:333", exceptionMessage);
 		assertNull(to);
 	}
 	
@@ -794,7 +796,7 @@ public class DataProviderTest {
 		Date date = Date.valueOf("2000-01-02");
 		String park = "park";
 		Long raceId = 1L;
-		String raceName = "RACE";
+		String raceName = "KEY_RACE";
 		SqlRowSet rowSet = PowerMock.createMock(org.springframework.jdbc.support.rowset.SqlRowSet.class);
 		EasyMock.expect(jdbcTemplate.queryForRowSet(TORequests.fullRaceTOListRequest(from, to, 1L))).andReturn(rowSet);
 		DataProvider provider = new DataProvider();

@@ -7,13 +7,11 @@ import java.util.Map;
 import by.irun.controller.ControllerConstants;
 import by.irun.domain.Gender;
 import by.irun.domain.to.RaceClubResultTO;
-import by.irun.domain.to.RunnerResultTO;
 import by.irun.domain.to.RunnerTO;
 import by.irun.locale.AppLocales;
 import by.irun.locale.Internationalizer;
 import by.irun.locale.Translator;
 import by.irun.viz.to.runnerpage.RunnerInfoTO;
-import by.irun.viz.to.runnerpage.RunnerResultInfoTO;
 
 /**
  * this class provides utility methods for front-end representation
@@ -137,15 +135,6 @@ public class VizUtils implements Translator{
 	 */
 	public static String resolveClubName(String clubName, Locale locale){
 		return clubName!=null?clubName:Internationalizer.translate(Internationalizer.KEY_WITHOUTCLUB, locale);
-	}
-	
-	/**
-	 * resolves link to race for given raceId
-	 * @param id
-	 * @return link to race
-	 */
-	public static String resolveRaceLink(Long id){
-		return !isValidId(id)?EMPTY_LINK:ControllerConstants.RACE_LINK+id;
 	}
 	
 	/**
@@ -298,4 +287,16 @@ public class VizUtils implements Translator{
 						: VizConstants.RACE_RESULT_NO_AVATAR_FEMALE);
 	}
 	
+	/**
+	 * resolves link to race for given raceId
+	 * @param id
+	 * @return link to race
+	 */
+	public static String resolveRaceLink(Long raceId) {
+		return !isValidId(raceId) ? EMPTY_LINK : buildRaceLink(raceId);
+	}
+
+	private static String buildRaceLink(Long raceId) {
+		return ControllerConstants.RACE_LINK + Long.toString(raceId);
+	}
 }

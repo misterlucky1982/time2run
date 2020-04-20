@@ -25,5 +25,7 @@ public class VizConstants {
 	public static final String NO_CLUB_LOGO_RU = "../../images/clubs/no_club_ru.png";
 	public static final String NO_CLUB_LOGO_BY = "../../images/clubs/no_club_by.png";
 	public static final String NO_CLUB_LOGO_EN = "../../images/clubs/no_club_en.png";
+	public static final String WARNING_SRC = "../../images/warning.png";
+	public static final String SAD_SMILE_SRC = "../../images/sad_smile.png";
 	
 }

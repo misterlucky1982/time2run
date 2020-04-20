@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<script type="text/javascript">
+	function raceListInit(){
+		$('#events_race_list_table').animate({
+			opacity : 1
+		});
+	}
+</script>
+</head>
+<body>
+	<p></p>
+	<div th:fragment="reselist">
+		<div class="events_racelist">
+			<div class="racelist_table_wrapper" id="events_race_list_table">
+				<div class="racelist_table">
+					<p th:each="race : ${racelist}">
+						<a href="#" th:attr="onclick=|${race.linkValue}|"><span
+							class="events_racelist_racename" th:text="${race.linkName}"></span></a>
+					</p>
+				</div>
+				<div class="racelist_summary">
+			<span th:text="#{events.racelist.totalAmountOfRacesInResultList}"></span>
+			<span>:</span>
+			<span th:text="${racelist.size()}"></span>
+			</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+.warning_message div{
+	width: 100%;
+}
+
+
+.warning_message img{
+	width: 40px;
+	margin: auto;
+}
+
+.warning_message{
+	width: 500px;
+	margin: auto;
+	margin-top: 50px;
+	text-align: center;
+	font-family:Trebuchet MS,sans-serif;
+    font-size:14;
+    border:2px solid #ff8040;
+    padding:0 6px 6px;
+    border-radius:15px;
+    -moz-border-radius:15px;
+    -webkit-border-radius:15px;
+}

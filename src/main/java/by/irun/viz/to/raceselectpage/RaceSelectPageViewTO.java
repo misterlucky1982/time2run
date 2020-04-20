@@ -9,59 +9,22 @@ import java.util.Map;
  */
 public class RaceSelectPageViewTO {
 
-	private String eventTitle;
-	private String lastRaceName;
-	private String lastRaceDate;
-	private String lastRacePark;
-	private String linkToLastRace;
+	private RaceInfoVizTO raceInfoVizTO;
 	private Map<String,String> parksMap;
 	/**
 	 * @return the lastRaceName
 	 */
-	public String getLastRaceName() {
-		return lastRaceName;
+	/**
+	 * @return the raceInfoVizTO
+	 */
+	public RaceInfoVizTO getRaceInfoVizTO() {
+		return raceInfoVizTO;
 	}
 	/**
-	 * @param lastRaceName the lastRaceName to set
+	 * @param raceInfoVizTO the raceInfoVizTO to set
 	 */
-	public void setLastRaceName(String lastRaceName) {
-		this.lastRaceName = lastRaceName;
-	}
-	/**
-	 * @return the lastRaceDate
-	 */
-	public String getLastRaceDate() {
-		return lastRaceDate;
-	}
-	/**
-	 * @param lastRaceDate the lastRaceDate to set
-	 */
-	public void setLastRaceDate(String lastRaceDate) {
-		this.lastRaceDate = lastRaceDate;
-	}
-	/**
-	 * @return the lastRacePark
-	 */
-	public String getLastRacePark() {
-		return lastRacePark;
-	}
-	/**
-	 * @param lastRacePark the lastRacePark to set
-	 */
-	public void setLastRacePark(String lastRacePark) {
-		this.lastRacePark = lastRacePark;
-	}
-	/**
-	 * @return the linkToLastRace
-	 */
-	public String getLinkToLastRace() {
-		return linkToLastRace;
-	}
-	/**
-	 * @param linkToLastRace the linkToLastRace to set
-	 */
-	public void setLinkToLastRace(String linkToLastRace) {
-		this.linkToLastRace = linkToLastRace;
+	public void setRaceInfoVizTO(RaceInfoVizTO raceInfoVizTO) {
+		this.raceInfoVizTO = raceInfoVizTO;
 	}
 	/**
 	 * @return the parksMap
@@ -75,17 +38,6 @@ public class RaceSelectPageViewTO {
 	public void setParksMap(Map<String, String> parksMap) {
 		this.parksMap = parksMap;
 	}
-	/**
-	 * @return the eventTitle
-	 */
-	public String getEventTitle() {
-		return eventTitle;
-	}
-	/**
-	 * @param eventTitle the eventTitle to set
-	 */
-	public void setEventTitle(String eventTitle) {
-		this.eventTitle = eventTitle;
-	}
+	
 	
 }

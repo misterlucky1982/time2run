@@ -87,8 +87,8 @@ public class RunnerResultTOTest {
 	@Test
 	public void raceNameTest(){
 		assertNull(to.getRaceName());
-		to.setRaceName("RACE");
-		assertEquals("RACE",to.getRaceName());
+		to.setRaceName("KEY_RACE");
+		assertEquals("KEY_RACE",to.getRaceName());
 	}
 
 }

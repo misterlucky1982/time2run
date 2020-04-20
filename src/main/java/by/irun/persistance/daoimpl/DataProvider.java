@@ -16,6 +16,7 @@ import by.irun.domain.Gender;
 import by.irun.domain.to.ClubRunnerTO;
 import by.irun.domain.to.ClubTO;
 import by.irun.domain.to.RaceClubResultTO;
+import by.irun.domain.to.RaceExtendedTO;
 import by.irun.domain.to.RaceTO;
 import by.irun.domain.to.RunnerRaceResultTO;
 import by.irun.domain.to.RunnerResultTO;
@@ -271,17 +272,11 @@ public class DataProvider implements IDataProvider{
 	 * @see by.irun.dao.IDataProvider#getRaceTOforRaceId (long raceId)
 	 */
 	@Override
-	public RaceTO getRaceTOforRaceId(long raceId) throws SQLException {
-		RaceTO to = null;
+	public RaceExtendedTO getRaceExtendedTOforRaceId(long raceId) throws SQLException {
+		RaceExtendedTO to = null;
 		try {
-			SqlRowSet rowSet = jdbcTemplate.queryForRowSet(TORequests.raceTORequest(raceId));
-			if (rowSet.next()) {
-				to = new RaceTO();
-				to.setRaceName(rowSet.getString(TORequests.RACENAME));
-				to.setDate(rowSet.getDate(TORequests.RACE_DATE));
-				to.setParkName(rowSet.getString(TORequests.PARK_NAME));
-			} else
-				throw new SQLException("empty resultSet for race id:" + raceId);
+			SqlRowSet rowSet = jdbcTemplate.queryForRowSet(TORequests.extendedRaceTORequestForRaceId(raceId));
+			to = raceExtendedTOfromSqlRowSet(rowSet);
 		} catch (RuntimeException e) {
 			throw new SQLException(e);
 		}
@@ -294,18 +289,30 @@ public class DataProvider implements IDataProvider{
 	 * @see by.irun.dao.IDataProvider#getRaceTOForLastRace()
 	 */
 	@Override
-	public RaceTO getRaceTOForLastRace() throws SQLException {
-		RaceTO to = null;
+	public RaceExtendedTO getRaceExtendedTOForLastRace() throws SQLException {
+		RaceExtendedTO to = null;
 		try {
-			SqlRowSet rowSet = jdbcTemplate.queryForRowSet(TORequests.raceTORequestForLastRace());
-			if (rowSet.next()) {
-				to = getRaceTOFromSqlRowset(rowSet);
-			} else
-				throw new SQLException("empty resultSet");
+			SqlRowSet rowSet = jdbcTemplate.queryForRowSet(TORequests.extendedRaceTORequestForLastRace());
+			to = raceExtendedTOfromSqlRowSet(rowSet);
 		} catch (RuntimeException e) {
 			throw new SQLException(e);
 		}
 		return to;
+	}
+	
+	private RaceExtendedTO raceExtendedTOfromSqlRowSet(SqlRowSet rowSet) throws SQLException{
+		if (rowSet.next()) {
+			RaceExtendedTO to = null;
+			to = new RaceExtendedTO();
+			to.setRaceName(rowSet.getString(TORequests.RACENAME));
+			to.setDate(rowSet.getDate(TORequests.RACE_DATE));
+			to.setParkName(rowSet.getString(TORequests.PARK_NAME));
+			to.setRaceId(rowSet.getLong(TORequests.RACE_ID));
+			to.setMenParticupants(rowSet.getInt(TORequests.M_PARTICIPANTS));
+			to.setWomenParticipants(rowSet.getInt(TORequests.W_PARTICIPANTS));
+			return to;
+		} else
+			throw new SQLException("empty resultSet");
 	}
 
 	/**
@@ -315,10 +322,10 @@ public class DataProvider implements IDataProvider{
 	 */
 	private RaceTO getRaceTOFromSqlRowset(SqlRowSet rowSet){
 		RaceTO to = new RaceTO();
-		to.setRaceId(rowSet.getLong(TORequests.RACE_ID));
 		to.setDate(rowSet.getDate(TORequests.RACE_DATE));
 		to.setRaceName(rowSet.getString(TORequests.RACENAME));
 		to.setParkName(rowSet.getString(TORequests.PARK_NAME));
+		to.setRaceId(rowSet.getLong(TORequests.RACE_ID));
 		return to;
 	}
 	
@@ -339,6 +346,20 @@ public class DataProvider implements IDataProvider{
 			throw new SQLException(e);
 		}
 		return list;
+	}
+
+	@Override
+	public RaceTO getRaceTOforRaceId(long raceId) throws SQLException {
+		RaceTO to = null;
+		try {
+			SqlRowSet rowSet = jdbcTemplate.queryForRowSet(TORequests.raceTORequest(raceId));
+			if(rowSet.next()){
+				to = getRaceTOFromSqlRowset(rowSet);
+			}else throw new SQLException("empty ResultSet for raceId:"+raceId);
+		} catch (RuntimeException e) {
+			throw new SQLException(e);
+		}
+		return to;
 	}
 	
 }

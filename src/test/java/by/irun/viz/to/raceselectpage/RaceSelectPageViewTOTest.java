@@ -19,38 +19,10 @@ public class RaceSelectPageViewTOTest {
 	}
 	
 	@Test
-	public void lastRaceNameTest(){
-		assertNull(to.getLastRaceName());
-		to.setLastRaceName("RACE");
-		assertEquals("RACE",to.getLastRaceName());
-	}
-	
-	@Test
-	public void lastRaceDateTest(){
-		assertNull(to.getLastRaceDate());
-		to.setLastRaceDate("DATE");
-		assertEquals("DATE",to.getLastRaceDate());
-	}
-	
-	@Test
-	public void lastRaceParkTest(){
-		assertNull(to.getLastRacePark());
-		to.setLastRacePark("PARK");
-		assertEquals("PARK",to.getLastRacePark());
-	}
-	
-	@Test
-	public void eventTitleTest(){
-		assertNull(to.getEventTitle());
-		to.setEventTitle("TITLE");
-		assertEquals("TITLE",to.getEventTitle());
-	}
-	
-	@Test
-	public void linkToRaceTest(){
-		assertNull(to.getLinkToLastRace());
-		to.setLinkToLastRace("LINK");
-		assertEquals("LINK",to.getLinkToLastRace());
+	public void raceInfoVizTOTest(){
+		RaceInfoVizTO vizTO = PowerMock.createMock(RaceInfoVizTO.class);
+		to.setRaceInfoVizTO(vizTO);
+		assertEquals(vizTO,to.getRaceInfoVizTO());
 	}
 	
 	@Test
