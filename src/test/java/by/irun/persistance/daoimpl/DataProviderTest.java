@@ -81,14 +81,14 @@ public class DataProviderTest {
 	public void getRaceResultWithExceptionTest() {
 		org.springframework.dao.DataAccessException exception = PowerMock
 				.createMock(org.springframework.dao.DataAccessException.class);
-		EasyMock.expect(jdbcTemplate.queryForRowSet(TORequests.raceResultRequest(1L))).andThrow(exception);
+		EasyMock.expect(jdbcTemplate.queryForRowSet(TORequests.raceResultRequest(2L))).andThrow(exception);
 		EasyMock.expect(exception.getCause()).andReturn(new RuntimeException());
 		DataProvider provider = new DataProvider();
 		Whitebox.setInternalState(provider, "jdbcTemplate", jdbcTemplate);
 		PowerMock.replayAll();
 		List<RaceResultTO> result = null;
 		try {
-			result = provider.getRaceResult(1L);
+			result = provider.getRaceResult(2L);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -664,7 +664,7 @@ public class DataProviderTest {
 		Integer time = 100;
 
 		SqlRowSet rowSet = PowerMock.createMock(org.springframework.jdbc.support.rowset.SqlRowSet.class);
-		EasyMock.expect(jdbcTemplate.queryForRowSet(TORequests.runnerRaceResultTORequest(333, Gender.FEMALE))).andReturn(rowSet);
+		EasyMock.expect(jdbcTemplate.queryForRowSet(TORequests.runnerRaceResultTORequest(1333, Gender.FEMALE))).andReturn(rowSet);
 		DataProvider provider = new DataProvider();
 		Whitebox.setInternalState(provider, "jdbcTemplate", jdbcTemplate);
 		EasyMock.expect(rowSet.next()).andReturn(true);
@@ -682,7 +682,7 @@ public class DataProviderTest {
 		PowerMock.replayAll();
 		List<RunnerRaceResultTO> list = null;
 		try {
-			list = provider.getRunnerRaceResultList(333, Gender.FEMALE);
+			list = provider.getRunnerRaceResultList(1333, Gender.FEMALE);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
