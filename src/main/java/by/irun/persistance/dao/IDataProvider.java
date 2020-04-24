@@ -1,4 +1,4 @@
-package by.irun.prsistance.dao;
+package by.irun.persistance.dao;
 
 import java.sql.Date;
 import java.sql.SQLException;

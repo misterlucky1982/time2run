@@ -22,7 +22,7 @@ import by.irun.domain.Race;
 import by.irun.domain.Result;
 import by.irun.domain.Runner;
 import by.irun.domain.User;
-import by.irun.prsistance.dao.CRUDHandler;
+import by.irun.persistance.dao.CRUDHandler;
 
 /**
  * test class for {@link by.irun.service.impl.DomainEntityService}
