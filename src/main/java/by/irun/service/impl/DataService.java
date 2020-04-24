@@ -10,8 +10,6 @@ import java.util.Locale;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import by.irun.dao.IDataProvider;
-import by.irun.dao.IDomainEntityProvider;
 import by.irun.domain.Gender;
 import by.irun.domain.Park;
 import by.irun.domain.to.ClubRunnerTO;
@@ -25,6 +23,8 @@ import by.irun.domain.to.RunnerTO;
 import by.irun.locale.AppLocales;
 import by.irun.locale.Internationalizer;
 import by.irun.locale.Translator;
+import by.irun.prsistance.dao.IDataProvider;
+import by.irun.prsistance.dao.IDomainEntityProvider;
 import by.irun.service.IDataService;
 import by.irun.service.ServiceUtils;
 import by.irun.util.Link;

@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import by.irun.dao.CRUDHandler;
 import by.irun.domain.Club;
 import by.irun.domain.DomainEntity;
 import by.irun.domain.Park;
@@ -15,6 +14,7 @@ import by.irun.domain.Race;
 import by.irun.domain.Result;
 import by.irun.domain.Runner;
 import by.irun.domain.User;
+import by.irun.prsistance.dao.CRUDHandler;
 import by.irun.service.IDomainEntityService;
 
 /**

@@ -14,7 +14,6 @@ import org.powermock.api.easymock.annotation.Mock;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.powermock.reflect.Whitebox;
 
-import by.irun.dao.CRUDHandler;
 import by.irun.domain.Club;
 import by.irun.domain.DomainEntity;
 import by.irun.domain.Park;
@@ -23,6 +22,7 @@ import by.irun.domain.Race;
 import by.irun.domain.Result;
 import by.irun.domain.Runner;
 import by.irun.domain.User;
+import by.irun.prsistance.dao.CRUDHandler;
 
 /**
  * test class for {@link by.irun.service.impl.DomainEntityService}

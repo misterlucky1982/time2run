@@ -11,7 +11,6 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
 import by.irun.config.ApplicationConstants;
-import by.irun.dao.IDataProvider;
 import by.irun.domain.Gender;
 import by.irun.domain.to.ClubRunnerTO;
 import by.irun.domain.to.ClubTO;
@@ -23,12 +22,13 @@ import by.irun.domain.to.RunnerResultTO;
 import by.irun.domain.to.RunnerTO;
 import by.irun.persistance.util.GenderConverter;
 import by.irun.persistance.util.TORequests;
+import by.irun.prsistance.dao.IDataProvider;
 import by.irun.viz.to.RaceInfoTO;
 import by.irun.viz.to.RaceResultTO;
 import by.irun.viz.utils.VizUtils;
 
 /**
- * implementation of {@link by.irun.dao.IDataProvider}
+ * implementation of {@link by.irun.prsistance.dao.IDataProvider}
  * @author A.Dubovik
  */
 @Component
@@ -42,7 +42,7 @@ public class DataProvider implements IDataProvider{
 	}
 
 	/* (non-Javadoc)
-	 * @see by.irun.dao.IDataProvider#getRaceResult(long raceId)
+	 * @see by.irun.prsistance.dao.IDataProvider#getRaceResult(long raceId)
 	 */
 	@Override
 	public List<RaceResultTO> getRaceResult(long raceId) throws SQLException{
@@ -54,7 +54,7 @@ public class DataProvider implements IDataProvider{
 	}
 	
 	/* (non-Javadoc)
-	 * @see by.irun.dao.IDataProvider#getFullRaceList()
+	 * @see by.irun.prsistance.dao.IDataProvider#getFullRaceList()
 	 */
 	@Override
 	public List<RaceInfoTO> getFullRaceList() throws SQLException{
@@ -106,7 +106,7 @@ public class DataProvider implements IDataProvider{
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see by.irun.dao.IDataProvider#getRunnerResults(long runnerId)
+	 * @see by.irun.prsistance.dao.IDataProvider#getRunnerResults(long runnerId)
 	 */
 	@Override
 	public List<RunnerResultTO> getRunnerResults(long runnerId) throws SQLException {
@@ -136,7 +136,7 @@ public class DataProvider implements IDataProvider{
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see by.irun.dao.IDataProvider#getRunnerTO(long runnerId)
+	 * @see by.irun.prsistance.dao.IDataProvider#getRunnerTO(long runnerId)
 	 */
 	@Override
 	public RunnerTO getRunnerTO(long runnerId) throws SQLException {
@@ -163,7 +163,7 @@ public class DataProvider implements IDataProvider{
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see by.irun.dao.IDataProvider#getClubTO(long clubId)
+	 * @see by.irun.prsistance.dao.IDataProvider#getClubTO(long clubId)
 	 */
 	@Override
 	public ClubTO getClubTO(long clubId) throws SQLException {
@@ -187,7 +187,7 @@ public class DataProvider implements IDataProvider{
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see by.irun.dao.IDataProvider#getRaceClubResultTOList(long clubId)
+	 * @see by.irun.prsistance.dao.IDataProvider#getRaceClubResultTOList(long clubId)
 	 */
 	@Override
 	public List<RaceClubResultTO> getRaceClubResultTOList(long clubId) throws SQLException {
@@ -218,7 +218,7 @@ public class DataProvider implements IDataProvider{
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see by.irun.dao.IDataProvider#getCurrentClubRunnerTOListForClub(long clubId)
+	 * @see by.irun.prsistance.dao.IDataProvider#getCurrentClubRunnerTOListForClub(long clubId)
 	 */
 	@Override
 	public List<ClubRunnerTO> getCurrentClubRunnerTOListForClub(long clubId) throws SQLException {
@@ -239,7 +239,7 @@ public class DataProvider implements IDataProvider{
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see by.irun.dao.IDataProvider#getRunnerRaceResultList(long raceId, Gender gender)
+	 * @see by.irun.prsistance.dao.IDataProvider#getRunnerRaceResultList(long raceId, Gender gender)
 	 */
 	@Override
 	public List<RunnerRaceResultTO> getRunnerRaceResultList(long raceId, Gender gender) throws SQLException {
@@ -269,7 +269,7 @@ public class DataProvider implements IDataProvider{
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see by.irun.dao.IDataProvider#getRaceTOforRaceId (long raceId)
+	 * @see by.irun.prsistance.dao.IDataProvider#getRaceTOforRaceId (long raceId)
 	 */
 	@Override
 	public RaceExtendedTO getRaceExtendedTOforRaceId(long raceId) throws SQLException {
@@ -286,7 +286,7 @@ public class DataProvider implements IDataProvider{
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see by.irun.dao.IDataProvider#getRaceTOForLastRace()
+	 * @see by.irun.prsistance.dao.IDataProvider#getRaceTOForLastRace()
 	 */
 	@Override
 	public RaceExtendedTO getRaceExtendedTOForLastRace() throws SQLException {
@@ -332,7 +332,7 @@ public class DataProvider implements IDataProvider{
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see by.irun.dao.IDataProvider#getRaceTOList(Date from, Date to, Long parkId)
+	 * @see by.irun.prsistance.dao.IDataProvider#getRaceTOList(Date from, Date to, Long parkId)
 	 */
 	@Override
 	public List<RaceTO> getRaceTOList(Date from, Date to, Long parkId) throws SQLException {
