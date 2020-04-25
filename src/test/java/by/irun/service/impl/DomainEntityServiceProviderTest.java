@@ -13,28 +13,24 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import org.powermock.reflect.Whitebox;
 
 import by.irun.domain.Club;
-import by.irun.domain.DomainEntity;
 import by.irun.domain.Park;
 import by.irun.domain.Picture;
 import by.irun.domain.Race;
 import by.irun.domain.Result;
 import by.irun.domain.Runner;
 import by.irun.domain.User;
-import by.irun.persistance.dao.CRUDHandler;
+import by.irun.persistance.proxi.InterimRepositoryConnector;
 
 /**
- * test class for {@link by.irun.service.impl.DomainEntityService}
+ * test class for {@link by.irun.service.impl.DomainEntityServiceProvider}
  * @author A.Dubovik
  *
  */
 @RunWith(PowerMockRunner.class)
-public class DomainEntityServiceTest {
+public class DomainEntityServiceProviderTest {
 	
 	@Mock
-	private CRUDHandler dao;
-	
-	@Mock
-	private DomainEntity entity;
+	private InterimRepositoryConnector repository;
 	
 	@Mock
 	private Club club;
@@ -57,12 +53,12 @@ public class DomainEntityServiceTest {
 	@Mock
 	private User user;
 	
-	private DomainEntityService service;
+	private DomainEntityServiceProvider service;
 	
 	@Before
 	public void init(){
-		service = new DomainEntityService();
-		Whitebox.setInternalState(service, "dao", dao);
+		service = new DomainEntityServiceProvider();
+		Whitebox.setInternalState(service, "repository", repository);
 	}
 	
 	
@@ -73,7 +69,7 @@ public class DomainEntityServiceTest {
 	public void getClubSuccessfullyTest(){
 		Club club0 = null;
 		try {
-			EasyMock.expect(dao.getEntityById(Club.class, 1L)).andReturn(club);
+			EasyMock.expect(repository.getClubById(1L)).andReturn(club);
 			PowerMock.replayAll();
 			club0 = service.getClubByID(1L);
 		} catch (SQLException e) {}
@@ -88,7 +84,7 @@ public class DomainEntityServiceTest {
 	public void getClubWithoutSuccessTest(){
 		Club club0 = null;
 		try {
-			EasyMock.expect(dao.getEntityById(Club.class, 1L)).andThrow(new SQLException());
+			EasyMock.expect(repository.getClubById(1L)).andThrow(new SQLException());
 			PowerMock.replayAll();
 			club0 = service.getClubByID(1L);
 		} catch (SQLException e) {}
@@ -103,7 +99,7 @@ public class DomainEntityServiceTest {
 	public void getParkSuccessfullyTest(){
 		Park entity = null;
 		try {
-			EasyMock.expect(dao.getEntityById(Park.class, 1L)).andReturn(park);
+			EasyMock.expect(repository.getParkById(1L)).andReturn(park);
 			PowerMock.replayAll();
 			entity = service.getParkByID(1L);
 		} catch (SQLException e) {}
@@ -118,7 +114,7 @@ public class DomainEntityServiceTest {
 	public void getParkWithoutSuccessTest(){
 		Park entity = null;
 		try {
-			EasyMock.expect(dao.getEntityById(Park.class, 1L)).andThrow(new SQLException());
+			EasyMock.expect(repository.getParkById(1L)).andThrow(new SQLException());
 			PowerMock.replayAll();
 			entity = service.getParkByID(1L);
 		} catch (SQLException e) {}
@@ -133,7 +129,7 @@ public class DomainEntityServiceTest {
 	public void getPictureSuccessfullyTest(){
 		Picture entity = null;
 		try {
-			EasyMock.expect(dao.getEntityById(Picture.class, 1L)).andReturn(picture);
+			EasyMock.expect(repository.getPictureById(1L)).andReturn(picture);
 			PowerMock.replayAll();
 			entity = service.getPictureByID(1L);
 		} catch (SQLException e) {}
@@ -148,69 +144,9 @@ public class DomainEntityServiceTest {
 	public void getPictureWithoutSuccessTest(){
 		Picture entity = null;
 		try {
-			EasyMock.expect(dao.getEntityById(Picture.class, 1L)).andThrow(new SQLException());
+			EasyMock.expect(repository.getPictureById(1L)).andThrow(new SQLException());
 			PowerMock.replayAll();
 			entity = service.getPictureByID(1L);
-		} catch (SQLException e) {}
-		PowerMock.verifyAll();
-		assertNull(entity);
-	}
-	
-	/**
-	 * test scenario with obtain race successfully
-	 */
-	@Test
-	public void getRaceSuccessfullyTest(){
-		Race entity = null;
-		try {
-			EasyMock.expect(dao.getEntityById(Race.class, 1L)).andReturn(race);
-			PowerMock.replayAll();
-			entity = service.getRaceByID(1L);
-		} catch (SQLException e) {}
-		PowerMock.verifyAll();
-		assertEquals(race,entity);
-	}
-	
-	/**
-	 * test scenario with obtain race failed
-	 */
-	@Test
-	public void getRaceWithoutSuccessTest(){
-		Race entity = null;
-		try {
-			EasyMock.expect(dao.getEntityById(Race.class, 1L)).andThrow(new SQLException());
-			PowerMock.replayAll();
-			entity = service.getRaceByID(1L);
-		} catch (SQLException e) {}
-		PowerMock.verifyAll();
-		assertNull(entity);
-	}
-	
-	/**
-	 * test scenario with obtain result successfully
-	 */
-	@Test
-	public void getResultSuccessfullyTest(){
-		Result entity = null;
-		try {
-			EasyMock.expect(dao.getEntityById(Result.class, 1L)).andReturn(result);
-			PowerMock.replayAll();
-			entity = service.getResultByID(1L);
-		} catch (SQLException e) {}
-		PowerMock.verifyAll();
-		assertEquals(result,entity);
-	}
-	
-	/**
-	 * test scenario with obtain result failed
-	 */
-	@Test
-	public void getResulkWithoutSuccessTest(){
-		Result entity = null;
-		try {
-			EasyMock.expect(dao.getEntityById(Result.class, 1L)).andThrow(new SQLException());
-			PowerMock.replayAll();
-			entity = service.getResultByID(1L);
 		} catch (SQLException e) {}
 		PowerMock.verifyAll();
 		assertNull(entity);
@@ -223,7 +159,7 @@ public class DomainEntityServiceTest {
 	public void getRunnerSuccessfullyTest(){
 		Runner entity = null;
 		try {
-			EasyMock.expect(dao.getEntityById(Runner.class, 1L)).andReturn(runner);
+			EasyMock.expect(repository.getRunnerById(1L)).andReturn(runner);
 			PowerMock.replayAll();
 			entity = service.getRunnerByID(1L);
 		} catch (SQLException e) {}
@@ -238,7 +174,7 @@ public class DomainEntityServiceTest {
 	public void getRunnerWithoutSuccessTest(){
 		Runner entity = null;
 		try {
-			EasyMock.expect(dao.getEntityById(Runner.class, 1L)).andThrow(new SQLException());
+			EasyMock.expect(repository.getRunnerById(1L)).andThrow(new SQLException());
 			PowerMock.replayAll();
 			entity = service.getRunnerByID(1L);
 		} catch (SQLException e) {}
@@ -253,7 +189,7 @@ public class DomainEntityServiceTest {
 	public void getUserSuccessfullyTest(){
 		User entity = null;
 		try {
-			EasyMock.expect(dao.getEntityById(User.class, 1L)).andReturn(user);
+			EasyMock.expect(repository.getUserById(1L)).andReturn(user);
 			PowerMock.replayAll();
 			entity = service.getUserByID(1L);
 		} catch (SQLException e) {}
@@ -268,7 +204,7 @@ public class DomainEntityServiceTest {
 	public void getUserWithoutSuccessTest(){
 		User entity = null;
 		try {
-			EasyMock.expect(dao.getEntityById(User.class, 1L)).andThrow(new SQLException());
+			EasyMock.expect(repository.getUserById(1L)).andThrow(new SQLException());
 			PowerMock.replayAll();
 			entity = service.getUserByID(1L);
 		} catch (SQLException e) {}
