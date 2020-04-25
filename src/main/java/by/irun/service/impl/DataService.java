@@ -30,8 +30,6 @@ import by.irun.service.ServiceUtils;
 import by.irun.util.Link;
 import by.irun.viz.to.ClubInfoTO;
 import by.irun.viz.to.ClubRunnerInfoTO;
-import by.irun.viz.to.RaceInfoTO;
-import by.irun.viz.to.RaceResultTO;
 import by.irun.viz.to.racepage.RaceResultInfoTO;
 import by.irun.viz.to.raceselectpage.RaceInfoVizTO;
 import by.irun.viz.to.raceselectpage.RaceSelectPageViewTO;
@@ -52,34 +50,6 @@ public class DataService implements IDataService{
 	
 	@Autowired
 	private IDataProvider dataProvider;
-	
-	/* (non-Javadoc)
-	 * @see by.irun.service.IDataService#getRaceResult(long raceId)
-	 */
-	@Override
-	public List<RaceResultTO> getRaceResult(long raceId) {
-		List<RaceResultTO>list = null;
-		try{
-			list = dataProvider.getRaceResult(raceId);
-		}catch(SQLException e){
-			e.printStackTrace();
-		}
-		return list!=null?list:Collections.emptyList();
-	}
-
-	/* (non-Javadoc)
-	 * @see by.irun.service.IDataService#getFullRaceList()
-	 */
-	@Override
-	public List<RaceInfoTO> getFullRaceList() {
-		List<RaceInfoTO>list = null;
-		try{
-			list = dataProvider.getFullRaceList();
-		}catch(SQLException e){
-			e.printStackTrace();
-		}
-		return list!=null?list:Collections.emptyList();
-	}
 
 	/* (non-Javadoc)
 	 * @see by.irun.service.IDataService#getRunnerInfoTO(long runnerId)

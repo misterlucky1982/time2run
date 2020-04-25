@@ -6,7 +6,6 @@ import java.util.Locale;
 import by.irun.util.Link;
 import by.irun.viz.to.ClubInfoTO;
 import by.irun.viz.to.RaceInfoTO;
-import by.irun.viz.to.RaceResultTO;
 import by.irun.viz.to.racepage.RaceResultInfoTO;
 import by.irun.viz.to.raceselectpage.RaceInfoVizTO;
 import by.irun.viz.to.raceselectpage.RaceSelectPageViewTO;
@@ -16,19 +15,6 @@ import by.irun.viz.to.runnerpage.RunnerInfoTO;
  * @author A.Dubovik
  */
 public interface IDataService {
-	
-	/**
-	 * Provides list of results of race with given id {@link by.irun.domain.Race}
-	 * @param raceId
-	 * @return List<RaceResultTO>
-	 */
-	List<RaceResultTO>getRaceResult(long raceId);
-	
-	/**
-	 * Provides list of RaceInfoTO for all races that are stored in Data Repository
-	 * @return RaceInfoTO
-	 */
-	List<RaceInfoTO>getFullRaceList();
 	
 	/**
 	 * Provides RunnerInfoTO for given id of {@link by.irun.domain.Runner}
