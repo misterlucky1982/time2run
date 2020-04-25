@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import by.irun.domain.Club;
-import by.irun.domain.DomainEntity;
 import by.irun.domain.Park;
 import by.irun.domain.Picture;
 import by.irun.domain.Race;
@@ -28,46 +27,6 @@ public class DomainEntityService implements IDomainEntityService{
 	
 	@Autowired
 	private CRUDHandler dao;
-
-	/* (non-Javadoc)
-	 * @see by.irun.service.IDomainEntityService#add(DomainEntity entity)
-	 */
-	@Override
-	public Serializable add(DomainEntity entity) {
-		Serializable id = null;
-		try{
-			id = dao.add(entity);
-		}catch(SQLException e){
-			e.printStackTrace();
-		}
-		return id;
-	}
-
-	/* (non-Javadoc)
-	 * @see by.irun.service.IDomainEntityService#update(DomainEntity entity)
-	 */
-	@Override
-	public boolean update(DomainEntity entity) {
-		try{
-			return dao.update(entity);
-		}catch(SQLException e){
-			e.printStackTrace();
-		}
-		return false;
-	}
-
-	/* (non-Javadoc)
-	 * @see by.irun.service.IDomainEntityService#delete(DomainEntity entity)
-	 */
-	@Override
-	public boolean delete(DomainEntity entity) {
-		try{
-			return dao.delete(entity);
-		}catch(SQLException e){
-			e.printStackTrace();
-		}
-		return false;
-	}
 
 	/* (non-Javadoc)
 	 * @see by.irun.service.IDomainEntityService#getClubByID(Serializable id)

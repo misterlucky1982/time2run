@@ -1,8 +1,6 @@
 package by.irun.service.impl;
 
 import static org.junit.Assert.*;
-
-import java.io.Serializable;
 import java.sql.SQLException;
 
 import org.easymock.EasyMock;
@@ -67,95 +65,6 @@ public class DomainEntityServiceTest {
 		Whitebox.setInternalState(service, "dao", dao);
 	}
 	
-	/**
-	 * test case with entity added successfully
-	 */
-	@Test
-	public void addDomainEntityTest(){
-		Serializable id = null;
-		try {
-			EasyMock.expect(dao.add(entity)).andReturn(1L);
-			PowerMock.replayAll();
-			id = service.add(entity);
-		} catch (SQLException e) {}
-		PowerMock.verifyAll();
-		assertEquals(1L,id);
-	}
-	
-	/**
-	 * test scenario with the adding entity failed
-	 */
-	@Test
-	public void addEntityWithoutSuccessTest(){
-		Serializable id = null;
-		try {
-			EasyMock.expect(dao.add(entity)).andThrow(new SQLException());
-			PowerMock.replayAll();
-			id = service.add(entity);
-		} catch (SQLException e) {}
-		PowerMock.verifyAll();
-		assertNull(id);
-	}
-
-	/**
-	 * test scenario with successfully updated entity 
-	 */
-	@Test
-	public void updateDomainEntityTest(){
-		Boolean result = null;
-		try {
-			EasyMock.expect(dao.update(entity)).andReturn(true);
-			PowerMock.replayAll();
-			result = service.update(entity);
-		} catch (SQLException e) {}
-		PowerMock.verifyAll();
-		assertTrue(result);
-	}
-	
-	/**
-	 * test scenario with update entity failed
-	 */
-	@Test
-	public void updateEntityFailedTest(){
-		Boolean result = null;
-		try {
-			EasyMock.expect(dao.update(entity)).andThrow(new SQLException());
-			PowerMock.replayAll();
-			result = service.update(entity);
-		} catch (SQLException e) {}
-		PowerMock.verifyAll();
-		assertFalse(result);
-	}
-	
-	/**
-	 * test scenario with delete entity successfully
-	 */
-	@Test
-	public void deleteDomainEntityTest(){
-		Boolean result = null;
-		try {
-			EasyMock.expect(dao.delete(entity)).andReturn(true);
-			PowerMock.replayAll();
-			result = service.delete(entity);
-		} catch (SQLException e) {}
-		PowerMock.verifyAll();
-		assertTrue(result);
-	}
-	
-	/**
-	 * test scenario delete entity failed
-	 */
-	@Test
-	public void deleteEntityWithoutSuccessTest(){
-		Boolean result = null;
-		try {
-			EasyMock.expect(dao.delete(entity)).andThrow(new SQLException());
-			PowerMock.replayAll();
-			result = service.delete(entity);
-		} catch (SQLException e) {}
-		PowerMock.verifyAll();
-		assertFalse(result);
-	}
 	
 	/**
 	 * test scenario with obtain club successfully

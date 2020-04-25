@@ -20,32 +20,6 @@ import by.irun.domain.User;
  */
 public interface IDomainEntityService {
 	
-	/**
-	 * adds DomainEntity to repository
-	 * @param entity
-	 * @return id of entity if entity been added or null if not
-	 */
-	public Serializable add(DomainEntity entity);
-	
-	/**
-	 * updates existing DomainEntity
-	 * @param entity
-	 * @return true if entity been updated or false if not
-	 */
-	public boolean update(DomainEntity entity);
-	
-	/**
-	 * deletes existing DomainEntity from repository
-	 * @param entity
-	 * @return true if entity been deleted or false if not
-	 */
-	public boolean delete(DomainEntity entity);
-	
-	/**
-	 * obtains existing Club from repository if its exists with given id
-	 * @param id
-	 * @return Club
-	 */
 	public Club getClubByID(Serializable id);
 	
 	/**
