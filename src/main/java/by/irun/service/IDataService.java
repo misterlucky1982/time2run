@@ -1,11 +1,9 @@
 package by.irun.service;
 
 import java.sql.Date;
-import java.util.List;
 import java.util.Locale;
 import by.irun.util.Link;
 import by.irun.viz.to.ClubInfoTO;
-import by.irun.viz.to.RaceInfoTO;
 import by.irun.viz.to.racepage.RaceResultInfoTO;
 import by.irun.viz.to.raceselectpage.RaceInfoVizTO;
 import by.irun.viz.to.raceselectpage.RaceSelectPageViewTO;
