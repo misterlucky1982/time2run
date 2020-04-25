@@ -29,6 +29,7 @@ public interface IDataProvider {
 	 * @param raceId
 	 * @return List<RaceResultTO>
 	 */
+	@Deprecated
 	List<RaceResultTO>getRaceResult(long raceId) throws SQLException;
 	
 	/**
