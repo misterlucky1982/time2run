@@ -10,8 +10,6 @@ import java.util.Locale;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import by.irun.dao.IDataProvider;
-import by.irun.dao.IDomainEntityProvider;
 import by.irun.domain.Gender;
 import by.irun.domain.Park;
 import by.irun.domain.to.ClubRunnerTO;
@@ -25,13 +23,12 @@ import by.irun.domain.to.RunnerTO;
 import by.irun.locale.AppLocales;
 import by.irun.locale.Internationalizer;
 import by.irun.locale.Translator;
+import by.irun.persistance.proxi.InterimRepositoryConnector;
 import by.irun.service.IDataService;
 import by.irun.service.ServiceUtils;
 import by.irun.util.Link;
 import by.irun.viz.to.ClubInfoTO;
 import by.irun.viz.to.ClubRunnerInfoTO;
-import by.irun.viz.to.RaceInfoTO;
-import by.irun.viz.to.RaceResultTO;
 import by.irun.viz.to.racepage.RaceResultInfoTO;
 import by.irun.viz.to.raceselectpage.RaceInfoVizTO;
 import by.irun.viz.to.raceselectpage.RaceSelectPageViewTO;
@@ -48,38 +45,7 @@ import by.irun.viz.utils.VizUtils;
 public class DataService implements IDataService{
 
 	@Autowired
-	private IDomainEntityProvider entityProvider;
-	
-	@Autowired
-	private IDataProvider dataProvider;
-	
-	/* (non-Javadoc)
-	 * @see by.irun.service.IDataService#getRaceResult(long raceId)
-	 */
-	@Override
-	public List<RaceResultTO> getRaceResult(long raceId) {
-		List<RaceResultTO>list = null;
-		try{
-			list = dataProvider.getRaceResult(raceId);
-		}catch(SQLException e){
-			e.printStackTrace();
-		}
-		return list!=null?list:Collections.emptyList();
-	}
-
-	/* (non-Javadoc)
-	 * @see by.irun.service.IDataService#getFullRaceList()
-	 */
-	@Override
-	public List<RaceInfoTO> getFullRaceList() {
-		List<RaceInfoTO>list = null;
-		try{
-			list = dataProvider.getFullRaceList();
-		}catch(SQLException e){
-			e.printStackTrace();
-		}
-		return list!=null?list:Collections.emptyList();
-	}
+	private InterimRepositoryConnector repository;
 
 	/* (non-Javadoc)
 	 * @see by.irun.service.IDataService#getRunnerInfoTO(long runnerId)
@@ -96,7 +62,7 @@ public class DataService implements IDataService{
 	public RunnerInfoTO getRunnerInfoTO(long runnerId, Locale locale) {
 		RunnerTO runnerTO = null;
 		try {
-			runnerTO = this.dataProvider.getRunnerTO(runnerId);
+			runnerTO = this.repository.getRunnerTO(runnerId);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -110,7 +76,7 @@ public class DataService implements IDataService{
 		to.setName(runnerTO.getFirstName()+" "+runnerTO.getLastName());
 		List<RunnerResultTO> resultList = null;
 		try {
-			resultList = this.dataProvider.getRunnerResults(runnerId);
+			resultList = this.repository.getRunnerResults(runnerId);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			resultList = Collections.emptyList();
@@ -128,9 +94,9 @@ public class DataService implements IDataService{
 		List<ClubRunnerTO> clubRunnerTOList = null;
 		List<RaceClubResultTO> raceClubResultTOList = null;
 		try {
-			clubTO = dataProvider.getClubTO(clubId);
-			clubRunnerTOList = dataProvider.getCurrentClubRunnerTOListForClub(clubId);
-			raceClubResultTOList = dataProvider.getRaceClubResultTOList(clubId);
+			clubTO = repository.getClubTO(clubId);
+			clubRunnerTOList = repository.getCurrentClubRunnerTOListForClub(clubId);
+			raceClubResultTOList = repository.getRaceClubResultTOList(clubId);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
@@ -171,9 +137,9 @@ public class DataService implements IDataService{
 		List<RunnerRaceResultTO> mensResult = null;
 		List<RunnerRaceResultTO> womenResult = null;
 		try {
-			raceTO = dataProvider.getRaceTOforRaceId(raceId);
-			mensResult = dataProvider.getRunnerRaceResultList(raceId, Gender.MALE);
-			womenResult = dataProvider.getRunnerRaceResultList(raceId, Gender.FEMALE);
+			raceTO = repository.getRaceTOforRaceId(raceId);
+			mensResult = repository.getMenRaceResultList(raceId);
+			womenResult = repository.getWomenRaceResultList(raceId);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
@@ -189,14 +155,13 @@ public class DataService implements IDataService{
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public RaceSelectPageViewTO getRaceSelectPageViewTOForLastRace(Locale locale) {
 		RaceExtendedTO lastRace = null;
 		List<Park> parkList = null;
 		try {
-			lastRace = dataProvider.getRaceExtendedTOForLastRace();
-			parkList = (List<Park>) entityProvider.getEntityList(Park.class);
+			lastRace = repository.getRaceExtendedTOForLastRace();
+			parkList = repository.getParkList();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -214,7 +179,7 @@ public class DataService implements IDataService{
 	public List<Link> getRaceLinkList(Date from, Date to, Long parkId, Locale locale) {
 		List<RaceTO> raceTOs = null;
 		try{
-			raceTOs = dataProvider.getRaceTOList(from, to, parkId);
+			raceTOs = repository.getRaceTOList(from, to, parkId);
 		}catch(SQLException e){
 			return Collections.emptyList();
 		};
@@ -232,7 +197,7 @@ public class DataService implements IDataService{
 	public RaceInfoVizTO getRaceInfoVizTO(Long raceId, Locale locale) {
 		RaceExtendedTO race = null;
 		try{
-			race = dataProvider.getRaceExtendedTOforRaceId(raceId);
+			race = repository.getRaceExtendedTOforRaceId(raceId);
 		}catch(SQLException e){
 			return null;
 		}

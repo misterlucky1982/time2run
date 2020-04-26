@@ -1,4 +1,4 @@
-package by.irun.dao;
+package by.irun.persistance.dao;
 
 import java.sql.Date;
 import java.sql.SQLException;
@@ -29,6 +29,7 @@ public interface IDataProvider {
 	 * @param raceId
 	 * @return List<RaceResultTO>
 	 */
+	@Deprecated
 	List<RaceResultTO>getRaceResult(long raceId) throws SQLException;
 	
 	/**
