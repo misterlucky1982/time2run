@@ -9,23 +9,23 @@ public class ClubTO {
 	/**
 	 * Official name of the club
 	 */
-	String name;
+	private String name;
 	/**
 	 * The base city of the club
 	 */
-	String city;
+	private String city;
 	/**
 	 * Admin`s email
 	 */
-	String email;
+	private String email;
 	/**
 	 * Admin`s phone
 	 */
-	String phone;
+	private String phone;
 	/**
 	 * Logo`s url (path)
 	 */
-	String clubLogo;
+	private String clubLogo;
 	/**
 	 * @return the name
 	 */
