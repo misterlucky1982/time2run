@@ -106,7 +106,7 @@
 	<dependency>
 		<groupId>com.github.misterlucky1982</groupId>
 		<artifactId>unittest-helper</artifactId>
-		<version>ed30778030</version>
+		<version>a36fdb60db</version>
 		<scope>test</scope>
 	</dependency>
 </dependencies>
