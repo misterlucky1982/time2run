@@ -1,0 +1,233 @@
+#events_select_options_container{
+	width: 760px;
+	margin: auto;
+	height: 35px;
+	margin-top: 25px;
+}
+.events_select_options {
+	height: 100%;
+    display:block;
+    float:left;
+    font-family:Trebuchet MS,sans-serif;
+    font-size:0;
+    padding:0 0 0 0;
+	margin-left: 10px;
+    background: -moz-linear-gradient(rgb(186,238,196), rgb(140,195,150)); /* FF 3.6+ */  
+    background: -ms-linear-gradient(rgb(186,238,196), rgb(140,195,150)); /* IE10 */  
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgb(186,238,196)), color-stop(100%, rgb(140,195,150))); /* Safari 4+, Chrome 2+ */  
+    background: -webkit-linear-gradient(rgb(186,238,196), rgb(140,195,150)); /* Safari 5.1+, Chrome 10+ */  
+    background: -o-linear-gradient(rgb(186,238,196), rgb(140,195,150)); /* Opera 11.10 */  
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='rgb(186,238,196)', endColorstr='rgb(140,195,150)'); /* IE6 & IE7 */  
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='rgb(186,238,196)', endColorstr='rgb(140,195,150)')"; /* IE8+ */  
+    background: linear-gradient(rgb(186,238,196), rgb(140,195,150)); /* the standard */ 
+}
+.events_select_options ul {
+    list-style:none;
+    text-align: center;
+}
+
+.events_select_options {
+    border:1px solid #454545;
+    border-radius:9px;
+    -moz-border-radius:9px;
+    -webkit-border-radius:9px;
+}
+.events_select_options .events_select_items {
+    background-color:#fff;
+    border:2px solid #222;
+    display:none;
+    float:left;
+    left:0;
+    padding:0 6px 6px;
+    position:absolute;
+    top:100%;
+    border-radius:7px;
+    -moz-border-radius:7px;
+    -webkit-border-radius:7px;
+}
+
+.events_select_options li:hover>* {
+    display:block;
+}
+.events_select_options li:hover {
+    position:relative;
+}
+.events_select_options ul {
+    padding:0 5px 5px;
+}
+
+.events_select_options li {
+    display:block;
+    float:left;
+    font-size:0;
+    white-space:nowrap;
+    width: 100%;
+}
+
+
+.events_select_options>li {
+    margin:0 0 0 0;
+}
+.events_select_options ul>li {
+    /*margin:5px 0 0;*/
+}
+.events_select_options a:active,.events_select_options a:focus {
+    outline-style:none;
+}
+.events_select_options a, .events_select_options .calendar_options a {
+    border-style:none;
+    border-width:0;
+    color:#181818;
+    cursor:pointer;
+    display:block;
+    font-size:13px;
+    font-weight:bold;
+    padding:5px 15px;
+    text-align: center;
+    text-decoration:none;
+    text-shadow:#fff 0 1px 1px;
+    vertical-align:middle;
+}
+
+.events_select_options ul li {
+    float:none;
+    margin:6px 0 0;
+}
+.events_select_options ul a, .events_select_options .calendar_options ul a{
+    border-color:#efefef;
+    border-style:solid;
+    border-width:0 0 1px;
+    color:#000;
+    font-size:11px;
+    padding:4px;
+    text-decoration:none;
+    text-shadow:#fff 0 0 0;
+
+    border-radius:0;
+    -moz-border-radius:0;
+    -webkit-border-radius:0;
+}
+.events_select_options li:hover>a,.events_select_options:hover>a{
+    border-style:none;
+    color:#fff;
+    text-decoration:none;
+    text-shadow:#181818 0 1px 1px;
+}
+
+.events_select_options .calendar_options li:hover>a {
+    border-style:none;
+    color:#fff;
+    font-size:13px;
+    font-weight:bold;
+    text-decoration:none;
+    text-shadow:#181818 0 1px 1px;
+}
+
+.events_select_options .calendar_options ul li:hover>a {
+    border-style:none;
+    color:#fff;
+    text-decoration:none;
+    text-shadow:#181818 0 1px 1px;
+}
+
+.events_select_options .calendar_options {
+	float: left;
+}
+
+.events_select_options span {
+    display:block;
+    overflow:visible;
+    padding-right:0;
+}
+.events_select_options ul span {
+    padding-right:20px;
+}
+.events_select_options ul li:hover>a, .events_select_options .calendar_options ul li:hover>a {
+    border-color:#444;
+    border-style:solid;
+    color:#444;
+    font-size:11px;
+    text-decoration:none;
+    text-shadow:#fff 0 0 0;
+}
+.events_select_options > li >a {
+    background-color:transpa;
+    height:25px;
+    line-height:25px;
+    border-radius:11px;
+    -moz-border-radius:11px;
+    -webkit-border-radius:11px;
+}
+
+#parks_select_options{
+	width: 190px;
+}
+
+#todate_calendar, #fromdate_calendar {
+	width: 0px;
+	opacity: 0;
+}
+
+#calendar_days_items, #calendar_fromdays_items{
+	width: 120px;
+}
+
+#calendar_months_items, #calendar_frommonths_items{
+	width: 200px;
+}
+
+
+#todate_calendar_days, #fromdate_calendar_days{
+	width: 40px;
+	text-align: right;
+}
+#todate_calendar_month, #fromdate_calendar_month{
+	width: 100px;
+}
+#todate_calendar_years, #fromdate_calendar_years{
+	width: 50px;
+}
+
+.events_select_options .calendar_options .events_select_items .calendar_nav_dates {
+	float: left;
+	width: 25%;
+}
+
+.events_select_options .calendar_options .events_select_items .calendar_nav_months {
+	float: left;
+	width: 50%;
+}
+
+#todate_select_options, #apply_search_options_button{
+	margin-left: -5px;
+}
+
+#apply_search_options_button{
+	width: 140px;
+}
+
+#apply_search_options_button a{
+	margin-top: 5px;
+}
+
+.seek_other_events_container{
+	width: 100%;
+	height: 35px;
+	justify-content: center;
+	display: flex;
+}
+
+#seek_other_events {
+	width: 300px;
+	margin-left: -1px;
+}
+
+#seek_other_events a{
+	margin-top: 5px;
+}
+
+#search_race_panel_wrapper{
+	height: 0px;
+	opacity: 0;
+	overflow: hidden;
+}

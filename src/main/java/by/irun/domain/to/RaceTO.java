@@ -8,10 +8,14 @@ import java.sql.Date;
  *
  */
 public class RaceTO {
+	
+	private Long raceId;
 
 	private String parkName;
 	
 	private Date date;
+	
+	private String raceName;
 
 	/**
 	 * @return the parkName
@@ -40,6 +44,33 @@ public class RaceTO {
 	public void setDate(Date date) {
 		this.date = date;
 	}
+
+	/**
+	 * @return the raceId
+	 */
+	public Long getRaceId() {
+		return raceId;
+	}
+
+	/**
+	 * @param raceId the raceId to set
+	 */
+	public void setRaceId(Long raceId) {
+		this.raceId = raceId;
+		}
 	
+	/**
+	 * @return the raceName
+	 */
+	public String getRaceName() {
+		return raceName;
+	}
+
+	/**
+	 * @param raceName the raceName to set
+	 */
+	public void setRaceName(String raceName) {
+		this.raceName = raceName;
+	}
 	
 }

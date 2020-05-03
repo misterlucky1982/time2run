@@ -9,6 +9,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.powermock.api.easymock.PowerMock;
 
+import by.irun.viz.to.runnerpage.RunnerResultInfoTO;
+
 public class ClubRaceResultInfoTOTest {
 
 	@SuppressWarnings("deprecation")

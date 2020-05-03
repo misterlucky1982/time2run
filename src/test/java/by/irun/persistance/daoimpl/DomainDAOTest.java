@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.util.List;
+
 import org.easymock.EasyMock;
 import org.hibernate.SessionFactory;
 import org.junit.Before;
@@ -13,8 +15,8 @@ import org.powermock.api.easymock.PowerMock;
 import org.powermock.api.easymock.annotation.Mock;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.powermock.reflect.Whitebox;
-
 import by.irun.domain.DomainEntity;
+import by.irun.domain.Park;
 import by.irun.persistance.util.DBUtils;
 
 /**
@@ -222,5 +224,50 @@ public class DomainDAOTest {
 		}
 		PowerMock.verifyAll();
 		assertNull(en);
+	}
+	
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void getEntityListTest() {
+		List list = PowerMock.createMock(List.class);
+		org.hibernate.query.Query query = PowerMock.createMock(org.hibernate.query.Query.class);
+		EasyMock.expect(session.beginTransaction()).andReturn(transaction);
+		EasyMock.expect(session.createQuery("from Park")).andReturn(query);
+		EasyMock.expect(query.getResultList()).andReturn(list);
+		transaction.commit();
+		EasyMock.expectLastCall();
+		EasyMock.expect(session.isOpen()).andReturn(true);
+		session.close();
+		EasyMock.expectLastCall();
+		PowerMock.replayAll();
+		List result = null;
+		try {
+			result = dao.getEntityList(Park.class);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		PowerMock.verifyAll();
+		assertEquals(list, result);
+	}
+	
+	@Test
+	public void getEntityListTestWithException() {
+		EasyMock.expect(session.beginTransaction()).andReturn(transaction);
+		EasyMock.expect(session.createQuery("from Park")).andThrow(new javax.persistence.PersistenceException("exception"));
+		EasyMock.expect(session.isOpen()).andReturn(true);
+		transaction.rollback();
+		EasyMock.expectLastCall();
+		session.close();
+		EasyMock.expectLastCall();
+		PowerMock.replayAll();
+		@SuppressWarnings("rawtypes")
+		List result = null;
+		try {
+			result = dao.getEntityList(Park.class);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		PowerMock.verifyAll();
+		assertNull(result);
 	}
 }

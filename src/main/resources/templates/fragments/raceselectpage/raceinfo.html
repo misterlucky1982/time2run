@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<body>
+	<div th:fragment="raceinfo">
+		<div class="raceinfo_container">
+		<div id="race_info_panel">
+		<p>
+			<span id="eventtype" th:text="${event.raceInfoVizTO.eventTitle}"></span>
+		</p>
+		<p>
+		<span id="racetitle" th:text="${event.raceInfoVizTO.raceName}"></span>
+		</p>
+		<div id="racedescription">
+		<p>
+			<span th:text="#{events.date}"></span>: <span
+				th:text="${event.raceInfoVizTO.raceDate}"></span>
+		</p>
+		<p>
+			<span th:text="#{events.place}"></span>: <span
+				th:text="${event.raceInfoVizTO.parkName}"></span>
+		</p>
+		<p>
+			<span th:text="#{events.raceInfo.totalAmountOfParticipants}"></span>: <span th:text="${event.raceInfoVizTO.totalAmountOfParticipant}"></span> (<span
+				th:text="#{events.raceInfo.menParticipants}"></span>: <span th:text="${event.raceInfoVizTO.menParticipant}"></span>,<span th:text="#{events.raceInfo.womenParticipants}"></span>: <span th:text="${event.raceInfoVizTO.womenParticipant}"></span>)
+		</p>
+		</div>
+		</div>
+		<div id="gotorace_wrapper"><div class="events_select_options" id="gotorace"><a th:href="${event.raceInfoVizTO.linkToRace}" th:text="#{events.raceInfo.goToRace}"></a></div></div>
+		</div>
+	</div>
+</body>
+</html>

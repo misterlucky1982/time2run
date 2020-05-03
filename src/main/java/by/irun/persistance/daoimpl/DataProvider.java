@@ -1,5 +1,6 @@
 package by.irun.persistance.daoimpl;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,15 +11,16 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
 import by.irun.config.ApplicationConstants;
-import by.irun.dao.IDataProvider;
 import by.irun.domain.Gender;
 import by.irun.domain.to.ClubRunnerTO;
 import by.irun.domain.to.ClubTO;
 import by.irun.domain.to.RaceClubResultTO;
+import by.irun.domain.to.RaceExtendedTO;
 import by.irun.domain.to.RaceTO;
 import by.irun.domain.to.RunnerRaceResultTO;
 import by.irun.domain.to.RunnerResultTO;
 import by.irun.domain.to.RunnerTO;
+import by.irun.persistance.dao.IDataProvider;
 import by.irun.persistance.util.GenderConverter;
 import by.irun.persistance.util.TORequests;
 import by.irun.viz.to.RaceInfoTO;
@@ -26,7 +28,7 @@ import by.irun.viz.to.RaceResultTO;
 import by.irun.viz.utils.VizUtils;
 
 /**
- * implementation of {@link by.irun.dao.IDataProvider}
+ * implementation of {@link by.irun.persistance.dao.IDataProvider}
  * @author A.Dubovik
  */
 @Component
@@ -40,7 +42,7 @@ public class DataProvider implements IDataProvider{
 	}
 
 	/* (non-Javadoc)
-	 * @see by.irun.dao.IDataProvider#getRaceResult(long raceId)
+	 * @see by.irun.persistance.dao.IDataProvider#getRaceResult(long raceId)
 	 */
 	@Override
 	public List<RaceResultTO> getRaceResult(long raceId) throws SQLException{
@@ -52,7 +54,7 @@ public class DataProvider implements IDataProvider{
 	}
 	
 	/* (non-Javadoc)
-	 * @see by.irun.dao.IDataProvider#getFullRaceList()
+	 * @see by.irun.persistance.dao.IDataProvider#getFullRaceList()
 	 */
 	@Override
 	public List<RaceInfoTO> getFullRaceList() throws SQLException{
@@ -104,7 +106,7 @@ public class DataProvider implements IDataProvider{
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see by.irun.dao.IDataProvider#getRunnerResults(long runnerId)
+	 * @see by.irun.persistance.dao.IDataProvider#getRunnerResults(long runnerId)
 	 */
 	@Override
 	public List<RunnerResultTO> getRunnerResults(long runnerId) throws SQLException {
@@ -121,6 +123,7 @@ public class DataProvider implements IDataProvider{
 				to.setPositionInGenderGroup(rowSet.getInt(TORequests.POSITIONINGENDERGROUP));
 				to.setRaceDate(rowSet.getDate(TORequests.RACE_DATE));
 				to.setRaceId(rowSet.getLong(TORequests.RACE_ID));
+				to.setRaceName(rowSet.getString(TORequests.RACENAME));
 				to.setTime(rowSet.getInt(TORequests.TIME));
 				list.add(to);
 			}
@@ -133,7 +136,7 @@ public class DataProvider implements IDataProvider{
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see by.irun.dao.IDataProvider#getRunnerTO(long runnerId)
+	 * @see by.irun.persistance.dao.IDataProvider#getRunnerTO(long runnerId)
 	 */
 	@Override
 	public RunnerTO getRunnerTO(long runnerId) throws SQLException {
@@ -160,7 +163,7 @@ public class DataProvider implements IDataProvider{
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see by.irun.dao.IDataProvider#getClubTO(long clubId)
+	 * @see by.irun.persistance.dao.IDataProvider#getClubTO(long clubId)
 	 */
 	@Override
 	public ClubTO getClubTO(long clubId) throws SQLException {
@@ -184,7 +187,7 @@ public class DataProvider implements IDataProvider{
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see by.irun.dao.IDataProvider#getRaceClubResultTOList(long clubId)
+	 * @see by.irun.persistance.dao.IDataProvider#getRaceClubResultTOList(long clubId)
 	 */
 	@Override
 	public List<RaceClubResultTO> getRaceClubResultTOList(long clubId) throws SQLException {
@@ -196,6 +199,7 @@ public class DataProvider implements IDataProvider{
 				to.setAbsPosition(rowSet.getInt(TORequests.ABSPOSITION));
 				to.setPositionInGenderGroup(rowSet.getInt(TORequests.POSITIONINGENDERGROUP));
 				to.setDate(rowSet.getDate(TORequests.RACE_DATE));
+				to.setRaceName(rowSet.getString(TORequests.RACENAME));
 				to.setParkName(rowSet.getString(TORequests.PARK_NAME));
 				to.setRaceId(rowSet.getLong(TORequests.RACE_ID));
 				to.setRunnerFirstName(rowSet.getString(TORequests.FIRSTNAME));
@@ -214,7 +218,7 @@ public class DataProvider implements IDataProvider{
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see by.irun.dao.IDataProvider#getCurrentClubRunnerTOListForClub(long clubId)
+	 * @see by.irun.persistance.dao.IDataProvider#getCurrentClubRunnerTOListForClub(long clubId)
 	 */
 	@Override
 	public List<ClubRunnerTO> getCurrentClubRunnerTOListForClub(long clubId) throws SQLException {
@@ -235,7 +239,7 @@ public class DataProvider implements IDataProvider{
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see by.irun.dao.IDataProvider#getRunnerRaceResultList(long raceId, Gender gender)
+	 * @see by.irun.persistance.dao.IDataProvider#getRunnerRaceResultList(long raceId, Gender gender)
 	 */
 	@Override
 	public List<RunnerRaceResultTO> getRunnerRaceResultList(long raceId, Gender gender) throws SQLException {
@@ -265,23 +269,97 @@ public class DataProvider implements IDataProvider{
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see by.irun.dao.IDataProvider#getRaceTOforRaceId (long raceId)
+	 * @see by.irun.persistance.dao.IDataProvider#getRaceTOforRaceId (long raceId)
 	 */
 	@Override
-	public RaceTO getRaceTOforRaceId(long raceId) throws SQLException {
-		RaceTO to = null;
+	public RaceExtendedTO getRaceExtendedTOforRaceId(long raceId) throws SQLException {
+		RaceExtendedTO to = null;
 		try {
-			SqlRowSet rowSet = jdbcTemplate.queryForRowSet(TORequests.raceTORequest(raceId));
-			if (rowSet.next()) {
-				to = new RaceTO();
-				to.setDate(rowSet.getDate(TORequests.RACE_DATE));
-				to.setParkName(rowSet.getString(TORequests.PARK_NAME));
-			} else
-				throw new SQLException("empty resultSet for race id:" + raceId);
+			SqlRowSet rowSet = jdbcTemplate.queryForRowSet(TORequests.extendedRaceTORequestForRaceId(raceId));
+			to = raceExtendedTOfromSqlRowSet(rowSet);
 		} catch (RuntimeException e) {
 			throw new SQLException(e);
 		}
 		return to;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see by.irun.persistance.dao.IDataProvider#getRaceTOForLastRace()
+	 */
+	@Override
+	public RaceExtendedTO getRaceExtendedTOForLastRace() throws SQLException {
+		RaceExtendedTO to = null;
+		try {
+			SqlRowSet rowSet = jdbcTemplate.queryForRowSet(TORequests.extendedRaceTORequestForLastRace());
+			to = raceExtendedTOfromSqlRowSet(rowSet);
+		} catch (RuntimeException e) {
+			throw new SQLException(e);
+		}
+		return to;
+	}
+	
+	private RaceExtendedTO raceExtendedTOfromSqlRowSet(SqlRowSet rowSet) throws SQLException{
+		if (rowSet.next()) {
+			RaceExtendedTO to = null;
+			to = new RaceExtendedTO();
+			to.setRaceName(rowSet.getString(TORequests.RACENAME));
+			to.setDate(rowSet.getDate(TORequests.RACE_DATE));
+			to.setParkName(rowSet.getString(TORequests.PARK_NAME));
+			to.setRaceId(rowSet.getLong(TORequests.RACE_ID));
+			to.setMenParticupants(rowSet.getInt(TORequests.M_PARTICIPANTS));
+			to.setWomenParticipants(rowSet.getInt(TORequests.W_PARTICIPANTS));
+			return to;
+		} else
+			throw new SQLException("empty resultSet");
+	}
+
+	/**
+	 * 
+	 * @param rowSet
+	 * @return RaceTO
+	 */
+	private RaceTO getRaceTOFromSqlRowset(SqlRowSet rowSet){
+		RaceTO to = new RaceTO();
+		to.setDate(rowSet.getDate(TORequests.RACE_DATE));
+		to.setRaceName(rowSet.getString(TORequests.RACENAME));
+		to.setParkName(rowSet.getString(TORequests.PARK_NAME));
+		to.setRaceId(rowSet.getLong(TORequests.RACE_ID));
+		return to;
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see by.irun.persistance.dao.IDataProvider#getRaceTOList(Date from, Date to, Long parkId)
+	 */
+	@Override
+	public List<RaceTO> getRaceTOList(Date from, Date to, Long parkId) throws SQLException {
+		List<RaceTO> list = new ArrayList<>();
+		try {
+			SqlRowSet rowSet = jdbcTemplate.queryForRowSet(TORequests.fullRaceTOListRequest(from, to, parkId));
+			while (rowSet.next()) {
+				list.add(getRaceTOFromSqlRowset(rowSet));
+			}
+		} catch (RuntimeException e) {
+			throw new SQLException(e);
+		}
+		return list;
+	}
+
+	@Override
+	public RaceTO getRaceTOforRaceId(long raceId) throws SQLException {
+		RaceTO to = null;
+		try {
+			SqlRowSet rowSet = jdbcTemplate.queryForRowSet(TORequests.raceTORequest(raceId));
+			if(rowSet.next()){
+				to = getRaceTOFromSqlRowset(rowSet);
+			}else throw new SQLException("empty ResultSet for raceId:"+raceId);
+		} catch (RuntimeException e) {
+			throw new SQLException(e);
+		}
+		return to;
+	}
+	
 }

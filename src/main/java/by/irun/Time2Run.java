@@ -7,7 +7,6 @@ import java.time.Duration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import by.irun.dao.CRUDHandler;
 import by.irun.domain.Club;
 import by.irun.domain.Gender;
 import by.irun.domain.Park;
@@ -16,6 +15,7 @@ import by.irun.domain.Race;
 import by.irun.domain.Result;
 import by.irun.domain.Runner;
 import by.irun.domain.User;
+import by.irun.persistance.dao.CRUDHandler;
 
 @SpringBootApplication
 public class Time2Run {

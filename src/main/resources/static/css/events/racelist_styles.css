@@ -1,0 +1,91 @@
+.events_racelist{
+	display: flex;
+	justify-content: center;
+}
+
+.events_racelist .racelist_table_wrapper{
+	font-family:Trebuchet MS,sans-serif;
+    background: -moz-linear-gradient(rgb(186,238,196), rgb(140,195,150)); /* FF 3.6+ */  
+    background: -ms-linear-gradient(rgb(186,238,196), rgb(140,195,150)); /* IE10 */  
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgb(186,238,196)), color-stop(100%, rgb(140,195,150))); /* Safari 4+, Chrome 2+ */  
+    background: -webkit-linear-gradient(rgb(186,238,196), rgb(140,195,150)); /* Safari 5.1+, Chrome 10+ */  
+    background: -o-linear-gradient(rgb(186,238,196), rgb(140,195,150)); /* Opera 11.10 */  
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='rgb(186,238,196)', endColorstr='rgb(140,195,150)'); /* IE6 & IE7 */  
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='rgb(186,238,196)', endColorstr='rgb(140,195,150)')"; /* IE8+ */  
+    background: linear-gradient(rgb(186,238,196), rgb(140,195,150)); /* the standard */ 
+    border:1px solid #222;
+    border-radius:15px;
+    -moz-border-radius:15px;
+    -webkit-border-radius:15px;
+	width: 500px;
+	height: 250px;
+	margin-top: 20px;
+	padding: 15px;
+	opacity: 0;
+}
+
+.events_racelist .racelist_table_wrapper .racelist_table{
+	border-radius:3px;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+	overflow: auto;
+	border:1px solid #222;
+	height: 220px;
+	text-align: center;
+	background: -moz-linear-gradient(rgb(192,230,199), rgb(159,212,168)); /* FF 3.6+ */  
+    background: -ms-linear-gradient(rgb(192,230,199), rgb(159,212,168)); /* IE10 */  
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgb(192,230,199)), color-stop(100%, rgb(159,212,168))); /* Safari 4+, Chrome 2+ */  
+    background: -webkit-linear-gradient(rgb(192,230,199), rgb(159,212,168)); /* Safari 5.1+, Chrome 10+ */  
+    background: -o-linear-gradient(rgb(192,230,199), rgb(159,212,168)); /* Opera 11.10 */  
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='rgb(192,230,199)', endColorstr='rgb(159,212,168)'); /* IE6 & IE7 */  
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='rgb(192,230,199)', endColorstr='rgb(159,212,168)')"; /* IE8+ */  
+    background: linear-gradient(rgb(192,230,199), rgb(159,212,168)); /* the standard */ 
+    border:1px solid rgb(42,61,46);
+}
+
+.events_racelist .racelist_table_wrapper .racelist_table p {
+    margin-bottom: -20px;
+}
+
+.events_racelist .racelist_table_wrapper .racelist_table a:focus {
+    outline-style:none;
+}
+
+.events_racelist .racelist_table_wrapper .racelist_table a:focus {
+    outline-style:none;
+}
+
+.events_racelist .racelist_table_wrapper .racelist_table a {
+    border-style:none;
+    border-width:0;
+    color: rgb(84,86,84);
+    cursor:pointer;
+    display:block;
+    font-size:14px;
+    font-weight:bold;
+    padding:5px 15px;
+    text-align: center;
+    text-decoration:none;
+    text-shadow:#fff 0 1px 1px;
+    vertical-align:middle;
+}
+
+.events_racelist .racelist_table_wrapper .racelist_summary{
+	margin-top: 12px;
+	font-weight:bold;
+	font-size:13px;
+	width: 100%;
+	text-align: center;
+	color: rgb(44,44,44);
+	text-shadow:#fff 0 1px 1px;
+}
+
+.events_racelist .racelist_table_wrapper .racelist_table p:hover>a {
+    border-style:none;
+    font-weight:bold;
+    color:#fff;
+    font-size:14px;
+    font-weight:bold;
+    text-decoration:none;
+    text-shadow:#181818 0 1px 1px;
+}

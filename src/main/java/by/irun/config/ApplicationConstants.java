@@ -9,7 +9,6 @@ public class ApplicationConstants {
 	
 	private ApplicationConstants(){}
 	
-	
 	public static final String DB_URL = "jdbc:postgresql://localhost/time2run";
 	public static final String DB_USERNAME = "postgres";
 	public static final String DB_PASSWORD = "gfhjkm";

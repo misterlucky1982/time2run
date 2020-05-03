@@ -1,5 +1,6 @@
-package by.irun.dao;
+package by.irun.persistance.dao;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -7,6 +8,7 @@ import by.irun.domain.Gender;
 import by.irun.domain.to.ClubRunnerTO;
 import by.irun.domain.to.ClubTO;
 import by.irun.domain.to.RaceClubResultTO;
+import by.irun.domain.to.RaceExtendedTO;
 import by.irun.domain.to.RaceTO;
 import by.irun.domain.to.RunnerRaceResultTO;
 import by.irun.domain.to.RunnerResultTO;
@@ -27,6 +29,7 @@ public interface IDataProvider {
 	 * @param raceId
 	 * @return List<RaceResultTO>
 	 */
+	@Deprecated
 	List<RaceResultTO>getRaceResult(long raceId) throws SQLException;
 	
 	/**
@@ -88,10 +91,29 @@ public interface IDataProvider {
 	List<RunnerRaceResultTO> getRunnerRaceResultList(long raceId, Gender gender) throws SQLException;
 	
 	/**
-	 * Provides RaceTO for given raceId
+	 * Provides RaceExtendedTO for given raceId
 	 * @param raceId
 	 * @return
 	 * @throws SQLException
 	 */
-	RaceTO getRaceTOforRaceId (long raceId) throws SQLException;
+	RaceExtendedTO getRaceExtendedTOforRaceId (long raceId) throws SQLException;
+	
+	/**
+	 * Provides RaceExtendedTO for last Race
+	 * @return RaceTO
+	 * @throws SQLException
+	 */
+	RaceExtendedTO getRaceExtendedTOForLastRace() throws SQLException;
+	
+	RaceTO getRaceTOforRaceId(long raceId) throws SQLException;
+	
+	/**
+	 * Provides List<RaceTO> for given parameters
+	 * @param from - start date of period
+	 * @param to - end date of period
+	 * @param parkId - Park id
+	 * @return
+	 * @throws SQLException
+	 */
+	List<RaceTO> getRaceTOList (Date from, Date to, Long parkId) throws SQLException;
 }

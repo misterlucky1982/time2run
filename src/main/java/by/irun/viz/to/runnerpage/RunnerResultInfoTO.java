@@ -1,4 +1,6 @@
-package by.irun.viz.to;
+package by.irun.viz.to.runnerpage;
+
+import by.irun.viz.to.InfoTO;
 
 /**
  * This class provides information of the runner`s result in particular race
