@@ -1,4 +1,4 @@
-package by.irun.persistance.proxi;
+package by.irun.persistance.dao;
 
 import java.sql.Date;
 import java.sql.SQLException;
@@ -20,7 +20,7 @@ import by.irun.domain.to.RunnerRaceResultTO;
 import by.irun.domain.to.RunnerResultTO;
 import by.irun.domain.to.RunnerTO;
 
-public interface InterimRepositoryConnector {
+public interface IGenericDAO {
 
 	Long addClub(Club club) throws SQLException;
 

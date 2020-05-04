@@ -2,12 +2,13 @@ package by.irun.service.impl;
 import java.sql.SQLException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import by.irun.domain.Club;
 import by.irun.domain.Park;
 import by.irun.domain.Picture;
 import by.irun.domain.Runner;
 import by.irun.domain.User;
-import by.irun.persistance.proxi.InterimRepositoryConnector;
+import by.irun.persistance.dao.IGenericDAO;
 import by.irun.service.IDomainEntityServiceProvider;
 
 /**
@@ -20,7 +21,7 @@ import by.irun.service.IDomainEntityServiceProvider;
 public class DomainEntityServiceProvider implements IDomainEntityServiceProvider{
 	
 	@Autowired
-	private InterimRepositoryConnector repository;
+	private IGenericDAO repository;
 
 	/* (non-Javadoc)
 	 * @see by.irun.service.IDomainEntityServiceProvider#getClubByID(Long id)
