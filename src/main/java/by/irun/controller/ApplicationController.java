@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.RequestParam;
-import by.irun.persistance.daoimpl.DataProvider;
 import by.irun.service.impl.DataService;
 import by.irun.util.Link;
 import by.irun.viz.to.ClubInfoTO;
@@ -23,10 +22,6 @@ import by.irun.viz.to.runnerpage.RunnerInfoTO;
 
 @Controller
 public abstract class ApplicationController {
-	
-	@SuppressWarnings("unused")
-	@Autowired
-	private DataProvider data;
 	
 	@Autowired
 	private DataService dataService;
