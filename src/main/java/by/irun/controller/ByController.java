@@ -11,7 +11,7 @@ import by.irun.locale.AppLocales;
 @RestController
 public class ByController extends ApplicationController{
 	
-	public static final String MAPPING = "/by/"; 
+	public static final String MAPPING = "/by"; 
 
 	/*
 	 * (non-Javadoc)

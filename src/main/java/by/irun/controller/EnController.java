@@ -11,7 +11,7 @@ import by.irun.locale.AppLocales;
 @RestController
 public class EnController extends ApplicationController{
 	
-	public static final String MAPPING = "/en/"; 
+	public static final String MAPPING = "/en"; 
 
 	/*
 	 * (non-Javadoc)
