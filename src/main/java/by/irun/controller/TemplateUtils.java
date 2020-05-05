@@ -13,15 +13,15 @@ public class TemplateUtils {
 	public static Map<String, String> resolveMapForRaceListWarningMessage(String paramValue, Locale locale) {
 		Map<String, String> map = new HashMap<>();
 		switch (paramValue) {
-		case ControllerConstants.FROM_DATE_WARNING_REQEST_PARAMVALUE:
+		case ControllerConstants.PARAM_FROM_DATE_WARNING_REQEST_PARAMVALUE:
 			map.put(TemplateConstants.KEY_MESSAGE,
 					Internationalizer.translate(Translator.KEY_UNCOMPLETED_START_DATE_WARNING, locale));
 			break;
-		case ControllerConstants.FOR_DATE_WARNING_REQEST_PARAMVALUE:
+		case ControllerConstants.PARAM_FOR_DATE_WARNING_REQEST_PARAMVALUE:
 			map.put(TemplateConstants.KEY_MESSAGE,
 					Internationalizer.translate(Translator.KEY_UNCOMPLETED_FINISH_DATE_WARNING, locale));
 			break;
-		case ControllerConstants.BOTH_FROM_FOR_DATE_WARNING_REQEST_PARAMVALUE:
+		case ControllerConstants.PARAM_BOTH_FROM_FOR_DATE_WARNING_REQEST_PARAMVALUE:
 			map.put(TemplateConstants.KEY_MESSAGE,
 					Internationalizer.translate(Translator.KEY_INCORRECT_DATE_PARAMS_WARNING, locale));
 		}
