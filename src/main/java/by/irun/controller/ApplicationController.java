@@ -29,8 +29,7 @@ public abstract class ApplicationController {
 	@Autowired
 	private LocaleResolver localeResolver;
 	
-	
-	@GetMapping(value = "/clubs")
+	@GetMapping(ControllerConstants.CLUB_PAGE)
 	public ModelAndView getClubInfo(@RequestParam(value = "id", required = true) long id, HttpServletRequest request,
 			HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
@@ -41,7 +40,7 @@ public abstract class ApplicationController {
 		return mav;
 	}
 
-	@GetMapping("/runner")
+	@GetMapping(ControllerConstants.RUNNER_PAGE)
 	public ModelAndView getRunnerPage(@RequestParam(value = "id", required = true) long id, HttpServletRequest request,
 			HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
@@ -52,7 +51,7 @@ public abstract class ApplicationController {
 		return mav;
 	}
 	
-	@GetMapping("/race")
+	@GetMapping(ControllerConstants.RACE_PAGE)
 	public ModelAndView getRacePage(@RequestParam(value = "id", required = true) long raceId, HttpServletRequest request,
 			HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
@@ -63,7 +62,7 @@ public abstract class ApplicationController {
 		return mav;
 	}
 	
-	@GetMapping("/events")
+	@GetMapping(ControllerConstants.EVENTS_PAGE)
 	public ModelAndView getLastEventPage(HttpServletRequest request,
 			HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
@@ -74,7 +73,7 @@ public abstract class ApplicationController {
 		return mav;
 	}
 	
-	@GetMapping("events/races")
+	@GetMapping(ControllerConstants.EVENTS_RACEREQUEST)
 	public ModelAndView getRaceList(@RequestParam(name = "park",required = false) Long parkId, @RequestParam(name = "from", required = false) String date1, @RequestParam(name = "to", required = false) String date2, HttpServletRequest request,
 			HttpServletResponse response) {
 		Date from = null;
@@ -92,7 +91,7 @@ public abstract class ApplicationController {
 			}
 		}
 		if (from != null && to != null && from.after(to)) {
-			return getWarningMessageForRaceList(ControllerConstants.BOTH_FROM_FOR_DATE_WARNING_REQEST_PARAMVALUE,
+			return getWarningMessageForRaceList(ControllerConstants.PARAM_BOTH_FROM_FOR_DATE_WARNING_REQEST_PARAMVALUE,
 					request, response);
 		}
 		java.util.List<Link>races = dataService.getRaceLinkList(from, to, parkId, getLocale());
@@ -103,7 +102,7 @@ public abstract class ApplicationController {
 		return mav;
 	}
 	
-	@GetMapping("events/races/info")
+	@GetMapping(ControllerConstants.EVENTS_RACEINFOREQUEST)
 	public ModelAndView getRaceInfo(@RequestParam(name = "id", required = true) Long id, HttpServletRequest request,
 			HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
@@ -115,7 +114,7 @@ public abstract class ApplicationController {
 		return mav;
 	}
 	
-	@GetMapping("events/warning")
+	@GetMapping(ControllerConstants.EVENTS_WARNING)
 	public ModelAndView getWarningMessageForRaceList(@RequestParam(name = "message",required = true) String paramValue, HttpServletRequest request,
 			HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
