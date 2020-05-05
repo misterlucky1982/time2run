@@ -1,8 +1,15 @@
 package by.irun.locale;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+
+import org.assertj.core.util.Arrays;
+
+import by.irun.controller.ByController;
+import by.irun.controller.EnController;
+import by.irun.controller.RuController;
 /**
  * this class provides Locale constants that are used in application
  * @author A.Dubovik
@@ -33,5 +40,9 @@ public class AppLocales {
 	 */
 	public static Locale getLocale(String key){
 		return key==null?DEFAULT:LOCALES.get(key.toUpperCase())!=null?LOCALES.get(key.toUpperCase()):DEFAULT;
+	}
+	
+	public static String[] mappings() {
+		return Arrays.array(RuController.MAPPING, ByController.MAPPING, EnController.MAPPING);
 	}
 }

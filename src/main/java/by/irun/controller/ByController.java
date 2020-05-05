@@ -10,6 +10,8 @@ import by.irun.locale.AppLocales;
 @RequestMapping("/by/")
 @RestController
 public class ByController extends ApplicationController{
+	
+	public static final String MAPPING = "/by/"; 
 
 	/*
 	 * (non-Javadoc)

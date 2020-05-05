@@ -10,6 +10,8 @@ import by.irun.locale.AppLocales;
 @RequestMapping("/en/")
 @RestController
 public class EnController extends ApplicationController{
+	
+	public static final String MAPPING = "/en/"; 
 
 	/*
 	 * (non-Javadoc)
