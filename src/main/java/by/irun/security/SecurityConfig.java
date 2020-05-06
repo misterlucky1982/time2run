@@ -1,4 +1,4 @@
-package by.irun.config;
+package by.irun.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -6,6 +6,8 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.access.AccessDeniedHandler;
+
+import by.irun.config.ConfigHelper;
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
@@ -18,13 +20,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
         http.csrf().disable()
                 .authorizeRequests()
-                    .antMatchers("/*/", "/*/clubs", "/*/runner", "/*/race", "/*/events").permitAll()
+                    .antMatchers(ConfigHelper.allPublicResourcesFor(ConfigHelper.CLUB_PAGE)).permitAll()
+                    .antMatchers(ConfigHelper.allPublicResourcesFor(ConfigHelper.EVENTS_PAGE)).permitAll()
+                    .antMatchers(ConfigHelper.allPublicResourcesFor(ConfigHelper.RACE_PAGE)).permitAll()
+                    .antMatchers(ConfigHelper.allPublicResourcesFor(ConfigHelper.RUNNER_PAGE)).permitAll()
+                    .antMatchers("/css/*","/css/**/*", "/images/*", "/images/**/*", "/scripts/**/*").permitAll()
                     .antMatchers("/*/admin/** ** ").hasAnyRole("ADMIN")
                     .antMatchers("/*/user/** ** ").hasAnyRole("USER")
                     .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                    .loginPage("/*/login")
+                    .loginPage("/login/")
                     .permitAll()
                     .and()
                 .logout()

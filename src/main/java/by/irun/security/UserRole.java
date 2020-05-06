@@ -1,4 +1,4 @@
-package by.irun.config.security;
+package by.irun.security;
 
 public enum UserRole {
 	ADMIN,

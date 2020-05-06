@@ -1,10 +1,9 @@
 package by.irun.locale;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-
-import org.assertj.core.util.Arrays;
 
 import by.irun.controller.ByController;
 import by.irun.controller.EnController;
@@ -42,6 +41,7 @@ public class AppLocales {
 	}
 	
 	public static String[] mappings() {
-		return Arrays.array(RuController.MAPPING, ByController.MAPPING, EnController.MAPPING);
+		String mappings[] = { RuController.MAPPING, EnController.MAPPING, ByController.MAPPING };
+		return mappings;
 	}
 }
