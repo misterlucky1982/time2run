@@ -14,14 +14,28 @@
 <body>
 	<div th:replace="fragments/header :: header"></div>
 	<div class="race_container">
-		<h1 th:text="${race.raceName}"></h1>
-		<h3 th:text="#{race.mensResults}"></h3>
+		<div class = "race_info_wrapper">
+				<div id="race_name" th:text="${race.raceName}"></div>
+				<div class="race_description">
+				<div>
+					<span class="race_description_property" th:text="#{race.eventDate}"></span>: <span
+						class="race_description_value" th:text="${race.raceDate}"></span>
+				</div>
+				<div>
+					<span class="race_description_property" th:text="#{race.eventLocation}"></span>: <span
+						class="race_description_value" th:text="${race.parkName}"></span>
+				</div>
+			</div>
+		</div>
+		<div class="results_wrapper">
+			<div class="gendergrouptitle" th:text="#{race.mensResults}"></div>
 		<div th:each="result : ${race.menResult}">
 			<div th:replace="fragments/racePageResultList :: resultList"></div>
 		</div>
-		<h3 th:text="#{race.womensResults}"></h3>
+		<div class="gendergrouptitle" th:text="#{race.womensResults}"></div>
 		<div th:each="result : ${race.womenResult}">
 			<div th:replace="fragments/racePageResultList :: resultList"></div>
+		</div>
 		</div>
 	</div>
 </body>
