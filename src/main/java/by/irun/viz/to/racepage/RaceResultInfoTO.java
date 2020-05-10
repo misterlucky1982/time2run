@@ -9,6 +9,8 @@ package by.irun.viz.to.racepage;
 public class RaceResultInfoTO {
 	
 	private String raceName;
+	private String raceDate;
+	private String parkName;
 	private by.irun.util.List<RunnerResultInfoTO>menResult;
 	private by.irun.util.List<RunnerResultInfoTO>womenResult;
 	/**
@@ -47,5 +49,19 @@ public class RaceResultInfoTO {
 	public void setWomenResult(by.irun.util.List<RunnerResultInfoTO> womenResult) {
 		this.womenResult = womenResult;
 	}
+	public String getRaceDate() {
+		return raceDate;
+	}
+	public void setRaceDate(String raceDate) {
+		this.raceDate = raceDate;
+	}
+	public String getParkName() {
+		return parkName;
+	}
+	public void setParkName(String parkName) {
+		this.parkName = parkName;
+	}
+	
+	
 	
 }

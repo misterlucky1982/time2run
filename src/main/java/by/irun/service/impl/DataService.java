@@ -148,6 +148,8 @@ public class DataService implements IDataService{
 			return null;
 		} else {
 			RaceResultInfoTO result = new RaceResultInfoTO();
+			result.setParkName(raceTO.getParkName());
+			result.setRaceDate(Internationalizer.translate(raceTO.getDate(), locale));
 			result.setRaceName(VizUtils.buildRaceName(raceTO.getRaceName(), raceTO.getParkName(), raceTO.getDate(), locale));
 			result.setMenResult(new by.irun.util.List<>(ServiceUtils.resolveRunnerResultList(mensResult, locale, Gender.MALE)));
 			result.setWomenResult(new by.irun.util.List<>(ServiceUtils.resolveRunnerResultList(womenResult, locale, Gender.FEMALE)));
