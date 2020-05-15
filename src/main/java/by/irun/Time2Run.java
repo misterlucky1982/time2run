@@ -15,7 +15,7 @@ import by.irun.domain.Race;
 import by.irun.domain.Result;
 import by.irun.domain.Runner;
 import by.irun.domain.User;
-import by.irun.persistance.dao.CRUDHandler;
+import by.irun.persistance.dao.common.CRUDHandler;
 
 @SpringBootApplication
 public class Time2Run {
