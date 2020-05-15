@@ -1,4 +1,4 @@
-package by.irun.persistance.proxi;
+package by.irun.persistance.daoimpl;
 
 import static org.junit.Assert.*;
 
@@ -30,8 +30,9 @@ import by.irun.domain.to.RaceExtendedTO;
 import by.irun.domain.to.RunnerRaceResultTO;
 import by.irun.domain.to.RunnerResultTO;
 import by.irun.domain.to.RunnerTO;
-import by.irun.persistance.dao.CRUDHandler;
-import by.irun.persistance.dao.IDataProvider;
+import by.irun.persistance.dao.common.CRUDHandler;
+import by.irun.persistance.dao.common.IDataProvider;
+import by.irun.persistance.daoimpl.RepositoryConnector;
 
 @RunWith(PowerMockRunner.class)
 public class RepositoryConnectorTest {

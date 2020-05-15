@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import by.irun.domain.DomainEntity;
-import by.irun.persistance.dao.CRUDHandler;
+import by.irun.persistance.dao.common.CRUDHandler;
 import by.irun.persistance.util.DBUtils;
 
 @Transactional

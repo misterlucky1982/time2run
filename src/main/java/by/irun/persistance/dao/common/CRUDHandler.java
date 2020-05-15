@@ -1,4 +1,4 @@
-package by.irun.persistance.dao;
+package by.irun.persistance.dao.common;
 
 import java.io.Serializable;
 import java.sql.SQLException;

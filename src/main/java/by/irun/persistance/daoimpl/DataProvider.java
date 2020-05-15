@@ -20,7 +20,7 @@ import by.irun.domain.to.RaceTO;
 import by.irun.domain.to.RunnerRaceResultTO;
 import by.irun.domain.to.RunnerResultTO;
 import by.irun.domain.to.RunnerTO;
-import by.irun.persistance.dao.IDataProvider;
+import by.irun.persistance.dao.common.IDataProvider;
 import by.irun.persistance.util.GenderConverter;
 import by.irun.persistance.util.TORequests;
 import by.irun.viz.to.RaceInfoTO;
@@ -28,7 +28,7 @@ import by.irun.viz.to.RaceResultTO;
 import by.irun.viz.utils.VizUtils;
 
 /**
- * implementation of {@link by.irun.persistance.dao.IDataProvider}
+ * implementation of {@link by.irun.persistance.dao.common.IDataProvider}
  * @author A.Dubovik
  */
 @Component

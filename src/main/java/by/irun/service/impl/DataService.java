@@ -23,7 +23,7 @@ import by.irun.domain.to.RunnerTO;
 import by.irun.locale.AppLocales;
 import by.irun.locale.Internationalizer;
 import by.irun.locale.Translator;
-import by.irun.persistance.proxi.InterimRepositoryConnector;
+import by.irun.persistance.dao.IGenericDAO;
 import by.irun.service.IDataService;
 import by.irun.service.ServiceUtils;
 import by.irun.util.Link;
@@ -45,7 +45,7 @@ import by.irun.viz.utils.VizUtils;
 public class DataService implements IDataService{
 
 	@Autowired
-	private InterimRepositoryConnector repository;
+	private IGenericDAO repository;
 
 	/* (non-Javadoc)
 	 * @see by.irun.service.IDataService#getRunnerInfoTO(long runnerId)
@@ -148,6 +148,8 @@ public class DataService implements IDataService{
 			return null;
 		} else {
 			RaceResultInfoTO result = new RaceResultInfoTO();
+			result.setParkName(raceTO.getParkName());
+			result.setRaceDate(Internationalizer.translate(raceTO.getDate(), locale));
 			result.setRaceName(VizUtils.buildRaceName(raceTO.getRaceName(), raceTO.getParkName(), raceTO.getDate(), locale));
 			result.setMenResult(new by.irun.util.List<>(ServiceUtils.resolveRunnerResultList(mensResult, locale, Gender.MALE)));
 			result.setWomenResult(new by.irun.util.List<>(ServiceUtils.resolveRunnerResultList(womenResult, locale, Gender.FEMALE)));

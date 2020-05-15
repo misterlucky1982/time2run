@@ -19,7 +19,7 @@ import by.irun.domain.Race;
 import by.irun.domain.Result;
 import by.irun.domain.Runner;
 import by.irun.domain.User;
-import by.irun.persistance.proxi.InterimRepositoryConnector;
+import by.irun.persistance.dao.IGenericDAO;
 
 /**
  * test class for {@link by.irun.service.impl.DomainEntityServiceProvider}
@@ -30,7 +30,7 @@ import by.irun.persistance.proxi.InterimRepositoryConnector;
 public class DomainEntityServiceProviderTest {
 	
 	@Mock
-	private InterimRepositoryConnector repository;
+	private IGenericDAO repository;
 	
 	@Mock
 	private Club club;

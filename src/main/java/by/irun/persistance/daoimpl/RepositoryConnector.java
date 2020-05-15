@@ -1,4 +1,4 @@
-package by.irun.persistance.proxi;
+package by.irun.persistance.daoimpl;
 
 import java.sql.Date;
 import java.sql.SQLException;
@@ -25,11 +25,12 @@ import by.irun.domain.to.RaceTO;
 import by.irun.domain.to.RunnerRaceResultTO;
 import by.irun.domain.to.RunnerResultTO;
 import by.irun.domain.to.RunnerTO;
-import by.irun.persistance.dao.CRUDHandler;
-import by.irun.persistance.dao.IDataProvider;
+import by.irun.persistance.dao.IGenericDAO;
+import by.irun.persistance.dao.common.CRUDHandler;
+import by.irun.persistance.dao.common.IDataProvider;
 
 @Component
-public class RepositoryConnector implements InterimRepositoryConnector{
+public class RepositoryConnector implements IGenericDAO{
 
 	private static Map<String,Object> COMMONCACHE = new WeakHashMap<>();
 	protected static final String PARKLIST = "parkList";
