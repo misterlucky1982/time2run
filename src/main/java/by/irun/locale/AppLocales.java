@@ -17,9 +17,9 @@ public class AppLocales {
 	private final static Map<String,Locale> LOCALES;
 	static{
 		LOCALES = new HashMap<>();
-		LOCALES.put("BY", BY);
-		LOCALES.put("RU", RU);
-		LOCALES.put("EN", EN);
+		LOCALES.put("by", BY);
+		LOCALES.put("ru", RU);
+		LOCALES.put("en", EN);
 	}
 	
 	private AppLocales(){}
@@ -31,7 +31,7 @@ public class AppLocales {
 	 * @param key
 	 * @return Locale
 	 */
-	public static Locale getLocale(String key){
-		return key==null?DEFAULT:LOCALES.get(key.toUpperCase())!=null?LOCALES.get(key.toUpperCase()):DEFAULT;
+	public static Locale resolveLocale(Locale locale){
+		return locale==null?DEFAULT:LOCALES.get(locale.toLanguageTag().toLowerCase())!=null?LOCALES.get(locale.toLanguageTag().toLowerCase()):DEFAULT;
 	}
 }
