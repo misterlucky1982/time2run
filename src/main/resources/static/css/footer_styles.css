@@ -1,0 +1,11 @@
+footer{
+	width: 100%;
+}
+
+footer .wrapper {
+	position: relative;
+	margin: 0 auto;
+	max-width: var(--main-width);
+	font-family: var(--font_0);
+	color: var(--main-black);
+}

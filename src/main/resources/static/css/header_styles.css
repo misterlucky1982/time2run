@@ -1,9 +1,9 @@
 body .header_link {
-	font-family: Code Pro Bold;
+	font-family: var(--font_0);
 	font-size: 16px;
 	font-weight: bold;
 	line-height: 19px;
-	color: #040000;
+	color: var(--main-black);
 	text-decoration: none;
 	text-transform: uppercase;
 }
@@ -11,7 +11,7 @@ body .header_link {
 header .wrapper {
 	position: relative;
 	margin: 0 auto;
-	max-width: 1000px;
+	max-width: var(--main-width);
 }
 
 header .menu ul {

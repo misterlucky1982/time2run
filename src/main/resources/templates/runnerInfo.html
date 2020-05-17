@@ -4,6 +4,8 @@
 <head>
 <title th:text="#{app.title}">Title</title>
 <link rel="icon" href="/images/icon.png" type="image/png">
+<link rel="stylesheet" th:href="@{/css/main.css}" type="text/css" media="screen"/>
+<link rel="stylesheet" th:href="@{/css/footer_styles.css}" type="text/css" media="screen"/>
 <link rel="stylesheet" th:href="@{/css/styles.css}" />
 <link rel="stylesheet" th:href="@{/css/header_styles.css}"/>
 <script
@@ -41,5 +43,6 @@
 			</table>
 		</div>
 	</div>
+	<footer th:replace="fragments/footer :: footer"></footer>
 </body>
 </html>
