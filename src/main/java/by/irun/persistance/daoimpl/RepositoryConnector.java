@@ -225,7 +225,7 @@ public class RepositoryConnector implements IGenericDAO{
 	@Override
 	public List<RaceTO> getRaceTOList(Date from, Date to, Long parkId) throws SQLException {
 		List<RaceTO> list = null;
-		if(from==null||to==null||parkId==null){
+		if(from==null&&to==null&&parkId==null){
 			list = (List<RaceTO>) COMMONCACHE.get(FULLRACETOLIST);
 			if(list==null){
 				list = dataProvider.getRaceTOList(from, to, parkId);
